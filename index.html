@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #15140F; }
+  a { color: #AB8A46; text-decoration: none; }
+  a:hover { color: #C9AD73; }
+  ::selection { background: #AB8A46; color: #15140F; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="background:#15140F;color:#F3EEE3;font-family:'Jost',sans-serif;overflow-x:hidden">
+
+  <!-- NAV -->
+  <div style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:clamp(14px,3vw,22px) clamp(20px,5vw,48px);background:linear-gradient(180deg,rgba(21,18,15,0.9),rgba(21,18,15,0))">
+    <a href="#" style="font-family:'Cormorant',serif;font-size:clamp(24px,4.5vw,30px);letter-spacing:3px;text-decoration:none">
+      <span style="color:#F3EEE3">TEN</span><span style="color:#AB8A46">TWO</span>
+    </a>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(12px,3vw,32px);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#F3EEE3">
+      <a href="#about" style="color:#F3EEE3">About</a>
+      <a href="#rooms" style="color:#F3EEE3">Villa</a>
+      <a href="#gallery" style="color:#F3EEE3">Gallery</a>
+      <a href="#faq" style="color:#F3EEE3">FAQ</a>
+      <a href="#contact" style="color:#F3EEE3">Reserve</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="position:relative;height:100vh;min-height:640px;width:100%">
+    <img src="./assets/hero-pool.jpg" alt="TenTwo villa pool" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(1.35) contrast(1.05) saturate(1.1)" />
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,18,15,0.3) 0%,rgba(21,18,15,0.12) 45%,rgba(21,18,15,0.8) 100%)"></div>
+    <div style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px">
+      <div style="font-size:clamp(18px,5vw,24px);letter-spacing:4px;text-transform:uppercase;color:#C9AD73;margin-bottom:clamp(16px,4vw,22px);text-shadow:0 2px 16px rgba(0,0,0,0.65),0 1px 4px rgba(0,0,0,0.8)">Private Luxury Residence, Kandy</div>
+      <div style="font-family:'Cormorant',serif;line-height:.95;letter-spacing:4px">
+        <div style="font-size:clamp(56px,16vw,96px);color:#F3EEE3;text-shadow:0 4px 24px rgba(0,0,0,0.7),0 2px 8px rgba(0,0,0,0.85)">TEN</div>
+        <div style="font-size:clamp(56px,16vw,96px);color:#AB8A46;text-shadow:0 4px 24px rgba(0,0,0,0.7),0 2px 8px rgba(0,0,0,0.85)">TWO</div>
+      </div>
+      <div style="width:64px;height:1px;background:#AB8A46;margin:clamp(20px,5vw,28px) 0"></div>
+      <div style="font-family:'Cormorant',serif;font-style:italic;font-size:clamp(16px,4vw,20px);color:#F3EEE3;max-width:520px;line-height:1.6;text-shadow:0 2px 12px rgba(0,0,0,0.7),0 1px 4px rgba(0,0,0,0.85)">
+        Glass walls, still water, and the hills of Kandy at your doorstep.
+      </div>
+      <a href="#contact" style="margin-top:clamp(28px,6vw,44px);padding:16px clamp(28px,6vw,40px);border:1px solid #AB8A46;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#F3EEE3;background:rgba(21,20,15,0.35);text-shadow:0 1px 6px rgba(0,0,0,0.6)">Enquire to Stay</a>
+    </div>
+    <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:1px;height:40px;background:linear-gradient(180deg,transparent,#AB8A46)"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" style="max-width:1180px;margin:0 auto;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,6vw,72px);align-items:center">
+    <div>
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:20px">The Villa</div>
+      <div style="font-family:'Cormorant',serif;font-size:38px;line-height:1.3;color:#F3EEE3;margin-bottom:24px">
+        A modern retreat, eight kilometres from Kandy city.
+      </div>
+      <div style="font-size:15px;line-height:1.9;color:#9a9686;max-width:460px">
+        TenTwo sits quietly above Kandy, built around a single idea: bring the outside in. Full-height glass walls open every living space onto a large pool, blurring the line between architecture and landscape. Three en-suite bedrooms and a private pool make it suited to families and small groups seeking a still, design-led escape close to the city.
+      </div>
+    </div>
+    <div style="width:100%;aspect-ratio:4/5;border-radius:2px;overflow:hidden">
+      <image-slot id="about-photo" placeholder="Drop a villa photo" shape="rect" src="./assets/about-photo.webp"></image-slot>
+    </div>
+  </div>
+
+  <!-- ROOMS & AMENITIES -->
+  <div id="rooms" style="background:#1B1713;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:72px">
+        <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Rooms &amp; Amenities</div>
+        <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3">Three suites. One pool. Every wall of glass.</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-bottom:32px">
+        <sc-for list="{{ rooms }}" as="room" hint-placeholder-count="3">
+          <div style="background:#15140F;border:1px solid rgba(201,164,103,0.18)">
+            <div style="width:100%;aspect-ratio:4/3">
+              <image-slot id="room-{{ $index }}" placeholder="Drop a bedroom photo" shape="rect"></image-slot>
+            </div>
+            <div style="padding:26px 28px">
+              <div style="font-family:'Cormorant',serif;font-size:20px;color:#F3EEE3;margin-bottom:8px">{{ room.title }}</div>
+              <div style="font-size:14px;color:#9a9686;line-height:1.6">{{ room.desc }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px">
+        <sc-for list="{{ amenities }}" as="am" hint-placeholder-count="4">
+          <div style="text-align:center;padding:28px 16px;border-top:1px solid rgba(201,164,103,0.25)">
+            <div style="font-family:'Cormorant',serif;font-size:15px;color:#C9AD73;margin-bottom:6px">{{ am.title }}</div>
+            <div style="font-size:13px;color:#8a8776;line-height:1.6">{{ am.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div id="gallery" style="max-width:1180px;margin:0 auto;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
+    <div style="text-align:center;margin-bottom:64px">
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Gallery</div>
+      <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3">The villa, in light.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:220px;gap:16px">
+      <div><image-slot id="gallery-0" placeholder="Drop a photo" shape="rect" src="./assets/gallery-0.webp"></image-slot></div>
+      <div><image-slot id="gallery-1" placeholder="Drop a photo" shape="rect" src="./assets/gallery-1.webp"></image-slot></div>
+      <div><image-slot id="gallery-2" placeholder="Drop a photo" shape="rect" src="./assets/gallery-stairs.jpg"></image-slot></div>
+      <div><image-slot id="gallery-3" placeholder="Drop a photo" shape="rect" src="./assets/gallery-3.webp"></image-slot></div>
+      <div><image-slot id="gallery-4" placeholder="Drop a photo" shape="rect" src="./assets/gallery-4.webp"></image-slot></div>
+      <div><image-slot id="gallery-5" placeholder="Drop a photo" shape="rect" src="./assets/gallery-5.webp"></image-slot></div>
+      <div><image-slot id="gallery-6" placeholder="Drop a photo" shape="rect" src="./assets/gallery-6.webp"></image-slot></div>
+      <div><image-slot id="gallery-7" placeholder="Drop a photo" shape="rect" src="./assets/gallery-7.webp"></image-slot></div>
+      <div><image-slot id="gallery-8" placeholder="Drop a photo" shape="rect" src="./assets/gallery-8.webp"></image-slot></div>
+      <div><image-slot id="gallery-9" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div><image-slot id="gallery-12" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div><image-slot id="gallery-13" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div style="grid-column:span 2;grid-row:span 2"><image-slot id="gallery-10" placeholder="Drop a photo" shape="rect" src="./assets/gallery-10.webp"></image-slot></div>
+      <div><image-slot id="gallery-16" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div><image-slot id="gallery-17" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div><image-slot id="gallery-18" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div><image-slot id="gallery-19" placeholder="Drop a photo" shape="rect"></image-slot></div>
+    </div>
+  </div>
+
+  <!-- GUEST REVIEWS (placeholder — no stays yet) -->
+  <div style="background:#1B1713;padding:clamp(64px,12vw,120px) clamp(20px,5vw,48px)">
+    <div style="max-width:760px;margin:0 auto;text-align:center">
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Guest Reviews</div>
+      <div style="font-family:'Cormorant',serif;font-style:italic;font-size:22px;color:#F3EEE3;line-height:1.7">
+        TenTwo is newly opened — guest reviews will appear here after the villa's first stays.
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div id="faq" style="max-width:820px;margin:0 auto;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
+    <div style="text-align:center;margin-bottom:64px">
+      <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Good to Know</div>
+      <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3">Frequently Asked Questions</div>
+    </div>
+    <div>
+      <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="5">
+        <div style="padding:26px 0;border-bottom:1px solid rgba(201,164,103,0.2)">
+          <div style="font-family:'Cormorant',serif;font-size:18px;color:#F3EEE3;margin-bottom:10px">{{ item.q }}</div>
+          <div style="font-size:14px;color:#9a9686;line-height:1.7">{{ item.a }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CONTACT / RESERVATION -->
+  <div id="contact" style="background:#1B1713;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
+    <div style="max-width:640px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:56px">
+        <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Reserve Your Stay</div>
+        <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3;margin-bottom:16px">Request a Reservation</div>
+        <div style="font-size:14px;color:#8a8776;line-height:1.7">Share your dates and we will confirm availability by email within 24 hours.</div>
+      </div>
+
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #AB8A46;padding:48px;text-align:center">
+          <div style="font-family:'Cormorant',serif;font-size:22px;color:#C9AD73;margin-bottom:10px">Thank you.</div>
+          <div style="font-size:14px;color:#9a9686;line-height:1.7">Your request has been sent. We'll be in touch shortly to confirm your stay at TenTwo.</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ handleSubmit }}" style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+            <div>
+              <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Name</label>
+              <input required="true" type="text" value="{{ form.name }}" onChange="{{ setField('name') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none" />
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Email</label>
+              <input required="true" type="email" value="{{ form.email }}" onChange="{{ setField('email') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none" />
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+            <div>
+              <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Phone / WhatsApp</label>
+              <input type="tel" value="{{ form.phone }}" onChange="{{ setField('phone') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none" />
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Guests</label>
+              <input type="number" min="1" value="{{ form.guests }}" onChange="{{ setField('guests') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none" />
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+            <div>
+              <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Check-in</label>
+              <input required="true" type="date" value="{{ form.checkin }}" onChange="{{ setField('checkin') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none" />
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Check-out</label>
+              <input required="true" type="date" value="{{ form.checkout }}" onChange="{{ setField('checkout') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none" />
+            </div>
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8776;margin-bottom:8px">Message (optional)</label>
+            <textarea rows="3" value="{{ form.message }}" onChange="{{ setField('message') }}" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,164,103,0.4);color:#F3EEE3;font-family:'Jost',sans-serif;font-size:15px;padding:10px 0;box-sizing:border-box;outline:none;resize:vertical"></textarea>
+          </div>
+          <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13px;color:#C97A67">{{ errorMessage }}</div>
+          </sc-if>
+          <button type="submit" disabled="{{ submitting }}" style="margin-top:16px;padding:18px;background:#AB8A46;border:none;color:#15140F;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer">{{ submitLabel }}</button>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding:56px clamp(20px,5vw,48px) 40px;text-align:center;border-top:1px solid rgba(201,164,103,0.15)">
+    <div style="font-family:'Cormorant',serif;font-size:18px;letter-spacing:2px;margin-bottom:14px">
+      <span style="color:#F3EEE3">TEN</span><span style="color:#AB8A46">TWO</span>
+    </div>
+    <div style="font-size:13px;color:#8a8776;margin-bottom:20px">8 km from Kandy city centre, Sri Lanka</div>
+    <div style="font-size:12px;color:#8a8776">© 2026 TenTwo Villa. All rights reserved.</div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    form: { name: '', email: '', phone: '', guests: '2', checkin: '', checkout: '', message: '' },
+    submitted: false,
+    submitting: false,
+    error: false,
+    errorMessage: ''
+  };
+
+  setField = (key) => (e) => {
+    const val = e.target.value;
+    this.setState((s) => ({ form: { ...s.form, [key]: val } }));
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    this.setState({ submitting: true, error: false });
+    try {
+      const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.state.form)
+      });
+      if (res.ok) {
+        this.setState({ submitted: true, submitting: false });
+      } else {
+        this.setState({ submitting: false, error: true, errorMessage: 'Something went wrong. Please email us directly or try again.' });
+      }
+    } catch (err) {
+      this.setState({ submitting: false, error: true, errorMessage: 'Something went wrong. Please email us directly or try again.' });
+    }
+  };
+
+  renderVals() {
+    const rooms = [
+      { title: 'Bedroom One', desc: 'En-suite bathroom, floor-to-ceiling glass onto the pool terrace.' },
+      { title: 'Bedroom Two', desc: 'En-suite bathroom, upper-floor balcony with garden views.' },
+      { title: 'Bedroom Three', desc: 'En-suite bathroom, quiet aspect away from the pool.' }
+    ];
+    const amenities = [
+      { title: 'Large Pool', desc: 'Full-length private pool, open year-round.' },
+      { title: 'Glass Walls', desc: 'Living spaces open fully onto the water.' },
+      { title: 'Powder Room', desc: 'Additional guest washroom on the ground floor.' },
+      { title: 'Private Parking', desc: 'Secure on-site parking for guests.' }
+    ];
+    const faqs = [
+      { q: 'How far is TenTwo from Kandy city centre?', a: 'The villa is approximately 8 km from central Kandy, around a 20-minute drive.' },
+      { q: 'What are the check-in and check-out times?', a: 'Standard check-in is from 2:00 PM and check-out by 11:00 AM. Early or late arrangements can be requested.' },
+      { q: 'How many guests can the villa accommodate?', a: 'TenTwo has three en-suite bedrooms plus a powder room, comfortably suited to families or small groups.' },
+      { q: 'Is the pool private?', a: 'Yes, the pool is exclusively for the use of guests staying at the villa.' },
+      { q: 'How do I confirm a booking?', a: 'Submit a reservation request below with your dates. Our team will confirm availability and next steps by email.' }
+    ];
+    return {
+      rooms, amenities, faqs,
+      form: this.state.form,
+      setField: this.setField,
+      handleSubmit: this.handleSubmit,
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+      submitting: this.state.submitting,
+      submitLabel: this.state.submitting ? 'Sending…' : 'Submit Request',
+      error: this.state.error,
+      errorMessage: this.state.errorMessage
+    };
+  }
+}
+
+</script>
+</body>
+</html>
