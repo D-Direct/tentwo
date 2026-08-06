@@ -1,0 +1,5 @@
+# CNAME should not be tracked or updated
+CNAME
+
+# Claude Code configuration
+.claude/
