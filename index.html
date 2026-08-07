@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TenTwo | Private Luxury Villa with Pool in Kandy, Sri Lanka</title>
+<meta name="description" content="TenTwo is a modern private villa in Kandy with full-height glass walls, a private pool, three en-suite bedrooms and a rooftop terrace. Eight kilometres from the city centre.">
+<meta property="og:title" content="TenTwo | Private Luxury Villa with Pool in Kandy, Sri Lanka">
+<meta property="og:description" content="TenTwo is a modern private villa in Kandy with full-height glass walls, a private pool, three en-suite bedrooms and a rooftop terrace. Eight kilometres from the city centre.">
+<meta property="og:type" content="website">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -16,6 +21,17 @@
   a:hover { color: #C9AD73; }
   ::selection { background: #AB8A46; color: #15140F; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .gallery-item { cursor: pointer; transition: opacity 0.3s ease; }
+  .gallery-item:hover { opacity: 0.85; }
+  .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; }
+  .lightbox-close { position: absolute; top: 24px; right: 24px; color: #F3EEE3; font-size: 36px; cursor: pointer; background: none; border: none; padding: 8px 16px; }
+  .lightbox-close:hover { color: #C9A35C; }
+  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); border: 1px solid rgba(201,163,92,0.3); color: #F3EEE3; font-size: 24px; cursor: pointer; padding: 16px 20px; border-radius: 2px; }
+  .lightbox-nav:hover { background: rgba(201,163,92,0.2); border-color: #C9A35C; }
+  .lightbox-prev { left: 24px; }
+  .lightbox-next { right: 24px; }
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
@@ -41,17 +57,19 @@
     <img src="./assets/hero-pool.jpg" alt="TenTwo villa pool" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.30) 35%,rgba(0,0,0,0.45) 100%)"></div>
     <div style="position:relative;height:100%;display:flex;align-items:center;justify-content:center;gap:clamp(16px,3vw,40px);padding:0 clamp(16px,4vw,48px);flex-wrap:nowrap;overflow:hidden">
-      <div style="flex:0 1 260px;min-width:0;max-width:260px;text-align:left;animation:fadeUp 700ms ease-out both">
-        <div style="font-family:'Cormorant',serif;font-style:italic;font-size:clamp(15px,1.7vw,22px);color:rgba(255,255,255,0.9);line-height:1.6">
+      <div style="flex:0 1 500px;min-width:0;max-width:500px;text-align:left;animation:fadeUp 700ms ease-out both;align-self:center">
+        <div style="font-family:'Cormorant',serif;font-style:italic;font-size:clamp(22px,2.55vw,33px);color:rgba(255,255,255,0.9);line-height:1.6;margin-top:-10px">
           Glass walls, still water, and the hills of Kandy at your doorstep.
         </div>
       </div>
-      <div style="width:1px;height:clamp(140px,26vh,260px);background:#C9A35C;opacity:0.7;flex-shrink:0"></div>
-      <div style="flex:0 1 auto;min-width:0;text-align:center;transform:translateX(clamp(0px,calc((100vw - 900px) / 8),90px));animation:fadeUp 750ms 120ms ease-out both">
-        <div style="font-size:clamp(10px,1.3vw,13px);letter-spacing:4px;text-transform:uppercase;color:#C9A35C;margin-bottom:clamp(18px,3vw,28px);white-space:nowrap">Private Luxury Residence, Kandy</div>
-        <div style="font-family:'Cormorant',serif;line-height:0.9;letter-spacing:3px">
-          <div style="font-size:clamp(42px,9vw,84px);color:#FFFFFF;text-shadow:0 4px 18px rgba(0,0,0,0.25)">TEN</div>
-          <div style="font-size:clamp(42px,9vw,84px);color:#C9A35C;text-shadow:0 4px 18px rgba(0,0,0,0.25)">TWO</div>
+      <div style="width:1px;height:clamp(140px,26vh,260px);background:#C9A35C;opacity:0.7;flex-shrink:0;align-self:center"></div>
+      <div style="flex:0 1 auto;min-width:0;text-align:center;transform:translateX(clamp(0px,calc((100vw - 900px) / 8),90px));animation:fadeUp 750ms 120ms ease-out both;align-self:center">
+        <div style="font-size:clamp(20px,2.6vw,26px);letter-spacing:4px;text-transform:uppercase;color:#FFFFFF;margin-bottom:clamp(18px,3vw,28px);white-space:nowrap">Private Luxury Residence, Kandy</div>
+        <div style="font-family:'Cormorant',serif;letter-spacing:3px">
+          <div style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:clamp(12px,2vw,24px);line-height:0.9">
+            <div style="font-size:clamp(63px,13.5vw,126px);color:#FFFFFF;text-shadow:0 4px 18px rgba(0,0,0,0.25)">TEN</div>
+            <div style="font-size:clamp(63px,13.5vw,126px);color:#C9A35C;text-shadow:0 4px 18px rgba(0,0,0,0.25)">TWO</div>
+          </div>
         </div>
         <div style="width:50px;height:1px;background:#C9A35C;margin:clamp(18px,3.5vw,28px) auto"></div>
         <a href="#contact" style="display:inline-block;padding:14px clamp(20px,4vw,32px);border:1px solid #C9A35C;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#FFFFFF;background:rgba(20,20,20,0.35);backdrop-filter:blur(8px);transition:all .3s ease;animation:fadeUp 700ms 320ms ease-out both;white-space:nowrap" style-hover="background:#C9A35C;color:#141414">Enquire to Stay</a>
@@ -68,7 +86,16 @@
         A modern retreat, eight kilometres from Kandy city.
       </div>
       <div style="font-size:15px;line-height:1.9;color:#9a9686;max-width:460px">
-        TenTwo sits quietly above Kandy, built around a single idea: bring the outside in. Full-height glass walls open every living space onto a large pool, blurring the line between architecture and landscape. Three en-suite bedrooms and a private pool make it suited to families and small groups seeking a still, design-led escape close to the city.
+        TenTwo is built around a single architectural idea: bring the outside in.
+      </div>
+      <div style="font-size:15px;line-height:1.9;color:#9a9686;max-width:460px;margin-top:20px">
+        Full-height glass walls dissolve the boundary between living space and landscape. Every principal room opens onto a long private pool, so water, light and the surrounding hills of Kandy become part of the interior. Reflections shift through the day; the line between architecture and nature remains deliberately thin.
+      </div>
+      <div style="font-size:15px;line-height:1.9;color:#9a9686;max-width:460px;margin-top:20px">
+        The plan is simple and deliberate. Three en-suite bedrooms (each with air-conditioning and ceiling fans) are arranged for both connection and privacy. A fully equipped kitchen, six-seater dining table and calm living area with smart TV form the social heart of the house, while a rooftop terrace extends the living space upward. Practical elements — high-speed Wi-Fi, washing machine, hairdryer, iron and mosquito repellents — are present but secondary to the experience of the space itself.
+      </div>
+      <div style="font-size:15px;line-height:1.9;color:#9a9686;max-width:460px;margin-top:20px">
+        Located eight kilometres above Kandy, the villa offers proximity to the city's temples, gardens and viewpoints within a twenty-minute drive, yet remains removed enough to feel private and unhurried. A modern residence designed for those who value clarity of form, continuous light, and the quiet presence of the landscape.
       </div>
     </div>
     <div style="width:100%;aspect-ratio:4/5;border-radius:2px;overflow:hidden">
@@ -81,7 +108,8 @@
     <div style="max-width:1180px;margin:0 auto">
       <div style="text-align:center;margin-bottom:72px">
         <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Rooms &amp; Amenities</div>
-        <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3">Three suites. One pool. Every wall of glass.</div>
+        <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3;margin-bottom:16px">Three suites. One pool. Every wall of glass.</div>
+        <div style="font-size:14px;color:#8a8776">Three suites · Private pool · Rooftop · Fully equipped kitchen · High-speed Wi-Fi · Parking for two cars</div>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-bottom:32px">
@@ -110,30 +138,38 @@
   </div>
 
   <!-- GALLERY -->
-  <div id="gallery" style="max-width:1180px;margin:0 auto;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
+  <div id="gallery" style="padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
     <div style="text-align:center;margin-bottom:64px">
       <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Gallery</div>
       <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3">The villa, in light.</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:220px;gap:16px">
-      <div><image-slot id="gallery-0" placeholder="Drop a photo" shape="rect" src="./assets/gallery-0.webp"></image-slot></div>
-      <div><image-slot id="gallery-1" placeholder="Drop a photo" shape="rect" src="./assets/gallery-1.webp"></image-slot></div>
-      <div><image-slot id="gallery-2" placeholder="Drop a photo" shape="rect" src="./assets/gallery-stairs.jpg"></image-slot></div>
-      <div><image-slot id="gallery-3" placeholder="Drop a photo" shape="rect" src="./assets/gallery-3.webp"></image-slot></div>
-      <div><image-slot id="gallery-4" placeholder="Drop a photo" shape="rect" src="./assets/gallery-4.webp"></image-slot></div>
-      <div><image-slot id="gallery-5" placeholder="Drop a photo" shape="rect" src="./assets/gallery-5.webp"></image-slot></div>
-      <div><image-slot id="gallery-6" placeholder="Drop a photo" shape="rect" src="./assets/gallery-6.webp"></image-slot></div>
-      <div><image-slot id="gallery-7" placeholder="Drop a photo" shape="rect" src="./assets/gallery-7.webp"></image-slot></div>
-      <div><image-slot id="gallery-8" placeholder="Drop a photo" shape="rect" src="./assets/gallery-8.webp"></image-slot></div>
-      <div><image-slot id="gallery-9" placeholder="Drop a photo" shape="rect"></image-slot></div>
-      <div><image-slot id="gallery-12" placeholder="Drop a photo" shape="rect"></image-slot></div>
-      <div><image-slot id="gallery-13" placeholder="Drop a photo" shape="rect"></image-slot></div>
-      <div style="grid-column:span 2;grid-row:span 2"><image-slot id="gallery-10" placeholder="Drop a photo" shape="rect" src="./assets/gallery-10.webp"></image-slot></div>
-      <div><image-slot id="gallery-16" placeholder="Drop a photo" shape="rect"></image-slot></div>
-      <div><image-slot id="gallery-17" placeholder="Drop a photo" shape="rect"></image-slot></div>
-      <div><image-slot id="gallery-18" placeholder="Drop a photo" shape="rect"></image-slot></div>
-      <div><image-slot id="gallery-19" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-0.webp"><image-slot id="gallery-0" placeholder="Drop a photo" shape="rect" src="./assets/gallery-0.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-1.webp"><image-slot id="gallery-1" placeholder="Drop a photo" shape="rect" src="./assets/gallery-1.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-stairs.jpg"><image-slot id="gallery-2" placeholder="Drop a photo" shape="rect" src="./assets/gallery-stairs.jpg"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-3.webp"><image-slot id="gallery-3" placeholder="Drop a photo" shape="rect" src="./assets/gallery-3.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-4.webp"><image-slot id="gallery-4" placeholder="Drop a photo" shape="rect" src="./assets/gallery-4.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-5.webp"><image-slot id="gallery-5" placeholder="Drop a photo" shape="rect" src="./assets/gallery-5.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-6.webp"><image-slot id="gallery-6" placeholder="Drop a photo" shape="rect" src="./assets/gallery-6.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-7.webp"><image-slot id="gallery-7" placeholder="Drop a photo" shape="rect" src="./assets/gallery-7.webp"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-8.webp"><image-slot id="gallery-8" placeholder="Drop a photo" shape="rect" src="./assets/gallery-8.webp"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-9" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-12" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-13" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item" data-img="./assets/gallery-10.webp" style="grid-column:span 2;grid-row:span 2"><image-slot id="gallery-10" placeholder="Drop a photo" shape="rect" src="./assets/gallery-10.webp"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-16" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-17" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-18" placeholder="Drop a photo" shape="rect"></image-slot></div>
+      <div class="gallery-item"><image-slot id="gallery-19" placeholder="Drop a photo" shape="rect"></image-slot></div>
     </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
+    <img id="lightbox-img" src="" alt="Gallery image" />
+    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
   </div>
 
   <!-- GUEST REVIEWS (placeholder — no stays yet) -->
@@ -165,6 +201,19 @@
   <!-- CONTACT / RESERVATION -->
   <div id="contact" style="background:#1B1713;padding:clamp(72px,14vw,140px) clamp(20px,5vw,48px)">
     <div style="max-width:640px;margin:0 auto">
+      <!-- Booking Platforms Section -->
+      <div style="text-align:center;margin-bottom:72px;padding-bottom:64px;border-bottom:1px solid rgba(201,164,103,0.15)">
+        <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Book via trusted platforms</div>
+        <div style="font-size:14px;color:#8a8776;line-height:1.8;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto">
+          TenTwo is also listed on major booking platforms for those who prefer the convenience of familiar reservation systems. Availability and rates are kept in sync.
+        </div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;align-items:center">
+          <a href="#" target="_blank" rel="noopener" style="display:inline-block;padding:14px 28px;border:1px solid rgba(201,164,103,0.4);font-size:13px;letter-spacing:2px;color:#C9AD73;transition:all .3s ease;text-decoration:none" onmouseover="this.style.borderColor='#C9A35C';this.style.backgroundColor='rgba(201,163,92,0.1)'" onmouseout="this.style.borderColor='rgba(201,164,103,0.4)';this.style.backgroundColor='transparent'">Airbnb</a>
+          <a href="#" target="_blank" rel="noopener" style="display:inline-block;padding:14px 28px;border:1px solid rgba(201,164,103,0.4);font-size:13px;letter-spacing:2px;color:#C9AD73;transition:all .3s ease;text-decoration:none" onmouseover="this.style.borderColor='#C9A35C';this.style.backgroundColor='rgba(201,163,92,0.1)'" onmouseout="this.style.borderColor='rgba(201,164,103,0.4)';this.style.backgroundColor='transparent'">Booking.com</a>
+          <a href="#" target="_blank" rel="noopener" style="display:inline-block;padding:14px 28px;border:1px solid rgba(201,164,103,0.4);font-size:13px;letter-spacing:2px;color:#C9AD73;transition:all .3s ease;text-decoration:none" onmouseover="this.style.borderColor='#C9A35C';this.style.backgroundColor='rgba(201,163,92,0.1)'" onmouseout="this.style.borderColor='rgba(201,164,103,0.4)';this.style.backgroundColor='transparent'">VRBO</a>
+        </div>
+      </div>
+
       <div style="text-align:center;margin-bottom:56px">
         <div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#AB8A46;margin-bottom:16px">Reserve Your Stay</div>
         <div style="font-family:'Cormorant',serif;font-size:34px;color:#F3EEE3;margin-bottom:16px">Request a Reservation</div>
@@ -222,6 +271,14 @@
     </div>
   </div>
 
+  <!-- SEO / AI Summary (hidden) -->
+  <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0">
+    <h1>TenTwo Private Luxury Villa Kandy Sri Lanka</h1>
+    <p>TenTwo is a private luxury residence located eight kilometres above Kandy, Sri Lanka. Designed around the idea of bringing the outside in, the villa features full-height glass walls that open every living space onto a long private swimming pool, creating a continuous relationship between architecture and the surrounding hills.</p>
+    <p>The property offers three en-suite bedrooms with air-conditioning and ceiling fans, a fully equipped kitchen, six-seater dining area, calm living space with smart TV, rooftop terrace with outdoor seating, high-speed Wi-Fi, washing machine, and secure parking for two cars. It is suited to families and small groups seeking a design-led, private escape close to Kandy's temples, botanical gardens and viewpoints, yet removed enough to feel still and unhurried.</p>
+    <p>Guests can enquire directly through the website or book via major platforms once listed. TenTwo combines contemporary architecture, privacy, and practical comfort in one of Sri Lanka's most culturally rich regions.</p>
+  </div>
+
   <!-- FOOTER -->
   <div style="padding:56px clamp(20px,5vw,48px) 40px;text-align:center;border-top:1px solid rgba(201,164,103,0.15)">
     <div style="font-family:'Cormorant',serif;font-size:18px;letter-spacing:2px;margin-bottom:14px">
@@ -270,21 +327,26 @@ class Component extends DCLogic {
 
   renderVals() {
     const rooms = [
-      { title: 'Bedroom One', desc: 'En-suite bathroom, floor-to-ceiling glass onto the pool terrace.' },
-      { title: 'Bedroom Two', desc: 'En-suite bathroom, upper-floor balcony with garden views.' },
-      { title: 'Bedroom Three', desc: 'En-suite bathroom, quiet aspect away from the pool.' }
+      { title: 'Bedroom One', desc: 'En-suite bedroom with floor-to-ceiling glass opening directly onto the pool terrace. Air-conditioned with ceiling fan.' },
+      { title: 'Bedroom Two', desc: 'En-suite bedroom on the upper floor with private balcony and garden views. Air-conditioned with ceiling fan.' },
+      { title: 'Bedroom Three', desc: 'Quiet en-suite bedroom set back from the pool. Air-conditioned with ceiling fan.' }
     ];
     const amenities = [
-      { title: 'Large Pool', desc: 'Full-length private pool, open year-round.' },
-      { title: 'Glass Walls', desc: 'Living spaces open fully onto the water.' },
-      { title: 'Powder Room', desc: 'Additional guest washroom on the ground floor.' },
-      { title: 'Private Parking', desc: 'Secure on-site parking for guests.' }
+      { title: 'Private Pool', desc: 'Full-length private pool exclusively for guests.' },
+      { title: 'Three En-suite Bedrooms', desc: 'All with air-conditioning and ceiling fans.' },
+      { title: 'Fully Equipped Kitchen', desc: 'Gas cooker, built-in oven, fridge and everything needed to cook.' },
+      { title: 'Dining & Living', desc: 'Six-seater dining table and a cozy living area with smart TV.' },
+      { title: 'Rooftop Terrace', desc: 'Outdoor seating and dining space with views.' },
+      { title: 'Practical Comforts', desc: 'Washing machine, high-speed Wi-Fi, hairdryer, iron & ironing board, mosquito repellents.' },
+      { title: 'Parking', desc: 'Secure on-site parking for two cars.' }
     ];
     const faqs = [
       { q: 'How far is TenTwo from Kandy city centre?', a: 'The villa is approximately 8 km from central Kandy, around a 20-minute drive.' },
       { q: 'What are the check-in and check-out times?', a: 'Standard check-in is from 2:00 PM and check-out by 11:00 AM. Early or late arrangements can be requested.' },
       { q: 'How many guests can the villa accommodate?', a: 'TenTwo has three en-suite bedrooms plus a powder room, comfortably suited to families or small groups.' },
       { q: 'Is the pool private?', a: 'Yes, the pool is exclusively for the use of guests staying at the villa.' },
+      { q: 'What kitchen facilities are available?', a: 'The kitchen is fully equipped with a gas cooker, built-in oven, fridge, and everything needed for self-catering. There is also a six-seater dining table.' },
+      { q: 'Is there Wi-Fi and other practical amenities?', a: 'Yes — high-speed Wi-Fi, a washing machine, smart TV, hairdryer, iron & ironing board, and mosquito repellents are all provided.' },
       { q: 'How do I confirm a booking?', a: 'Submit a reservation request below with your dates. Our team will confirm availability and next steps by email.' }
     ];
     return {
@@ -302,6 +364,68 @@ class Component extends DCLogic {
   }
 }
 
+</script>
+<script>
+// Gallery lightbox functionality
+let galleryImages = [];
+let currentImageIndex = 0;
+
+// Initialize gallery when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  const galleryItems = document.querySelectorAll('.gallery-item[data-img]');
+
+  // Build array of images
+  galleryImages = Array.from(galleryItems).map(item => item.getAttribute('data-img'));
+
+  // Add click listeners to gallery items
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', function() {
+      openLightbox(index);
+    });
+  });
+});
+
+function openLightbox(index) {
+  currentImageIndex = index;
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = galleryImages[index];
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(event) {
+  if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function navigateLightbox(direction) {
+  event.stopPropagation();
+  currentImageIndex += direction;
+  if (currentImageIndex < 0) {
+    currentImageIndex = galleryImages.length - 1;
+  } else if (currentImageIndex >= galleryImages.length) {
+    currentImageIndex = 0;
+  }
+  document.getElementById('lightbox-img').src = galleryImages[currentImageIndex];
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox.classList.contains('active')) {
+    if (e.key === 'Escape') {
+      closeLightbox({ target: lightbox });
+    } else if (e.key === 'ArrowLeft') {
+      navigateLightbox(-1);
+    } else if (e.key === 'ArrowRight') {
+      navigateLightbox(1);
+    }
+  }
+});
 </script>
 </body>
 </html>
