@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TENTWO | Private Architectural Sanctuary</title>
+  <style>
+    /* Global Styles & Design System */
+    :root {
+      --bg-color: #fcfbf9;
+      --text-color: #222222;
+      --muted-text: #666666;
+      --accent-color: #1a1a1a;
+      --border-color: #e5e2dd;
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(252, 251, 249, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(229, 226, 221, 0.5);
+    }
+
+    .brand-logo {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted-text);
+      font-size: 0.875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-color);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 64px 48px;
+      position: relative;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%), url('images/hero.webp') center/cover no-repeat;
+      color: #ffffff;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      opacity: 0.9;
+      margin-bottom: 32px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 16px 36px;
+      background-color: transparent;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      border: 1px solid #ffffff;
+    }
+
+    .hero-btn:hover {
+      background-color: #ffffff;
+      color: var(--accent-color);
+    }
+
+    /* Sections General */
+    section {
+      padding: 100px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-text);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* Narrative Section - Side-by-Side Layout */
+    .narrative-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .narrative-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      color: var(--text-color);
+    }
+
+    .narrative-text p {
+      color: var(--muted-text);
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .narrative-image-wrapper {
+      width: 100%;
+      height: 520px;
+      border-radius: 2px;
+      overflow: hidden;
+      background-color: #f0eee9;
+    }
+
+    .narrative-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Interactive Living Spaces Section */
+    .spaces-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 80px;
+      margin-top: 48px;
+    }
+
+    .space-block {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 48px;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 64px;
+    }
+
+    .space-block.reverse {
+      grid-template-columns: 5fr 7fr;
+    }
+
+    .space-gallery-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .main-image-frame {
+      width: 100%;
+      height: 460px;
+      border-radius: 2px;
+      overflow: hidden;
+      background-color: #f0eee9;
+    }
+
+    .main-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Thumbnail Gallery Navigation */
+    .thumbnail-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .thumb {
+      width: 90px;
+      height: 60px;
+      border-radius: 2px;
+      cursor: pointer;
+      opacity: 0.6;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .thumb.active, .thumb:hover {
+      opacity: 1;
+      border-color: var(--accent-color);
+    }
+
+    .space-info h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .space-info p {
+      color: var(--muted-text);
+      font-size: 1rem;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .feature-tags li {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background-color: #f0eee9;
+      padding: 6px 14px;
+      border-radius: 2px;
+      color: #444;
+    }
+
+    /* Amenities List */
+    .amenities-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 48px;
+      margin-top: 48px;
+    }
+
+    .amenity-group h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    .amenity-group ul {
+      list-style: none;
+    }
+
+    .amenity-group li {
+      font-size: 0.95rem;
+      color: var(--muted-text);
+      margin-bottom: 8px;
+    }
+
+    /* Booking / Inquiry Form */
+    .booking-section {
+      background-color: #f3f0eb;
+      border-radius: 4px;
+      padding: 80px 64px;
+    }
+
+    .booking-form {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) auto;
+      gap: 16px;
+      align-items: flex-end;
+      margin-top: 32px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-text);
+    }
+
+    .form-group input, .form-group select {
+      padding: 14px;
+      border: 1px solid var(--border-color);
+      background-color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      border-radius: 2px;
+    }
+
+    .btn-submit {
+      padding: 15px 32px;
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #333333;
+    }
+
+    /* External Platforms Section */
+    .booking-platforms-section {
+      padding-top: 60px;
+      padding-bottom: 120px;
+    }
+
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .platform-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    .platform-card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .platform-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .platform-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--text-color);
+      transition: fill 0.3s ease;
+    }
+
+    .platform-name {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .platform-action {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-text);
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      color: var(--muted-text);
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 900px) {
+      header, section, .booking-section {
+        padding: 32px 24px;
+      }
+
+      .narrative-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .space-block, .space-block.reverse {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .amenities-container, .booking-form, .platforms-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .platforms-grid, .booking-form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <a href="#" class="brand-logo">TENTWO</a>
+    <nav>
+      <ul>
+        <li><a href="#about">The Sanctuary</a></li>
+        <li><a href="#spaces">Living Spaces</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#reserve">Reserve</a></li>
+        <li><a href="#platforms">Book Direct</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Quiet luxury rooted in nature.</h1>
+      <p class="hero-subtitle">A private architectural vacation rental designed for stillness and comfort.</p>
+      <a href="#reserve" class="hero-btn">Book Your Stay</a>
+    </div>
+  </div>
+
+  <!-- Narrative Section (Side-by-Side Layout) -->
+  <section id="about">
+    <div class="narrative-grid">
+      <div class="narrative-text">
+        <span class="section-label">Architecture & Purpose</span>
+        <h2>Designed as a seamless bridge between space and surroundings.</h2>
+        <p>TENTWO offers a contemporary private refuge tailored for discerning guests seeking privacy, thoughtful design, and immersive calm.</p>
+        <p>Every element—from natural light framing to spatial layout—is curated to encourage slow living and effortless relaxation.</p>
+      </div>
+      <div class="narrative-image-wrapper">
+        <img src="images/exterior-main.jpg" alt="Architectural Exterior of TENTWO">
+      </div>
+    </div>
+  </section>
+
+  <!-- Living Spaces Detailed Feature Showcase -->
+  <section id="spaces">
+    <span class="section-label">Detailed Accommodation</span>
+    <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 2.25rem; margin-bottom: 48px;">Explore The Residence</h2>
+
+    <div class="spaces-container">
+
+      <!-- MASTER SUITE -->
+      <div class="space-block">
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="master-main" src="images/bedroom-suite.png" alt="Master Suite Bedroom View">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/bedroom-suite.png" alt="Master Bedroom" onclick="switchImage('master-main', this)">
+            <img class="thumb" src="images/bedroom-suite-bath.jpg" alt="Ensuite Bathroom" onclick="switchImage('master-main', this)">
+            <img class="thumb" src="images/bedroom-suite-closet.jpg" alt="Walk-in Closet" onclick="switchImage('master-main', this)">
+          </div>
+        </div>
+        <div class="space-info">
+          <h3>Master Suite</h3>
+          <p>A minimalist sanctuary offering floor-to-ceiling garden views, an expansive king bed, and direct access to an ensuite bathroom with a rainfall shower and double vanity.</p>
+          <ul class="feature-tags">
+            <li>King Bed</li>
+            <li>Ensuite Bathroom</li>
+            <li>Rainfall Shower</li>
+            <li>Private Deck</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BEDROOM 02 -->
+      <div class="space-block reverse">
+        <div class="space-info">
+          <h3>Garden Guest Suite</h3>
+          <p>Overlooking the internal courtyard, this peaceful guest room features a queen bed, warm timber finishes, and an attached ensuite bath with minimalist stone accents.</p>
+          <ul class="feature-tags">
+            <li>Queen Bed</li>
+            <li>Ensuite Bath</li>
+            <li>Courtyard View</li>
+            <li>Work Desk</li>
+          </ul>
+        </div>
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="bedroom2-main" src="images/bedroom-02.jpeg" alt="Garden Guest Suite">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/bedroom-02.jpeg" alt="Bedroom View" onclick="switchImage('bedroom2-main', this)">
+            <img class="thumb" src="images/bedroom-02-bath.jpg" alt="Ensuite Bathroom" onclick="switchImage('bedroom2-main', this)">
+          </div>
+        </div>
+      </div>
+
+      <!-- BEDROOM 03 -->
+      <div class="space-block">
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="bedroom3-main" src="images/bedroom-03.jpeg" alt="Upper Level Sanctuary">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/bedroom-03.jpeg" alt="Bedroom View" onclick="switchImage('bedroom3-main', this)">
+            <img class="thumb" src="images/bedroom-03-bath.jpg" alt="Ensuite Bathroom" onclick="switchImage('bedroom3-main', this)">
+          </div>
+        </div>
+        <div class="space-info">
+          <h3>Upper Level Sanctuary</h3>
+          <p>Situated on the upper floor with elevated landscape views. Features twin setup options, customized timber storage, and a private attached washroom.</p>
+          <ul class="feature-tags">
+            <li>Twin / Queen Option</li>
+            <li>Ensuite Bathroom</li>
+            <li>Elevated Views</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ROOFTOP LOUNGE -->
+      <div class="space-block reverse">
+        <div class="space-info">
+          <h3>Sky Lounge & Rooftop Terrace</h3>
+          <p>An open-air elevated deck furnished with premium weather-resistant outdoor seating, sun loungers, and ambient evening lighting. Perfect for sunset cocktails and stargazing.</p>
+          <ul class="feature-tags">
+            <li>Outdoor Lounge Furniture</li>
+            <li>Panoramic Views</li>
+            <li>Sunset Deck</li>
+            <li>Ambient Lighting</li>
+          </ul>
+        </div>
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="rooftop-main" src="images/rooftop-main.jpg" alt="Sky Lounge & Rooftop Terrace">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/rooftop-main.jpg" alt="Rooftop Main View" onclick="switchImage('rooftop-main', this)">
+            <img class="thumb" src="images/rooftop-seating.jpg" alt="Outdoor Lounge Seating" onclick="switchImage('rooftop-main', this)">
+            <img class="thumb" src="images/rooftop-sunset.jpg" alt="Sunset Angle" onclick="switchImage('rooftop-main', this)">
+          </div>
+        </div>
+      </div>
+
+      <!-- DINING & KITCHEN -->
+      <div class="space-block">
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="kitchen-main" src="images/dining.jpg" alt="Dining Area">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/dining.jpg" alt="Dining Table" onclick="switchImage('kitchen-main', this)">
+            <img class="thumb" src="images/kitchen-prep.jpg" alt="Kitchen Island" onclick="switchImage('kitchen-main', this)">
+            <img class="thumb" src="images/kitchen-pantry.jpg" alt="Coffee & Pantry" onclick="switchImage('kitchen-main', this)">
+          </div>
+        </div>
+        <div class="space-info">
+          <h3>Kitchen & Culinary Space</h3>
+          <p>Designed for entertainment and quiet culinary moments alike. Fully equipped with modern appliances, island prep counter, and direct connection to the outdoor dining courtyard.</p>
+          <ul class="feature-tags">
+            <li>Chef's Island</li>
+            <li>Espresso Station</li>
+            <li>Indoor/Outdoor Dining</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LIVING AREA -->
+      <div class="space-block reverse">
+        <div class="space-info">
+          <h3>Central Lounge & Living Area</h3>
+          <p>An expansive indoor lounge featuring plush seating, warm timber detailing, and large glass paneling that frames lush garden and poolside views.</p>
+          <ul class="feature-tags">
+            <li>Lounge Seating</li>
+            <li>Pool Views</li>
+            <li>Smart Entertainment</li>
+            <li>Floor-to-Ceiling Glass</li>
+          </ul>
+        </div>
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="living-main" src="images/living-room.jpg" alt="Main Living Area">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/living-room.jpg" alt="Living Room" onclick="switchImage('living-main', this)">
+            <img class="thumb" src="images/pool.jpeg" alt="Plunge Pool View" onclick="switchImage('living-main', this)">
+          </div>
+        </div>
+      </div>
+
+      <!-- PRIVATE PARKING -->
+      <div class="space-block">
+        <div class="space-gallery-wrapper">
+          <div class="main-image-frame">
+            <img id="parking-main" src="images/carport.webp" alt="Private Carport & Driveway">
+          </div>
+          <div class="thumbnail-strip">
+            <img class="thumb active" src="images/carport.webp" alt="Covered Carport" onclick="switchImage('parking-main', this)">
+            <img class="thumb" src="images/carport-entry.jpg" alt="Secure Entry Gate" onclick="switchImage('parking-main', this)">
+          </div>
+        </div>
+        <div class="space-info">
+          <h3>Private Carport & Access</h3>
+          <p>A secure, covered parking bay providing sheltered vehicle space with direct, private keyless access into the residence grounds.</p>
+          <ul class="feature-tags">
+            <li>Covered Parking</li>
+            <li>Keyless Entry</li>
+            <li>Secure Perimeter</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Amenities -->
+  <section id="amenities">
+    <span class="section-label">Features & Comforts</span>
+    <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 2.25rem;">Everything considered for your stay.</h2>
+
+    <div class="amenities-container">
+      <div class="amenity-group">
+        <h3>Living & Comfort</h3>
+        <ul>
+          <li>Private outdoor swimming pool</li>
+          <li>Elevated rooftop terrace & outdoor lounge</li>
+          <li>Climate-controlled bedrooms</li>
+          <li>High-speed fiber Wi-Fi</li>
+        </ul>
+      </div>
+
+      <div class="amenity-group">
+        <h3>Kitchen & Convenience</h3>
+        <ul>
+          <li>Fully equipped modern kitchen</li>
+          <li>Espresso coffee maker</li>
+          <li>In-house laundry facilities</li>
+          <li>Daily housekeeping upon request</li>
+        </ul>
+      </div>
+
+      <div class="amenity-group">
+        <h3>Access & Privacy</h3>
+        <ul>
+          <li>Private covered carport</li>
+          <li>Self-check-in keypad access</li>
+          <li>24/7 exterior security perimeter</li>
+          <li>Exclusive single-group residency</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation Section -->
+  <section id="reserve">
+    <div class="booking-section">
+      <span class="section-label">Inquiries & Booking</span>
+      <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 2rem;">Plan Your Escape</h2>
+      
+      <form class="booking-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="checkin">Check-in</label>
+          <input type="date" id="checkin" name="checkin" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="checkout">Check-out</label>
+          <input type="date" id="checkout" name="checkout" required>
+        </div>
+
+        <div class="form-group">
+          <label for="guests">Guests</label>
+          <select id="guests" name="guests">
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+            <option value="6">6+ Guests</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Contact Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Request Availability</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Major Booking Partners Section -->
+  <section id="platforms" class="booking-platforms-section">
+    <span class="section-label">External Platforms</span>
+    <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 2.25rem;">Book Via Your Preferred Partner</h2>
+    <p style="color: var(--muted-text); max-width: 600px; margin-top: 8px;">Find us on major travel platforms or send a direct inquiry above for custom arrangements.</p>
+
+    <div class="platforms-grid">
+      <!-- Booking.com -->
+      <a href="https://www.booking.com/your-property-link" target="_blank" rel="noopener noreferrer" class="platform-card">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M2.5 5.5h10c2.5 0 4.5 1.5 4.5 3.5 0 1.2-.7 2.2-1.8 2.8 1.5.5 2.5 1.8 2.5 3.4 0 2.3-2 4.3-4.7 4.3H2.5V5.5zm4.2 3.3v2.4h5.2c.8 0 1.4-.5 1.4-1.2s-.6-1.2-1.4-1.2H6.7zm0 5.2v2.7h5.6c.9 0 1.6-.6 1.6-1.35s-.7-1.35-1.6-1.35H6.7z"/>
+          </svg>
+        </div>
+        <span class="platform-name">Booking.com</span>
+        <span class="platform-action">Reserve Unit &rarr;</span>
+      </a>
+
+      <!-- Airbnb -->
+      <a href="https://www.airbnb.com/rooms/your-property-link" target="_blank" rel="noopener noreferrer" class="platform-card">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C8.5 2 5.5 4.2 5.5 8c0 4.2 4.7 10 6.1 11.7.2.2.6.2.8 0C13.8 18 18.5 12.2 18.5 8c0-3.8-3-6-6.5-6zm0 8.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <span class="platform-name">Airbnb</span>
+        <span class="platform-action">Reserve Unit &rarr;</span>
+      </a>
+
+      <!-- Agoda -->
+      <a href="https://www.agoda.com/your-property-link" target="_blank" rel="noopener noreferrer" class="platform-card">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8"/>
+          </svg>
+        </div>
+        <span class="platform-name">Agoda</span>
+        <span class="platform-action">Reserve Unit &rarr;</span>
+      </a>
+
+      <!-- Trip.com -->
+      <a href="https://www.trip.com/hotels/your-property-link" target="_blank" rel="noopener noreferrer" class="platform-card">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+          </svg>
+        </div>
+        <span class="platform-name">Trip.com</span>
+        <span class="platform-action">Reserve Unit &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; TENTWO. All rights reserved.</p>
+    <p>Private Sanctuary Vacation Rental</p>
+  </footer>
+
+  <!-- Simple JavaScript for Thumbnail Switching -->
+  <script>
+    function switchImage(mainImgId, clickedThumb) {
+      const mainImage = document.getElementById(mainImgId);
+      mainImage.src = clickedThumb.src;
+      
+      // Update active state among sibling thumbnails
+      const siblings = clickedThumb.parentElement.children;
+      for (let thumb of siblings) {
+        thumb.classList.remove('active');
+      }
+      clickedThumb.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
