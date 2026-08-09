@@ -1,0 +1,25 @@
+# Documentation
+*.md
+TenTwo_*.md
+
+# Git
+.git
+.gitignore
+
+# Node modules
+node_modules
+package-lock.json
+
+# Editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup branch info (not needed in deployment)
+README.md
