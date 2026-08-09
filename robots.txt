@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://[PRODUCTION-DOMAIN-TODO].com/sitemap.xml
+Sitemap: https://tentwo.lk/sitemap.xml
