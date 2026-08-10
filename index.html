@@ -899,7 +899,44 @@
     .availability-inner > p {
       font-size: 17px;
       color: var(--stone);
-      margin-bottom: 64px;
+      margin-bottom: 32px;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 48px;
+      margin-top: 48px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-label {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: var(--stone);
+    }
+
+    .contact-value {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--stone);
+    }
+
+    .contact-value a {
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 300ms;
+    }
+
+    .contact-value a:hover {
+      color: #C9A961;
     }
 
     .availability-form {
@@ -980,7 +1017,7 @@
     }
 
     .ota-links-section > p {
-      font-size: 13px;
+      font-size: 16px;
       color: var(--stone);
       margin-bottom: 24px;
     }
@@ -993,7 +1030,7 @@
     }
 
     .ota-links a {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -1019,7 +1056,7 @@
       max-width: var(--content-max);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
       gap: 80px;
       padding-bottom: 48px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -1054,7 +1091,7 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .footer-nav a {
@@ -1322,7 +1359,7 @@
           </div>
           <div class="detail">
             <div class="detail-num">03</div>
-            <div class="detail-label">ONE GROUP AT A TIME</div>
+            <div class="detail-label">ROOFTOP TERRACE</div>
           </div>
         </div>
       </div>
@@ -1453,24 +1490,24 @@
 
       <div class="location-list">
         <div class="location-item">
-          <span class="location-place">KANDY</span>
-          <span class="location-time">25 MIN</span>
+          <span class="location-place">KANDY CITY CENTRE</span>
+          <span class="location-time">25 MIN (8.5 km)</span>
         </div>
         <div class="location-item">
           <span class="location-place">BANDARANAIKE INTERNATIONAL</span>
-          <span class="location-time">3 HRS</span>
+          <span class="location-time">3 HRS (110 km)</span>
         </div>
         <div class="location-item">
           <span class="location-place">TEMPLE OF THE TOOTH</span>
-          <span class="location-time">20 MIN</span>
+          <span class="location-time">20 MIN (8.2 km)</span>
         </div>
         <div class="location-item">
           <span class="location-place">ROYAL BOTANICAL GARDENS</span>
-          <span class="location-time">40 MIN</span>
+          <span class="location-time">40 MIN (13 km)</span>
         </div>
                 <div class="location-item">
           <span class="location-place">PALLEKELE INTERNATIONAL CRICKET STADIUM</span>
-          <span class="location-time">20 MIN</span>
+          <span class="location-time">20 MIN (8.8 km)</span>
         </div>
       </div>
     </div>
@@ -1511,6 +1548,17 @@
         <button type="submit" class="btn-submit">CHECK AVAILABILITY</button>
       </form>
 
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp</span>
+          <div class="contact-value"><a href="https://wa.me/94777889880">+94 77 788 9880</a></div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <div class="contact-value"><a href="mailto:reservation@tentwo.lk">reservation@tentwo.lk</a></div>
+        </div>
+      </div>
+
       <p class="availability-note">TenTwo is reserved exclusively for one family or group at a time.</p>
 
       <div class="ota-links-section">
@@ -1531,7 +1579,14 @@
     <div class="footer-content">
       <div class="footer-brand">
         <h3>TENTWO</h3>
-        <p>Private contemporary residence near Kandy, Sri Lanka.</p>
+        <p>Private contemporary residence. Kandy, Sri Lanka.</p>
+      </div>
+      <div class="footer-nav">
+        <h4>CONTACT</h4>
+        <ul>
+          <li><a href="https://wa.me/94777889880">WhatsApp<br>+94 77 788 9880</a></li>
+          <li><a href="mailto:reservation@tentwo.lk">Email<br>reservation@tentwo.lk</a></li>
+        </ul>
       </div>
       <div class="footer-nav">
         <h4>NAVIGATION</h4>
