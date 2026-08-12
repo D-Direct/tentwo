@@ -1704,9 +1704,40 @@
     // Form submission
     const availabilityForm = document.querySelector('.availability-form');
     if (availabilityForm) {
-      availabilityForm.addEventListener('submit', (e) => {
+      availabilityForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Thank you for your inquiry. We will contact you shortly to confirm availability.');
+
+        const submitButton = availabilityForm.querySelector('.btn-submit');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'SENDING...';
+        submitButton.disabled = true;
+
+        const formData = {
+          arrival: document.getElementById('arrival').value,
+          departure: document.getElementById('departure').value,
+          guests: document.getElementById('guests').value,
+          email: document.getElementById('email').value,
+        };
+
+        try {
+          const response = await fetch('/api/inquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+          });
+
+          if (response.ok) {
+            alert('Thank you for your inquiry. We will contact you shortly to confirm availability.');
+            availabilityForm.reset();
+          } else {
+            alert('Sorry, something went wrong sending your inquiry. Please try again or contact us directly via WhatsApp or email.');
+          }
+        } catch (err) {
+          alert('Sorry, something went wrong sending your inquiry. Please try again or contact us directly via WhatsApp or email.');
+        } finally {
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        }
       });
     }
 
