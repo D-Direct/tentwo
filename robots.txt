@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /index-primestyle.html
 
 Sitemap: https://tentwo.lk/sitemap.xml
