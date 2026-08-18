@@ -208,31 +208,67 @@
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      transition: all 500ms var(--ease);
+    }
+
+    .logo-text {
       font-family: var(--serif);
       font-size: 24px;
       font-weight: 400;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 500ms var(--ease);
+      display: flex;
+      gap: 4px;
     }
 
-    .logo::before {
-      content: "TEN";
+    .logo-ten {
       color: var(--text);
     }
 
-    .logo::after {
-      content: "TWO";
+    .logo-two {
       color: var(--gold);
     }
 
-    header.scrolled .logo::before {
+    .logo-divider {
+      width: 1px;
+      height: 24px;
+      background: var(--gold);
+      opacity: 0.8;
+    }
+
+    .logo-tagline {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-tagline span {
+      font-family: var(--sans);
+      font-size: 8px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    header.scrolled .logo-ten {
       color: var(--text);
     }
 
-    header.scrolled .logo::after {
+    header.scrolled .logo-two {
+      color: var(--gold);
+    }
+
+    header.scrolled .logo-divider {
+      background: var(--gold);
+    }
+
+    header.scrolled .logo-tagline span {
       color: var(--gold);
     }
 
@@ -639,6 +675,14 @@
       font-weight: 400;
       line-height: 0.98;
       letter-spacing: 0.005em;
+      margin-bottom: 24px;
+    }
+
+    .architecture-overlay p {
+      font-size: 17px;
+      line-height: 1.65;
+      opacity: 0.9;
+      max-width: 580px;
     }
 
     /* ===== SECTION: ARCHITECTURE TEXT ===== */
@@ -1293,14 +1337,56 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .footer-brand h3 {
-      font-family: var(--sans);
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--white);
+    .footer-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
       margin-bottom: 20px;
+    }
+
+    .footer-brand h3 {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .footer-brand h3 .logo-ten {
+      color: var(--text);
+    }
+
+    .footer-brand h3 .logo-two {
+      color: var(--gold);
+    }
+
+    .footer-tagline {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .tagline-separator {
+      width: 1px;
+      height: 80px;
+      background: var(--gold);
+    }
+
+    .tagline-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tagline-text span {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
     }
 
     .footer-brand p {
@@ -1442,6 +1528,13 @@
       }
     }
 
+    @media (max-width: 1024px) {
+      .logo-divider,
+      .logo-tagline {
+        display: none;
+      }
+    }
+
     @media (max-width: 768px) {
       nav.desktop-nav {
         display: none;
@@ -1519,6 +1612,28 @@
       .footer-content {
         grid-template-columns: 1fr;
         gap: 40px;
+      }
+
+      .footer-logo-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .footer-brand h3 {
+        font-size: 40px;
+      }
+
+      .footer-tagline {
+        gap: 16px;
+      }
+
+      .tagline-separator {
+        height: 60px;
+      }
+
+      .tagline-text span {
+        font-size: 11px;
       }
     }
 
@@ -1604,7 +1719,16 @@
 
   <!-- HEADER -->
   <header id="header">
-    <a href="#hero" class="logo"></a>
+    <a href="#hero" class="logo">
+      <span class="logo-text">
+        <span class="logo-ten">TEN</span><span class="logo-two">TWO</span>
+      </span>
+      <span class="logo-divider"></span>
+      <span class="logo-tagline">
+        <span>LUXURY RESIDENCE</span>
+        <span>KANDY, SRI LANKA</span>
+      </span>
+    </a>
 
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#residence">RESIDENCE</a>
@@ -1679,12 +1803,6 @@
     <div class="architecture-overlay">
       <span class="eyebrow">ARCHITECTURE</span>
       <h2>An architecture <br>defined by openness</h2>
-    </div>
-  </section>
-
-  <!-- ARCHITECTURE TEXT -->
-  <section class="architecture-text">
-    <div class="architecture-text-inner reveal">
       <p>Floor-to-ceiling glass, clean lines and natural materials create a continuous connection between the residence and its surroundings.</p>
     </div>
   </section>
@@ -1699,20 +1817,6 @@
         <span class="eyebrow">LIVING TOGETHER</span>
         <h2>Space to gather.<br>Space to retreat.</h2>
         <p>TenTwo is structured around the rhythm of shared time. Public areas—the kitchen, pool, and living room—are balanced by the deliberate privacy of the suites. Gather in the expanse of the shared floor, or withdraw to the quiet of your own space.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- DINING -->
-  <section class="dining-section" aria-label="Dining Area">
-    <div class="dining-composition">
-      <div class="dining-image-large reveal-image">
-        <img src="images/dining.jpg" alt="TenTwo dining area opening onto outdoor terrace with natural light">
-      </div>
-      <div class="dining-text-box reveal">
-        <span class="eyebrow">LIVING & DINING</span>
-        <h2>Made for long lunches,<br>slow mornings and<br>evenings together.</h2>
-        <p>The kitchen opens directly onto the dining area and outdoor terrace. Large windows bring natural light throughout the day.</p>
       </div>
     </div>
   </section>
@@ -1900,7 +2004,16 @@
   <footer>
     <div class="footer-content">
       <div class="footer-brand">
-        <h3>TENTWO</h3>
+        <div class="footer-logo-container">
+          <h3><span class="logo-ten">TEN</span><br><span class="logo-two">TWO</span></h3>
+          <div class="footer-tagline">
+            <span class="tagline-separator"></span>
+            <div class="tagline-text">
+              <span>LUXURY RESIDENCE</span>
+              <span>KANDY, SRI LANKA</span>
+            </div>
+          </div>
+        </div>
         <p>Private contemporary residence. Kandy, Sri Lanka.</p>
       </div>
       <div class="footer-nav">
