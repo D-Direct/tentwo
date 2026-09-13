@@ -628,7 +628,29 @@
       margin-top: 48px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px 48px;
+      gap: 48px;
+    }
+
+    .amenity-column {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .amenity-category {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .category-title {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
     }
 
     .amenity-item {
@@ -636,6 +658,11 @@
       align-items: flex-start;
       gap: 16px;
       padding-left: 0;
+      margin-bottom: 8px;
+    }
+
+    .amenity-item:last-child {
+      margin-bottom: 0;
     }
 
     .amenity-bullet {
@@ -681,6 +708,49 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--ink);
+    }
+
+    /* ===== SECTION: THE STORY ===== */
+    .story-section {
+      display: none;
+    }
+
+    .story-grid {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(60px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .story-headline {
+      font-family: var(--serif);
+      font-size: clamp(38px, 4.2vw, 62px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: 0.005em;
+    }
+
+    .story-subheading {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-top: 32px;
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .story-content p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+
+    .story-content p:last-child {
+      margin-bottom: 0;
     }
 
     /* ===== SECTION: ARCHITECTURE ===== */
@@ -1152,6 +1222,191 @@
       color: var(--muted);
     }
 
+    /* ===== SECTION: CHOOSE YOUR STAY (TIERS) ===== */
+    .stay-tiers-section {
+      position: relative;
+      background: var(--ivory);
+      padding: clamp(80px, 12vw, 160px) var(--page-pad);
+    }
+
+    .stay-tiers-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stay-tiers-inner h2 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 4.2vw, 62px);
+      font-weight: 400;
+      line-height: 0.98;
+      letter-spacing: 0.005em;
+      margin-bottom: 24px;
+    }
+
+    .stay-tiers-subtext {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      max-width: 820px;
+      margin: 0 auto 64px;
+    }
+
+    .tier-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .tier-card {
+      background: transparent;
+      border: 1px solid var(--line);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: all 500ms var(--ease);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .tier-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .tier-card.selected {
+      border-color: var(--gold) !important;
+      border-width: 2px !important;
+      background: rgba(195, 162, 105, 0.03);
+    }
+
+    .tier-primary {
+      padding: 56px 40px;
+    }
+
+    .tier-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tier-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .tier-detail {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tier-description {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-top: 8px;
+    }
+
+    .tier-price {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink-soft);
+      margin-top: auto;
+      padding-top: 12px;
+    }
+
+    .tier-btn {
+      padding: 16px 32px;
+      border: 1px solid var(--line-2);
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 500ms var(--ease);
+      margin-top: 12px;
+    }
+
+    .tier-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateY(101%);
+      transition: transform 500ms var(--ease);
+      z-index: -1;
+    }
+
+    .tier-btn:hover {
+      color: var(--bg-900);
+      border-color: var(--gold);
+    }
+
+    .tier-btn:hover::after {
+      transform: translateY(0);
+    }
+
+    .tier-card.selected .tier-btn {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg-900);
+    }
+
+    .tier-card.selected .tier-btn::after {
+      background: var(--gold-bright);
+    }
+
+    .tier-card.selected .tier-btn:hover {
+      color: var(--bg-900);
+      background-color: var(--gold-bright);
+    }
+
+    .tier-reassurance {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--gold);
+      max-width: 100%;
+      margin: 0 auto;
+      margin-top: 48px;
+      text-align: center;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .booking-form-container {
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--line);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 600ms var(--ease);
+    }
+
+    .booking-form-container.visible {
+      opacity: 1;
+      max-height: 600px;
+    }
+
     /* ===== SECTION: AVAILABILITY ===== */
     .availability-section {
       position: relative;
@@ -1194,6 +1449,33 @@
       margin-top: 48px;
       margin-bottom: 48px;
       flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .booking-form-container .contact-info {
+      margin-top: 48px;
+      margin-bottom: 24px;
+    }
+
+    .booking-form-container .contact-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .booking-form-container .contact-value {
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .booking-form-container .contact-value a {
+      color: var(--ink);
+    }
+
+    .booking-form-container .contact-value a:hover {
+      color: var(--gold);
     }
 
     .contact-item {
@@ -1227,7 +1509,7 @@
 
     .availability-form {
       display: grid;
-      grid-template-columns: repeat(4, 1fr) auto;
+      grid-template-columns: repeat(5, 1fr) auto;
       gap: 16px;
       align-items: end;
       margin-bottom: 48px;
@@ -1352,6 +1634,17 @@
       background: var(--bg-850);
       color: var(--text-2);
       padding: clamp(80px, 10vw, 120px) var(--page-pad) 60px;
+    }
+
+    .footer-booking-notice {
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--gold);
+      max-width: 680px;
+      margin: 0 auto 64px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(195, 162, 105, 0.2);
     }
 
     .footer-content {
@@ -1500,11 +1793,21 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .residence-grid,
+      .story-grid,
       .architecture-composition,
       .living-composition,
       .rooftop-composition {
         grid-template-columns: 1fr;
         gap: 48px;
+      }
+
+      .residence-amenities {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .amenity-column {
+        gap: 24px;
       }
 
       .architecture-text {
@@ -1558,6 +1861,20 @@
         grid-row: span 1 !important;
         margin-top: 0 !important;
         transform: translateY(0) !important;
+      }
+
+      .tier-cards {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .tier-primary {
+        padding: 48px 36px;
+      }
+
+      .tier-reassurance {
+        white-space: normal;
+        font-size: 15px;
       }
     }
 
@@ -1818,37 +2135,65 @@
       </div>
       <div>
         <div class="residence-amenities">
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Three air-conditioned bedrooms, each with en-suite bathroom and private balcony</span>
+          <div class="amenity-column">
+            <div class="amenity-category">
+              <h3 class="category-title">Accommodation</h3>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Three air-conditioned bedrooms with en-suite bathrooms</span>
+              </div>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Private balconies</span>
+              </div>
+            </div>
+
+            <div class="amenity-category">
+              <h3 class="category-title">Facilities</h3>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Private pool</span>
+              </div>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Rooftop terrace</span>
+              </div>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Private two-car garage</span>
+              </div>
+            </div>
           </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Dedicated laundry area with self-service washing machine</span>
-          </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Rooftop terrace</span>
-          </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Complimentary Wi-Fi throughout</span>
-          </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Private two-car garage</span>
-          </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Dining area with six-seater table</span>
-          </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Fully equipped kitchen</span>
-          </div>
-          <div class="amenity-item">
-            <span class="amenity-bullet"></span>
-            <span class="amenity-text">Private pool</span>
+
+          <div class="amenity-column">
+            <div class="amenity-category">
+              <h3 class="category-title">Amenities</h3>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Fully equipped kitchen / dining area</span>
+              </div>
+
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Complimentary Wi-Fi</span>
+              </div>
+            </div>
+
+            <div class="amenity-category">
+              <h3 class="category-title">Available Upon Request</h3>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Private chef</span>
+              </div>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Daily housekeeping</span>
+              </div>
+              <div class="amenity-item">
+                <span class="amenity-bullet"></span>
+                <span class="amenity-text">Airport transfers</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1865,6 +2210,22 @@
       </div>
       <div class="architecture-image reveal-image">
         <img src="images/hero.webp" alt="Contemporary architecture at TenTwo with clean lines and natural materials near Kandy">
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PHILOSOPHY -->
+  <section class="story-section" aria-label="The Philosophy of TenTwo">
+    <div class="story-grid">
+      <div>
+        <span class="eyebrow">THE PHILOSOPHY</span>
+        <h2 class="story-headline">Built to disappear<br>into its surroundings.</h2>
+        <p class="story-subheading">It is a residence built to be lived in, quietly, by the people who matter to you.</p>
+      </div>
+      <div class="story-content">
+        <p>TenTwo was designed on a simple premise: a home should not compete with its landscape — it should surrender to it. Every material, every line, every opening was chosen to blur the boundary between inside and out.</p>
+        <p>There is no ornamentation here. No attempt to impress. What remains is space, light and silence — arranged with intent, and left otherwise untouched.</p>
+        <p>This is not a villa built to look like a postcard. It is a residence built to be lived in, quietly, by the people who matter to you.</p>
       </div>
     </div>
   </section>
@@ -2061,52 +2422,97 @@
     </div>
   </section>
 
-  <!-- AVAILABILITY -->
-  <section class="availability-section" id="availability" aria-label="Check Availability">
-    <div class="availability-inner">
-      <span class="eyebrow">YOUR STAY AT TENTWO</span>
-      <h2>Your dates.<br>Your residence.</h2>
-      <p>Tell us when you would like to stay and we will confirm availability.</p>
+  <!-- CHOOSE YOUR STAY -->
+  <section class="stay-tiers-section" id="availability" aria-label="Choose Your Stay">
+    <div class="stay-tiers-inner">
+      <span class="eyebrow">CHOOSE YOUR STAY</span>
+      <h2>However you stay,<br>the residence is entirely yours.</h2>
+      <p class="stay-tiers-subtext">Every configuration includes full private use of the pool, kitchen, living spaces and rooftop terrace — exclusively, for the duration of your stay.</p>
 
-      <form class="availability-form">
-        <div class="form-group">
-          <label for="arrival">ARRIVAL</label>
-          <input type="date" id="arrival" name="arrival" required>
+      <div class="tier-cards">
+        <!-- Primary Tier: Full Residence -->
+        <div class="tier-card tier-primary">
+          <div class="tier-header">
+            <h3 class="tier-name">The Full Residence</h3>
+            <p class="tier-detail">3 Bedrooms · Up to 8 Guests</p>
+          </div>
+          <p class="tier-description">All three suites, for the whole group.</p>
+          <p class="tier-price"><strong>350 USD</strong> / Night</p>
+          <button class="tier-btn" data-max-guests="8">Check Availability</button>
         </div>
-        <div class="form-group">
-          <label for="departure">DEPARTURE</label>
-          <input type="date" id="departure" name="departure" required>
-        </div>
-        <div class="form-group">
-          <label for="guests">GUESTS</label>
-          <select id="guests" name="guests" required>
-            <option value="">Select</option>
-            <option value="1">1 Guest</option>
-            <option value="2">2 Guests</option>
-            <option value="3">3 Guests</option>
-            <option value="4">4 Guests</option>
-            <option value="5">5 Guests</option>
-            <option value="6">6 Guests</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="email">EMAIL</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-        </div>
-        <button type="submit" class="btn-submit">CHECK AVAILABILITY</button>
-      </form>
 
-      <div class="contact-info">
-        <div class="contact-item">
-          <span class="contact-label">WhatsApp</span>
-          <div class="contact-value"><a href="https://wa.me/94777889880">+94 77 788 9880</a></div>
+        <!-- Tier 2: Two-Suite Stay -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <h3 class="tier-name">The Two-Suite Stay</h3>
+            <p class="tier-detail">2 Bedrooms · Up to 6 Guests</p>
+          </div>
+          <p class="tier-description">The Master Suite and one additional room.</p>
+          <p class="tier-price"><strong>300 USD</strong> / Night</p>
+          <button class="tier-btn" data-max-guests="6">Check Availability</button>
         </div>
-        <div class="contact-item">
-          <span class="contact-label">Email</span>
-          <div class="contact-value"><a href="mailto:reservation@tentwo.lk">reservation@tentwo.lk</a></div>
+
+        <!-- Tier 3: Master Suite Stay -->
+        <div class="tier-card">
+          <div class="tier-header">
+            <h3 class="tier-name">The Master Suite Stay</h3>
+            <p class="tier-detail">1 Bedroom · Up to 4 Guests</p>
+          </div>
+          <p class="tier-description">The Master Suite, for a smaller stay.</p>
+          <p class="tier-price"><strong>250 USD</strong> / Night</p>
+          <button class="tier-btn" data-max-guests="4">Check Availability</button>
         </div>
       </div>
 
+      <p class="tier-reassurance">Whichever you choose, the entire residence remains exclusively yours — no shared access, no other guests.</p>
+
+      <!-- Booking Form (Hidden until tier selection) -->
+      <div class="booking-form-container" id="bookingFormContainer" style="display: none;">
+        <form class="availability-form">
+          <div class="form-group">
+            <label for="arrival">ARRIVAL</label>
+            <input type="date" id="arrival" name="arrival" required>
+          </div>
+          <div class="form-group">
+            <label for="departure">DEPARTURE</label>
+            <input type="date" id="departure" name="departure" required>
+          </div>
+          <div class="form-group">
+            <label for="configuration">CONFIGURATION</label>
+            <select id="configuration" name="configuration" required>
+              <option value="">Select</option>
+              <option value="full-residence">The Full Residence (3 Bedrooms)</option>
+              <option value="two-suite">The Two-Suite Stay (2 Bedrooms)</option>
+              <option value="master-suite">The Master Suite Stay (1 Bedroom)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="guests">GUESTS</label>
+            <select id="guests" name="guests" required>
+              <option value="">Select</option>
+              <option value="1">1 Guest</option>
+              <option value="2">2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6 Guests</option>
+              <option value="7">7 Guests</option>
+              <option value="8">8 Guests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+          </div>
+          <button type="submit" class="btn-submit">CHECK AVAILABILITY</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVAILABILITY (Old section - hidden) -->
+  <section class="availability-section" aria-label="Check Availability" style="display: none;">
+    <div class="availability-inner">
       <p class="availability-note">TenTwo is reserved exclusively for one family or group at a time.</p>
 
       <!-- OTA Links - To be added when booking platform URLs are available -->
@@ -2127,6 +2533,7 @@
 
   <!-- FOOTER -->
   <footer>
+    <p class="footer-booking-notice">Due to limited availability, we recommend booking 4-6 weeks in advance.</p>
     <div class="footer-content">
       <div class="footer-brand">
         <div class="footer-logo-container">
@@ -2225,6 +2632,7 @@
         const formData = {
           arrival: document.getElementById('arrival').value,
           departure: document.getElementById('departure').value,
+          configuration: document.getElementById('configuration').value,
           guests: document.getElementById('guests').value,
           email: document.getElementById('email').value,
         };
@@ -2328,6 +2736,71 @@
           setTimeout(() => {
             filterGallery(filter);
           }, 500);
+        }
+      });
+    });
+
+    // Tier card selection and form reveal
+    const tierCards = document.querySelectorAll('.tier-card');
+    const tierButtons = document.querySelectorAll('.tier-btn');
+    const bookingFormContainer = document.getElementById('bookingFormContainer');
+
+    tierButtons.forEach((button, index) => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent card click from firing
+
+        const card = button.closest('.tier-card');
+        const maxGuests = button.getAttribute('data-max-guests');
+
+        // Determine configuration value based on index
+        let configValue = '';
+        if (index === 0) {
+          configValue = 'full-residence';
+        } else if (index === 1) {
+          configValue = 'two-suite';
+        } else if (index === 2) {
+          configValue = 'master-suite';
+        }
+
+        // Remove selected class from all cards
+        tierCards.forEach(c => c.classList.remove('selected'));
+
+        // Add selected class to clicked card
+        card.classList.add('selected');
+
+        // Show booking form with smooth animation
+        if (bookingFormContainer) {
+          bookingFormContainer.style.display = 'block';
+
+          // Trigger animation after a small delay to ensure display change takes effect
+          setTimeout(() => {
+            bookingFormContainer.classList.add('visible');
+          }, 10);
+
+          // Pre-fill configuration and guest count
+          const configSelect = document.getElementById('configuration');
+          const guestsSelect = document.getElementById('guests');
+
+          if (configSelect && configValue) {
+            configSelect.value = configValue;
+          }
+
+          if (guestsSelect && maxGuests) {
+            const optionExists = Array.from(guestsSelect.options).some(option => option.value === maxGuests);
+            if (optionExists) {
+              guestsSelect.value = maxGuests;
+            }
+          }
+        }
+      });
+    });
+
+    // Also make the entire card clickable (same behavior as button)
+    tierCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        const button = card.querySelector('.tier-btn');
+        if (button) {
+          button.click();
         }
       });
     });
