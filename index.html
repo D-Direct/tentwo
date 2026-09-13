@@ -29,7 +29,7 @@
   <meta name="twitter:title" content="TenTwo | Private Contemporary Residence Near Kandy, Sri Lanka">
   <meta name="twitter:description" content="A private contemporary residence near Kandy, Sri Lanka, reserved exclusively for families and groups of friends.">
   <meta name="twitter:image" content="https://tentwo.lk/images/hero.webp">
-  <meta name="twitter:image:alt" content="TenTwo private contemporary residence near Kandy, Sri Lanka">
+  <meta property="twitter:image:alt" content="TenTwo private contemporary residence near Kandy, Sri Lanka">
 
   <!-- Hreflang -->
   <link rel="alternate" hreflang="en" href="https://tentwo.lk/">
@@ -57,7 +57,7 @@
         "url": "https://tentwo.lk/",
         "image": [
           "https://tentwo.lk/images/hero.webp",
-          "https://tentwo.lk/images/exterior-main.jpg",
+          "https://tentwo.lk/images/living-main.jpg",
           "https://tentwo.lk/images/pool.jpeg"
         ],
         "address": {
@@ -617,10 +617,41 @@
     }
 
     .residence-body {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.7;
       color: var(--ink-soft);
-      margin-bottom: 48px;
+      margin-top: 32px;
+      margin-bottom: 0;
+    }
+
+    .residence-amenities {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 48px;
+    }
+
+    .amenity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding-left: 0;
+    }
+
+    .amenity-bullet {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      margin-top: 9px;
+      flex-shrink: 0;
+    }
+
+    .amenity-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      font-weight: 300;
     }
 
     .residence-details {
@@ -652,55 +683,48 @@
       color: var(--ink);
     }
 
-    /* ===== SECTION: ARCHITECTURE FULL BLEED ===== */
-    .architecture-hero {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-      min-height: 700px;
-      background: url('images/hero.webp') center center / cover no-repeat;
-      display: flex;
-      align-items: flex-end;
+    /* ===== SECTION: ARCHITECTURE ===== */
+    .architecture-section {
+      background: var(--ivory);
+      padding: clamp(60px, 8vw, 100px) 0;
     }
 
-    .architecture-overlay {
-      padding: clamp(40px, 6vw, 80px) var(--page-pad);
-      color: var(--white);
-      max-width: 800px;
+    .architecture-composition {
+      display: grid;
+      grid-template-columns: 35fr 65fr;
+      align-items: center;
+      gap: 60px;
     }
 
-    .architecture-overlay h2 {
+    .architecture-text {
+      padding-left: var(--page-pad);
+    }
+
+    .architecture-text h2 {
       font-family: var(--serif);
       font-size: clamp(38px, 4.2vw, 62px);
       font-weight: 400;
       line-height: 0.98;
       letter-spacing: 0.005em;
-      margin-bottom: 24px;
-    }
-
-    .architecture-overlay p {
-      font-size: 17px;
-      line-height: 1.65;
-      opacity: 0.9;
-      max-width: 580px;
-    }
-
-    /* ===== SECTION: ARCHITECTURE TEXT ===== */
-    .architecture-text {
-      background: var(--ivory);
-      padding: clamp(100px, 14vw, 200px) var(--page-pad);
-    }
-
-    .architecture-text-inner {
-      max-width: 700px;
-      margin: 0 0 0 clamp(0px, 8vw, 180px);
+      margin-bottom: 28px;
     }
 
     .architecture-text p {
-      font-size: clamp(20px, 2.2vw, 26px);
-      line-height: 1.65;
+      font-size: 17px;
+      line-height: 1.7;
       color: var(--ink-soft);
-      font-weight: 300;
+    }
+
+    .architecture-image {
+      height: 70vh;
+      min-height: 560px;
+      overflow: hidden;
+    }
+
+    .architecture-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     /* ===== SECTION: LIVING ===== */
@@ -789,6 +813,9 @@
     .suite-item {
       position: relative;
       overflow: hidden;
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .suite-item img {
@@ -884,7 +911,7 @@
       height: 90svh;
       min-height: 700px;
       background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22)),
-                  url('images/exterior-main.jpg') center center / cover no-repeat;
+                  url('images/living-main.jpg') center center / cover no-repeat;
       display: none;
       align-items: flex-end;
     }
@@ -1473,10 +1500,16 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .residence-grid,
+      .architecture-composition,
       .living-composition,
       .rooftop-composition {
         grid-template-columns: 1fr;
         gap: 48px;
+      }
+
+      .architecture-text {
+        padding-left: var(--page-pad);
+        padding-right: var(--page-pad);
       }
 
       .living-image-wrapper {
@@ -1577,6 +1610,11 @@
       .btn {
         padding: 14px 28px;
         font-size: 9px;
+      }
+
+      .residence-amenities {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
       .residence-details {
@@ -1776,34 +1814,58 @@
       <div>
         <span class="eyebrow">THE ENTIRE RESIDENCE</span>
         <h2 class="residence-headline">The entire residence,<br>exclusively yours.</h2>
+        <p class="residence-body">TenTwo is reserved for one family or group at a time. The residence, private pool, living spaces and rooftop terrace are yours throughout your stay.</p>
       </div>
       <div>
-        <p class="residence-body">TenTwo is reserved for one family or group at a time. The residence, private pool, living spaces and rooftop terrace are yours throughout your stay.</p>
-
-        <div class="residence-details">
-          <div class="detail">
-            <div class="detail-num">01</div>
-            <div class="detail-label">ENTIRE RESIDENCE</div>
+        <div class="residence-amenities">
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Three air-conditioned bedrooms, each with en-suite bathroom and private balcony</span>
           </div>
-          <div class="detail">
-            <div class="detail-num">02</div>
-            <div class="detail-label">PRIVATE POOL</div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Dedicated laundry area with self-service washing machine</span>
           </div>
-          <div class="detail">
-            <div class="detail-num">03</div>
-            <div class="detail-label">ROOFTOP TERRACE</div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Rooftop terrace</span>
+          </div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Complimentary Wi-Fi throughout</span>
+          </div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Private two-car garage</span>
+          </div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Dining area with six-seater table</span>
+          </div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Fully equipped kitchen</span>
+          </div>
+          <div class="amenity-item">
+            <span class="amenity-bullet"></span>
+            <span class="amenity-text">Private pool</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ARCHITECTURE FULL BLEED -->
-  <section class="architecture-hero" id="architecture" role="img" aria-label="Contemporary architecture at TenTwo with clean lines and natural materials">
-    <div class="architecture-overlay">
-      <span class="eyebrow">ARCHITECTURE</span>
-      <h2>An architecture <br>defined by openness</h2>
-      <p>Floor-to-ceiling glass, clean lines and natural materials create a continuous connection between the residence and its surroundings.</p>
+  <!-- ARCHITECTURE -->
+  <section class="architecture-section" id="architecture" aria-label="Contemporary architecture at TenTwo">
+    <div class="architecture-composition">
+      <div class="architecture-text reveal">
+        <span class="eyebrow">ARCHITECTURE</span>
+        <h2>An architecture<br>defined by openness</h2>
+        <p>Floor-to-ceiling glass, clean lines and natural materials create a continuous connection between the residence and its surroundings.</p>
+      </div>
+      <div class="architecture-image reveal-image">
+        <img src="images/hero.webp" alt="Contemporary architecture at TenTwo with clean lines and natural materials near Kandy">
+      </div>
     </div>
   </section>
 
@@ -1811,7 +1873,7 @@
   <section class="living-section" aria-label="Living Spaces">
     <div class="living-composition">
       <div class="living-image-wrapper reveal-image">
-        <img src="images/exterior-main.jpg" alt="TenTwo living area with floor-to-ceiling glass opening towards the private pool and landscape">
+        <img src="images/living-main.jpg" alt="TenTwo living area with floor-to-ceiling glass opening towards the private pool and landscape">
       </div>
       <div class="living-text reveal">
         <span class="eyebrow">LIVING TOGETHER</span>
@@ -1852,18 +1914,18 @@
     </div>
 
     <div class="suites-grid">
-      <div class="suite-item suite-1 reveal-image">
+      <a href="#gallery" class="suite-item suite-1 reveal-image" data-gallery-filter="master">
         <img src="images/bedroom-suite.png" alt="Master suite bedroom at TenTwo with contemporary design and natural light">
         <div class="suite-label">MASTER SUITE</div>
-      </div>
-      <div class="suite-item suite-2 reveal-image">
+      </a>
+      <a href="#gallery" class="suite-item suite-2 reveal-image" data-gallery-filter="garden">
         <img src="images/bedroom-02.jpeg" alt="Garden suite bedroom at TenTwo with views to the surrounding landscape">
         <div class="suite-label">GARDEN SUITE</div>
-      </div>
-      <div class="suite-item suite-3 reveal-image">
+      </a>
+      <a href="#gallery" class="suite-item suite-3 reveal-image" data-gallery-filter="upper">
         <img src="images/bedroom-03.jpeg" alt="Upper suite bedroom at TenTwo with contemporary finishes">
         <div class="suite-label">UPPER SUITE</div>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -1874,32 +1936,95 @@
       <h2>Form. Texture. Detail.</h2>
 
       <div class="gallery-filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+        <button class="filter-btn active" data-filter="outdoor">Outdoor</button>
         <button class="filter-btn" data-filter="rooftop">Rooftop & Surrounding</button>
         <button class="filter-btn" data-filter="living">Living</button>
         <button class="filter-btn" data-filter="kitchen">Kitchen & Dining</button>
         <button class="filter-btn" data-filter="master">Master Suite</button>
-        <button class="filter-btn" data-filter="bedroom1">Garden Suite</button>
-        <button class="filter-btn" data-filter="bedroom2">Upper Suite</button>
+        <button class="filter-btn" data-filter="garden">Garden Suite</button>
+        <button class="filter-btn" data-filter="upper">Upper Suite</button>
       </div>
     </div>
 
     <div class="gallery-grid">
+      <!-- OUTDOOR -->
       <div class="gallery-item g1 reveal-image" data-category="outdoor">
-        <img src="images/exterior-main.jpg" alt="Contemporary TenTwo residence with clean architectural lines near Kandy">
+        <img src="images/OUTDOOR/Outdoor1.jpg" alt="TenTwo private residence outdoor pool area with contemporary architecture Kandy Sri Lanka">
       </div>
       <div class="gallery-item g2 reveal-image" data-category="outdoor">
-        <img src="images/pool.jpeg" alt="Private pool at TenTwo with water, light and architectural design">
+        <img src="images/OUTDOOR/Outdoor2.jpeg" alt="TenTwo luxury villa outdoor living space with modern design near Kandy">
       </div>
-      <div class="gallery-item g3 reveal-image" data-category="living">
-        <img src="images/living-room.jpg" alt="Shared living space at TenTwo with indoor-outdoor connection">
+      <div class="gallery-item g3 reveal-image" data-category="outdoor">
+        <img src="images/OUTDOOR/Outdoor3.jpeg" alt="Contemporary outdoor architecture at TenTwo private residence Kandy">
       </div>
-      <div class="gallery-item g4 reveal-image" data-category="kitchen">
-        <img src="images/dining.jpg" alt="Dining and living area at TenTwo with natural light">
+
+      <!-- ROOFTOP & SURROUNDING -->
+      <div class="gallery-item g1 reveal-image" data-category="rooftop">
+        <img src="images/ROOFTOP & SURROUNDING/RoofTop1.jpg" alt="TenTwo rooftop terrace with panoramic views of Kandy Sri Lanka landscape">
       </div>
-      <div class="gallery-item g5 reveal-image" data-category="outdoor">
-        <img src="images/carport.webp" alt="TenTwo residence entrance and arrival area">
+      <div class="gallery-item g2 reveal-image" data-category="rooftop">
+        <img src="images/ROOFTOP & SURROUNDING/RoofTop2.jpg" alt="Private rooftop terrace overlooking Kandy hills at TenTwo luxury residence">
+      </div>
+      <div class="gallery-item g3 reveal-image" data-category="rooftop">
+        <img src="images/ROOFTOP & SURROUNDING/RoofTop3.jpg" alt="Rooftop outdoor space with mountain views at TenTwo private villa Kandy">
+      </div>
+      <div class="gallery-item g4 reveal-image" data-category="rooftop">
+        <img src="images/ROOFTOP & SURROUNDING/RoofTop4.jpg" alt="TenTwo rooftop relaxation area with scenic Kandy countryside views">
+      </div>
+      <div class="gallery-item g5 reveal-image" data-category="rooftop">
+        <img src="images/ROOFTOP & SURROUNDING/RoofTop5.jpeg" alt="Elevated rooftop terrace at TenTwo contemporary residence near Kandy">
+      </div>
+
+      <!-- LIVING -->
+      <div class="gallery-item g1 reveal-image" data-category="living">
+        <img src="images/LIVING/Living-Dining1.jpeg" alt="TenTwo spacious living dining area with modern furnishings Kandy luxury villa">
+      </div>
+      <div class="gallery-item g2 reveal-image" data-category="living">
+        <img src="images/LIVING/Living-Dining3.jpeg" alt="Contemporary living space with open plan design at TenTwo private residence Kandy">
+      </div>
+
+      <!-- KITCHEN & DINING -->
+      <div class="gallery-item g1 reveal-image" data-category="kitchen">
+        <img src="images/KITCHEN & DINING/kKitchen-Dining1.jpeg" alt="TenTwo fully equipped modern kitchen with dining area Kandy Sri Lanka">
+      </div>
+      <div class="gallery-item g2 reveal-image" data-category="kitchen">
+        <img src="images/KITCHEN & DINING/kKitchen-Dining2.jpg" alt="Contemporary kitchen and dining space at TenTwo luxury residence near Kandy">
+      </div>
+      <div class="gallery-item g3 reveal-image" data-category="kitchen">
+        <img src="images/KITCHEN & DINING/kKitchen-Dining3.jpeg" alt="Modern kitchen with six-seater dining table at TenTwo private villa Kandy">
+      </div>
+
+      <!-- MASTER SUITE -->
+      <div class="gallery-item g1 reveal-image" data-category="master">
+        <img src="images/MASTER SUITE/MasterRoom1.jpg" alt="TenTwo master suite bedroom with en-suite bathroom and private balcony Kandy">
+      </div>
+      <div class="gallery-item g2 reveal-image" data-category="master">
+        <img src="images/MASTER SUITE/MasterRoom2.jpeg" alt="Luxurious master bedroom with contemporary design at TenTwo residence Kandy Sri Lanka">
+      </div>
+      <div class="gallery-item g3 reveal-image" data-category="master">
+        <img src="images/MASTER SUITE/MasterRoom3.jpg" alt="Master suite with modern amenities and natural light at TenTwo private villa Kandy">
+      </div>
+
+      <!-- GARDEN SUITE -->
+      <div class="gallery-item g1 reveal-image" data-category="garden">
+        <img src="images/GARDEN SUITE/Room1-1.jpeg" alt="TenTwo garden suite bedroom with air conditioning and en-suite bathroom Kandy">
+      </div>
+      <div class="gallery-item g2 reveal-image" data-category="garden">
+        <img src="images/GARDEN SUITE/Room1-2.jpeg" alt="Garden view bedroom suite with private balcony at TenTwo luxury residence Kandy">
+      </div>
+      <div class="gallery-item g3 reveal-image" data-category="garden">
+        <img src="images/GARDEN SUITE/Room1-3.jpeg" alt="Contemporary garden suite with modern furnishings at TenTwo private villa Kandy Sri Lanka">
+      </div>
+
+      <!-- UPPER SUITE -->
+      <div class="gallery-item g1 reveal-image" data-category="upper">
+        <img src="images/UPPER SUITE/Room2-1.jpg" alt="TenTwo upper suite bedroom with en-suite facilities and balcony Kandy">
+      </div>
+      <div class="gallery-item g2 reveal-image" data-category="upper">
+        <img src="images/UPPER SUITE/Room2-2.jpg" alt="Upper level bedroom suite with contemporary design at TenTwo residence Kandy Sri Lanka">
+      </div>
+      <div class="gallery-item g3 reveal-image" data-category="upper">
+        <img src="images/UPPER SUITE/Room2-3.jpg" alt="Spacious upper suite with air conditioning at TenTwo luxury private villa Kandy">
       </div>
     </div>
   </section>
@@ -2146,24 +2271,64 @@
     const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
+    // Function to filter gallery
+    function filterGallery(filterValue) {
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      const activeButton = document.querySelector(`[data-filter="${filterValue}"]`);
+      if (activeButton) {
+        activeButton.classList.add('active');
+      }
+
+      // Filter gallery items
+      galleryItems.forEach(item => {
+        const category = item.getAttribute('data-category');
+        if (category === filterValue) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // Initialize gallery - show only outdoor on page load
+    galleryItems.forEach(item => {
+      const category = item.getAttribute('data-category');
+      if (category !== 'outdoor') {
+        item.classList.add('hidden');
+      }
+    });
+
+    // Filter button clicks
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
         const filter = button.getAttribute('data-filter');
+        filterGallery(filter);
+      });
+    });
 
-        // Update active button
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+    // Suite item clicks - navigate to gallery with filter
+    const suiteItems = document.querySelectorAll('.suite-item');
+    suiteItems.forEach(suite => {
+      suite.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = suite.getAttribute('data-gallery-filter');
 
-        // Filter gallery items
-        galleryItems.forEach(item => {
-          const category = item.getAttribute('data-category');
+        // Scroll to gallery
+        const gallerySection = document.querySelector('#gallery');
+        if (gallerySection) {
+          const headerHeight = 76;
+          const targetPosition = gallerySection.offsetTop - headerHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
 
-          if (filter === 'all' || category === filter) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
-          }
-        });
+          // Apply filter after a short delay to ensure scroll completes
+          setTimeout(() => {
+            filterGallery(filter);
+          }, 500);
+        }
       });
     });
   </script>
