@@ -35,9 +35,13 @@
   <link rel="alternate" hreflang="en" href="https://tentwo.lk/">
   <link rel="alternate" hreflang="x-default" href="https://tentwo.lk/">
 
-  <!-- Search Console Verification Tokens (to be added) -->
-  <!-- GOOGLE SEARCH CONSOLE VERIFICATION TOKEN GOES HERE -->
-  <!-- BING WEBMASTER VERIFICATION TOKEN GOES HERE -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PWTV3BHG');</script>
+  <!-- End Google Tag Manager -->
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1318,6 +1322,14 @@
       margin-top: 8px;
     }
 
+    .tier-ideal {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--gold);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
     .tier-price {
       font-size: 15px;
       font-weight: 400;
@@ -1595,6 +1607,7 @@
     }
 
     .ota-links-section {
+      margin-top: 48px;
       padding-top: 48px;
       border-top: 1px solid rgba(255,255,255,0.1);
       text-align: center;
@@ -1608,25 +1621,52 @@
 
     .ota-links {
       display: flex;
-      gap: 32px;
+      gap: 48px;
       justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
     }
 
-    .ota-links a {
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
+    .ota-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      padding: 0 28px;
+      height: 48px;
+      background: transparent;
+      border: 1px solid var(--line-2);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
       text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: all 300ms;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 500ms var(--ease);
+      isolation: isolate;
     }
 
-    .ota-links a:hover {
-      color: var(--white);
-      border-bottom-color: var(--white);
+    .ota-button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: translateY(101%);
+      transition: transform 500ms var(--ease);
+      z-index: -1;
+    }
+
+    .ota-button:hover {
+      color: var(--bg-900);
+      border-color: var(--gold);
+    }
+
+    .ota-button:hover::after {
+      transform: translateY(0);
     }
 
     /* ===== FOOTER ===== */
@@ -2054,8 +2094,94 @@
 
       .ota-links {
         flex-direction: column;
-        gap: 20px;
+        gap: 16px;
       }
+
+      .ota-button {
+        width: 100%;
+        max-width: 280px;
+      }
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-consent {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(13, 13, 13, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 24px;
+      z-index: 10000;
+      display: none;
+    }
+
+    .cookie-consent.show {
+      display: block;
+    }
+
+    .cookie-consent-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-consent-text p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--stone);
+      margin: 0;
+    }
+
+    .cookie-consent-text a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+
+    .cookie-consent-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-consent-btn {
+      padding: 12px 24px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--white);
+      transition: all 300ms;
+      font-family: var(--sans);
+    }
+
+    .cookie-consent-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .cookie-consent-btn.accept {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .cookie-consent-btn.accept:hover {
+      opacity: 0.9;
     }
 
     /* Reduced motion */
@@ -2071,6 +2197,23 @@
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWTV3BHG"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Cookie Consent Banner -->
+  <div class="cookie-consent" id="cookieConsent">
+    <div class="cookie-consent-inner">
+      <div class="cookie-consent-text">
+        <p>We use cookies to enhance your experience and analyze site usage. By continuing to browse, you consent to our use of cookies. Read our <a href="/privacy-policy.html">Privacy Policy</a> for more information.</p>
+      </div>
+      <div class="cookie-consent-buttons">
+        <button class="cookie-consent-btn" onclick="rejectCookies()">Decline</button>
+        <button class="cookie-consent-btn accept" onclick="acceptCookies()">Accept</button>
+      </div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header id="header">
@@ -2434,11 +2577,12 @@
         <div class="tier-card tier-primary">
           <div class="tier-header">
             <h3 class="tier-name">The Full Residence</h3>
-            <p class="tier-detail">3 Bedrooms · Up to 8 Guests</p>
+            <p class="tier-detail">3 Bedrooms · Up to 6 Guests</p>
           </div>
           <p class="tier-description">All three suites, for the whole group.</p>
-          <p class="tier-price"><strong>350 USD</strong> / Night</p>
-          <button class="tier-btn" data-max-guests="8">Check Availability</button>
+          <p class="tier-ideal">Ideal for family reunions, milestone birthdays and group getaways.</p>
+          <p class="tier-price"><strong>250 USD</strong> / Night</p>
+          <button class="tier-btn" data-max-guests="6">Check Availability</button>
         </div>
 
         <!-- Tier 2: Two-Suite Stay -->
@@ -2448,7 +2592,8 @@
             <p class="tier-detail">2 Bedrooms · Up to 6 Guests</p>
           </div>
           <p class="tier-description">The Master Suite and one additional room.</p>
-          <p class="tier-price"><strong>300 USD</strong> / Night</p>
+          <p class="tier-ideal">Ideal for two couples or a family with older children.</p>
+          <p class="tier-price"><strong>225 USD</strong> / Night</p>
           <button class="tier-btn" data-max-guests="6">Check Availability</button>
         </div>
 
@@ -2459,7 +2604,8 @@
             <p class="tier-detail">1 Bedroom · Up to 4 Guests</p>
           </div>
           <p class="tier-description">The Master Suite, for a smaller stay.</p>
-          <p class="tier-price"><strong>250 USD</strong> / Night</p>
+          <p class="tier-ideal">Ideal for couples or a small family.</p>
+          <p class="tier-price"><strong>200 USD</strong> / Night</p>
           <button class="tier-btn" data-max-guests="4">Check Availability</button>
         </div>
       </div>
@@ -2469,6 +2615,56 @@
       <!-- Booking Form (Hidden until tier selection) -->
       <div class="booking-form-container" id="bookingFormContainer" style="display: none;">
         <form class="availability-form">
+          <div class="form-group">
+            <label for="name">NAME</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label for="country">COUNTRY</label>
+            <select id="country" name="country" required>
+              <option value="">Select your country</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Canada">Canada</option>
+              <option value="China">China</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Germany">Germany</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Italy">Italy</option>
+              <option value="Japan">Japan</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Norway">Norway</option>
+              <option value="Singapore">Singapore</option>
+              <option value="South Korea">South Korea</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Thailand">Thailand</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="whatsapp">WHATSAPP (Optional)</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+94 77 123 4567">
+          </div>
           <div class="form-group">
             <label for="arrival">ARRIVAL</label>
             <input type="date" id="arrival" name="arrival" required>
@@ -2496,44 +2692,28 @@
               <option value="4">4 Guests</option>
               <option value="5">5 Guests</option>
               <option value="6">6 Guests</option>
-              <option value="7">7 Guests</option>
-              <option value="8">8 Guests</option>
             </select>
-          </div>
-          <div class="form-group">
-            <label for="email">EMAIL</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
           </div>
           <button type="submit" class="btn-submit">CHECK AVAILABILITY</button>
         </form>
       </div>
-    </div>
-  </section>
 
-  <!-- AVAILABILITY (Old section - hidden) -->
-  <section class="availability-section" aria-label="Check Availability" style="display: none;">
-    <div class="availability-inner">
-      <p class="availability-note">TenTwo is reserved exclusively for one family or group at a time.</p>
-
-      <!-- OTA Links - To be added when booking platform URLs are available -->
-      <!--
+      <!-- OTA Links Section -->
       <div class="ota-links-section">
         <p>Prefer to book through a travel platform?</p>
         <div class="ota-links">
-          <a href="#" target="_blank" rel="noopener">Booking.com</a>
-          <a href="#" target="_blank" rel="noopener">Airbnb</a>
-          <a href="#" target="_blank" rel="noopener">Agoda</a>
-          <a href="#" target="_blank" rel="noopener">Trip.com</a>
+          <a href="https://airbnb.com.sg/h/tentwo" target="_blank" rel="noopener" class="ota-button">AIRBNB</a>
+          <a href="https://www.agoda.com/luxury-villa-in-kandy-with-a-private-pool/hotel/kandy-lk.html?ds=T8a9OBi6VA0RYSor" target="_blank" rel="noopener" class="ota-button">AGODA</a>
+          <a href="https://www.booking.com/hotel/lk/luxury-villa-in-kandy-with-a-private-pool.html" target="_blank" rel="noopener" class="ota-button">BOOKING.COM</a>
         </div>
       </div>
-      -->
     </div>
   </section>
   </main>
 
   <!-- FOOTER -->
   <footer>
-    <p class="footer-booking-notice">Due to limited availability, we recommend booking 4-6 weeks in advance.</p>
+    <p class="footer-booking-notice">Travelling from overseas? We recommend enquiring 2-3 months ahead, especially for Dec-Jan and Jun-Aug. We reply within 24 hours.</p>
     <div class="footer-content">
       <div class="footer-brand">
         <div class="footer-logo-container">
@@ -2551,8 +2731,8 @@
       <div class="footer-nav">
         <h4>CONTACT</h4>
         <ul>
-          <li><a href="https://wa.me/94777889880">WhatsApp<br>+94 77 788 9880</a></li>
-          <li><a href="mailto:reservation@tentwo.lk">Email<br>reservation@tentwo.lk</a></li>
+          <li><a href="https://wa.me/94777889880" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({'event':'whatsapp_click','link_location':'footer'});">WhatsApp<br>+94 77 788 9880</a></li>
+          <li><a href="mailto:reservation@tentwo.lk" onclick="window.dataLayer=window.dataLayer||[];window.dataLayer.push({'event':'email_click','link_location':'footer'});">Email<br>reservation@tentwo.lk</a></li>
         </ul>
       </div>
       <div class="footer-nav">
@@ -2567,7 +2747,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 TENTWO. All rights reserved.</p>
+      <p>&copy; 2025 TENTWO. All rights reserved. · <a href="/privacy-policy.html" style="color: var(--gold); text-decoration: none;">Privacy Policy</a></p>
     </div>
   </footer>
 
@@ -2630,12 +2810,25 @@
         submitButton.disabled = true;
 
         const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          country: document.getElementById('country').value,
+          whatsapp: document.getElementById('whatsapp').value,
           arrival: document.getElementById('arrival').value,
           departure: document.getElementById('departure').value,
           configuration: document.getElementById('configuration').value,
           guests: document.getElementById('guests').value,
-          email: document.getElementById('email').value,
         };
+
+        // Track form submission event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'availability_form_submit',
+          'form_type': 'availability_inquiry',
+          'configuration': formData.configuration,
+          'guests': formData.guests,
+          'country': formData.country
+        });
 
         try {
           const response = await fetch('/api/inquiry', {
@@ -2645,7 +2838,7 @@
           });
 
           if (response.ok) {
-            alert('Thank you for your inquiry. We will contact you shortly to confirm availability.');
+            alert('Thank you, we will reply within 24 hours.');
             availabilityForm.reset();
           } else {
             alert('Sorry, something went wrong sending your inquiry. Please try again or contact us directly via WhatsApp or email.');
@@ -2768,6 +2961,14 @@
         // Add selected class to clicked card
         card.classList.add('selected');
 
+        // Track tier selection event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'check_availability_click',
+          'tier_type': configValue,
+          'max_guests': maxGuests
+        });
+
         // Show booking form with smooth animation
         if (bookingFormContainer) {
           bookingFormContainer.style.display = 'block';
@@ -2804,6 +3005,50 @@
         }
       });
     });
+
+    // Cookie Consent Management
+    function checkCookieConsent() {
+      const consent = localStorage.getItem('cookieConsent');
+      const cookieBanner = document.getElementById('cookieConsent');
+
+      if (!consent && cookieBanner) {
+        // Show banner after a short delay
+        setTimeout(() => {
+          cookieBanner.classList.add('show');
+        }, 1000);
+      }
+    }
+
+    function acceptCookies() {
+      localStorage.setItem('cookieConsent', 'accepted');
+      document.getElementById('cookieConsent').classList.remove('show');
+
+      // Track consent
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'cookie_consent',
+        'consent_type': 'accepted'
+      });
+
+      // Note: After accepting, GTM will handle GA4 and Meta Pixel based on your GTM configuration
+    }
+
+    function rejectCookies() {
+      localStorage.setItem('cookieConsent', 'rejected');
+      document.getElementById('cookieConsent').classList.remove('show');
+
+      // Track consent rejection
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'cookie_consent',
+        'consent_type': 'rejected'
+      });
+
+      // Note: Configure GTM to respect this rejection
+    }
+
+    // Check cookie consent on page load
+    checkCookieConsent();
   </script>
 
 </body>
