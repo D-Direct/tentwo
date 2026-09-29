@@ -1595,27 +1595,13 @@
       text-transform: uppercase;
       cursor: pointer;
       position: relative;
-      overflow: hidden;
       transition: all 500ms var(--ease);
     }
 
-    .btn-submit::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--gold);
-      transform: translateY(101%);
-      transition: transform 500ms var(--ease);
-      z-index: -1;
-    }
-
     .btn-submit:hover {
-      color: var(--bg-900);
+      background: var(--gold);
+      color: var(--ink);
       border-color: var(--gold);
-    }
-
-    .btn-submit:hover::after {
-      transform: translateY(0);
     }
 
     .availability-note {
