@@ -2871,14 +2871,15 @@
           });
 
           if (response.ok) {
-            alert('Thank you, we will reply within 24 hours.');
-            availabilityForm.reset();
+            // Redirect to thank you page
+            window.location.href = '/thank-you.html';
           } else {
             alert('Sorry, something went wrong sending your inquiry. Please try again or contact us directly via WhatsApp or email.');
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
           }
         } catch (err) {
           alert('Sorry, something went wrong sending your inquiry. Please try again or contact us directly via WhatsApp or email.');
-        } finally {
           submitButton.textContent = originalText;
           submitButton.disabled = false;
         }
