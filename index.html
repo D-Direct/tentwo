@@ -452,8 +452,25 @@
       height: 100svh;
       min-height: 720px;
       overflow: hidden;
-      background: linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.20)),
-                  url('images/pool_large.jpeg') center center / cover no-repeat;
+      background: #000;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.25));
+      z-index: 1;
     }
 
     .hero-content {
@@ -462,6 +479,8 @@
       bottom: clamp(48px, 8vw, 110px);
       max-width: 720px;
       color: var(--white);
+      z-index: 2;
+      display: none;
     }
 
     .eyebrow {
@@ -602,6 +621,7 @@
       text-transform: uppercase;
       color: var(--white);
       opacity: 0.6;
+      z-index: 2;
       writing-mode: vertical-rl;
     }
 
@@ -2286,7 +2306,11 @@
 
   <main>
   <!-- HERO -->
-  <section class="hero" id="hero" role="img" aria-label="TenTwo private contemporary residence with pool and landscape views near Kandy">
+  <section class="hero" id="hero" aria-label="TenTwo private contemporary residence with pool and landscape views near Kandy">
+    <video class="hero-video" autoplay muted loop playsinline poster="images/pool_large.jpeg" id="heroVideo">
+      <source src="images/Hero-Video WEB.mp4" type="video/mp4" id="videoSource">
+      Your browser does not support the video tag.
+    </video>
     <div class="hero-content">
       <span class="eyebrow">PRIVATE CONTEMPORARY RESIDENCE</span>
       <h1>A private residence,<br>shaped by<br>light and landscape.</h1>
@@ -2781,6 +2805,26 @@
 
   <!-- JAVASCRIPT -->
   <script>
+    // Responsive hero video
+    const heroVideo = document.getElementById('heroVideo');
+    const videoSource = document.getElementById('videoSource');
+
+    function setHeroVideo() {
+      const isMobile = window.innerWidth <= 768;
+      const newSrc = isMobile ? 'images/Hero-Video (mobile).mp4' : 'images/Hero-Video WEB.mp4';
+
+      if (videoSource.src !== newSrc) {
+        videoSource.src = newSrc;
+        heroVideo.load();
+      }
+    }
+
+    // Set video on load
+    setHeroVideo();
+
+    // Update video on resize
+    window.addEventListener('resize', setHeroVideo);
+
     // Header scroll behavior
     const header = document.getElementById('header');
 
