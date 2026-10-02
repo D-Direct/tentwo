@@ -1,0 +1,11 @@
+{
+  "name": "tentwo-image-converter",
+  "version": "1.0.0",
+  "description": "WebP image conversion for TenTwo website",
+  "scripts": {
+    "convert": "node convert-to-webp.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  }
+}
