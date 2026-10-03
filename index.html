@@ -463,6 +463,39 @@
       height: 100%;
       object-fit: cover;
       z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+
+    .hero-video.loaded {
+      opacity: 1;
+    }
+
+    .video-loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .video-loader .spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      border-top-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .video-loader.hidden {
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
     }
 
     .hero::after {
@@ -2307,6 +2340,9 @@
   <main>
   <!-- HERO -->
   <section class="hero" id="hero" aria-label="TenTwo private contemporary residence with pool and landscape views near Kandy">
+    <div class="video-loader" id="videoLoader">
+      <div class="spinner"></div>
+    </div>
     <video class="hero-video" autoplay muted loop playsinline preload="auto" id="heroVideo">
       <source src="images/Hero-Video WEB.mp4" type="video/mp4" id="videoSource">
       Your browser does not support the video tag.
@@ -2808,6 +2844,7 @@
     // Responsive hero video
     const heroVideo = document.getElementById('heroVideo');
     const videoSource = document.getElementById('videoSource');
+    const videoLoader = document.getElementById('videoLoader');
 
     function setHeroVideo() {
       const isMobile = window.innerWidth <= 768;
@@ -2818,6 +2855,23 @@
         heroVideo.load();
       }
     }
+
+    // Handle video loading states
+    heroVideo.addEventListener('loadeddata', () => {
+      heroVideo.classList.add('loaded');
+      videoLoader.classList.add('hidden');
+      setTimeout(() => {
+        videoLoader.style.display = 'none';
+      }, 300);
+    });
+
+    // Handle video errors
+    heroVideo.addEventListener('error', () => {
+      videoLoader.classList.add('hidden');
+      setTimeout(() => {
+        videoLoader.style.display = 'none';
+      }, 300);
+    });
 
     // Set video on load
     setHeroVideo();
