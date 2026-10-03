@@ -4,8 +4,9 @@ CNAME
 # Claude Code configuration
 .claude/
 
-# Dependencies
+# Dependencies (only needed for local WebP conversion)
 node_modules/
+package.json
 package-lock.json
 
 # Build files

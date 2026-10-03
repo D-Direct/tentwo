@@ -1,0 +1,17 @@
+# Cloudflare Pages ignore file
+# Don't upload these files/folders to Cloudflare
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Development files
+.git/
+.claude/
+.vercel/
+
+# Build script (not needed for deployment)
+convert-to-webp.js
+
+# Documentation
+*.md
