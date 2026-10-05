@@ -1750,6 +1750,23 @@
         border-color: rgba(255, 255, 255, 0.6);
       }
 
+      /* Date input specific styling */
+      .form-group input[type="date"] {
+        color-scheme: dark;
+        cursor: pointer;
+      }
+
+      .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        filter: invert(1);
+        opacity: 0.8;
+        transition: opacity 300ms;
+      }
+
+      .form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+      }
+
       .form-group select option {
         background: var(--bg-900);
         color: var(--white);
@@ -3370,6 +3387,34 @@
       revealElements.forEach((el) => {
         revealObserver.observe(el);
       });
+
+      // Set minimum dates for date inputs
+      const arrivalInput = document.getElementById("arrival");
+      const departureInput = document.getElementById("departure");
+
+      if (arrivalInput && departureInput) {
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        arrivalInput.setAttribute('min', today);
+        departureInput.setAttribute('min', today);
+
+        // When arrival date changes, update departure minimum date
+        arrivalInput.addEventListener('change', function() {
+          const arrivalDate = this.value;
+          if (arrivalDate) {
+            // Set departure minimum to one day after arrival
+            const nextDay = new Date(arrivalDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            const minDeparture = nextDay.toISOString().split('T')[0];
+            departureInput.setAttribute('min', minDeparture);
+
+            // Reset departure if it's before the new minimum
+            if (departureInput.value && departureInput.value <= arrivalDate) {
+              departureInput.value = '';
+            }
+          }
+        });
+      }
 
       // Form submission
       const availabilityForm = document.querySelector(".availability-form");
