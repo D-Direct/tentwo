@@ -2343,87 +2343,6 @@
         }
       }
 
-      /* Cookie Consent Banner */
-      .cookie-consent {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(13, 13, 13, 0.98);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 24px;
-        z-index: 10000;
-        display: none;
-      }
-
-      .cookie-consent.show {
-        display: block;
-      }
-
-      .cookie-consent-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        flex-wrap: wrap;
-      }
-
-      .cookie-consent-text {
-        flex: 1;
-        min-width: 300px;
-      }
-
-      .cookie-consent-text p {
-        font-size: 14px;
-        line-height: 1.6;
-        color: var(--stone);
-        margin: 0;
-      }
-
-      .cookie-consent-text a {
-        color: var(--gold);
-        text-decoration: underline;
-      }
-
-      .cookie-consent-buttons {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      .cookie-consent-btn {
-        padding: 12px 24px;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        cursor: pointer;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background: transparent;
-        color: var(--white);
-        transition: all 300ms;
-        font-family: var(--sans);
-      }
-
-      .cookie-consent-btn:hover {
-        background: var(--gold);
-        border-color: var(--gold);
-        color: var(--ink);
-      }
-
-      .cookie-consent-btn.accept {
-        background: var(--gold);
-        border-color: var(--gold);
-        color: var(--ink);
-      }
-
-      .cookie-consent-btn.accept:hover {
-        opacity: 0.9;
-      }
-
       /* Reduced motion */
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -2463,27 +2382,6 @@
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Cookie Consent Banner -->
-    <div class="cookie-consent" id="cookieConsent">
-      <div class="cookie-consent-inner">
-        <div class="cookie-consent-text">
-          <p>
-            We use cookies to enhance your experience and analyze site usage. By
-            continuing to browse, you consent to our use of cookies. Read our
-            <a href="/privacy-policy.html">Privacy Policy</a> for more
-            information.
-          </p>
-        </div>
-        <div class="cookie-consent-buttons">
-          <button class="cookie-consent-btn" onclick="rejectCookies()">
-            Decline
-          </button>
-          <button class="cookie-consent-btn accept" onclick="acceptCookies()">
-            Accept
-          </button>
-        </div>
-      </div>
-    </div>
 
     <!-- HEADER -->
     <header id="header">
@@ -3649,49 +3547,6 @@
         });
       });
 
-      // Cookie Consent Management
-      function checkCookieConsent() {
-        const consent = localStorage.getItem("cookieConsent");
-        const cookieBanner = document.getElementById("cookieConsent");
-
-        if (!consent && cookieBanner) {
-          // Show banner after a short delay
-          setTimeout(() => {
-            cookieBanner.classList.add("show");
-          }, 1000);
-        }
-      }
-
-      function acceptCookies() {
-        localStorage.setItem("cookieConsent", "accepted");
-        document.getElementById("cookieConsent").classList.remove("show");
-
-        // Track consent
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "cookie_consent",
-          consent_type: "accepted",
-        });
-
-        // Note: After accepting, GTM will handle GA4 and Meta Pixel based on your GTM configuration
-      }
-
-      function rejectCookies() {
-        localStorage.setItem("cookieConsent", "rejected");
-        document.getElementById("cookieConsent").classList.remove("show");
-
-        // Track consent rejection
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "cookie_consent",
-          consent_type: "rejected",
-        });
-
-        // Note: Configure GTM to respect this rejection
-      }
-
-      // Check cookie consent on page load
-      checkCookieConsent();
     </script>
   </body>
 </html>
