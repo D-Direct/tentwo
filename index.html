@@ -1758,13 +1758,16 @@
 
       .form-group input[type="date"]::-webkit-calendar-picker-indicator {
         cursor: pointer;
-        filter: invert(1);
-        opacity: 0.8;
-        transition: opacity 300ms;
+        filter: invert(1) brightness(2);
+        opacity: 1;
+        transition: all 300ms;
+        width: 20px;
+        height: 20px;
       }
 
       .form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
-        opacity: 1;
+        filter: invert(1) brightness(2.5);
+        transform: scale(1.1);
       }
 
       .form-group select option {
