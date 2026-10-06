@@ -1652,7 +1652,8 @@
 
       .booking-form-container.visible {
         opacity: 1;
-        max-height: 600px;
+        max-height: 2000px;
+        padding-bottom: 32px;
       }
 
       /* ===== SECTION: AVAILABILITY ===== */
@@ -1856,6 +1857,7 @@
         cursor: pointer;
         position: relative;
         transition: all 500ms var(--ease);
+        margin-bottom: 32px;
       }
 
       .btn-submit:hover {
@@ -2403,6 +2405,13 @@
         .btn-submit {
           width: 100%;
           text-align: center;
+          margin-top: 16px;
+          display: block;
+        }
+
+        .availability-form .btn-submit {
+          grid-column: 1;
+          margin-top: 24px;
         }
 
         .ota-links {
@@ -3072,11 +3081,6 @@
             </div>
           </div>
 
-          <p class="tier-reassurance">
-            Whichever you choose, the entire residence remains exclusively yours
-            — no shared access, no other guests.
-          </p>
-
           <!-- Booking Form (Hidden until tier selection) -->
           <div
             class="booking-form-container"
@@ -3194,6 +3198,11 @@
               </button>
             </form>
           </div>
+
+          <p class="tier-reassurance">
+            Whichever you choose, the entire residence remains exclusively yours
+            — no shared access, no other guests.
+          </p>
 
           <!-- OTA Links Section -->
           <div class="ota-links-section">
