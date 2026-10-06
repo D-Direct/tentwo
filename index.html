@@ -3622,6 +3622,14 @@
                 guestsSelect.value = maxGuests;
               }
             }
+
+            // Scroll to the form smoothly (especially important on mobile)
+            setTimeout(() => {
+              bookingFormContainer.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }, 100);
           }
         });
       });
