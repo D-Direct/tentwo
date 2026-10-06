@@ -1757,10 +1757,14 @@
 
       .availability-form {
         display: grid;
-        grid-template-columns: repeat(5, 1fr) auto;
+        grid-template-columns: repeat(4, 1fr);
         gap: 16px;
         align-items: end;
         margin-bottom: 48px;
+      }
+
+      .availability-form .btn-submit {
+        grid-column: span 4;
       }
 
       .form-group {
@@ -2281,6 +2285,10 @@
 
         .availability-form {
           grid-template-columns: 1fr;
+        }
+
+        .availability-form .btn-submit {
+          grid-column: 1;
         }
 
         .footer-content {
@@ -3182,7 +3190,7 @@
                 </select>
               </div>
               <button type="submit" class="btn-submit">
-                RESERVE NOW
+                SUBMIT
               </button>
             </form>
           </div>
