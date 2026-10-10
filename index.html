@@ -613,23 +613,26 @@
       }
 
       .hero-title {
-        font-family: var(--serif);
-        font-size: clamp(32px, 5vw, 56px);
-        font-weight: 500;
-        color: var(--white);
-        margin: 0 0 16px 0;
-        line-height: 1.2;
-        letter-spacing: 0.02em;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
       }
 
       .hero-subtitle {
-        font-family: var(--sans);
-        font-size: clamp(14px, 2vw, 18px);
-        font-weight: 300;
-        color: var(--stone);
-        margin: 0 0 32px 0;
-        line-height: 1.5;
+        font-family: var(--serif);
+        font-size: clamp(20px, 3.5vw, 42px);
+        font-weight: 400;
+        color: var(--white);
+        margin: 0 0 40px 0;
+        line-height: 1.4;
         letter-spacing: 0.03em;
+        font-style: italic;
       }
 
       .hero-buttons {
