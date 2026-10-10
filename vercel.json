@@ -1,6 +1,4 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -20,7 +18,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(webp|jpg|jpeg|png|svg|woff2))",
+      "source": "/images/:path*",
       "headers": [
         {
           "key": "Cache-Control",
