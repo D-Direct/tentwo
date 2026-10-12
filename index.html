@@ -604,12 +604,29 @@
       .hero-content {
         position: absolute;
         left: 50%;
-        bottom: clamp(48px, 8vw, 110px);
-        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
         text-align: center;
         color: var(--white);
         z-index: 2;
-        max-width: 90%;
+        max-width: 95%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .hero-bottom {
+        position: absolute;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 2;
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 24px;
       }
 
       .hero-title {
@@ -624,15 +641,208 @@
         border-width: 0;
       }
 
-      .hero-subtitle {
+      /* New Hero Styles */
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+        z-index: 1;
+      }
+
+      .hero-title-new {
         font-family: var(--serif);
-        font-size: clamp(16px, 2vw, 24px);
         font-weight: 400;
-        color: var(--stone);
-        margin: 32px 0 0 0;
+        color: var(--white);
+        margin: 0 0 16px 0;
+        line-height: 1.1;
+        letter-spacing: 0.005em;
+        white-space: normal;
+        display: block;
+      }
+
+      .hero-title-new br {
+        display: block;
+        content: "";
+        margin-top: 0;
+      }
+
+      .hero-title-desktop {
+        font-size: clamp(32px, 3.7vw, 42px);
+        max-width: 1200px;
+        display: inline-block;
+      }
+
+      .hero-title-mobile {
+        display: none;
+      }
+
+      .hero-location-mobile {
+        display: none;
+      }
+
+      .hero-facts {
+        font-family: var(--sans) !important;
+        font-size: 10px !important;
+        font-weight: 500 !important;
+        letter-spacing: 0.34em !important;
+        text-transform: uppercase !important;
+        color: var(--gold) !important;
+        margin: 16px auto 0 auto;
         line-height: 1.4;
-        letter-spacing: 0.03em;
-        font-style: italic;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .hero-facts * {
+        font-size: 10px !important;
+        color: var(--gold) !important;
+      }
+
+      .quick-book {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
+        gap: 16px;
+        max-width: 1100px;
+        background: rgba(1, 0, 0, 0.3);
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .qb-field {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .qb-field label {
+        display: block;
+        font-size: 11px;
+        color: var(--white);
+        margin-bottom: 4px;
+        font-weight: 600;
+      }
+
+      .qb-price-display {
+        padding: 14px 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        height: 50px;
+        box-sizing: border-box;
+      }
+
+      .qb-price-display span {
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .quick-book input,
+      .quick-book select {
+        padding: 14px 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        font-family: var(--sans);
+        font-size: 14px;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 300ms;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        height: 50px;
+      }
+
+      .quick-book input[type="date"] {
+        color-scheme: light;
+      }
+
+      .quick-book input[type="date"]::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        opacity: 1;
+        filter: invert(0.4);
+      }
+
+      .quick-book select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+      }
+
+      .quick-book select option {
+        background: #ffffff;
+        color: #0d0d0d;
+      }
+
+      .quick-book input:focus,
+      .quick-book select:focus {
+        outline: none;
+        border-color: #d4af37;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+      }
+
+      .qb-check-btn {
+        padding: 14px 20px;
+        background: rgba(8, 0, 0, 0);
+        color: var(--white);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        font-family: var(--sans);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 300ms;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-end;
+        margin-top: 19px;
+      }
+
+      .qb-check-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .qb-wa-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 20px;
+        background: #25d366;
+        color: var(--white);
+        border: none;
+        border-radius: 4px;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 300ms;
+      }
+
+      .qb-wa-btn:hover {
+        background: #20ba5a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
 
       .hero-buttons {
@@ -679,14 +889,13 @@
         transform: translateY(0);
       }
 
-
       /* Floating WhatsApp Button */
       .floating-whatsapp {
         position: fixed;
         bottom: 24px;
         right: 24px;
         z-index: 9999;
-        background: #25D366;
+        background: #25d366;
         color: #ffffff;
         padding: 14px 20px;
         border-radius: 30px;
@@ -702,7 +911,7 @@
       }
 
       .floating-whatsapp:hover {
-        background: #128C7E;
+        background: #128c7e;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
       }
@@ -2393,18 +2602,47 @@
         }
 
         .hero-content {
+          top: 80px;
           left: 50%;
-          bottom: 32px;
           transform: translateX(-50%);
+        }
+
+        .hero-bottom {
+          bottom: 60px;
+          padding: 0 16px;
+        }
+
+        .hero-facts {
+          display: none;
+        }
+
+        .hero-title-new {
+          line-height: 1.2;
+          margin: 0;
+        }
+
+        .hero-title-desktop {
+          display: none;
+        }
+
+        .hero-title-mobile {
+          display: block;
+          font-size: clamp(32px, 8vw, 42px);
+        }
+
+        .hero-location-mobile {
+          display: block;
+          font-family: var(--sans);
+          font-size: clamp(14px, 3.5vw, 18px);
+          font-weight: 400;
+          color: var(--white);
+          margin: 8px 0 0 0;
+          opacity: 0.95;
         }
 
         .hero-buttons {
           flex-direction: column;
           gap: 12px;
-        }
-
-        .hero-subtitle {
-          display: none;
         }
 
         .hero-cta-button {
@@ -2420,6 +2658,35 @@
           font-size: 13px;
           bottom: 16px;
           right: 16px;
+        }
+
+        /* Mobile Quick Booking */
+        .quick-book {
+          grid-template-columns: 1fr;
+          padding: 12px;
+          gap: 8px;
+        }
+
+        .qb-field label {
+          font-size: 9px !important;
+          margin-bottom: 2px !important;
+        }
+
+        .quick-book input,
+        .quick-book select,
+        .qb-price-display {
+          padding: 10px 12px !important;
+          font-size: 13px !important;
+        }
+
+        .qb-price-display span {
+          font-size: 14px !important;
+        }
+
+        .qb-check-btn {
+          width: 100%;
+          padding: 12px 16px !important;
+          font-size: 10px !important;
         }
 
         .floating-whatsapp svg {
@@ -2533,7 +2800,6 @@
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
     <!-- HEADER -->
     <header id="header">
       <a href="#hero" class="logo">
@@ -2567,11 +2833,22 @@
       href="https://wa.me/94777889880"
       target="_blank"
       class="floating-whatsapp"
-      onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'whatsapp_click',link_location:'floating'});"
+      onclick="
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({ event: 'whatsapp_click', link_location: 'floating' });
+      "
       aria-label="Contact us on WhatsApp"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+        />
       </svg>
       <span>WhatsApp</span>
     </a>
@@ -2591,43 +2868,59 @@
       <section
         class="hero"
         id="hero"
-        aria-label="TenTwo private contemporary residence with pool and landscape views near Kandy"
+        style="
+          background: url(&quot;images/hero.webp&quot;) center/cover no-repeat;
+        "
       >
-        <div class="video-loader" id="videoLoader">
-          <div class="spinner"></div>
-        </div>
-        <video
-          class="hero-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          id="heroVideo"
-        >
-          <source
-            src="images/Hero-Video WEB.mp4"
-            type="video/mp4"
-            id="videoSource"
-          />
-          Your browser does not support the video tag.
-        </video>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-          <h1 class="hero-title">Luxury Private Residence in Kandy, Sri Lanka</h1>
-          <div class="hero-buttons">
-            <a href="#availability" class="hero-cta-button">CHECK AVAILABILITY</a>
-            <a
-              href="https://wa.me/94777889880"
-              target="_blank"
-              class="hero-cta-button hero-whatsapp-button"
-              onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'whatsapp_click',link_location:'hero'});"
+          <h1 class="hero-title">
+            Luxury Private Residence in Kandy, Sri Lanka
+          </h1>
+          <p class="hero-title-new">
+            <span class="hero-title-desktop"
+              >Your Private Luxury Escape<br />in Kandy</span
             >
-              WHATSAPP US
-            </a>
-          </div>
-          <p class="hero-subtitle">A private residence, shaped by light and landscape.</p>
+            <span class="hero-title-mobile">Your Private Escape</span>
+          </p>
+          <p class="hero-location-mobile">Kandy, Sri Lanka</p>
         </div>
-        <div class="scroll-indicator">SCROLL</div>
+        <div class="hero-bottom">
+          <form class="quick-book" id="quickBook">
+            <div class="qb-field">
+              <label for="qbIn">CHECK-IN</label>
+              <input type="date" id="qbIn" required aria-label="Check-in" />
+            </div>
+            <div class="qb-field">
+              <label for="qbOut">CHECK-OUT</label>
+              <input type="date" id="qbOut" required aria-label="Check-out" />
+            </div>
+            <div class="qb-field">
+              <label for="qbGuests">GUESTS</label>
+              <select id="qbGuests" aria-label="Guests">
+                <option value="2" data-price="200">2 Guests</option>
+                <option value="4" data-price="225">4 Guests</option>
+                <option value="6" data-price="250" selected>6 Guests</option>
+              </select>
+            </div>
+            <div class="qb-field qb-price-field">
+              <label>PRICE</label>
+              <div class="qb-price-display">
+                USD&nbsp;<span id="formPrice">250</span>/night
+              </div>
+            </div>
+            <button type="submit" class="qb-check-btn">
+              CHECK AVAILABILITY
+            </button>
+          </form>
+          <p class="hero-facts">
+            <span class="hero-fact-item">Entire Residence</span>
+            <span class="hero-fact-separator"> · </span>
+            <span class="hero-fact-item">Private Pool </span>
+            <span class="hero-fact-separator"> · </span>
+            <span class="hero-fact-item">Up to 6 Guests</span>
+          </p>
+        </div>
       </section>
 
       <!-- PRIVATE RESIDENCE -->
@@ -3264,9 +3557,7 @@
                   <option value="6">6 Guests</option>
                 </select>
               </div>
-              <button type="submit" class="btn-submit">
-                SUBMIT
-              </button>
+              <button type="submit" class="btn-submit">SUBMIT</button>
             </form>
           </div>
 
@@ -3386,46 +3677,6 @@
 
     <!-- JAVASCRIPT -->
     <script>
-      // Responsive hero video
-      const heroVideo = document.getElementById("heroVideo");
-      const videoSource = document.getElementById("videoSource");
-      const videoLoader = document.getElementById("videoLoader");
-
-      function setHeroVideo() {
-        const isMobile = window.innerWidth <= 768;
-        const newSrc = isMobile
-          ? "images/Hero-Video (mobile).mp4"
-          : "images/Hero-Video WEB.mp4";
-
-        if (videoSource.src !== newSrc) {
-          videoSource.src = newSrc;
-          heroVideo.load();
-        }
-      }
-
-      // Handle video loading states
-      heroVideo.addEventListener("loadeddata", () => {
-        heroVideo.classList.add("loaded");
-        videoLoader.classList.add("hidden");
-        setTimeout(() => {
-          videoLoader.style.display = "none";
-        }, 300);
-      });
-
-      // Handle video errors
-      heroVideo.addEventListener("error", () => {
-        videoLoader.classList.add("hidden");
-        setTimeout(() => {
-          videoLoader.style.display = "none";
-        }, 300);
-      });
-
-      // Set video on load
-      setHeroVideo();
-
-      // Update video on resize
-      window.addEventListener("resize", setHeroVideo);
-
       // Header scroll behavior
       const header = document.getElementById("header");
 
@@ -3482,23 +3733,23 @@
 
       if (arrivalInput && departureInput) {
         // Set minimum date to today
-        const today = new Date().toISOString().split('T')[0];
-        arrivalInput.setAttribute('min', today);
-        departureInput.setAttribute('min', today);
+        const today = new Date().toISOString().split("T")[0];
+        arrivalInput.setAttribute("min", today);
+        departureInput.setAttribute("min", today);
 
         // When arrival date changes, update departure minimum date
-        arrivalInput.addEventListener('change', function() {
+        arrivalInput.addEventListener("change", function () {
           const arrivalDate = this.value;
           if (arrivalDate) {
             // Set departure minimum to one day after arrival
             const nextDay = new Date(arrivalDate);
             nextDay.setDate(nextDay.getDate() + 1);
-            const minDeparture = nextDay.toISOString().split('T')[0];
-            departureInput.setAttribute('min', minDeparture);
+            const minDeparture = nextDay.toISOString().split("T")[0];
+            departureInput.setAttribute("min", minDeparture);
 
             // Reset departure if it's before the new minimum
             if (departureInput.value && departureInput.value <= arrivalDate) {
-              departureInput.value = '';
+              departureInput.value = "";
             }
           }
         });
@@ -3732,6 +3983,52 @@
         });
       });
 
+      // Quick Booking Form Functionality
+      document
+        .getElementById("quickBook")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          document.getElementById("arrival").value = qbIn.value;
+          document.getElementById("departure").value = qbOut.value;
+          document.getElementById("guests").value = qbGuests.value;
+          var f = document.getElementById("bookingFormContainer");
+          f.style.display = "block";
+          f.classList.add("visible");
+          setTimeout(() => {
+            f.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 100);
+        });
+
+      // Set minimum dates for quick booking
+      var today = new Date().toISOString().split("T")[0];
+      document.getElementById("qbIn").setAttribute("min", today);
+      document.getElementById("qbOut").setAttribute("min", today);
+
+      // Update price when guests selection changes
+      var guestsDropdown = document.getElementById("qbGuests");
+      var formPriceElement = document.getElementById("formPrice");
+
+      if (guestsDropdown && formPriceElement) {
+        guestsDropdown.addEventListener("change", function () {
+          var selectedOption = this.options[this.selectedIndex];
+          var guests = selectedOption.value;
+          var price = selectedOption.getAttribute("data-price");
+
+          // Update form price
+          formPriceElement.textContent = price;
+
+          // Update facts line if elements exist
+          var displayGuestsElement = document.getElementById("displayGuests");
+          var displayPriceElement = document.getElementById("displayPrice");
+
+          if (displayGuestsElement) {
+            displayGuestsElement.textContent = guests;
+          }
+          if (displayPriceElement) {
+            displayPriceElement.textContent = price;
+          }
+        });
+      }
     </script>
   </body>
 </html>
