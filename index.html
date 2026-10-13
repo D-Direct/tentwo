@@ -645,7 +645,7 @@
       .hero-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.15));
         z-index: 1;
       }
 
@@ -705,9 +705,9 @@
 
       .quick-book {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
+        grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr;
         gap: 16px;
-        max-width: 1100px;
+        max-width: 1200px;
         background: rgba(1, 0, 0, 0.3);
         padding: 24px;
         border-radius: 8px;
@@ -793,7 +793,28 @@
         box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
       }
 
+      /* Disabled configuration field styling */
+      .quick-book select:disabled {
+        opacity: 0.8;
+        cursor: not-allowed;
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .qb-additional-fields {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 16px;
+        margin-top: 8px;
+      }
+
+      /* Hide mobile booking section on desktop */
+      .mobile-booking-section {
+        display: none;
+      }
+
       .qb-check-btn {
+        grid-column: 1 / -1;
         padding: 14px 20px;
         background: rgba(8, 0, 0, 0);
         color: var(--white);
@@ -2602,9 +2623,10 @@
         }
 
         .hero-content {
-          top: 80px;
+          top: 50%;
           left: 50%;
-          transform: translateX(-50%);
+          transform: translate(-50%, -50%);
+          bottom: auto;
         }
 
         .hero-bottom {
@@ -2627,7 +2649,9 @@
 
         .hero-title-mobile {
           display: block;
-          font-size: clamp(32px, 8vw, 42px);
+          font-size: clamp(28px, 7vw, 38px);
+          text-align: center;
+          line-height: 1.2;
         }
 
         .hero-location-mobile {
@@ -2636,8 +2660,13 @@
           font-size: clamp(14px, 3.5vw, 18px);
           font-weight: 400;
           color: var(--white);
-          margin: 8px 0 0 0;
+          margin: 12px 0 0 0;
           opacity: 0.95;
+          text-align: center;
+        }
+
+        .hero-title-new {
+          text-align: center;
         }
 
         .hero-buttons {
@@ -2681,6 +2710,95 @@
 
         .qb-price-display span {
           font-size: 14px !important;
+        }
+
+        .qb-additional-fields {
+          grid-template-columns: 1fr;
+          margin-top: 8px;
+        }
+
+        /* Hide desktop form fields on mobile, show only button */
+        .quick-book .qb-field,
+        .quick-book .qb-additional-fields {
+          display: none;
+        }
+
+        .quick-book .qb-check-btn {
+          display: flex;
+        }
+
+        /* Mobile booking section */
+        .mobile-booking-section {
+          display: block;
+          padding: 40px 20px;
+          background: var(--cream);
+        }
+
+        .mobile-booking-form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        .mobile-booking-form .form-field {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .mobile-booking-form label {
+          font-size: 11px;
+          font-weight: 600;
+          color: var(--charcoal);
+          margin-bottom: 6px;
+          letter-spacing: 0.05em;
+        }
+
+        .mobile-booking-form input,
+        .mobile-booking-form select {
+          padding: 14px 16px;
+          border: 1px solid rgba(13, 13, 13, 0.2);
+          border-radius: 4px;
+          font-family: var(--sans);
+          font-size: 14px;
+          color: #0d0d0d !important;
+          background: #ffffff !important;
+          -webkit-text-fill-color: #0d0d0d !important;
+        }
+
+        .mobile-booking-form select option {
+          color: #0d0d0d;
+          background: #ffffff;
+        }
+
+        .mobile-booking-form input:focus,
+        .mobile-booking-form select:focus {
+          outline: none;
+          border-color: var(--gold);
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .mobile-booking-form .submit-btn {
+          padding: 16px;
+          background: transparent;
+          color: #0d0d0d;
+          border: 2px solid #0d0d0d;
+          border-radius: 4px;
+          font-family: var(--sans);
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          margin-top: 8px;
+          transition: all 0.3s ease;
+        }
+
+        .mobile-booking-form .submit-btn:active,
+        .mobile-booking-form .submit-btn:hover {
+          background: #0d0d0d;
+          color: #ffffff;
         }
 
         .qb-check-btn {
@@ -2869,7 +2987,7 @@
         class="hero"
         id="hero"
         style="
-          background: url(&quot;images/hero.webp&quot;) center/cover no-repeat;
+          background: url(&quot;images/hero2.jpg&quot;) center/cover no-repeat;
         "
       >
         <div class="hero-overlay"></div>
@@ -2881,7 +2999,7 @@
             <span class="hero-title-desktop"
               >Your Private Luxury Escape<br />in Kandy</span
             >
-            <span class="hero-title-mobile">Your Private Escape</span>
+            <span class="hero-title-mobile">Your Private Luxury Escape</span>
           </p>
           <p class="hero-location-mobile">Kandy, Sri Lanka</p>
         </div>
@@ -2909,7 +3027,70 @@
                 USD&nbsp;<span id="formPrice">250</span>/night
               </div>
             </div>
-            <button type="submit" class="qb-check-btn">
+            <div class="qb-field">
+              <label for="qbConfiguration">CONFIGURATION</label>
+              <select id="qbConfiguration" aria-label="Configuration" disabled>
+                <option value="full-residence">Full Residence</option>
+                <option value="two-suite">Two-Suite Stay</option>
+                <option value="master-suite">Master Suite</option>
+              </select>
+            </div>
+
+            <!-- Additional fields - hidden initially -->
+            <div class="qb-additional-fields" id="qbAdditionalFields" style="display: none;">
+              <div class="qb-field">
+                <label for="qbName">NAME</label>
+                <input type="text" id="qbName" placeholder="Your name" aria-label="Name" />
+              </div>
+              <div class="qb-field">
+                <label for="qbEmail">EMAIL</label>
+                <input type="email" id="qbEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email" />
+              </div>
+              <div class="qb-field">
+                <label for="qbCountry">COUNTRY</label>
+                <select id="qbCountry" aria-label="Country">
+                  <option value="">Select your country</option>
+                  <option value="Afghanistan">Afghanistan</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Austria">Austria</option>
+                  <option value="Belgium">Belgium</option>
+                  <option value="Brazil">Brazil</option>
+                  <option value="Canada">Canada</option>
+                  <option value="China">China</option>
+                  <option value="Denmark">Denmark</option>
+                  <option value="Finland">Finland</option>
+                  <option value="France">France</option>
+                  <option value="Germany">Germany</option>
+                  <option value="India">India</option>
+                  <option value="Indonesia">Indonesia</option>
+                  <option value="Ireland">Ireland</option>
+                  <option value="Italy">Italy</option>
+                  <option value="Japan">Japan</option>
+                  <option value="Malaysia">Malaysia</option>
+                  <option value="Maldives">Maldives</option>
+                  <option value="Netherlands">Netherlands</option>
+                  <option value="New Zealand">New Zealand</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Singapore">Singapore</option>
+                  <option value="South Korea">South Korea</option>
+                  <option value="Spain">Spain</option>
+                  <option value="Sri Lanka">Sri Lanka</option>
+                  <option value="Sweden">Sweden</option>
+                  <option value="Switzerland">Switzerland</option>
+                  <option value="Thailand">Thailand</option>
+                  <option value="United Arab Emirates">United Arab Emirates</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="United States">United States</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="qb-field">
+                <label for="qbWhatsapp">WHATSAPP (Optional)</label>
+                <input type="tel" id="qbWhatsapp" placeholder="+94 77 123 4567" aria-label="WhatsApp" />
+              </div>
+            </div>
+
+            <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
               CHECK AVAILABILITY
             </button>
           </form>
@@ -2921,6 +3102,88 @@
             <span class="hero-fact-item">Up to 6 Guests</span>
           </p>
         </div>
+      </section>
+
+      <!-- MOBILE BOOKING SECTION (Hidden on Desktop) -->
+      <section class="mobile-booking-section" id="mobileBooking" style="display: none;">
+        <h2 style="font-family: var(--serif); font-size: 28px; text-align: center; margin-bottom: 24px; color: var(--charcoal);">Complete Your Booking</h2>
+        <form class="mobile-booking-form" id="mobileBookingForm">
+          <div class="form-field">
+            <label for="mbCheckIn">CHECK-IN</label>
+            <input type="date" id="mbCheckIn" required />
+          </div>
+          <div class="form-field">
+            <label for="mbCheckOut">CHECK-OUT</label>
+            <input type="date" id="mbCheckOut" required />
+          </div>
+          <div class="form-field">
+            <label for="mbGuests">GUESTS</label>
+            <select id="mbGuests" required>
+              <option value="2" data-price="200">2 Guests</option>
+              <option value="4" data-price="225">4 Guests</option>
+              <option value="6" data-price="250" selected>6 Guests</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="mbConfiguration">CONFIGURATION</label>
+            <select id="mbConfiguration" disabled>
+              <option value="full-residence">Full Residence</option>
+              <option value="two-suite">Two-Suite Stay</option>
+              <option value="master-suite">Master Suite</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="mbName">NAME</label>
+            <input type="text" id="mbName" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label for="mbEmail">EMAIL</label>
+            <input type="email" id="mbEmail" placeholder="your@email.com" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="mbCountry">COUNTRY</label>
+            <select id="mbCountry" required>
+              <option value="">Select your country</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Canada">Canada</option>
+              <option value="China">China</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Germany">Germany</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Italy">Italy</option>
+              <option value="Japan">Japan</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Norway">Norway</option>
+              <option value="Singapore">Singapore</option>
+              <option value="South Korea">South Korea</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Thailand">Thailand</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="mbWhatsapp">WHATSAPP (Optional)</label>
+            <input type="tel" id="mbWhatsapp" placeholder="+94 77 123 4567" />
+          </div>
+          <button type="submit" class="submit-btn">SUBMIT</button>
+        </form>
       </section>
 
       <!-- PRIVATE RESIDENCE -->
@@ -3445,11 +3708,12 @@
             </div>
           </div>
 
-          <!-- Booking Form (Hidden until tier selection) -->
+          <!-- OLD BOOKING FORM - DEPRECATED - Now using hero section booking -->
+          <!-- TODO: Remove this entire booking form container after testing new hero booking flow -->
           <div
             class="booking-form-container"
             id="bookingFormContainer"
-            style="display: none"
+            style="display: none !important"
           >
             <form class="availability-form">
               <div class="form-group">
@@ -3922,12 +4186,6 @@
             configValue = "master-suite";
           }
 
-          // Remove selected class from all cards
-          tierCards.forEach((c) => c.classList.remove("selected"));
-
-          // Add selected class to clicked card
-          card.classList.add("selected");
-
           // Track tier selection event
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -3936,35 +4194,42 @@
             max_guests: maxGuests,
           });
 
-          // Show booking form with smooth animation
-          if (bookingFormContainer) {
-            bookingFormContainer.style.display = "block";
+          // NEW BEHAVIOR: Scroll to hero and show booking fields
+          const heroSection = document.getElementById("hero");
+          const qbGuestsDropdown = document.getElementById("qbGuests");
 
-            // Trigger animation after a small delay to ensure display change takes effect
-            setTimeout(() => {
-              bookingFormContainer.classList.add("visible");
-            }, 10);
+          // Pre-fill guest count in hero form
+          if (qbGuestsDropdown && maxGuests) {
+            qbGuestsDropdown.value = maxGuests;
 
-            // Pre-fill configuration and guest count
-            const configSelect = document.getElementById("configuration");
-            const guestsSelect = document.getElementById("guests");
-
-            if (configSelect && configValue) {
-              configSelect.value = configValue;
+            // Update price display
+            const selectedOption = qbGuestsDropdown.options[qbGuestsDropdown.selectedIndex];
+            const price = selectedOption.getAttribute("data-price");
+            const formPriceElement = document.getElementById("formPrice");
+            if (formPriceElement && price) {
+              formPriceElement.textContent = price;
             }
+          }
 
-            if (guestsSelect && maxGuests) {
-              const optionExists = Array.from(guestsSelect.options).some(
-                (option) => option.value === maxGuests,
-              );
-              if (optionExists) {
-                guestsSelect.value = maxGuests;
-              }
+          // Show the additional fields and change button text
+          if (!fieldsShown) {
+            qbAdditionalFields.style.display = "grid";
+            if (isMobile()) {
+              quickBookForm.classList.add("expanded");
             }
+            qbSubmitBtn.textContent = "SUBMIT";
+            fieldsShown = true;
 
-            // Scroll to the form smoothly (especially important on mobile)
+            // Add required attributes
+            document.getElementById("qbName").setAttribute("required", "required");
+            document.getElementById("qbEmail").setAttribute("required", "required");
+            document.getElementById("qbCountry").setAttribute("required", "required");
+          }
+
+          // Scroll to hero section
+          if (heroSection) {
             setTimeout(() => {
-              bookingFormContainer.scrollIntoView({
+              heroSection.scrollIntoView({
                 behavior: "smooth",
                 block: "start",
               });
@@ -3983,30 +4248,171 @@
         });
       });
 
-      // Quick Booking Form Functionality
-      document
-        .getElementById("quickBook")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          document.getElementById("arrival").value = qbIn.value;
-          document.getElementById("departure").value = qbOut.value;
-          document.getElementById("guests").value = qbGuests.value;
-          var f = document.getElementById("bookingFormContainer");
-          f.style.display = "block";
-          f.classList.add("visible");
-          setTimeout(() => {
-            f.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 100);
+      // Quick Booking Form Functionality - New Two-Step Process
+      const quickBookForm = document.getElementById("quickBook");
+      const qbAdditionalFields = document.getElementById("qbAdditionalFields");
+      const qbSubmitBtn = document.getElementById("qbSubmitBtn");
+      let fieldsShown = false;
+
+      // Helper function to determine configuration based on guests
+      function getConfigurationForGuests(guests) {
+        if (guests == 2) return "master-suite";
+        if (guests == 4) return "two-suite";
+        if (guests == 6) return "full-residence";
+        return "full-residence"; // default
+      }
+
+      // Helper function to check if mobile
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
+
+      // On mobile, remove required attributes from desktop form fields to avoid validation errors
+      if (isMobile()) {
+        document.getElementById("qbIn").removeAttribute("required");
+        document.getElementById("qbOut").removeAttribute("required");
+      }
+
+      quickBookForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // On mobile: scroll to mobile booking section
+        if (isMobile()) {
+          const mobileBooking = document.getElementById("mobileBooking");
+          if (mobileBooking) {
+            mobileBooking.style.display = "block";
+            setTimeout(() => {
+              mobileBooking.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 100);
+          }
+          return;
+        }
+
+        // Desktop behavior: Step 1 - Show additional fields and change button text
+        if (!fieldsShown) {
+          // Show additional fields
+          qbAdditionalFields.style.display = "grid";
+
+          // Change button text
+          qbSubmitBtn.textContent = "SUBMIT";
+          fieldsShown = true;
+
+          // Add required attributes to additional fields
+          document.getElementById("qbName").setAttribute("required", "required");
+          document.getElementById("qbEmail").setAttribute("required", "required");
+          document.getElementById("qbCountry").setAttribute("required", "required");
+
+          return; // Don't submit yet
+        }
+
+        // Step 2: Submit to Google Sheets
+        const submitButton = qbSubmitBtn;
+        const originalText = submitButton.textContent;
+        submitButton.textContent = "SENDING...";
+        submitButton.disabled = true;
+
+        // Get configuration from dropdown (auto-set based on guests)
+        const guests = document.getElementById("qbGuests").value;
+        const configuration = document.getElementById("qbConfiguration").value;
+
+        const formData = {
+          name: document.getElementById("qbName").value,
+          email: document.getElementById("qbEmail").value,
+          country: document.getElementById("qbCountry").value,
+          whatsapp: document.getElementById("qbWhatsapp").value || "",
+          arrival: document.getElementById("qbIn").value,
+          departure: document.getElementById("qbOut").value,
+          configuration: configuration,
+          guests: guests,
+        };
+
+        // Track form submission event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "availability_form_submit",
+          form_type: "hero_booking",
+          configuration: formData.configuration,
+          guests: formData.guests,
+          country: formData.country,
         });
+
+        try {
+          // Google Apps Script Web App URL - sends data to Google Sheets
+          const GOOGLE_SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbziOnMCLS6izjkwTiPVhTveRN92panuERYbijowPca_NqxA50tEMkXEqJX-sBl6bKs/exec";
+
+          // Send data to Google Sheets
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+
+          // Redirect to thank you page for conversion tracking
+          window.location.href = "/thank-you.html";
+        } catch (err) {
+          console.error("Error submitting form:", err);
+          // Even if there's an error, redirect to thank you page
+          window.location.href = "/thank-you.html";
+        }
+      });
 
       // Set minimum dates for quick booking
       var today = new Date().toISOString().split("T")[0];
-      document.getElementById("qbIn").setAttribute("min", today);
-      document.getElementById("qbOut").setAttribute("min", today);
+      const qbInInput = document.getElementById("qbIn");
+      const qbOutInput = document.getElementById("qbOut");
 
-      // Update price when guests selection changes
+      qbInInput.setAttribute("min", today);
+      qbOutInput.setAttribute("min", today);
+
+      // Add validation to ensure check-out is after check-in
+      qbInInput.addEventListener("change", function() {
+        const checkInDate = this.value;
+        if (checkInDate) {
+          // Set check-out minimum to the day after check-in
+          const checkInDateObj = new Date(checkInDate);
+          checkInDateObj.setDate(checkInDateObj.getDate() + 1);
+          const minCheckOut = checkInDateObj.toISOString().split("T")[0];
+          qbOutInput.setAttribute("min", minCheckOut);
+
+          // If check-out is already set and is before or equal to check-in, clear it
+          if (qbOutInput.value && qbOutInput.value <= checkInDate) {
+            qbOutInput.value = "";
+          }
+        }
+      });
+
+      // Validate on check-out change as well
+      qbOutInput.addEventListener("change", function() {
+        const checkInDate = qbInInput.value;
+        const checkOutDate = this.value;
+
+        if (checkInDate && checkOutDate && checkOutDate <= checkInDate) {
+          alert("Check-out date must be after check-in date");
+          this.value = "";
+        }
+      });
+
+      // Update price and configuration when guests selection changes
       var guestsDropdown = document.getElementById("qbGuests");
       var formPriceElement = document.getElementById("formPrice");
+      var configurationDropdown = document.getElementById("qbConfiguration");
+
+      // Function to update configuration based on guests
+      function updateConfiguration(guests) {
+        if (configurationDropdown) {
+          const config = getConfigurationForGuests(guests);
+          configurationDropdown.value = config;
+        }
+      }
+
+      // Set initial configuration on page load
+      if (guestsDropdown) {
+        updateConfiguration(guestsDropdown.value);
+      }
 
       if (guestsDropdown && formPriceElement) {
         guestsDropdown.addEventListener("change", function () {
@@ -4017,6 +4423,9 @@
           // Update form price
           formPriceElement.textContent = price;
 
+          // Update configuration
+          updateConfiguration(guests);
+
           // Update facts line if elements exist
           var displayGuestsElement = document.getElementById("displayGuests");
           var displayPriceElement = document.getElementById("displayPrice");
@@ -4026,6 +4435,108 @@
           }
           if (displayPriceElement) {
             displayPriceElement.textContent = price;
+          }
+        });
+      }
+
+      // Mobile Booking Form Handler
+      const mobileBookingForm = document.getElementById("mobileBookingForm");
+      if (mobileBookingForm) {
+        // Set minimum dates
+        const mbCheckIn = document.getElementById("mbCheckIn");
+        const mbCheckOut = document.getElementById("mbCheckOut");
+        const mbGuests = document.getElementById("mbGuests");
+        const mbConfiguration = document.getElementById("mbConfiguration");
+
+        mbCheckIn.setAttribute("min", today);
+        mbCheckOut.setAttribute("min", today);
+
+        // Date validation for mobile form
+        mbCheckIn.addEventListener("change", function() {
+          const checkInDate = this.value;
+          if (checkInDate) {
+            const checkInDateObj = new Date(checkInDate);
+            checkInDateObj.setDate(checkInDateObj.getDate() + 1);
+            const minCheckOut = checkInDateObj.toISOString().split("T")[0];
+            mbCheckOut.setAttribute("min", minCheckOut);
+
+            if (mbCheckOut.value && mbCheckOut.value <= checkInDate) {
+              mbCheckOut.value = "";
+            }
+          }
+        });
+
+        mbCheckOut.addEventListener("change", function() {
+          const checkInDate = mbCheckIn.value;
+          const checkOutDate = this.value;
+
+          if (checkInDate && checkOutDate && checkOutDate <= checkInDate) {
+            alert("Check-out date must be after check-in date");
+            this.value = "";
+          }
+        });
+
+        // Auto-update configuration based on guests
+        function updateMobileConfiguration(guests) {
+          if (mbConfiguration) {
+            const config = getConfigurationForGuests(guests);
+            mbConfiguration.value = config;
+          }
+        }
+
+        updateMobileConfiguration(mbGuests.value);
+
+        mbGuests.addEventListener("change", function() {
+          updateMobileConfiguration(this.value);
+        });
+
+        // Form submission
+        mobileBookingForm.addEventListener("submit", async function(e) {
+          e.preventDefault();
+
+          const submitButton = this.querySelector(".submit-btn");
+          const originalText = submitButton.textContent;
+          submitButton.textContent = "SENDING...";
+          submitButton.disabled = true;
+
+          const formData = {
+            name: document.getElementById("mbName").value,
+            email: document.getElementById("mbEmail").value,
+            country: document.getElementById("mbCountry").value,
+            whatsapp: document.getElementById("mbWhatsapp").value || "",
+            arrival: document.getElementById("mbCheckIn").value,
+            departure: document.getElementById("mbCheckOut").value,
+            configuration: document.getElementById("mbConfiguration").value,
+            guests: document.getElementById("mbGuests").value,
+          };
+
+          // Track form submission event
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "availability_form_submit",
+            form_type: "mobile_booking",
+            configuration: formData.configuration,
+            guests: formData.guests,
+            country: formData.country,
+          });
+
+          try {
+            const GOOGLE_SCRIPT_URL =
+              "https://script.google.com/macros/s/AKfycbziOnMCLS6izjkwTiPVhTveRN92panuERYbijowPca_NqxA50tEMkXEqJX-sBl6bKs/exec";
+
+            await fetch(GOOGLE_SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            window.location.href = "/thank-you.html";
+          } catch (err) {
+            console.error("Error submitting form:", err);
+            window.location.href = "/thank-you.html";
           }
         });
       }
