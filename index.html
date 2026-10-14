@@ -603,29 +603,30 @@
 
       .hero-content {
         position: absolute;
-        left: 50%;
+        left: 0;
+        right: 0;
         top: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateY(-50%);
         text-align: center;
         color: var(--white);
         z-index: 2;
-        max-width: 95%;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 40px;
+        padding: 0 24px;
       }
 
       .hero-bottom {
         position: absolute;
-        bottom: 48px;
+        bottom: 12px;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
         z-index: 2;
         width: 100%;
-        max-width: 1000px;
+        max-width: 900px;
         padding: 0 24px;
       }
 
@@ -658,23 +659,22 @@
         font-family: var(--serif);
         font-weight: 400;
         color: var(--white);
-        margin: 0 0 16px 0;
+        margin: 0 0 24px 0;
         line-height: 1.1;
         letter-spacing: 0.005em;
-        white-space: normal;
+        white-space: nowrap;
         display: block;
+        text-align: center;
+        width: 100%;
       }
 
       .hero-title-new br {
-        display: block;
-        content: "";
-        margin-top: 0;
+        display: none;
       }
 
       .hero-title-desktop {
-        font-size: clamp(32px, 3.7vw, 42px);
-        max-width: 1200px;
-        display: inline-block;
+        font-size: clamp(28px, 3.2vw, 38px);
+        white-space: nowrap;
       }
 
       .hero-title-mobile {
@@ -710,13 +710,14 @@
 
       .quick-book {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr;
-        gap: 16px;
-        max-width: 1200px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        max-width: 900px;
         background: rgba(1, 0, 0, 0.3);
-        padding: 24px;
+        padding: 20px;
         border-radius: 8px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        margin: 0 auto;
       }
 
       .qb-field {
@@ -755,18 +756,18 @@
 
       .quick-book input,
       .quick-book select {
-        padding: 14px 16px;
+        padding: 10px 12px;
         border: 2px solid rgba(255, 255, 255, 0.3);
         border-radius: 4px;
         font-family: var(--sans);
-        font-size: 14px;
+        font-size: 13px;
         color: var(--white);
         background: rgba(255, 255, 255, 0.2);
         transition: all 300ms;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        height: 50px;
+        height: 38px;
       }
 
       .quick-book input[type="date"] {
@@ -776,7 +777,16 @@
       .quick-book input[type="date"]::-webkit-calendar-picker-indicator {
         cursor: pointer;
         opacity: 1;
-        filter: invert(0.4);
+        filter: invert(1) brightness(2);
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+      }
+
+      .quick-book input[type="date"] {
+        position: relative;
+        cursor: pointer;
       }
 
       .quick-book select {
@@ -808,9 +818,9 @@
       .qb-additional-fields {
         grid-column: 1 / -1;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 16px;
-        margin-top: 8px;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-top: 6px;
       }
 
       /* Hide mobile booking section on desktop */
@@ -818,9 +828,19 @@
         display: none;
       }
 
+      .qb-package-message {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: var(--white);
+        font-size: 16px;
+        font-weight: 500;
+        padding: 12px 0 8px 0;
+        letter-spacing: 0.02em;
+      }
+
       .qb-check-btn {
         grid-column: 1 / -1;
-        padding: 14px 20px;
+        padding: 10px 16px;
         background: rgba(8, 0, 0, 0);
         color: var(--white);
         border: 2px solid rgba(255, 255, 255, 0.3);
@@ -832,12 +852,12 @@
         text-transform: uppercase;
         cursor: pointer;
         transition: all 300ms;
-        height: 50px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: center;
         align-self: flex-end;
-        margin-top: 19px;
+        margin-top: 0;
       }
 
       .qb-check-btn:hover {
@@ -845,6 +865,10 @@
         border-color: rgba(255, 255, 255, 0.5);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .qb-package-message span {
+        font-weight: 600;
       }
 
       .qb-wa-btn {
@@ -2635,7 +2659,7 @@
         }
 
         .hero-bottom {
-          bottom: 60px;
+          bottom: 20px;
           padding: 0 16px;
         }
 
@@ -2655,7 +2679,6 @@
         .hero-title-mobile {
           display: block;
           font-size: clamp(28px, 7vw, 38px);
-          text-align: center;
           line-height: 1.2;
         }
 
@@ -2667,11 +2690,6 @@
           color: var(--white);
           margin: 12px 0 0 0;
           opacity: 0.95;
-          text-align: center;
-        }
-
-        .hero-title-new {
-          text-align: center;
         }
 
         .hero-buttons {
@@ -2786,24 +2804,28 @@
 
         .mobile-booking-form .submit-btn {
           padding: 16px;
-          background: transparent;
-          color: #0d0d0d;
-          border: 2px solid #0d0d0d;
+          background: var(--gold);
+          color: #ffffff;
+          border: 2px solid var(--gold);
           border-radius: 4px;
           font-family: var(--sans);
-          font-size: 12px;
-          font-weight: 600;
+          font-size: 14px;
+          font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           cursor: pointer;
           margin-top: 8px;
           transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
         }
 
         .mobile-booking-form .submit-btn:active,
         .mobile-booking-form .submit-btn:hover {
-          background: #0d0d0d;
+          background: #b8962f;
+          border-color: #b8962f;
           color: #ffffff;
+          box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+          transform: translateY(-2px);
         }
 
         .qb-check-btn {
@@ -2992,7 +3014,8 @@
         class="hero"
         id="hero"
         style="
-          background: url(&quot;images/Hero-Pool.png&quot;) center/cover no-repeat;
+          background: url(&quot;images/Hero-Pool.png&quot;) center/cover
+            no-repeat;
         "
       >
         <div class="hero-overlay"></div>
@@ -3000,56 +3023,64 @@
           <h1 class="hero-title">
             Luxury Private Residence in Kandy, Sri Lanka
           </h1>
-          <p class="hero-title-new">
-            <span class="hero-title-desktop"
-              >Your Private Luxury Escape<br />in Kandy</span
-            >
-            <span class="hero-title-mobile">Your Private Luxury Escape</span>
-          </p>
-          <p class="hero-location-mobile">Kandy, Sri Lanka</p>
         </div>
         <div class="hero-bottom">
+          <p class="hero-title-new">
+            <span class="hero-title-desktop"
+              >Your Private Luxury Escape in Kandy</span
+            >
+            <span class="hero-title-mobile">Your Luxury Escape</span>
+          </p>
+          <p class="hero-location-mobile">Kandy, Sri Lanka</p>
           <form class="quick-book" id="quickBook">
             <div class="qb-field">
               <label for="qbIn">CHECK-IN</label>
-              <input type="date" id="qbIn" required aria-label="Check-in" />
+              <input type="date" id="qbIn" aria-label="Check-in" />
             </div>
             <div class="qb-field">
               <label for="qbOut">CHECK-OUT</label>
-              <input type="date" id="qbOut" required aria-label="Check-out" />
+              <input type="date" id="qbOut" aria-label="Check-out" />
             </div>
             <div class="qb-field">
               <label for="qbGuests">GUESTS</label>
               <select id="qbGuests" aria-label="Guests">
-                <option value="2" data-price="200">2 Guests</option>
-                <option value="4" data-price="225">4 Guests</option>
-                <option value="6" data-price="250" selected>6 Guests</option>
-              </select>
-            </div>
-            <div class="qb-field qb-price-field">
-              <label>PRICE</label>
-              <div class="qb-price-display">
-                USD&nbsp;<span id="formPrice">250</span>/night
-              </div>
-            </div>
-            <div class="qb-field">
-              <label for="qbConfiguration">CONFIGURATION</label>
-              <select id="qbConfiguration" aria-label="Configuration" disabled>
-                <option value="full-residence">Full Residence</option>
-                <option value="two-suite">Two-Suite Stay</option>
-                <option value="master-suite">Master Suite</option>
+                <option value="">Select guests</option>
+                <option value="2" data-price="200" data-config="Master Suite">
+                  2 Guests
+                </option>
+                <option value="4" data-price="225" data-config="Two-Suite Stay">
+                  4 Guests
+                </option>
+                <option value="6" data-price="250" data-config="Full Residence">
+                  6 Guests
+                </option>
               </select>
             </div>
 
             <!-- Additional fields - hidden initially -->
-            <div class="qb-additional-fields" id="qbAdditionalFields" style="display: none;">
+            <div
+              class="qb-additional-fields"
+              id="qbAdditionalFields"
+              style="display: none"
+            >
               <div class="qb-field">
                 <label for="qbName">NAME</label>
-                <input type="text" id="qbName" placeholder="Your name" aria-label="Name" />
+                <input
+                  type="text"
+                  id="qbName"
+                  placeholder="Your name"
+                  aria-label="Name"
+                />
               </div>
               <div class="qb-field">
-                <label for="qbEmail">EMAIL</label>
-                <input type="email" id="qbEmail" placeholder="your@email.com" autocomplete="email" aria-label="Email" />
+                <label for="qbEmail">EMAIL / WHATSAPP</label>
+                <input
+                  type="text"
+                  id="qbEmail"
+                  placeholder="your@email.com or WhatsApp"
+                  autocomplete="email"
+                  aria-label="Email or WhatsApp"
+                />
               </div>
               <div class="qb-field">
                 <label for="qbCountry">COUNTRY</label>
@@ -3083,16 +3114,25 @@
                   <option value="Sweden">Sweden</option>
                   <option value="Switzerland">Switzerland</option>
                   <option value="Thailand">Thailand</option>
-                  <option value="United Arab Emirates">United Arab Emirates</option>
+                  <option value="United Arab Emirates">
+                    United Arab Emirates
+                  </option>
                   <option value="United Kingdom">United Kingdom</option>
                   <option value="United States">United States</option>
                   <option value="Other">Other</option>
                 </select>
               </div>
-              <div class="qb-field">
-                <label for="qbWhatsapp">WHATSAPP (Optional)</label>
-                <input type="tel" id="qbWhatsapp" placeholder="+94 77 123 4567" aria-label="WhatsApp" />
-              </div>
+            </div>
+
+            <!-- Dynamic Package Message -->
+            <div
+              class="qb-package-message"
+              id="qbPackageMessage"
+              style="display: none"
+            >
+              <span id="packageConfig"></span>,
+              <span id="packageGuests"></span>, USD
+              <span id="packagePrice"></span>/Night
             </div>
 
             <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
@@ -3110,8 +3150,22 @@
       </section>
 
       <!-- MOBILE BOOKING SECTION (Hidden on Desktop) -->
-      <section class="mobile-booking-section" id="mobileBooking" style="display: none;">
-        <h2 style="font-family: var(--serif); font-size: 28px; text-align: center; margin-bottom: 24px; color: var(--charcoal);">Complete Your Booking</h2>
+      <section
+        class="mobile-booking-section"
+        id="mobileBooking"
+        style="display: none"
+      >
+        <h2
+          style="
+            font-family: var(--serif);
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+          "
+        >
+          Complete Your Booking
+        </h2>
         <form class="mobile-booking-form" id="mobileBookingForm">
           <div class="form-field">
             <label for="mbCheckIn">CHECK-IN</label>
@@ -3124,17 +3178,16 @@
           <div class="form-field">
             <label for="mbGuests">GUESTS</label>
             <select id="mbGuests" required>
-              <option value="2" data-price="200">2 Guests</option>
-              <option value="4" data-price="225">4 Guests</option>
-              <option value="6" data-price="250" selected>6 Guests</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="mbConfiguration">CONFIGURATION</label>
-            <select id="mbConfiguration" disabled>
-              <option value="full-residence">Full Residence</option>
-              <option value="two-suite">Two-Suite Stay</option>
-              <option value="master-suite">Master Suite</option>
+              <option value="">Select guests</option>
+              <option value="2" data-price="200" data-config="Master Suite">
+                2 Guests
+              </option>
+              <option value="4" data-price="225" data-config="Two-Suite Stay">
+                4 Guests
+              </option>
+              <option value="6" data-price="250" data-config="Full Residence">
+                6 Guests
+              </option>
             </select>
           </div>
           <div class="form-field">
@@ -3142,8 +3195,14 @@
             <input type="text" id="mbName" placeholder="Your name" required />
           </div>
           <div class="form-field">
-            <label for="mbEmail">EMAIL</label>
-            <input type="email" id="mbEmail" placeholder="your@email.com" autocomplete="email" required />
+            <label for="mbEmail">EMAIL / WHATSAPP</label>
+            <input
+              type="text"
+              id="mbEmail"
+              placeholder="your@email.com or WhatsApp"
+              autocomplete="email"
+              required
+            />
           </div>
           <div class="form-field">
             <label for="mbCountry">COUNTRY</label>
@@ -3182,10 +3241,6 @@
               <option value="United States">United States</option>
               <option value="Other">Other</option>
             </select>
-          </div>
-          <div class="form-field">
-            <label for="mbWhatsapp">WHATSAPP (Optional)</label>
-            <input type="tel" id="mbWhatsapp" placeholder="+94 77 123 4567" />
           </div>
           <button type="submit" class="submit-btn">SUBMIT</button>
         </form>
@@ -3300,6 +3355,8 @@
             <img
               src="images/hero.webp"
               alt="Contemporary architecture at TenTwo with clean lines and natural materials near Kandy"
+            
+              loading="lazy"
             />
           </div>
         </div>
@@ -3346,6 +3403,8 @@
             <img
               src="images/living-main.webp"
               alt="TenTwo living area with floor-to-ceiling glass opening towards the private pool and landscape"
+            
+              loading="lazy"
             />
           </div>
           <div class="living-text reveal">
@@ -3392,6 +3451,8 @@
             <img
               src="images/roof_top.webp"
               alt="TenTwo rooftop terrace with open views across the surrounding landscape near Kandy"
+            
+              loading="lazy"
             />
           </div>
         </div>
@@ -3413,6 +3474,8 @@
             <img
               src="images/bedroom-suite.webp"
               alt="Master suite bedroom at TenTwo with contemporary design and natural light"
+            
+              loading="lazy"
             />
             <div class="suite-label">MASTER SUITE</div>
           </a>
@@ -3424,6 +3487,8 @@
             <img
               src="images/bedroom-02.webp"
               alt="Garden suite bedroom at TenTwo with views to the surrounding landscape"
+            
+              loading="lazy"
             />
             <div class="suite-label">GARDEN SUITE</div>
           </a>
@@ -3435,6 +3500,8 @@
             <img
               src="images/bedroom-03.webp"
               alt="Upper suite bedroom at TenTwo with contemporary finishes"
+            
+              loading="lazy"
             />
             <div class="suite-label">UPPER SUITE</div>
           </a>
@@ -3474,18 +3541,70 @@
             <img
               src="images/OUTDOOR/Outdoor1.webp"
               alt="TenTwo private residence outdoor pool area with contemporary architecture Kandy Sri Lanka"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="outdoor">
             <img
               src="images/OUTDOOR/Outdoor2.webp"
               alt="TenTwo luxury villa outdoor living space with modern design near Kandy"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g3 reveal-image" data-category="outdoor">
             <img
               src="images/OUTDOOR/Outdoor3.webp"
               alt="Contemporary outdoor architecture at TenTwo private residence Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g4 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor4.webp"
+              alt="TenTwo outdoor pool deck with modern architecture Kandy Sri Lanka"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g5 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor5.webp"
+              alt="Outdoor entertainment area at TenTwo luxury villa near Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g1 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor6.webp"
+              alt="Private outdoor space with contemporary design TenTwo residence Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g2 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor8.webp"
+              alt="TenTwo outdoor living pavilion with modern aesthetic Kandy Sri Lanka"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g3 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor9.webp"
+              alt="Contemporary outdoor architecture and pool at TenTwo private villa Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g4 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor10.webp"
+              alt="Outdoor terrace and garden area TenTwo luxury residence near Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g5 reveal-image" data-category="outdoor">
+            <img
+              src="images/OUTDOOR/outdoor11.webp"
+              alt="Private outdoor pool and relaxation area at TenTwo villa Kandy Sri Lanka"
+              loading="lazy"
             />
           </div>
 
@@ -3494,30 +3613,40 @@
             <img
               src="images/ROOFTOP & SURROUNDING/RoofTop1.webp"
               alt="TenTwo rooftop terrace with panoramic views of Kandy Sri Lanka landscape"
+            
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="rooftop">
             <img
               src="images/ROOFTOP & SURROUNDING/RoofTop2.webp"
               alt="Private rooftop terrace overlooking Kandy hills at TenTwo luxury residence"
+            
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g3 reveal-image" data-category="rooftop">
             <img
               src="images/ROOFTOP & SURROUNDING/RoofTop3.webp"
               alt="Rooftop outdoor space with mountain views at TenTwo private villa Kandy"
+            
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g4 reveal-image" data-category="rooftop">
             <img
               src="images/ROOFTOP & SURROUNDING/RoofTop4.webp"
               alt="TenTwo rooftop relaxation area with scenic Kandy countryside views"
+            
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g5 reveal-image" data-category="rooftop">
             <img
               src="images/ROOFTOP & SURROUNDING/RoofTop5.webp"
               alt="Elevated rooftop terrace at TenTwo contemporary residence near Kandy"
+            
+              loading="lazy"
             />
           </div>
 
@@ -3526,12 +3655,28 @@
             <img
               src="images/LIVING/Living-Dining1.webp"
               alt="TenTwo spacious living dining area with modern furnishings Kandy luxury villa"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="living">
             <img
               src="images/LIVING/Living-Dining3.webp"
               alt="Contemporary living space with open plan design at TenTwo private residence Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g3 reveal-image" data-category="living">
+            <img
+              src="images/LIVING/living-dining4.webp"
+              alt="Modern living area with stylish furniture at TenTwo luxury residence Kandy Sri Lanka"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g4 reveal-image" data-category="living">
+            <img
+              src="images/LIVING/living-dining5.webp"
+              alt="Open concept living and dining space at TenTwo private villa near Kandy"
+              loading="lazy"
             />
           </div>
 
@@ -3540,18 +3685,28 @@
             <img
               src="images/KITCHEN & DINING/kKitchen-Dining1.webp"
               alt="TenTwo fully equipped modern kitchen with dining area Kandy Sri Lanka"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="kitchen">
             <img
               src="images/KITCHEN & DINING/kKitchen-Dining2.webp"
               alt="Contemporary kitchen and dining space at TenTwo luxury residence near Kandy"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g3 reveal-image" data-category="kitchen">
             <img
               src="images/KITCHEN & DINING/kKitchen-Dining3.webp"
               alt="Modern kitchen with six-seater dining table at TenTwo private villa Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g4 reveal-image" data-category="kitchen">
+            <img
+              src="images/KITCHEN & DINING/kitchen-dining4.webp"
+              alt="Elegant kitchen and dining area at TenTwo luxury villa Kandy Sri Lanka"
+              loading="lazy"
             />
           </div>
 
@@ -3560,18 +3715,28 @@
             <img
               src="images/MASTER SUITE/MasterRoom1.webp"
               alt="TenTwo master suite bedroom with en-suite bathroom and private balcony Kandy"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="master">
             <img
               src="images/MASTER SUITE/MasterRoom2.webp"
               alt="Luxurious master bedroom with contemporary design at TenTwo residence Kandy Sri Lanka"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g3 reveal-image" data-category="master">
             <img
               src="images/MASTER SUITE/MasterRoom3.webp"
               alt="Master suite with modern amenities and natural light at TenTwo private villa Kandy"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g4 reveal-image" data-category="master">
+            <img
+              src="images/MASTER SUITE/master-suite4.webp"
+              alt="Spacious master bedroom with elegant design at TenTwo luxury residence Kandy"
+              loading="lazy"
             />
           </div>
 
@@ -3580,18 +3745,28 @@
             <img
               src="images/GARDEN SUITE/Room1-1.webp"
               alt="TenTwo garden suite bedroom with air conditioning and en-suite bathroom Kandy"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="garden">
             <img
               src="images/GARDEN SUITE/Room1-2.webp"
               alt="Garden view bedroom suite with private balcony at TenTwo luxury residence Kandy"
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g3 reveal-image" data-category="garden">
             <img
               src="images/GARDEN SUITE/Room1-3.webp"
               alt="Contemporary garden suite with modern furnishings at TenTwo private villa Kandy Sri Lanka"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item g4 reveal-image" data-category="garden">
+            <img
+              src="images/GARDEN SUITE/garden-suite-poolview.webp"
+              alt="Garden suite with stunning pool view at TenTwo luxury villa Kandy Sri Lanka"
+              loading="lazy"
             />
           </div>
 
@@ -3600,18 +3775,24 @@
             <img
               src="images/UPPER SUITE/Room2-1.webp"
               alt="TenTwo upper suite bedroom with en-suite facilities and balcony Kandy"
+            
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g2 reveal-image" data-category="upper">
             <img
               src="images/UPPER SUITE/Room2-2.webp"
               alt="Upper level bedroom suite with contemporary design at TenTwo residence Kandy Sri Lanka"
+            
+              loading="lazy"
             />
           </div>
           <div class="gallery-item g3 reveal-image" data-category="upper">
             <img
               src="images/UPPER SUITE/Room2-3.webp"
               alt="Spacious upper suite with air conditioning at TenTwo luxury private villa Kandy"
+            
+              loading="lazy"
             />
           </div>
         </div>
@@ -4208,7 +4389,8 @@
             qbGuestsDropdown.value = maxGuests;
 
             // Update price display
-            const selectedOption = qbGuestsDropdown.options[qbGuestsDropdown.selectedIndex];
+            const selectedOption =
+              qbGuestsDropdown.options[qbGuestsDropdown.selectedIndex];
             const price = selectedOption.getAttribute("data-price");
             const formPriceElement = document.getElementById("formPrice");
             if (formPriceElement && price) {
@@ -4216,19 +4398,24 @@
             }
           }
 
-          // Show the additional fields and change button text
+          // Show the additional fields (button text stays as CHECK AVAILABILITY)
           if (!fieldsShown) {
             qbAdditionalFields.style.display = "grid";
             if (isMobile()) {
               quickBookForm.classList.add("expanded");
             }
-            qbSubmitBtn.textContent = "SUBMIT";
             fieldsShown = true;
 
             // Add required attributes
-            document.getElementById("qbName").setAttribute("required", "required");
-            document.getElementById("qbEmail").setAttribute("required", "required");
-            document.getElementById("qbCountry").setAttribute("required", "required");
+            document
+              .getElementById("qbName")
+              .setAttribute("required", "required");
+            document
+              .getElementById("qbEmail")
+              .setAttribute("required", "required");
+            document
+              .getElementById("qbCountry")
+              .setAttribute("required", "required");
           }
 
           // Scroll to hero section
@@ -4259,14 +4446,6 @@
       const qbSubmitBtn = document.getElementById("qbSubmitBtn");
       let fieldsShown = false;
 
-      // Helper function to determine configuration based on guests
-      function getConfigurationForGuests(guests) {
-        if (guests == 2) return "master-suite";
-        if (guests == 4) return "two-suite";
-        if (guests == 6) return "full-residence";
-        return "full-residence"; // default
-      }
-
       // Helper function to check if mobile
       function isMobile() {
         return window.innerWidth <= 768;
@@ -4287,28 +4466,36 @@
           if (mobileBooking) {
             mobileBooking.style.display = "block";
             setTimeout(() => {
-              mobileBooking.scrollIntoView({ behavior: "smooth", block: "start" });
+              mobileBooking.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
             }, 100);
           }
           return;
         }
 
-        // Desktop behavior: Step 1 - Show additional fields and change button text
-        if (!fieldsShown) {
-          // Show additional fields
-          qbAdditionalFields.style.display = "grid";
+        // Validate required fields before submission
+        const checkInValue = document.getElementById("qbIn").value;
+        const checkOutValue = document.getElementById("qbOut").value;
+        const guestsValue = document.getElementById("qbGuests").value;
+        const nameValue = document.getElementById("qbName").value;
+        const emailValue = document.getElementById("qbEmail").value;
+        const countryValue = document.getElementById("qbCountry").value;
 
-          // Change button text
-          qbSubmitBtn.textContent = "SUBMIT";
-          fieldsShown = true;
-
-          // Add required attributes to additional fields
-          document.getElementById("qbName").setAttribute("required", "required");
-          document.getElementById("qbEmail").setAttribute("required", "required");
-          document.getElementById("qbCountry").setAttribute("required", "required");
-
-          return; // Don't submit yet
+        if (!checkInValue || !checkOutValue || !guestsValue) {
+          alert(
+            "Please fill in check-in, check-out, and select number of guests.",
+          );
+          return;
         }
+
+        if (!nameValue || !emailValue || !countryValue) {
+          alert("Please fill in your name, email/WhatsApp, and country.");
+          return;
+        }
+
+        // All fields should be shown when guest is selected, so just submit directly
 
         // Step 2: Submit to Google Sheets
         const submitButton = qbSubmitBtn;
@@ -4316,15 +4503,16 @@
         submitButton.textContent = "SENDING...";
         submitButton.disabled = true;
 
-        // Get configuration from dropdown (auto-set based on guests)
-        const guests = document.getElementById("qbGuests").value;
-        const configuration = document.getElementById("qbConfiguration").value;
+        // Get configuration from guest selection data attribute
+        const guestsSelect = document.getElementById("qbGuests");
+        const guests = guestsSelect.value;
+        const selectedOption = guestsSelect.options[guestsSelect.selectedIndex];
+        const configuration = selectedOption.getAttribute("data-config");
 
         const formData = {
           name: document.getElementById("qbName").value,
           email: document.getElementById("qbEmail").value,
           country: document.getElementById("qbCountry").value,
-          whatsapp: document.getElementById("qbWhatsapp").value || "",
           arrival: document.getElementById("qbIn").value,
           departure: document.getElementById("qbOut").value,
           configuration: configuration,
@@ -4374,7 +4562,7 @@
       qbOutInput.setAttribute("min", today);
 
       // Add validation to ensure check-out is after check-in
-      qbInInput.addEventListener("change", function() {
+      qbInInput.addEventListener("change", function () {
         const checkInDate = this.value;
         if (checkInDate) {
           // Set check-out minimum to the day after check-in
@@ -4391,7 +4579,7 @@
       });
 
       // Validate on check-out change as well
-      qbOutInput.addEventListener("change", function() {
+      qbOutInput.addEventListener("change", function () {
         const checkInDate = qbInInput.value;
         const checkOutDate = this.value;
 
@@ -4401,44 +4589,117 @@
         }
       });
 
-      // Update price and configuration when guests selection changes
-      var guestsDropdown = document.getElementById("qbGuests");
-      var formPriceElement = document.getElementById("formPrice");
-      var configurationDropdown = document.getElementById("qbConfiguration");
+      // Make date fields open calendar on click (anywhere on the field)
+      qbInInput.addEventListener("click", function () {
+        this.showPicker();
+      });
 
-      // Function to update configuration based on guests
-      function updateConfiguration(guests) {
-        if (configurationDropdown) {
-          const config = getConfigurationForGuests(guests);
-          configurationDropdown.value = config;
+      qbOutInput.addEventListener("click", function () {
+        this.showPicker();
+      });
+
+      // Update package message when guests selection changes
+      var guestsDropdown = document.getElementById("qbGuests");
+      var packageConfigElement = document.getElementById("packageConfig");
+      var packageGuestsElement = document.getElementById("packageGuests");
+      var packagePriceElement = document.getElementById("packagePrice");
+
+      // Function to update package message based on guest selection
+      function updatePackageMessage() {
+        var qbPackageMessageElement =
+          document.getElementById("qbPackageMessage");
+        var quickBookFormElement = document.getElementById("quickBook");
+
+        if (
+          guestsDropdown &&
+          packageConfigElement &&
+          packageGuestsElement &&
+          packagePriceElement
+        ) {
+          var selectedOption =
+            guestsDropdown.options[guestsDropdown.selectedIndex];
+          var guests = selectedOption.value;
+          var price = selectedOption.getAttribute("data-price");
+          var config = selectedOption.getAttribute("data-config");
+
+          // Show or hide message based on selection
+          if (guests && price && config) {
+            // Update package message elements
+            packageConfigElement.textContent = config;
+            packageGuestsElement.textContent = guests + " Guests";
+            packagePriceElement.textContent = price;
+
+            // Show the message
+            if (qbPackageMessageElement) {
+              qbPackageMessageElement.style.display = "block";
+            }
+
+            // Remove transparency from form background
+            if (quickBookFormElement) {
+              quickBookFormElement.style.background = "rgba(1, 0, 0, 0.85)";
+            }
+
+            // Show additional fields automatically
+            var qbAdditionalFieldsElement =
+              document.getElementById("qbAdditionalFields");
+            if (qbAdditionalFieldsElement && !fieldsShown) {
+              qbAdditionalFieldsElement.style.display = "grid";
+              fieldsShown = true;
+
+              // Add required attributes to additional fields
+              document
+                .getElementById("qbName")
+                .setAttribute("required", "required");
+              document
+                .getElementById("qbEmail")
+                .setAttribute("required", "required");
+              document
+                .getElementById("qbCountry")
+                .setAttribute("required", "required");
+            }
+          } else {
+            // Hide the message if no valid selection
+            if (qbPackageMessageElement) {
+              qbPackageMessageElement.style.display = "none";
+            }
+
+            // Hide additional fields
+            var qbAdditionalFieldsElement =
+              document.getElementById("qbAdditionalFields");
+            if (qbAdditionalFieldsElement) {
+              qbAdditionalFieldsElement.style.display = "none";
+              fieldsShown = false;
+
+              // Remove required attributes
+              document.getElementById("qbName").removeAttribute("required");
+              document.getElementById("qbEmail").removeAttribute("required");
+              document.getElementById("qbCountry").removeAttribute("required");
+            }
+
+            // Restore transparency if no selection
+            if (quickBookFormElement) {
+              quickBookFormElement.style.background = "rgba(1, 0, 0, 0.3)";
+            }
+          }
         }
       }
 
-      // Set initial configuration on page load
+      // Update package message when guests selection changes
       if (guestsDropdown) {
-        updateConfiguration(guestsDropdown.value);
-      }
-
-      if (guestsDropdown && formPriceElement) {
         guestsDropdown.addEventListener("change", function () {
-          var selectedOption = this.options[this.selectedIndex];
-          var guests = selectedOption.value;
-          var price = selectedOption.getAttribute("data-price");
+          updatePackageMessage();
 
-          // Update form price
-          formPriceElement.textContent = price;
-
-          // Update configuration
-          updateConfiguration(guests);
-
-          // Update facts line if elements exist
+          // Update facts line if elements exist (for mobile or other sections)
           var displayGuestsElement = document.getElementById("displayGuests");
           var displayPriceElement = document.getElementById("displayPrice");
 
           if (displayGuestsElement) {
+            var guests = this.value;
             displayGuestsElement.textContent = guests;
           }
           if (displayPriceElement) {
+            var price =
+              this.options[this.selectedIndex].getAttribute("data-price");
             displayPriceElement.textContent = price;
           }
         });
@@ -4451,13 +4712,12 @@
         const mbCheckIn = document.getElementById("mbCheckIn");
         const mbCheckOut = document.getElementById("mbCheckOut");
         const mbGuests = document.getElementById("mbGuests");
-        const mbConfiguration = document.getElementById("mbConfiguration");
 
         mbCheckIn.setAttribute("min", today);
         mbCheckOut.setAttribute("min", today);
 
         // Date validation for mobile form
-        mbCheckIn.addEventListener("change", function() {
+        mbCheckIn.addEventListener("change", function () {
           const checkInDate = this.value;
           if (checkInDate) {
             const checkInDateObj = new Date(checkInDate);
@@ -4471,7 +4731,7 @@
           }
         });
 
-        mbCheckOut.addEventListener("change", function() {
+        mbCheckOut.addEventListener("change", function () {
           const checkInDate = mbCheckIn.value;
           const checkOutDate = this.value;
 
@@ -4481,22 +4741,17 @@
           }
         });
 
-        // Auto-update configuration based on guests
-        function updateMobileConfiguration(guests) {
-          if (mbConfiguration) {
-            const config = getConfigurationForGuests(guests);
-            mbConfiguration.value = config;
-          }
-        }
+        // Make mobile date fields open calendar on click
+        mbCheckIn.addEventListener("click", function () {
+          this.showPicker();
+        });
 
-        updateMobileConfiguration(mbGuests.value);
-
-        mbGuests.addEventListener("change", function() {
-          updateMobileConfiguration(this.value);
+        mbCheckOut.addEventListener("click", function () {
+          this.showPicker();
         });
 
         // Form submission
-        mobileBookingForm.addEventListener("submit", async function(e) {
+        mobileBookingForm.addEventListener("submit", async function (e) {
           e.preventDefault();
 
           const submitButton = this.querySelector(".submit-btn");
@@ -4504,15 +4759,20 @@
           submitButton.textContent = "SENDING...";
           submitButton.disabled = true;
 
+          const mbGuestsSelect = document.getElementById("mbGuests");
+          const guests = mbGuestsSelect.value;
+          const selectedOption =
+            mbGuestsSelect.options[mbGuestsSelect.selectedIndex];
+          const configuration = selectedOption.getAttribute("data-config");
+
           const formData = {
             name: document.getElementById("mbName").value,
             email: document.getElementById("mbEmail").value,
             country: document.getElementById("mbCountry").value,
-            whatsapp: document.getElementById("mbWhatsapp").value || "",
             arrival: document.getElementById("mbCheckIn").value,
             departure: document.getElementById("mbCheckOut").value,
-            configuration: document.getElementById("mbConfiguration").value,
-            guests: document.getElementById("mbGuests").value,
+            configuration: configuration,
+            guests: guests,
           };
 
           // Track form submission event
