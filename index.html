@@ -13,6 +13,9 @@
     <link rel="icon" type="image/png" href="images/TENTWO-icon.webp" />
     <link rel="apple-touch-icon" href="images/TENTWO-icon.webp" />
 
+    <!-- Preload critical resources -->
+    <link rel="preload" as="image" href="images/Hero-Pool.png" />
+
     <!-- SEO Meta Tags -->
     <meta
       name="robots"
@@ -687,11 +690,11 @@
 
       .hero-facts {
         font-family: var(--sans) !important;
-        font-size: 10px !important;
-        font-weight: 500 !important;
-        letter-spacing: 0.34em !important;
-        text-transform: uppercase !important;
-        color: var(--gold) !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        letter-spacing: 0.02em !important;
+        text-transform: none !important;
+        color: rgba(255, 255, 255, 0.95) !important;
         margin: 16px auto 0 auto;
         line-height: 1.4;
         text-align: center;
@@ -701,11 +704,12 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       }
 
       .hero-facts * {
-        font-size: 10px !important;
-        color: var(--gold) !important;
+        font-size: 14px !important;
+        color: rgba(255, 255, 255, 0.95) !important;
       }
 
       .quick-book {
@@ -865,6 +869,18 @@
         border-color: rgba(255, 255, 255, 0.5);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .qb-reassurance {
+        grid-column: 1 / -1;
+        font-family: var(--sans);
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.85);
+        text-align: center;
+        margin: 8px 0 0 0;
+        padding: 0;
+        line-height: 1.4;
       }
 
       .qb-package-message span {
@@ -1208,6 +1224,16 @@
         line-height: 1.6;
         color: var(--ink-soft);
         font-weight: 300;
+      }
+
+      .residence-note {
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--ink-soft);
+        font-style: italic;
+        font-weight: 300;
+        margin-top: 32px;
+        margin-bottom: 0;
       }
 
       .residence-details {
@@ -3138,13 +3164,13 @@
             <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
               CHECK AVAILABILITY
             </button>
+
+            <p class="qb-reassurance" id="qbReassurance" style="display: none;">
+              We reply within 24 hours. No payment needed.
+            </p>
           </form>
           <p class="hero-facts">
-            <span class="hero-fact-item">Entire Residence</span>
-            <span class="hero-fact-separator"> · </span>
-            <span class="hero-fact-item">Private Pool </span>
-            <span class="hero-fact-separator"> · </span>
-            <span class="hero-fact-item">Up to 6 Guests</span>
+            Entire residence · Private pool · Up to 6 guests · From USD 200/night · 25 min from Kandy
           </p>
         </div>
       </section>
@@ -3263,6 +3289,10 @@
               residence, private pool, living spaces and rooftop terrace are
               yours throughout your stay.
             </p>
+            <p class="residence-note">
+              TenTwo is self-catering — meals are not included, but everything
+              you need to cook and dine in is provided.
+            </p>
           </div>
           <div>
             <div class="residence-amenities">
@@ -3305,10 +3335,31 @@
                   <div class="amenity-item">
                     <span class="amenity-bullet"></span>
                     <span class="amenity-text"
-                      >Fully equipped kitchen / dining area</span
+                      >Fully equipped kitchen & dining area</span
                     >
                   </div>
-
+                  <div class="amenity-item">
+                    <span class="amenity-bullet"></span>
+                    <span class="amenity-text"
+                      >Washing machine (self-service)</span
+                    >
+                  </div>
+                  <div class="amenity-item">
+                    <span class="amenity-bullet"></span>
+                    <span class="amenity-text">Complimentary tea & coffee</span>
+                  </div>
+                  <div class="amenity-item">
+                    <span class="amenity-bullet"></span>
+                    <span class="amenity-text"
+                      >Bath, face & pool towels</span
+                    >
+                  </div>
+                  <div class="amenity-item">
+                    <span class="amenity-bullet"></span>
+                    <span class="amenity-text"
+                      >Shampoo, soap & basic toiletries</span
+                    >
+                  </div>
                   <div class="amenity-item">
                     <span class="amenity-bullet"></span>
                     <span class="amenity-text">Complimentary Wi-Fi</span>
@@ -3866,7 +3917,7 @@
                 </p>
               </div>
               <p class="tier-price"><strong>250 USD</strong> / Night</p>
-              <button class="tier-btn" data-max-guests="6">RESERVE NOW</button>
+              <button class="tier-btn" data-max-guests="6">CHECK DATES</button>
             </div>
 
             <!-- Tier 2: Two-Suite Stay -->
@@ -3879,7 +3930,7 @@
                 </p>
               </div>
               <p class="tier-price"><strong>225 USD</strong> / Night</p>
-              <button class="tier-btn" data-max-guests="4">RESERVE NOW</button>
+              <button class="tier-btn" data-max-guests="4">CHECK DATES</button>
             </div>
 
             <!-- Tier 3: Master Suite Stay -->
@@ -3890,7 +3941,7 @@
                 <p class="tier-ideal">Ideal for couples or a small family.</p>
               </div>
               <p class="tier-price"><strong>200 USD</strong> / Night</p>
-              <button class="tier-btn" data-max-guests="2">RESERVE NOW</button>
+              <button class="tier-btn" data-max-guests="2">CHECK DATES</button>
             </div>
           </div>
 
@@ -4388,6 +4439,10 @@
           if (qbGuestsDropdown && maxGuests) {
             qbGuestsDropdown.value = maxGuests;
 
+            // Dispatch change event to update package summary
+            const changeEvent = new Event('change', { bubbles: true });
+            qbGuestsDropdown.dispatchEvent(changeEvent);
+
             // Update price display
             const selectedOption =
               qbGuestsDropdown.options[qbGuestsDropdown.selectedIndex];
@@ -4396,26 +4451,6 @@
             if (formPriceElement && price) {
               formPriceElement.textContent = price;
             }
-          }
-
-          // Show the additional fields (button text stays as CHECK AVAILABILITY)
-          if (!fieldsShown) {
-            qbAdditionalFields.style.display = "grid";
-            if (isMobile()) {
-              quickBookForm.classList.add("expanded");
-            }
-            fieldsShown = true;
-
-            // Add required attributes
-            document
-              .getElementById("qbName")
-              .setAttribute("required", "required");
-            document
-              .getElementById("qbEmail")
-              .setAttribute("required", "required");
-            document
-              .getElementById("qbCountry")
-              .setAttribute("required", "required");
           }
 
           // Scroll to hero section
@@ -4475,13 +4510,10 @@
           return;
         }
 
-        // Validate required fields before submission
+        // Step 1: Validate dates and show step 2 if not shown yet
         const checkInValue = document.getElementById("qbIn").value;
         const checkOutValue = document.getElementById("qbOut").value;
         const guestsValue = document.getElementById("qbGuests").value;
-        const nameValue = document.getElementById("qbName").value;
-        const emailValue = document.getElementById("qbEmail").value;
-        const countryValue = document.getElementById("qbCountry").value;
 
         if (!checkInValue || !checkOutValue || !guestsValue) {
           alert(
@@ -4490,14 +4522,34 @@
           return;
         }
 
+        // If step 2 is not shown yet, show it and change button text
+        if (!fieldsShown) {
+          qbAdditionalFields.style.display = "grid";
+          fieldsShown = true;
+
+          // Change button text to SEND ENQUIRY
+          qbSubmitBtn.textContent = "SEND ENQUIRY";
+
+          // Show reassurance text
+          const reassuranceElement = document.getElementById("qbReassurance");
+          if (reassuranceElement) {
+            reassuranceElement.style.display = "block";
+          }
+
+          return; // Don't submit yet, just show step 2
+        }
+
+        // Step 2: Validate contact fields and submit
+        const nameValue = document.getElementById("qbName").value;
+        const emailValue = document.getElementById("qbEmail").value;
+        const countryValue = document.getElementById("qbCountry").value;
+
         if (!nameValue || !emailValue || !countryValue) {
           alert("Please fill in your name, email/WhatsApp, and country.");
           return;
         }
 
-        // All fields should be shown when guest is selected, so just submit directly
-
-        // Step 2: Submit to Google Sheets
+        // Submit to Google Sheets
         const submitButton = qbSubmitBtn;
         const originalText = submitButton.textContent;
         submitButton.textContent = "SENDING...";
@@ -4639,41 +4691,31 @@
               quickBookFormElement.style.background = "rgba(1, 0, 0, 0.85)";
             }
 
-            // Show additional fields automatically
-            var qbAdditionalFieldsElement =
-              document.getElementById("qbAdditionalFields");
-            if (qbAdditionalFieldsElement && !fieldsShown) {
-              qbAdditionalFieldsElement.style.display = "grid";
-              fieldsShown = true;
-
-              // Add required attributes to additional fields
-              document
-                .getElementById("qbName")
-                .setAttribute("required", "required");
-              document
-                .getElementById("qbEmail")
-                .setAttribute("required", "required");
-              document
-                .getElementById("qbCountry")
-                .setAttribute("required", "required");
-            }
+            // Don't automatically show step 2 fields - let user click CHECK AVAILABILITY first
           } else {
             // Hide the message if no valid selection
             if (qbPackageMessageElement) {
               qbPackageMessageElement.style.display = "none";
             }
 
-            // Hide additional fields
+            // Hide additional fields and reset button text
             var qbAdditionalFieldsElement =
               document.getElementById("qbAdditionalFields");
             if (qbAdditionalFieldsElement) {
               qbAdditionalFieldsElement.style.display = "none";
               fieldsShown = false;
 
-              // Remove required attributes
-              document.getElementById("qbName").removeAttribute("required");
-              document.getElementById("qbEmail").removeAttribute("required");
-              document.getElementById("qbCountry").removeAttribute("required");
+              // Reset button text
+              var submitBtn = document.getElementById("qbSubmitBtn");
+              if (submitBtn) {
+                submitBtn.textContent = "CHECK AVAILABILITY";
+              }
+
+              // Hide reassurance text
+              var reassuranceElement = document.getElementById("qbReassurance");
+              if (reassuranceElement) {
+                reassuranceElement.style.display = "none";
+              }
             }
 
             // Restore transparency if no selection
