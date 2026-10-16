@@ -239,9 +239,11 @@
 
       html {
         scroll-behavior: smooth;
+        overflow-x: hidden;
       }
 
       body {
+        overflow-x: hidden;
         font-family: var(--sans);
         font-size: 17px;
         font-weight: 300;
@@ -474,8 +476,9 @@
       }
 
       .mobile-menu nav {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 32px;
       }
 
@@ -486,6 +489,41 @@
       }
 
       .mobile-menu nav a:hover {
+        color: var(--gold);
+      }
+
+      .mobile-menu .mobile-cta-btn {
+        width: 100%;
+        padding: 16px 24px;
+        background: var(--gold);
+        color: rgba(10, 25, 45, 1);
+        border: none;
+        border-radius: 6px;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 300ms ease;
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .mobile-menu .mobile-cta-btn:hover {
+        background: #e6c045;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      }
+
+      .mobile-menu .mobile-whatsapp-link {
+        font-size: 16px;
+        color: var(--text);
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .mobile-menu .mobile-whatsapp-link:hover {
         color: var(--gold);
       }
 
@@ -545,9 +583,9 @@
       .hero {
         position: relative;
         width: 100%;
-        height: 100svh;
-        min-height: 720px;
-        overflow: hidden;
+        min-height: 100vh;
+        min-height: 100svh;
+        overflow: visible;
         background: #000;
       }
 
@@ -623,14 +661,18 @@
 
       .hero-bottom {
         position: absolute;
-        bottom: 12px;
         left: 50%;
         transform: translateX(-50%);
-        text-align: center;
         z-index: 2;
         width: 100%;
-        max-width: 900px;
+        max-width: 960px;
         padding: 0 24px;
+      }
+
+      @media (max-width: 900px) {
+        .hero-bottom {
+          top: 22vh;
+        }
       }
 
       .hero-title {
@@ -649,11 +691,11 @@
       .hero-overlay {
         position: absolute;
         inset: 0;
-        background: radial-gradient(
-          ellipse at center,
-          rgba(0, 0, 0, 0.35) 0%,
-          rgba(0, 0, 0, 0.25) 40%,
-          rgba(0, 0, 0, 0.15) 100%
+        background: linear-gradient(
+          to bottom,
+          rgba(10, 25, 45, 0) 0%,
+          rgba(10, 25, 45, 0) 40%,
+          rgba(10, 25, 45, 0.55) 100%
         );
         z-index: 1;
       }
@@ -662,13 +704,15 @@
         font-family: var(--serif);
         font-weight: 400;
         color: var(--white);
-        margin: 0 0 24px 0;
-        line-height: 1.1;
+        margin: 0;
+        padding: 0;
+        line-height: 0.98;
         letter-spacing: 0.005em;
         white-space: nowrap;
         display: block;
-        text-align: center;
+        text-align: left;
         width: 100%;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
       }
 
       .hero-title-new br {
@@ -676,8 +720,11 @@
       }
 
       .hero-title-desktop {
-        font-size: clamp(28px, 3.2vw, 38px);
+        font-size: clamp(48px, 4vw, 64px);
         white-space: nowrap;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
       }
 
       .hero-title-mobile {
@@ -690,51 +737,79 @@
 
       .hero-facts {
         font-family: var(--sans) !important;
-        font-size: 14px !important;
+        font-size: 16px !important;
         font-weight: 400 !important;
-        letter-spacing: 0.02em !important;
+        letter-spacing: 0.01em !important;
         text-transform: none !important;
-        color: rgba(255, 255, 255, 0.95) !important;
-        margin: 16px auto 0 auto;
+        color: rgba(255, 255, 255, 0.9) !important;
+        margin: 8px 0 28px 0 !important;
+        padding: 0 !important;
         line-height: 1.4;
-        text-align: center;
+        text-align: left;
         white-space: nowrap;
         width: 100%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        display: block;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       .hero-facts * {
-        font-size: 14px !important;
-        color: rgba(255, 255, 255, 0.95) !important;
+        font-size: 16px !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+      }
+
+      .hero-bottom .hero-title-new {
+        margin: 0;
+        line-height: 1.05;
+        max-width: none;
+      }
+
+      .hero-bottom .hero-facts,
+      .hero-bottom .qb-reassurance-line {
+        max-width: none;
+        margin-bottom: 0;
       }
 
       .quick-book {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 12px;
-        max-width: 900px;
-        background: rgba(1, 0, 0, 0.3);
+        max-width: 960px;
+        background: rgba(10, 25, 45, 0.25);
         padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
         margin: 0 auto;
+        transition: all 0.3s ease;
+      }
+
+      .qb-row-1,
+      .qb-row-2 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .qb-row-2 {
+        display: none;
       }
 
       .qb-field {
         display: flex;
         flex-direction: column;
+        align-items: stretch;
       }
 
       .qb-field label {
         display: block;
         font-size: 11px;
         color: var(--white);
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-align: left;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       }
 
       .qb-price-display {
@@ -760,18 +835,19 @@
 
       .quick-book input,
       .quick-book select {
-        padding: 10px 12px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+        padding: 14px 16px;
+        border: none;
+        border-radius: 6px;
         font-family: var(--sans);
-        font-size: 13px;
-        color: var(--white);
-        background: rgba(255, 255, 255, 0.2);
+        font-size: 14px;
+        color: rgba(10, 25, 45, 1);
+        background: rgba(255, 255, 255, 0.95);
         transition: all 300ms;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        height: 38px;
+        height: 52px;
+        box-sizing: border-box;
       }
 
       .quick-book input[type="date"] {
@@ -780,8 +856,8 @@
 
       .quick-book input[type="date"]::-webkit-calendar-picker-indicator {
         cursor: pointer;
-        opacity: 1;
-        filter: invert(1) brightness(2);
+        opacity: 0.6;
+        filter: invert(0.2) sepia(1) saturate(10) hue-rotate(180deg);
         width: 20px;
         height: 20px;
         position: absolute;
@@ -794,10 +870,10 @@
       }
 
       .quick-book select {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230a192d' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 12px center;
-        padding-right: 36px;
+        background-position: right 16px center;
+        padding-right: 40px;
       }
 
       .quick-book select option {
@@ -808,8 +884,7 @@
       .quick-book input:focus,
       .quick-book select:focus {
         outline: none;
-        border-color: #d4af37;
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
       }
 
       /* Disabled configuration field styling */
@@ -822,9 +897,9 @@
       .qb-additional-fields {
         grid-column: 1 / -1;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 12px;
-        margin-top: 6px;
+        margin-top: 12px;
       }
 
       /* Hide mobile booking section on desktop */
@@ -832,43 +907,90 @@
         display: none;
       }
 
-      .qb-package-message {
-        grid-column: 1 / -1;
-        text-align: center;
-        color: var(--white);
+      .qb-stay-card {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 14px 20px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .stay-card-left,
+      .stay-card-right {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .stay-card-left {
+        text-align: left;
+      }
+
+      .stay-card-right {
+        text-align: right;
+        align-items: flex-end;
+      }
+
+      .stay-card-package {
         font-size: 16px;
+        font-weight: 600;
+        color: var(--white);
+        line-height: 1.3;
+      }
+
+      .stay-card-bed {
+        font-size: 14px;
+        color: #e4ce9e;
         font-weight: 500;
-        padding: 12px 0 8px 0;
-        letter-spacing: 0.02em;
+        line-height: 1.3;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      }
+
+      .stay-card-total {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--white);
+        line-height: 1.3;
+      }
+
+      .stay-card-breakdown {
+        font-size: 14px;
+        color: #e4ce9e;
+        font-weight: 500;
+        line-height: 1.3;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
       }
 
       .qb-check-btn {
-        grid-column: 1 / -1;
-        padding: 10px 16px;
-        background: rgba(8, 0, 0, 0);
-        color: var(--white);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+        padding: 14px 20px;
+        background: var(--gold);
+        color: rgba(10, 25, 45, 1);
+        border: none;
+        border-radius: 6px;
         font-family: var(--sans);
         font-size: 11px;
-        font-weight: 600;
+        font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         cursor: pointer;
-        transition: all 300ms;
-        height: 38px;
+        transition: all 300ms ease;
+        height: 52px;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-sizing: border-box;
         align-self: flex-end;
-        margin-top: 0;
       }
 
       .qb-check-btn:hover {
-        background: rgba(255, 255, 255, 0.3);
-        border-color: rgba(255, 255, 255, 0.5);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        background: #e6c045;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
       }
 
       .qb-reassurance {
@@ -881,6 +1003,28 @@
         margin: 8px 0 0 0;
         padding: 0;
         line-height: 1.4;
+      }
+
+      .qb-reassurance-line {
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: left;
+        margin: 14px 0 0 0;
+        width: 100%;
+        max-width: 960px;
+        line-height: 1.5;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
+      }
+
+      .qb-reassurance-mobile {
+        display: none;
+      }
+
+      .qb-reassurance-desktop {
+        display: inline;
       }
 
       .qb-package-message span {
@@ -1022,7 +1166,7 @@
         margin-bottom: 32px;
       }
 
-      .hero p {
+      .hero-content p {
         max-width: 520px;
         font-size: 17px;
         line-height: 1.7;
@@ -1308,102 +1452,68 @@
         margin-bottom: 0;
       }
 
-      /* ===== SECTION: ARCHITECTURE ===== */
-      .architecture-section {
+      /* ===== SECTION: LIFE AT TENTWO ===== */
+      .life-section {
         background: var(--ivory);
-        padding: clamp(60px, 8vw, 100px) 0;
+        padding: clamp(60px, 8vw, 100px) var(--page-pad);
       }
 
-      .architecture-composition {
-        display: grid;
-        grid-template-columns: 35fr 65fr;
-        align-items: center;
-        gap: 60px;
+      .life-intro {
+        max-width: var(--content-max);
+        margin: 0 auto 60px;
+        text-align: center;
       }
 
-      .architecture-text {
-        padding-left: var(--page-pad);
-      }
-
-      .architecture-text h2 {
+      .life-intro h2 {
         font-family: var(--serif);
         font-size: clamp(38px, 4.2vw, 62px);
         font-weight: 400;
         line-height: 0.98;
         letter-spacing: 0.005em;
-        margin-bottom: 28px;
       }
 
-      .architecture-text p {
-        font-size: 17px;
-        line-height: 1.7;
-        color: var(--ink-soft);
-      }
-
-      .architecture-image {
-        height: 70vh;
-        min-height: 560px;
-        overflow: hidden;
-      }
-
-      .architecture-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      /* ===== SECTION: LIVING ===== */
-      .living-section {
-        position: relative;
-        background: var(--paper);
-        padding: clamp(80px, 10vw, 140px) 0;
-        overflow: hidden;
-      }
-
-      .living-composition {
-        position: relative;
+      .life-grid {
+        max-width: var(--content-max);
+        margin: 0 auto;
         display: grid;
-        grid-template-columns: 65fr 35fr;
-        align-items: center;
-        gap: 60px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
       }
 
-      .living-image-wrapper {
+      .life-item {
         position: relative;
-        height: 75vh;
-        min-height: 600px;
         overflow: hidden;
       }
 
-      .living-image-wrapper img {
+      .life-item img {
         width: 100%;
-        height: 100%;
+        height: 450px;
         object-fit: cover;
+        transition: transform 1000ms cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .living-text {
-        padding-left: var(--page-pad);
-        padding-right: var(--page-pad);
+      .life-item:hover img {
+        transform: scale(1.03);
       }
 
-      .living-text .eyebrow {
-        color: var(--muted);
-        opacity: 1;
+      .life-caption {
+        margin-top: 16px;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--text-2);
+        letter-spacing: 0.02em;
+        text-align: center;
       }
 
-      .living-text h2 {
-        font-family: var(--serif);
-        font-size: clamp(38px, 4.2vw, 62px);
-        font-weight: 400;
-        line-height: 0.98;
-        letter-spacing: 0.005em;
-        margin-bottom: 32px;
-      }
+      @media (max-width: 900px) {
+        .life-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
 
-      .living-text p {
-        font-size: 17px;
-        line-height: 1.7;
-        color: var(--ink-soft);
+        .life-item img {
+          height: 400px;
+        }
       }
 
       /* ===== SECTION: SUITES ===== */
@@ -1536,84 +1646,6 @@
         font-size: 17px;
         line-height: 1.7;
         color: var(--ink-soft);
-      }
-
-      /* ===== SECTION: POOL FULL BLEED ===== */
-      .pool-hero {
-        position: relative;
-        width: 100%;
-        height: 90svh;
-        min-height: 700px;
-        background:
-          linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),
-          url("images/living-main.jpg") center center / cover no-repeat;
-        display: none;
-        align-items: flex-end;
-      }
-
-      .pool-content {
-        padding: clamp(40px, 6vw, 80px) var(--page-pad);
-        color: var(--white);
-        max-width: 580px;
-      }
-
-      .pool-content h2 {
-        font-family: var(--serif);
-        font-size: clamp(38px, 4.2vw, 62px);
-        font-weight: 400;
-        line-height: 0.98;
-        letter-spacing: 0.005em;
-        margin-bottom: 24px;
-      }
-
-      .pool-content p {
-        font-size: 17px;
-        line-height: 1.65;
-        opacity: 0.9;
-      }
-
-      /* ===== SECTION: ROOFTOP ===== */
-      .rooftop-section {
-        background: var(--ivory);
-        padding: clamp(60px, 8vw, 100px) 0;
-      }
-
-      .rooftop-composition {
-        display: grid;
-        grid-template-columns: 35fr 65fr;
-        align-items: center;
-        gap: 60px;
-      }
-
-      .rooftop-text {
-        padding-left: var(--page-pad);
-      }
-
-      .rooftop-text h2 {
-        font-family: var(--serif);
-        font-size: clamp(38px, 4.2vw, 62px);
-        font-weight: 400;
-        line-height: 0.98;
-        letter-spacing: 0.005em;
-        margin-bottom: 28px;
-      }
-
-      .rooftop-text p {
-        font-size: 17px;
-        line-height: 1.7;
-        color: var(--ink-soft);
-      }
-
-      .rooftop-image {
-        height: 70vh;
-        min-height: 560px;
-        overflow: hidden;
-      }
-
-      .rooftop-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
       }
 
       /* ===== SECTION: GALLERY ===== */
@@ -2307,10 +2339,11 @@
         max-width: var(--content-max);
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 80px;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
         padding-bottom: 48px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        align-items: start;
       }
 
       .footer-logo-container {
@@ -2581,7 +2614,7 @@
           margin-bottom: 20px;
         }
 
-        .hero p {
+        .hero-content p {
           font-size: 15px;
           line-height: 1.6;
           margin-bottom: 28px;
@@ -2675,6 +2708,9 @@
         .hero {
           height: 100svh;
           min-height: 600px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
         }
 
         .hero-content {
@@ -2685,17 +2721,28 @@
         }
 
         .hero-bottom {
-          bottom: 20px;
-          padding: 0 16px;
+          position: relative;
+          left: auto;
+          right: auto;
+          transform: none;
+          width: 100%;
+          padding: 0 20px 28px 20px;
+          padding-bottom: calc(28px + env(safe-area-inset-bottom));
+          bottom: auto;
+          top: auto;
+          z-index: 2;
+          text-align: center;
         }
 
         .hero-facts {
-          display: none;
+          display: none !important;
         }
 
         .hero-title-new {
-          line-height: 1.2;
+          line-height: 1.1;
           margin: 0;
+          white-space: normal;
+          text-align: center;
         }
 
         .hero-title-desktop {
@@ -2704,18 +2751,32 @@
 
         .hero-title-mobile {
           display: block;
-          font-size: clamp(28px, 7vw, 38px);
-          line-height: 1.2;
+          font-size: clamp(36px, 9vw, 40px);
+          line-height: 1.1;
         }
 
         .hero-location-mobile {
           display: block;
           font-family: var(--sans);
-          font-size: clamp(14px, 3.5vw, 18px);
+          font-size: clamp(16px, 4vw, 18px);
           font-weight: 400;
           color: var(--white);
-          margin: 12px 0 0 0;
+          margin: 4px 0 20px 0;
           opacity: 0.95;
+          text-align: center;
+        }
+
+        .qb-reassurance-line {
+          white-space: normal;
+          text-align: center;
+        }
+
+        .qb-reassurance-desktop {
+          display: none !important;
+        }
+
+        .qb-reassurance-mobile {
+          display: inline !important;
         }
 
         .hero-buttons {
@@ -2741,8 +2802,12 @@
         /* Mobile Quick Booking */
         .quick-book {
           grid-template-columns: 1fr;
-          padding: 12px;
-          gap: 8px;
+          padding: 0;
+          gap: 10px;
+          background: transparent;
+          backdrop-filter: none;
+          box-shadow: none;
+          border-radius: 0;
         }
 
         .qb-field label {
@@ -2761,34 +2826,162 @@
           font-size: 14px !important;
         }
 
-        .qb-additional-fields {
-          grid-template-columns: 1fr;
-          margin-top: 8px;
+        /* Mobile: show row 1 as flex column */
+        .qb-row-1 {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
         }
 
-        /* Hide desktop form fields on mobile, show only button */
-        .quick-book .qb-field,
-        .quick-book .qb-additional-fields {
+        .qb-row-2 {
+          display: none !important;
+        }
+
+        /* Hide desktop form fields on mobile, show only CHECK AVAILABILITY button */
+        .quick-book .qb-field {
           display: none;
         }
 
-        .quick-book .qb-check-btn {
+        .quick-book .qb-row-1 .qb-check-btn {
           display: flex;
+        }
+
+        /* Hide row 2 button on mobile */
+        .quick-book .qb-row-2 .qb-check-btn {
+          display: none;
+        }
+
+        /* Hide stay card on mobile */
+        .quick-book .qb-stay-card {
+          display: none !important;
+        }
+
+        /* Stay card mobile responsive (for screens under 600px if shown) */
+        @media (max-width: 600px) {
+          .qb-stay-card {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+
+          .stay-card-right {
+            align-items: flex-start;
+            text-align: left;
+          }
         }
 
         /* Mobile booking section */
         .mobile-booking-section {
           display: block;
-          padding: 40px 20px;
-          background: var(--cream);
+          padding: 20px 20px;
+          padding-bottom: 100px;
+          background: var(--bg-850);
+        }
+
+        .mobile-booking-section h2 {
+          font-size: 28px !important;
+          margin-bottom: 16px !important;
         }
 
         .mobile-booking-form {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 12px;
           max-width: 500px;
           margin: 0 auto;
+        }
+
+        .mobile-booking-form .date-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+
+        .mb-stay-card {
+          background: rgba(255, 255, 255, 0.12);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          padding: 12px 14px;
+          backdrop-filter: blur(10px);
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 0;
+        }
+
+        .mb-stay-card.placeholder {
+          justify-content: center;
+          align-items: center;
+        }
+
+        .mb-stay-card.placeholder .mb-stay-package {
+          font-size: 13px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mb-stay-card-left {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          flex: 1;
+        }
+
+        .mb-stay-card-right {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          text-align: right;
+          align-items: flex-end;
+          flex-shrink: 0;
+        }
+
+        .mb-stay-card-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .mb-stay-card-divider {
+          display: none;
+        }
+
+        .mb-stay-package {
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--white);
+          line-height: 1.3;
+        }
+
+        .mb-stay-bed {
+          font-size: 13px;
+          color: var(--gold-bright);
+          font-weight: 500;
+          line-height: 1.3;
+        }
+
+        .mb-stay-total {
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--white);
+          line-height: 1.3;
+        }
+
+        .mb-stay-breakdown {
+          font-size: 13px;
+          color: var(--gold-bright);
+          font-weight: 500;
+          line-height: 1.3;
+        }
+
+        .mb-reassurance {
+          text-align: center;
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.8);
+          margin-top: 8px;
+          line-height: 1.6;
         }
 
         .mobile-booking-form .form-field {
@@ -2799,21 +2992,23 @@
         .mobile-booking-form label {
           font-size: 11px;
           font-weight: 600;
-          color: var(--charcoal);
-          margin-bottom: 6px;
+          color: var(--white);
+          margin-bottom: 4px;
           letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .mobile-booking-form input,
         .mobile-booking-form select {
-          padding: 14px 16px;
-          border: 1px solid rgba(13, 13, 13, 0.2);
-          border-radius: 4px;
+          padding: 0 16px;
+          border: none;
+          border-radius: 6px;
           font-family: var(--sans);
-          font-size: 14px;
-          color: #0d0d0d !important;
-          background: #ffffff !important;
-          -webkit-text-fill-color: #0d0d0d !important;
+          font-size: 15px;
+          height: 46px;
+          color: rgba(10, 25, 45, 1) !important;
+          background: rgba(255, 255, 255, 0.95) !important;
+          -webkit-text-fill-color: rgba(10, 25, 45, 1) !important;
         }
 
         .mobile-booking-form select option {
@@ -2824,45 +3019,64 @@
         .mobile-booking-form input:focus,
         .mobile-booking-form select:focus {
           outline: none;
-          border-color: var(--gold);
-          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+          box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
 
         .mobile-booking-form .submit-btn {
-          padding: 16px;
+          padding: 0 16px;
           background: var(--gold);
-          color: #ffffff;
-          border: 2px solid var(--gold);
-          border-radius: 4px;
+          color: rgba(10, 25, 45, 1);
+          border: none;
+          border-radius: 6px;
           font-family: var(--sans);
-          font-size: 14px;
+          font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           cursor: pointer;
-          margin-top: 8px;
+          margin-top: 0;
           transition: all 0.3s ease;
-          box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+          height: 48px;
         }
 
         .mobile-booking-form .submit-btn:active,
         .mobile-booking-form .submit-btn:hover {
-          background: #b8962f;
-          border-color: #b8962f;
-          color: #ffffff;
-          box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
-          transform: translateY(-2px);
+          background: #e6c045;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
         }
 
         .qb-check-btn {
           width: 100%;
-          padding: 12px 16px !important;
-          font-size: 10px !important;
+          padding: 14px 16px !important;
+          font-size: 11px !important;
+          height: 48px !important;
+          background: var(--gold) !important;
+          color: rgba(10, 25, 45, 1) !important;
+          margin-top: 20px !important;
+        }
+
+        .qb-reassurance-line {
+          font-size: 13px !important;
+          font-weight: 400 !important;
+          color: rgba(255, 255, 255, 0.85) !important;
+          margin: 8px 0 0 0 !important;
+          line-height: 1.6;
+        }
+
+        .qb-reassurance-line a {
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: underline;
         }
 
         .floating-whatsapp svg {
           width: 20px;
           height: 20px;
+        }
+
+        .floating-whatsapp.hidden-on-hero {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .eyebrow {
@@ -2876,7 +3090,7 @@
           margin-bottom: 16px;
         }
 
-        .hero p {
+        .hero-content p {
           font-size: 14px;
           line-height: 1.55;
           margin-bottom: 24px;
@@ -2985,11 +3199,11 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#residence">RESIDENCE</a>
-        <a href="#architecture">ARCHITECTURE</a>
+        <a href="#residence">THE VILLA</a>
+        <a href="#suites">SUITES</a>
         <a href="#gallery">GALLERY</a>
         <a href="#location">LOCATION</a>
-        <a href="#availability" class="cta-header">CHECK AVAILABILITY</a>
+        <a href="#" class="cta-header" id="desktopCheckAvailability">CHECK AVAILABILITY</a>
       </nav>
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -3026,11 +3240,12 @@
 
     <div class="mobile-menu" id="mobileMenu">
       <nav aria-label="Mobile navigation">
-        <a href="#residence">RESIDENCE</a>
-        <a href="#architecture">ARCHITECTURE</a>
-        <a href="#gallery">GALLERY</a>
-        <a href="#location">LOCATION</a>
-        <a href="#availability">CHECK AVAILABILITY</a>
+        <a href="#residence" class="mobile-menu-link">THE VILLA</a>
+        <a href="#suites" class="mobile-menu-link">SUITES</a>
+        <a href="#gallery" class="mobile-menu-link">GALLERY</a>
+        <a href="#location" class="mobile-menu-link">LOCATION</a>
+        <a href="#" class="mobile-cta-btn" id="mobileCheckAvailability">CHECK AVAILABILITY</a>
+        <a href="https://wa.me/94777889880" target="_blank" class="mobile-whatsapp-link" id="mobileWhatsAppLink">WhatsApp us</a>
       </nav>
     </div>
 
@@ -3058,35 +3273,44 @@
             <span class="hero-title-mobile">Your Luxury Escape</span>
           </p>
           <p class="hero-location-mobile">Kandy, Sri Lanka</p>
+          <p class="hero-facts">
+            Private pool · Up to 6 guests · From USD 200/night
+          </p>
           <form class="quick-book" id="quickBook">
-            <div class="qb-field">
-              <label for="qbIn">CHECK-IN</label>
-              <input type="date" id="qbIn" aria-label="Check-in" />
-            </div>
-            <div class="qb-field">
-              <label for="qbOut">CHECK-OUT</label>
-              <input type="date" id="qbOut" aria-label="Check-out" />
-            </div>
-            <div class="qb-field">
-              <label for="qbGuests">GUESTS</label>
-              <select id="qbGuests" aria-label="Guests">
-                <option value="">Select guests</option>
-                <option value="2" data-price="200" data-config="Master Suite">
-                  2 Guests
-                </option>
-                <option value="4" data-price="225" data-config="Two-Suite Stay">
-                  4 Guests
-                </option>
-                <option value="6" data-price="250" data-config="Full Residence">
-                  6 Guests
-                </option>
-              </select>
+            <!-- Row 1: Always visible -->
+            <div class="qb-row-1">
+              <div class="qb-field">
+                <label for="qbIn">CHECK-IN</label>
+                <input type="date" id="qbIn" aria-label="Check-in" />
+              </div>
+              <div class="qb-field">
+                <label for="qbOut">CHECK-OUT</label>
+                <input type="date" id="qbOut" aria-label="Check-out" />
+              </div>
+              <div class="qb-field">
+                <label for="qbGuests">GUESTS</label>
+                <select id="qbGuests" aria-label="Guests">
+                  <option value="">Select guests</option>
+                  <option value="2" data-price="200" data-config="Master Suite">
+                    2 Guests
+                  </option>
+                  <option value="4" data-price="225" data-config="Two-Suite Stay">
+                    4 Guests
+                  </option>
+                  <option value="6" data-price="250" data-config="Full Residence">
+                    6 Guests
+                  </option>
+                </select>
+              </div>
+              <button type="button" class="qb-check-btn" id="qbCheckBtn">
+                CHECK AVAILABILITY
+              </button>
             </div>
 
-            <!-- Additional fields - hidden initially -->
+            <!-- Row 2: Hidden initially -->
             <div
-              class="qb-additional-fields"
-              id="qbAdditionalFields"
+              class="qb-row-2"
+              id="qbRow2"
               style="display: none"
             >
               <div class="qb-field">
@@ -3148,29 +3372,31 @@
                   <option value="Other">Other</option>
                 </select>
               </div>
+              <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
+                SEND ENQUIRY
+              </button>
             </div>
 
-            <!-- Dynamic Package Message -->
+            <!-- Your Stay Card -->
             <div
-              class="qb-package-message"
-              id="qbPackageMessage"
+              class="qb-stay-card"
+              id="qbStayCard"
               style="display: none"
             >
-              <span id="packageConfig"></span>,
-              <span id="packageGuests"></span>, USD
-              <span id="packagePrice"></span>/Night
+              <div class="stay-card-left">
+                <div class="stay-card-package" id="stayCardPackage">Master Suite</div>
+                <div class="stay-card-bed" id="stayCardBed">King bed · up to 2 guests</div>
+              </div>
+              <div class="stay-card-right">
+                <div class="stay-card-total" id="stayCardTotal">USD 200</div>
+                <div class="stay-card-breakdown" id="stayCardBreakdown">/ night</div>
+              </div>
             </div>
 
-            <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
-              CHECK AVAILABILITY
-            </button>
-
-            <p class="qb-reassurance" id="qbReassurance" style="display: none;">
-              We reply within 24 hours. No payment needed.
-            </p>
           </form>
-          <p class="hero-facts">
-            Entire residence · Private pool · Up to 6 guests · From USD 200/night · 25 min from Kandy
+          <p class="qb-reassurance-line">
+            <span class="qb-reassurance-desktop">We reply within 24 hours · No payment to enquire · <span style="white-space: nowrap;">Dec–Jan</span> & <span style="white-space: nowrap;">Jun–Aug</span> book early</span>
+            <span class="qb-reassurance-mobile">We reply within 24 hours · No payment to enquire<br>or <a href="https://wa.me/94777889880" target="_blank" onclick="window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'whatsapp_click', link_location: 'hero_mobile' });">message us on WhatsApp</a></span>
           </p>
         </div>
       </section>
@@ -3187,19 +3413,21 @@
             font-size: 28px;
             text-align: center;
             margin-bottom: 24px;
-            color: var(--charcoal);
+            color: var(--white);
           "
         >
-          Complete Your Booking
+          Check Availability
         </h2>
         <form class="mobile-booking-form" id="mobileBookingForm">
-          <div class="form-field">
-            <label for="mbCheckIn">CHECK-IN</label>
-            <input type="date" id="mbCheckIn" required />
-          </div>
-          <div class="form-field">
-            <label for="mbCheckOut">CHECK-OUT</label>
-            <input type="date" id="mbCheckOut" required />
+          <div class="date-row">
+            <div class="form-field">
+              <label for="mbCheckIn">CHECK-IN</label>
+              <input type="date" id="mbCheckIn" required />
+            </div>
+            <div class="form-field">
+              <label for="mbCheckOut">CHECK-OUT</label>
+              <input type="date" id="mbCheckOut" required />
+            </div>
           </div>
           <div class="form-field">
             <label for="mbGuests">GUESTS</label>
@@ -3216,6 +3444,7 @@
               </option>
             </select>
           </div>
+
           <div class="form-field">
             <label for="mbName">NAME</label>
             <input type="text" id="mbName" placeholder="Your name" required />
@@ -3268,7 +3497,25 @@
               <option value="Other">Other</option>
             </select>
           </div>
-          <button type="submit" class="submit-btn">SUBMIT</button>
+
+          <!-- Mobile Stay Card -->
+          <div class="mb-stay-card" id="mbStayCard" style="display: none;">
+            <div class="mb-stay-card-left">
+              <div class="mb-stay-package" id="mbStayPackage">Master Suite</div>
+              <div class="mb-stay-bed" id="mbStayBed">King bed · up to 2 guests</div>
+            </div>
+            <div class="mb-stay-card-divider"></div>
+            <div class="mb-stay-card-right">
+              <div class="mb-stay-total" id="mbStayTotal">USD 200</div>
+              <div class="mb-stay-breakdown" id="mbStayBreakdown">/ night</div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">SEND ENQUIRY</button>
+          <div class="mb-reassurance">
+            We reply within 24 hours · No payment to enquire<br>
+            Dec–Jan & Jun–Aug book early
+          </div>
         </form>
       </section>
 
@@ -3292,6 +3539,9 @@
             <p class="residence-note">
               TenTwo is self-catering — meals are not included, but everything
               you need to cook and dine in is provided.
+            </p>
+            <p class="residence-rates" id="rates" style="margin-top: 24px; font-size: 15px; line-height: 1.6; color: var(--text-2);">
+              <strong style="color: var(--gold);">Rates:</strong> Master Suite Stay USD 200 · Two-Suite Stay USD 225 · Full Residence USD 250 per night — the entire residence is always yours. <a href="#" id="ratesCheckDates" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); transition: all 300ms var(--ease);">CHECK DATES</a>
             </p>
           </div>
           <div>
@@ -3387,130 +3637,8 @@
         </div>
       </section>
 
-      <!-- ARCHITECTURE -->
-      <section
-        class="architecture-section"
-        id="architecture"
-        aria-label="Contemporary architecture at TenTwo"
-      >
-        <div class="architecture-composition">
-          <div class="architecture-text reveal">
-            <span class="eyebrow">ARCHITECTURE</span>
-            <h2>An architecture<br />defined by openness</h2>
-            <p>
-              Floor-to-ceiling glass, clean lines and natural materials create a
-              continuous connection between the residence and its surroundings.
-            </p>
-          </div>
-          <div class="architecture-image reveal-image">
-            <img
-              src="images/hero.webp"
-              alt="Contemporary architecture at TenTwo with clean lines and natural materials near Kandy"
-            
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
-      <!-- THE PHILOSOPHY -->
-      <section class="story-section" aria-label="The Philosophy of TenTwo">
-        <div class="story-grid">
-          <div>
-            <span class="eyebrow">THE PHILOSOPHY</span>
-            <h2 class="story-headline">
-              Built to disappear<br />into its surroundings.
-            </h2>
-            <p class="story-subheading">
-              It is a residence built to be lived in, quietly, by the people who
-              matter to you.
-            </p>
-          </div>
-          <div class="story-content">
-            <p>
-              TenTwo was designed on a simple premise: a home should not compete
-              with its landscape — it should surrender to it. Every material,
-              every line, every opening was chosen to blur the boundary between
-              inside and out.
-            </p>
-            <p>
-              There is no ornamentation here. No attempt to impress. What
-              remains is space, light and silence — arranged with intent, and
-              left otherwise untouched.
-            </p>
-            <p>
-              This is not a villa built to look like a postcard. It is a
-              residence built to be lived in, quietly, by the people who matter
-              to you.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- LIVING -->
-      <section class="living-section" aria-label="Living Spaces">
-        <div class="living-composition">
-          <div class="living-image-wrapper reveal-image">
-            <img
-              src="images/living-main.webp"
-              alt="TenTwo living area with floor-to-ceiling glass opening towards the private pool and landscape"
-            
-              loading="lazy"
-            />
-          </div>
-          <div class="living-text reveal">
-            <span class="eyebrow">LIVING TOGETHER</span>
-            <h2>Space to gather.<br />Space to retreat.</h2>
-            <p>
-              TenTwo is structured around the rhythm of shared time. Public
-              areas—the kitchen, pool, and living room—are balanced by the
-              deliberate privacy of the suites. Gather in the expanse of the
-              shared floor, or withdraw to the quiet of your own space.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- POOL FULL BLEED -->
-      <section
-        class="pool-hero"
-        role="img"
-        aria-label="Private pool at TenTwo surrounded by contemporary architecture and landscape"
-      >
-        <div class="pool-content">
-          <span class="eyebrow">PRIVATE POOL</span>
-          <h2>Water, light<br />and open space.</h2>
-          <p>
-            The pool sits at the heart of the residence, extending the living
-            spaces into the landscape.
-          </p>
-        </div>
-      </section>
-
-      <!-- ROOFTOP -->
-      <section class="rooftop-section" aria-label="Rooftop Terrace">
-        <div class="rooftop-composition">
-          <div class="rooftop-text reveal">
-            <span class="eyebrow">ROOFTOP TERRACE</span>
-            <h2>Above the residence,<br />open to the landscape.</h2>
-            <p>
-              An open-air space above the residence, with wide views across the
-              surrounding landscape.
-            </p>
-          </div>
-          <div class="rooftop-image reveal-image">
-            <img
-              src="images/roof_top.webp"
-              alt="TenTwo rooftop terrace with open views across the surrounding landscape near Kandy"
-            
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
       <!-- SUITES -->
-      <section class="suites-section" aria-label="Private Suites">
+      <section class="suites-section" id="suites" aria-label="Private Suites">
         <div class="suites-intro reveal">
           <span class="eyebrow">THE RESIDENCE</span>
           <h2>Room for everyone.<br />Space for yourself.</h2>
@@ -3525,10 +3653,11 @@
             <img
               src="images/bedroom-suite.webp"
               alt="Master suite bedroom at TenTwo with contemporary design and natural light"
-            
+
               loading="lazy"
             />
             <div class="suite-label">MASTER SUITE</div>
+            <p class="suite-details" style="font-size: 14px; color: var(--text-3); margin-top: 8px; line-height: 1.5;">King bed · en-suite · paddy field & pool view</p>
           </a>
           <a
             href="#gallery"
@@ -3538,10 +3667,11 @@
             <img
               src="images/bedroom-02.webp"
               alt="Garden suite bedroom at TenTwo with views to the surrounding landscape"
-            
+
               loading="lazy"
             />
             <div class="suite-label">GARDEN SUITE</div>
+            <p class="suite-details" style="font-size: 14px; color: var(--text-3); margin-top: 8px; line-height: 1.5;">Queen bed · en-suite · pool view</p>
           </a>
           <a
             href="#gallery"
@@ -3551,11 +3681,47 @@
             <img
               src="images/bedroom-03.webp"
               alt="Upper suite bedroom at TenTwo with contemporary finishes"
-            
+
               loading="lazy"
             />
             <div class="suite-label">UPPER SUITE</div>
+            <p class="suite-details" style="font-size: 14px; color: var(--text-3); margin-top: 8px; line-height: 1.5;">Queen bed · en-suite · pool view</p>
           </a>
+        </div>
+      </section>
+
+      <!-- LIFE AT TENTWO -->
+      <section class="life-section" aria-label="Life at TenTwo">
+        <div class="life-intro reveal">
+          <span class="eyebrow">LIFE AT TENTWO</span>
+          <h2>The spaces that<br />define your stay.</h2>
+        </div>
+
+        <div class="life-grid">
+          <div class="life-item reveal-image">
+            <img
+              src="images/hero.webp"
+              alt="The pool and garden at TenTwo private residence near Kandy"
+              loading="lazy"
+            />
+            <p class="life-caption">The pool & garden</p>
+          </div>
+          <div class="life-item reveal-image">
+            <img
+              src="images/living-main.webp"
+              alt="Shared living spaces at TenTwo with contemporary design"
+              loading="lazy"
+            />
+            <p class="life-caption">Shared living spaces</p>
+          </div>
+          <div class="life-item reveal-image">
+            <img
+              src="images/roof_top.webp"
+              alt="The rooftop terrace at TenTwo overlooking the landscape"
+              loading="lazy"
+            />
+            <p class="life-caption">The rooftop terrace</p>
+          </div>
         </div>
       </section>
 
@@ -3609,20 +3775,6 @@
               loading="lazy"
             />
           </div>
-          <div class="gallery-item g4 reveal-image" data-category="outdoor">
-            <img
-              src="images/OUTDOOR/outdoor4.webp"
-              alt="TenTwo outdoor pool deck with modern architecture Kandy Sri Lanka"
-              loading="lazy"
-            />
-          </div>
-          <div class="gallery-item g5 reveal-image" data-category="outdoor">
-            <img
-              src="images/OUTDOOR/outdoor5.webp"
-              alt="Outdoor entertainment area at TenTwo luxury villa near Kandy"
-              loading="lazy"
-            />
-          </div>
           <div class="gallery-item g1 reveal-image" data-category="outdoor">
             <img
               src="images/OUTDOOR/outdoor6.webp"
@@ -3648,13 +3800,6 @@
             <img
               src="images/OUTDOOR/outdoor10.webp"
               alt="Outdoor terrace and garden area TenTwo luxury residence near Kandy"
-              loading="lazy"
-            />
-          </div>
-          <div class="gallery-item g5 reveal-image" data-category="outdoor">
-            <img
-              src="images/OUTDOOR/outdoor11.webp"
-              alt="Private outdoor pool and relaxation area at TenTwo villa Kandy Sri Lanka"
               loading="lazy"
             />
           </div>
@@ -3891,215 +4036,6 @@
         </div>
       </section>
 
-      <!-- CHOOSE YOUR STAY -->
-      <section
-        class="stay-tiers-section"
-        id="availability"
-        aria-label="Choose Your Stay"
-      >
-        <div class="stay-tiers-inner">
-          <span class="eyebrow">CHOOSE YOUR STAY</span>
-          <h2>However you stay,<br />the residence is entirely yours.</h2>
-          <p class="stay-tiers-subtext">
-            Every configuration includes full private use of the pool, kitchen,
-            living spaces and rooftop terrace — exclusively, for the duration of
-            your stay.
-          </p>
-
-          <div class="tier-cards">
-            <!-- Primary Tier: Full Residence -->
-            <div class="tier-card tier-primary">
-              <div class="tier-header">
-                <h3 class="tier-name">The Full Residence</h3>
-                <p class="tier-detail">3 Bedrooms · Up to 6 Guests.</p>
-                <p class="tier-ideal">
-                  Ideal for family reunions, birthdays and group getaways.
-                </p>
-              </div>
-              <p class="tier-price"><strong>250 USD</strong> / Night</p>
-              <button class="tier-btn" data-max-guests="6">CHECK DATES</button>
-            </div>
-
-            <!-- Tier 2: Two-Suite Stay -->
-            <div class="tier-card">
-              <div class="tier-header">
-                <h3 class="tier-name">The Two-Suite Stay</h3>
-                <p class="tier-detail">2 Bedrooms · Up to 4 Guests</p>
-                <p class="tier-ideal">
-                  Ideal for two couples or a family with older children.
-                </p>
-              </div>
-              <p class="tier-price"><strong>225 USD</strong> / Night</p>
-              <button class="tier-btn" data-max-guests="4">CHECK DATES</button>
-            </div>
-
-            <!-- Tier 3: Master Suite Stay -->
-            <div class="tier-card">
-              <div class="tier-header">
-                <h3 class="tier-name">The Master Suite Stay</h3>
-                <p class="tier-detail">1 Bedroom · Up to 2 Guests</p>
-                <p class="tier-ideal">Ideal for couples or a small family.</p>
-              </div>
-              <p class="tier-price"><strong>200 USD</strong> / Night</p>
-              <button class="tier-btn" data-max-guests="2">CHECK DATES</button>
-            </div>
-          </div>
-
-          <!-- OLD BOOKING FORM - DEPRECATED - Now using hero section booking -->
-          <!-- TODO: Remove this entire booking form container after testing new hero booking flow -->
-          <div
-            class="booking-form-container"
-            id="bookingFormContainer"
-            style="display: none !important"
-          >
-            <form class="availability-form">
-              <div class="form-group">
-                <label for="name">NAME</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="email">EMAIL</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="your@email.com"
-                  autocomplete="email"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="country">COUNTRY</label>
-                <select id="country" name="country" required>
-                  <option value="">Select your country</option>
-                  <option value="Afghanistan">Afghanistan</option>
-                  <option value="Australia">Australia</option>
-                  <option value="Austria">Austria</option>
-                  <option value="Belgium">Belgium</option>
-                  <option value="Brazil">Brazil</option>
-                  <option value="Canada">Canada</option>
-                  <option value="China">China</option>
-                  <option value="Denmark">Denmark</option>
-                  <option value="Finland">Finland</option>
-                  <option value="France">France</option>
-                  <option value="Germany">Germany</option>
-                  <option value="India">India</option>
-                  <option value="Indonesia">Indonesia</option>
-                  <option value="Ireland">Ireland</option>
-                  <option value="Italy">Italy</option>
-                  <option value="Japan">Japan</option>
-                  <option value="Malaysia">Malaysia</option>
-                  <option value="Maldives">Maldives</option>
-                  <option value="Netherlands">Netherlands</option>
-                  <option value="New Zealand">New Zealand</option>
-                  <option value="Norway">Norway</option>
-                  <option value="Singapore">Singapore</option>
-                  <option value="South Korea">South Korea</option>
-                  <option value="Spain">Spain</option>
-                  <option value="Sri Lanka">Sri Lanka</option>
-                  <option value="Sweden">Sweden</option>
-                  <option value="Switzerland">Switzerland</option>
-                  <option value="Thailand">Thailand</option>
-                  <option value="United Arab Emirates">
-                    United Arab Emirates
-                  </option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="United States">United States</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="whatsapp">WHATSAPP (Optional)</label>
-                <input
-                  type="tel"
-                  id="whatsapp"
-                  name="whatsapp"
-                  placeholder="+94 77 123 4567"
-                />
-              </div>
-              <div class="form-group">
-                <label for="arrival">ARRIVAL</label>
-                <input type="date" id="arrival" name="arrival" required />
-              </div>
-              <div class="form-group">
-                <label for="departure">DEPARTURE</label>
-                <input type="date" id="departure" name="departure" required />
-              </div>
-              <div class="form-group">
-                <label for="configuration">CONFIGURATION</label>
-                <select id="configuration" name="configuration" required>
-                  <option value="">Select</option>
-                  <option value="full-residence">
-                    The Full Residence (3 Bedrooms)
-                  </option>
-                  <option value="two-suite">
-                    The Two-Suite Stay (2 Bedrooms)
-                  </option>
-                  <option value="master-suite">
-                    The Master Suite Stay (1 Bedroom)
-                  </option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="guests">GUESTS</label>
-                <select id="guests" name="guests" required>
-                  <option value="">Select</option>
-                  <option value="1">1 Guest</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="5">5 Guests</option>
-                  <option value="6">6 Guests</option>
-                </select>
-              </div>
-              <button type="submit" class="btn-submit">SUBMIT</button>
-            </form>
-          </div>
-
-          <p class="tier-reassurance">
-            Whichever you choose, the entire residence remains exclusively yours
-            — no shared access, no other guests.
-          </p>
-
-          <!-- OTA Links Section -->
-          <div class="ota-links-section">
-            <p>Prefer to book through a travel platform?</p>
-            <div class="ota-links">
-              <a
-                href="https://airbnb.com.sg/h/tentwo"
-                target="_blank"
-                rel="noopener"
-                class="ota-button"
-                >AIRBNB</a
-              >
-              <a
-                href="https://www.agoda.com/luxury-villa-in-kandy-with-a-private-pool/hotel/kandy-lk.html?ds=T8a9OBi6VA0RYSor"
-                target="_blank"
-                rel="noopener"
-                class="ota-button"
-                >AGODA</a
-              >
-              <a
-                href="https://www.booking.com/hotel/lk/luxury-villa-in-kandy-with-a-private-pool.html"
-                target="_blank"
-                rel="noopener"
-                class="ota-button"
-                >BOOKING.COM</a
-              >
-            </div>
-            <p class="footer-booking-notice">
-              Travelling from overseas? We recommend enquiring 2-3 months ahead,
-              especially for Dec-Jan and Jun-Aug. We reply within 24 hours.
-            </p>
-          </div>
-        </div>
-      </section>
     </main>
 
     <!-- FOOTER -->
@@ -4156,11 +4092,19 @@
         <div class="footer-nav">
           <h4>NAVIGATION</h4>
           <ul>
-            <li><a href="#residence">RESIDENCE</a></li>
-            <li><a href="#architecture">ARCHITECTURE</a></li>
+            <li><a href="#residence">THE VILLA</a></li>
+            <li><a href="#suites">SUITES</a></li>
             <li><a href="#gallery">GALLERY</a></li>
             <li><a href="#location">LOCATION</a></li>
-            <li><a href="#availability">AVAILABILITY</a></li>
+            <li><a href="#" id="footerCheckAvailability">CHECK AVAILABILITY</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav">
+          <h4>ALSO ON</h4>
+          <ul>
+            <li><a href="https://airbnb.com.sg/h/tentwo" target="_blank" rel="noopener">AIRBNB</a></li>
+            <li><a href="https://www.agoda.com/luxury-villa-in-kandy-with-a-private-pool/hotel/kandy-lk.html?ds=T8a9OBi6VA0RYSor" target="_blank" rel="noopener">AGODA</a></li>
+            <li><a href="https://www.booking.com/hotel/lk/luxury-villa-in-kandy-with-a-private-pool.html" target="_blank" rel="noopener">BOOKING.COM</a></li>
           </ul>
         </div>
       </div>
@@ -4204,6 +4148,119 @@
           mobileMenu.classList.remove("active");
         });
       });
+
+      // Smooth scroll with header offset for all navigation links
+      function smoothScrollTo(targetId, offset = 76) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const scrollPosition = targetPosition - offset;
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: "smooth"
+          });
+        }
+      }
+
+      // Handle all section navigation links (desktop and mobile)
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' || !href) return;
+
+        const targetId = href.substring(1);
+        if (targetId === 'residence' || targetId === 'suites' || targetId === 'gallery' || targetId === 'location') {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            smoothScrollTo(targetId, 76);
+          });
+        }
+      });
+
+      // Desktop CHECK AVAILABILITY button - scroll to top and focus check-in field
+      const desktopCheckAvailability = document.getElementById('desktopCheckAvailability');
+      if (desktopCheckAvailability) {
+        desktopCheckAvailability.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          setTimeout(() => {
+            const checkInField = document.getElementById('qbIn');
+            if (checkInField) {
+              checkInField.focus();
+            }
+          }, 500);
+        });
+      }
+
+      // Mobile CHECK AVAILABILITY button - scroll to mobile booking section
+      const mobileCheckAvailability = document.getElementById('mobileCheckAvailability');
+      if (mobileCheckAvailability) {
+        mobileCheckAvailability.addEventListener('click', function(e) {
+          e.preventDefault();
+          const mobileBooking = document.getElementById('mobileBooking');
+          if (mobileBooking) {
+            mobileBooking.style.display = 'block';
+            setTimeout(() => {
+              const sectionTop = mobileBooking.getBoundingClientRect().top + window.pageYOffset;
+              const scrollPosition = sectionTop - 76;
+              window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+              });
+            }, 100);
+          }
+        });
+      }
+
+      // Mobile WhatsApp link tracking
+      const mobileWhatsAppLink = document.getElementById('mobileWhatsAppLink');
+      if (mobileWhatsAppLink) {
+        mobileWhatsAppLink.addEventListener('click', function() {
+          window.dataLayer = window.dataLayer || [];
+          dataLayer.push({
+            event: 'whatsapp_click',
+            link_location: 'mobile_menu'
+          });
+        });
+      }
+
+      // Footer CHECK AVAILABILITY link - behaves like desktop button
+      const footerCheckAvailability = document.getElementById('footerCheckAvailability');
+      if (footerCheckAvailability) {
+        footerCheckAvailability.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          setTimeout(() => {
+            const checkInField = document.getElementById('qbIn');
+            if (checkInField) {
+              checkInField.focus();
+            }
+          }, 500);
+        });
+      }
+
+      // Rates section "CHECK DATES" link - behaves like desktop button
+      const ratesCheckDates = document.getElementById('ratesCheckDates');
+      if (ratesCheckDates) {
+        ratesCheckDates.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+          setTimeout(() => {
+            const checkInField = document.getElementById('qbIn');
+            if (checkInField) {
+              checkInField.focus();
+            }
+          }, 500);
+        });
+      }
 
       // Intersection Observer for reveals
       const revealElements = document.querySelectorAll(
@@ -4401,83 +4458,10 @@
 
       // Tier card selection and form reveal
       const tierCards = document.querySelectorAll(".tier-card");
-      const tierButtons = document.querySelectorAll(".tier-btn");
-      const bookingFormContainer = document.getElementById(
-        "bookingFormContainer",
-      );
-
-      tierButtons.forEach((button, index) => {
-        button.addEventListener("click", (e) => {
-          e.stopPropagation(); // Prevent card click from firing
-
-          const card = button.closest(".tier-card");
-          const maxGuests = button.getAttribute("data-max-guests");
-
-          // Determine configuration value based on index
-          let configValue = "";
-          if (index === 0) {
-            configValue = "full-residence";
-          } else if (index === 1) {
-            configValue = "two-suite";
-          } else if (index === 2) {
-            configValue = "master-suite";
-          }
-
-          // Track tier selection event
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "check_availability_click",
-            tier_type: configValue,
-            max_guests: maxGuests,
-          });
-
-          // NEW BEHAVIOR: Scroll to hero and show booking fields
-          const heroSection = document.getElementById("hero");
-          const qbGuestsDropdown = document.getElementById("qbGuests");
-
-          // Pre-fill guest count in hero form
-          if (qbGuestsDropdown && maxGuests) {
-            qbGuestsDropdown.value = maxGuests;
-
-            // Dispatch change event to update package summary
-            const changeEvent = new Event('change', { bubbles: true });
-            qbGuestsDropdown.dispatchEvent(changeEvent);
-
-            // Update price display
-            const selectedOption =
-              qbGuestsDropdown.options[qbGuestsDropdown.selectedIndex];
-            const price = selectedOption.getAttribute("data-price");
-            const formPriceElement = document.getElementById("formPrice");
-            if (formPriceElement && price) {
-              formPriceElement.textContent = price;
-            }
-          }
-
-          // Scroll to hero section
-          if (heroSection) {
-            setTimeout(() => {
-              heroSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }, 100);
-          }
-        });
-      });
-
-      // Also make the entire card clickable (same behavior as button)
-      tierCards.forEach((card, index) => {
-        card.addEventListener("click", () => {
-          const button = card.querySelector(".tier-btn");
-          if (button) {
-            button.click();
-          }
-        });
-      });
-
       // Quick Booking Form Functionality - New Two-Step Process
       const quickBookForm = document.getElementById("quickBook");
-      const qbAdditionalFields = document.getElementById("qbAdditionalFields");
+      const qbRow2 = document.getElementById("qbRow2");
+      const qbCheckBtn = document.getElementById("qbCheckBtn");
       const qbSubmitBtn = document.getElementById("qbSubmitBtn");
       let fieldsShown = false;
 
@@ -4490,6 +4474,65 @@
       if (isMobile()) {
         document.getElementById("qbIn").removeAttribute("required");
         document.getElementById("qbOut").removeAttribute("required");
+      }
+
+      // CHECK AVAILABILITY button click handler
+      if (qbCheckBtn) {
+        qbCheckBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // On mobile: scroll to mobile booking section
+          if (isMobile()) {
+            const mobileBooking = document.getElementById("mobileBooking");
+            if (mobileBooking) {
+              mobileBooking.style.display = "block";
+              setTimeout(() => {
+                // Calculate scroll position: section top minus scrolled header height (76px)
+                const sectionTop = mobileBooking.getBoundingClientRect().top + window.pageYOffset;
+                const scrollPosition = sectionTop - 76;
+                window.scrollTo({
+                  top: scrollPosition,
+                  behavior: "smooth"
+                });
+              }, 100);
+            }
+            return;
+          }
+
+          // Validate dates and guests
+          const checkInValue = document.getElementById("qbIn").value;
+          const checkOutValue = document.getElementById("qbOut").value;
+          const guestsValue = document.getElementById("qbGuests").value;
+
+          if (!checkInValue || !checkOutValue || !guestsValue) {
+            alert(
+              "Please fill in check-in, check-out, and select number of guests.",
+            );
+            return;
+          }
+
+          // Show row 2 (Name, Email, Country, SEND ENQUIRY button)
+          qbRow2.style.display = "grid";
+          qbCheckBtn.style.visibility = "hidden";
+          fieldsShown = true;
+
+          // Change form background to solid
+          quickBookForm.style.background = "rgba(10, 25, 45, 0.92)";
+
+          // Scroll to bring SEND ENQUIRY button into view if needed
+          setTimeout(() => {
+            const formRect = quickBookForm.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+
+            // If form bottom is below viewport, scroll to bring it into view
+            if (formRect.bottom > viewportHeight) {
+              quickBookForm.scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+              });
+            }
+          }, 100);
+        });
       }
 
       quickBookForm.addEventListener("submit", async function (e) {
@@ -4510,36 +4553,7 @@
           return;
         }
 
-        // Step 1: Validate dates and show step 2 if not shown yet
-        const checkInValue = document.getElementById("qbIn").value;
-        const checkOutValue = document.getElementById("qbOut").value;
-        const guestsValue = document.getElementById("qbGuests").value;
-
-        if (!checkInValue || !checkOutValue || !guestsValue) {
-          alert(
-            "Please fill in check-in, check-out, and select number of guests.",
-          );
-          return;
-        }
-
-        // If step 2 is not shown yet, show it and change button text
-        if (!fieldsShown) {
-          qbAdditionalFields.style.display = "grid";
-          fieldsShown = true;
-
-          // Change button text to SEND ENQUIRY
-          qbSubmitBtn.textContent = "SEND ENQUIRY";
-
-          // Show reassurance text
-          const reassuranceElement = document.getElementById("qbReassurance");
-          if (reassuranceElement) {
-            reassuranceElement.style.display = "block";
-          }
-
-          return; // Don't submit yet, just show step 2
-        }
-
-        // Step 2: Validate contact fields and submit
+        // Validate contact fields and submit
         const nameValue = document.getElementById("qbName").value;
         const emailValue = document.getElementById("qbEmail").value;
         const countryValue = document.getElementById("qbCountry").value;
@@ -4560,6 +4574,13 @@
         const guests = guestsSelect.value;
         const selectedOption = guestsSelect.options[guestsSelect.selectedIndex];
         const configuration = selectedOption.getAttribute("data-config");
+        const price = selectedOption.getAttribute("data-price");
+
+        // Calculate nights and total
+        const checkInDate = new Date(document.getElementById("qbIn").value);
+        const checkOutDate = new Date(document.getElementById("qbOut").value);
+        const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+        const estimatedTotal = nights > 0 ? nights * parseInt(price) : 0;
 
         const formData = {
           name: document.getElementById("qbName").value,
@@ -4569,6 +4590,9 @@
           departure: document.getElementById("qbOut").value,
           configuration: configuration,
           guests: guests,
+          nights: nights,
+          pricePerNight: price,
+          estimatedTotal: estimatedTotal,
         };
 
         // Track form submission event
@@ -4628,6 +4652,10 @@
             qbOutInput.value = "";
           }
         }
+        // Update stay card when dates change
+        if (typeof updateStayCard === 'function') {
+          updateStayCard();
+        }
       });
 
       // Validate on check-out change as well
@@ -4638,6 +4666,10 @@
         if (checkInDate && checkOutDate && checkOutDate <= checkInDate) {
           alert("Check-out date must be after check-in date");
           this.value = "";
+        }
+        // Update stay card when dates change
+        if (typeof updateStayCard === 'function') {
+          updateStayCard();
         }
       });
 
@@ -4650,86 +4682,120 @@
         this.showPicker();
       });
 
-      // Update package message when guests selection changes
+      // Update stay card when guests or dates selection changes
       var guestsDropdown = document.getElementById("qbGuests");
-      var packageConfigElement = document.getElementById("packageConfig");
-      var packageGuestsElement = document.getElementById("packageGuests");
-      var packagePriceElement = document.getElementById("packagePrice");
 
-      // Function to update package message based on guest selection
-      function updatePackageMessage() {
-        var qbPackageMessageElement =
-          document.getElementById("qbPackageMessage");
+      // Function to update stay card based on guest and date selection
+      function updateStayCard() {
+        var stayCardElement = document.getElementById("qbStayCard");
         var quickBookFormElement = document.getElementById("quickBook");
+        var stayCardPackageElement = document.getElementById("stayCardPackage");
+        var stayCardBedElement = document.getElementById("stayCardBed");
+        var stayCardTotalElement = document.getElementById("stayCardTotal");
+        var stayCardBreakdownElement = document.getElementById("stayCardBreakdown");
 
-        if (
-          guestsDropdown &&
-          packageConfigElement &&
-          packageGuestsElement &&
-          packagePriceElement
-        ) {
+        if (guestsDropdown && stayCardElement) {
           var selectedOption =
             guestsDropdown.options[guestsDropdown.selectedIndex];
           var guests = selectedOption.value;
           var price = selectedOption.getAttribute("data-price");
           var config = selectedOption.getAttribute("data-config");
 
-          // Show or hide message based on selection
+          // Show or hide card based on selection
           if (guests && price && config) {
-            // Update package message elements
-            packageConfigElement.textContent = config;
-            packageGuestsElement.textContent = guests + " Guests";
-            packagePriceElement.textContent = price;
+            // Update package title and bed text
+            var packageTitle = "";
+            var bedText = "";
 
-            // Show the message
-            if (qbPackageMessageElement) {
-              qbPackageMessageElement.style.display = "block";
+            if (guests === "2") {
+              packageTitle = "Master Suite";
+              bedText = "King bed · up to 2 guests";
+            } else if (guests === "4") {
+              packageTitle = "Master Suite + Garden Suite";
+              bedText = "King + Queen beds · up to 4 guests";
+            } else if (guests === "6") {
+              packageTitle = "Full Residence · All 3 Suites";
+              bedText = "King + 2 Queen beds · up to 6 guests";
             }
 
-            // Remove transparency from form background
-            if (quickBookFormElement) {
-              quickBookFormElement.style.background = "rgba(1, 0, 0, 0.85)";
+            if (stayCardPackageElement) stayCardPackageElement.textContent = packageTitle;
+            if (stayCardBedElement) stayCardBedElement.textContent = bedText;
+
+            // Calculate nights and total if both dates are selected
+            var checkInValue = document.getElementById("qbIn").value;
+            var checkOutValue = document.getElementById("qbOut").value;
+
+            if (checkInValue && checkOutValue) {
+              var checkIn = new Date(checkInValue);
+              var checkOut = new Date(checkOutValue);
+              var nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+
+              if (nights > 0) {
+                var total = nights * parseInt(price);
+                var totalFormatted = total.toLocaleString('en-US');
+
+                // Show total and breakdown
+                if (stayCardTotalElement) {
+                  stayCardTotalElement.textContent = "USD " + totalFormatted;
+                }
+                if (stayCardBreakdownElement) {
+                  stayCardBreakdownElement.textContent = nights + " night" + (nights > 1 ? "s" : "") + " × USD " + price;
+                }
+              } else {
+                // Show nightly rate
+                if (stayCardTotalElement) {
+                  stayCardTotalElement.textContent = "USD " + price;
+                }
+                if (stayCardBreakdownElement) {
+                  stayCardBreakdownElement.textContent = "/ night";
+                }
+              }
+            } else {
+              // No dates selected - show nightly rate
+              if (stayCardTotalElement) {
+                stayCardTotalElement.textContent = "USD " + price;
+              }
+              if (stayCardBreakdownElement) {
+                stayCardBreakdownElement.textContent = "/ night";
+              }
+            }
+
+            // Show the card
+            stayCardElement.style.display = "flex";
+
+            // Keep light transparent background - only changes to solid on step 2
+            if (quickBookFormElement && !fieldsShown) {
+              quickBookFormElement.style.background = "rgba(10, 25, 45, 0.25)";
             }
 
             // Don't automatically show step 2 fields - let user click CHECK AVAILABILITY first
           } else {
-            // Hide the message if no valid selection
-            if (qbPackageMessageElement) {
-              qbPackageMessageElement.style.display = "none";
-            }
+            // Hide the card if no valid selection
+            stayCardElement.style.display = "none";
 
-            // Hide additional fields and reset button text
-            var qbAdditionalFieldsElement =
-              document.getElementById("qbAdditionalFields");
-            if (qbAdditionalFieldsElement) {
-              qbAdditionalFieldsElement.style.display = "none";
+            // Hide row 2 and show CHECK AVAILABILITY button again
+            var qbRow2Element = document.getElementById("qbRow2");
+            var qbCheckBtnElement = document.getElementById("qbCheckBtn");
+            if (qbRow2Element) {
+              qbRow2Element.style.display = "none";
               fieldsShown = false;
-
-              // Reset button text
-              var submitBtn = document.getElementById("qbSubmitBtn");
-              if (submitBtn) {
-                submitBtn.textContent = "CHECK AVAILABILITY";
-              }
-
-              // Hide reassurance text
-              var reassuranceElement = document.getElementById("qbReassurance");
-              if (reassuranceElement) {
-                reassuranceElement.style.display = "none";
-              }
+            }
+            if (qbCheckBtnElement) {
+              qbCheckBtnElement.style.visibility = "visible";
             }
 
-            // Restore transparency if no selection
+            // Restore light transparency if no selection
             if (quickBookFormElement) {
-              quickBookFormElement.style.background = "rgba(1, 0, 0, 0.3)";
+              quickBookFormElement.style.background = "rgba(10, 25, 45, 0.25)";
             }
           }
         }
       }
 
-      // Update package message when guests selection changes
+      // Update stay card when guests or dates selection changes
       if (guestsDropdown) {
         guestsDropdown.addEventListener("change", function () {
-          updatePackageMessage();
+          updateStayCard();
 
           // Update facts line if elements exist (for mobile or other sections)
           var displayGuestsElement = document.getElementById("displayGuests");
@@ -4747,6 +4813,88 @@
         });
       }
 
+      // Mobile Stay Card Update Function
+      function updateMobileStayCard() {
+        const mbGuestsSelect = document.getElementById("mbGuests");
+        const mbStayCard = document.getElementById("mbStayCard");
+        const mbStayPackage = document.getElementById("mbStayPackage");
+        const mbStayBed = document.getElementById("mbStayBed");
+        const mbStayTotal = document.getElementById("mbStayTotal");
+        const mbStayBreakdown = document.getElementById("mbStayBreakdown");
+        const mbStayCardDivider = mbStayCard.querySelector(".mb-stay-card-divider");
+        const mbStayCardLeft = mbStayCard.querySelector(".mb-stay-card-left");
+        const mbStayCardRight = mbStayCard.querySelector(".mb-stay-card-right");
+
+        if (!mbGuestsSelect || !mbStayCard) return;
+
+        const selectedOption = mbGuestsSelect.options[mbGuestsSelect.selectedIndex];
+        const guests = mbGuestsSelect.value;
+        const price = selectedOption.getAttribute("data-price");
+        const checkInValue = document.getElementById("mbCheckIn").value;
+        const checkOutValue = document.getElementById("mbCheckOut").value;
+
+        // Check if any field is filled
+        if (!guests && !checkInValue && !checkOutValue) {
+          // Show placeholder state
+          mbStayCard.classList.add("placeholder");
+          if (mbStayPackage) mbStayPackage.textContent = "Select dates and guests to see your price";
+          if (mbStayBed) mbStayBed.style.display = "none";
+          if (mbStayCardDivider) mbStayCardDivider.style.display = "none";
+          if (mbStayCardRight) mbStayCardRight.style.display = "none";
+          mbStayCard.style.display = "flex";
+          return;
+        }
+
+        // Remove placeholder state
+        mbStayCard.classList.remove("placeholder");
+        if (mbStayBed) mbStayBed.style.display = "block";
+        if (mbStayCardDivider) mbStayCardDivider.style.display = "block";
+        if (mbStayCardRight) mbStayCardRight.style.display = "flex";
+
+        if (guests && price) {
+          let packageTitle = "Master Suite";
+          let bedText = "King bed · up to 2 guests";
+
+          if (guests === "2") {
+            packageTitle = "Master Suite";
+            bedText = "King bed · up to 2 guests";
+          } else if (guests === "4") {
+            packageTitle = "Master Suite + Garden Suite";
+            bedText = "King + Queen beds · up to 4 guests";
+          } else if (guests === "6") {
+            packageTitle = "Full Residence · All 3 Suites";
+            bedText = "King + 2 Queen beds · up to 6 guests";
+          }
+
+          if (mbStayPackage) mbStayPackage.textContent = packageTitle;
+          if (mbStayBed) mbStayBed.textContent = bedText;
+
+          // Calculate nights and total if both dates are selected
+          if (checkInValue && checkOutValue) {
+            const checkIn = new Date(checkInValue);
+            const checkOut = new Date(checkOutValue);
+            const nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+
+            if (nights > 0) {
+              const total = nights * parseInt(price);
+              const totalFormatted = total.toLocaleString('en-US');
+              if (mbStayTotal) mbStayTotal.textContent = "USD " + totalFormatted;
+              if (mbStayBreakdown) mbStayBreakdown.textContent = nights + " night" + (nights > 1 ? "s" : "") + " × USD " + price;
+            } else {
+              if (mbStayTotal) mbStayTotal.textContent = "USD " + price;
+              if (mbStayBreakdown) mbStayBreakdown.textContent = "per night";
+            }
+          } else {
+            if (mbStayTotal) mbStayTotal.textContent = "USD " + price;
+            if (mbStayBreakdown) mbStayBreakdown.textContent = "per night";
+          }
+
+          mbStayCard.style.display = "flex";
+        } else {
+          mbStayCard.style.display = "flex";
+        }
+      }
+
       // Mobile Booking Form Handler
       const mobileBookingForm = document.getElementById("mobileBookingForm");
       if (mobileBookingForm) {
@@ -4757,6 +4905,9 @@
 
         mbCheckIn.setAttribute("min", today);
         mbCheckOut.setAttribute("min", today);
+
+        // Initialize mobile stay card with placeholder
+        updateMobileStayCard();
 
         // Date validation for mobile form
         mbCheckIn.addEventListener("change", function () {
@@ -4771,6 +4922,7 @@
               mbCheckOut.value = "";
             }
           }
+          updateMobileStayCard();
         });
 
         mbCheckOut.addEventListener("change", function () {
@@ -4781,6 +4933,12 @@
             alert("Check-out date must be after check-in date");
             this.value = "";
           }
+          updateMobileStayCard();
+        });
+
+        // Update mobile stay card when guests change
+        mbGuests.addEventListener("change", function () {
+          updateMobileStayCard();
         });
 
         // Make mobile date fields open calendar on click
@@ -4806,6 +4964,13 @@
           const selectedOption =
             mbGuestsSelect.options[mbGuestsSelect.selectedIndex];
           const configuration = selectedOption.getAttribute("data-config");
+          const price = selectedOption.getAttribute("data-price");
+
+          // Calculate nights and total
+          const checkInDate = new Date(document.getElementById("mbCheckIn").value);
+          const checkOutDate = new Date(document.getElementById("mbCheckOut").value);
+          const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+          const estimatedTotal = nights > 0 ? nights * parseInt(price) : 0;
 
           const formData = {
             name: document.getElementById("mbName").value,
@@ -4815,6 +4980,8 @@
             departure: document.getElementById("mbCheckOut").value,
             configuration: configuration,
             guests: guests,
+            nights: nights,
+            estimatedTotal: estimatedTotal,
           };
 
           // Track form submission event
@@ -4846,6 +5013,83 @@
             window.location.href = "/thank-you.html";
           }
         });
+      }
+
+      // Dynamic hero positioning - desktop only (>900px)
+      function positionHeroBlock() {
+        if (window.innerWidth <= 900) return;
+
+        const heroBottom = document.querySelector('.hero-bottom');
+        const qbRow2 = document.getElementById('qbRow2');
+        const qbStayCard = document.getElementById('qbStayCard');
+        const header = document.getElementById('header');
+
+        if (!heroBottom || !qbRow2 || !qbStayCard) return;
+
+        // Temporarily show hidden elements to measure full height
+        const originalRow2Display = qbRow2.style.display;
+        const originalCardDisplay = qbStayCard.style.display;
+        const originalRow2Visibility = qbRow2.style.visibility;
+
+        qbRow2.style.display = 'grid';
+        qbRow2.style.visibility = 'hidden';
+        qbStayCard.style.display = 'flex';
+        qbStayCard.style.visibility = 'hidden';
+
+        // Measure full expanded height
+        const heroHeight = heroBottom.offsetHeight;
+
+        // Restore original state
+        qbRow2.style.display = originalRow2Display;
+        qbRow2.style.visibility = originalRow2Visibility;
+        qbStayCard.style.display = originalCardDisplay;
+        qbStayCard.style.visibility = '';
+
+        // Calculate position: 100vh - height - 40px bottom margin
+        const headerHeight = header ? header.offsetHeight : 0;
+        const minTop = headerHeight + 40;
+        const idealTop = window.innerHeight - heroHeight - 40;
+        const finalTop = Math.max(minTop, idealTop);
+
+        heroBottom.style.top = finalTop + 'px';
+        heroBottom.style.transform = 'translateX(-50%)';
+      }
+
+      // Position on load and resize (desktop only)
+      if (window.innerWidth > 900) {
+        // Wait for fonts and images to load
+        if (document.readyState === 'loading') {
+          window.addEventListener('DOMContentLoaded', positionHeroBlock);
+        } else {
+          positionHeroBlock();
+        }
+
+        window.addEventListener('load', positionHeroBlock);
+        window.addEventListener('resize', positionHeroBlock);
+      }
+
+      // Floating WhatsApp visibility control on mobile
+      if (window.innerWidth <= 900) {
+        const heroSection = document.querySelector('.hero');
+        const floatingWhatsApp = document.querySelector('.floating-whatsapp');
+
+        if (heroSection && floatingWhatsApp) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                // Hero is visible, hide WhatsApp button
+                floatingWhatsApp.classList.add('hidden-on-hero');
+              } else {
+                // Hero is not visible, show WhatsApp button
+                floatingWhatsApp.classList.remove('hidden-on-hero');
+              }
+            });
+          }, {
+            threshold: 0.1
+          });
+
+          observer.observe(heroSection);
+        }
       }
     </script>
   </body>
