@@ -3372,6 +3372,8 @@
                   <option value="Other">Other</option>
                 </select>
               </div>
+              <!-- Honeypot field for spam protection (hidden from users) -->
+              <input type="text" name="website" id="qbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
                 SEND ENQUIRY
               </button>
@@ -3510,6 +3512,9 @@
               <div class="mb-stay-breakdown" id="mbStayBreakdown">/ night</div>
             </div>
           </div>
+
+          <!-- Honeypot field for spam protection (hidden from users) -->
+          <input type="text" name="website" id="mbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <button type="submit" class="submit-btn">SEND ENQUIRY</button>
           <div class="mb-reassurance">
@@ -4611,7 +4616,7 @@
             "https://script.google.com/macros/s/AKfycbziOnMCLS6izjkwTiPVhTveRN92panuERYbijowPca_NqxA50tEMkXEqJX-sBl6bKs/exec";
 
           // Send data to Google Sheets
-          await fetch(GOOGLE_SCRIPT_URL, {
+          const sheetsPromise = fetch(GOOGLE_SCRIPT_URL, {
             method: "POST",
             mode: "no-cors",
             headers: {
@@ -4619,6 +4624,36 @@
             },
             body: JSON.stringify(formData),
           });
+
+          // Send email notification via API
+          const emailData = {
+            name: formData.name,
+            contact: formData.email,
+            country: formData.country,
+            checkIn: formData.arrival,
+            checkOut: formData.departure,
+            guests: formData.guests,
+            nights: formData.nights,
+            stayType: formData.configuration,
+            pricePerNight: formData.pricePerNight,
+            estimatedTotal: formData.estimatedTotal,
+            formType: 'Desktop Hero Form',
+            website: document.getElementById("qbWebsite").value // honeypot
+          };
+
+          const emailPromise = fetch('/api/enquiry', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData),
+          }).catch(err => {
+            console.error('Email notification failed:', err);
+            // Don't throw - we still want to redirect
+          });
+
+          // Wait for both requests to complete
+          await Promise.all([sheetsPromise, emailPromise]);
 
           // Redirect to thank you page for conversion tracking
           window.location.href = "/thank-you.html";
@@ -4981,6 +5016,7 @@
             configuration: configuration,
             guests: guests,
             nights: nights,
+            pricePerNight: price,
             estimatedTotal: estimatedTotal,
           };
 
@@ -4998,7 +5034,8 @@
             const GOOGLE_SCRIPT_URL =
               "https://script.google.com/macros/s/AKfycbziOnMCLS6izjkwTiPVhTveRN92panuERYbijowPca_NqxA50tEMkXEqJX-sBl6bKs/exec";
 
-            await fetch(GOOGLE_SCRIPT_URL, {
+            // Send data to Google Sheets
+            const sheetsPromise = fetch(GOOGLE_SCRIPT_URL, {
               method: "POST",
               mode: "no-cors",
               headers: {
@@ -5006,6 +5043,36 @@
               },
               body: JSON.stringify(formData),
             });
+
+            // Send email notification via API
+            const emailData = {
+              name: formData.name,
+              contact: formData.email,
+              country: formData.country,
+              checkIn: formData.arrival,
+              checkOut: formData.departure,
+              guests: formData.guests,
+              nights: formData.nights,
+              stayType: formData.configuration,
+              pricePerNight: formData.pricePerNight,
+              estimatedTotal: formData.estimatedTotal,
+              formType: 'Mobile Booking Form',
+              website: document.getElementById("mbWebsite").value // honeypot
+            };
+
+            const emailPromise = fetch('/api/enquiry', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(emailData),
+            }).catch(err => {
+              console.error('Email notification failed:', err);
+              // Don't throw - we still want to redirect
+            });
+
+            // Wait for both requests to complete
+            await Promise.all([sheetsPromise, emailPromise]);
 
             window.location.href = "/thank-you.html";
           } catch (err) {
