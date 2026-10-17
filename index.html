@@ -371,7 +371,7 @@
       nav {
         display: flex;
         align-items: center;
-        gap: clamp(20px, 3vw, 40px);
+        gap: clamp(16px, 2.2vw, 32px);
       }
 
       nav a {
@@ -391,6 +391,12 @@
       nav a:hover {
         color: var(--gold);
         opacity: 1;
+      }
+
+      nav a.active {
+        color: var(--gold);
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 2px;
       }
 
       .cta-header {
@@ -3200,11 +3206,12 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <a href="#residence">THE VILLA</a>
+        <a href="/about">THE VILLA</a>
         <a href="#suites">SUITES</a>
         <a href="#gallery">GALLERY</a>
+        <a href="/kandy-guide">DISCOVER KANDY</a>
         <a href="#location">LOCATION</a>
-        <a href="#" class="cta-header" id="desktopCheckAvailability">CHECK AVAILABILITY</a>
+        <a href="/" class="cta-header" id="desktopCheckAvailability">CHECK AVAILABILITY</a>
       </nav>
 
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -3241,11 +3248,12 @@
 
     <div class="mobile-menu" id="mobileMenu">
       <nav aria-label="Mobile navigation">
-        <a href="#residence" class="mobile-menu-link">THE VILLA</a>
+        <a href="/about" class="mobile-menu-link">THE VILLA</a>
         <a href="#suites" class="mobile-menu-link">SUITES</a>
         <a href="#gallery" class="mobile-menu-link">GALLERY</a>
+        <a href="/kandy-guide" class="mobile-menu-link">DISCOVER KANDY</a>
         <a href="#location" class="mobile-menu-link">LOCATION</a>
-        <a href="#" class="mobile-cta-btn" id="mobileCheckAvailability">CHECK AVAILABILITY</a>
+        <a href="/#mobileBooking" class="mobile-cta-btn" id="mobileCheckAvailability">CHECK AVAILABILITY</a>
         <a href="https://wa.me/94777889880" target="_blank" class="mobile-whatsapp-link" id="mobileWhatsAppLink">WhatsApp us</a>
       </nav>
     </div>
@@ -4039,6 +4047,9 @@
               <span class="location-time">20 MIN (8.8 km)</span>
             </div>
           </div>
+          <p style="margin-top: 32px; font-size: 16px;">
+            <a href="/kandy-guide" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: opacity 300ms ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Things to do near Kandy →</a>
+          </p>
         </div>
       </section>
 
@@ -4049,7 +4060,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <div class="footer-logo-container">
-            <h3>
+            <h3 style="white-space: nowrap;">
               <span class="logo-ten">TEN</span><br /><span class="logo-two"
                 >TWO</span
               >
@@ -4098,11 +4109,12 @@
         <div class="footer-nav">
           <h4>NAVIGATION</h4>
           <ul>
-            <li><a href="#residence">THE VILLA</a></li>
-            <li><a href="#suites">SUITES</a></li>
-            <li><a href="#gallery">GALLERY</a></li>
-            <li><a href="#location">LOCATION</a></li>
-            <li><a href="#" id="footerCheckAvailability">CHECK AVAILABILITY</a></li>
+            <li><a href="/about">THE VILLA</a></li>
+            <li><a href="/#suites">SUITES</a></li>
+            <li><a href="/#gallery">GALLERY</a></li>
+            <li><a href="/kandy-guide">DISCOVER KANDY</a></li>
+            <li><a href="/#location">LOCATION</a></li>
+            <li><a href="/">CHECK AVAILABILITY</a></li>
           </ul>
         </div>
         <div class="footer-nav">
