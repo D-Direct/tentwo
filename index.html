@@ -14,7 +14,7 @@
     <link rel="apple-touch-icon" href="images/TENTWO-icon.webp" />
 
     <!-- Preload critical resources -->
-    <link rel="preload" as="image" href="images/Hero-Pool.png" />
+    <link rel="preload" as="image" href="images/Hero-Pool.webp" />
 
     <!-- SEO Meta Tags -->
     <meta
@@ -1483,6 +1483,7 @@
       .life-item {
         position: relative;
         overflow: hidden;
+        cursor: pointer;
       }
 
       .life-item img {
@@ -3255,7 +3256,7 @@
         class="hero"
         id="hero"
         style="
-          background: url(&quot;images/Hero-Pool.png&quot;) center/cover
+          background: url(&quot;images/Hero-Pool.webp&quot;) center/cover
             no-repeat;
         "
       >
@@ -3703,7 +3704,7 @@
         </div>
 
         <div class="life-grid">
-          <div class="life-item reveal-image">
+          <div class="life-item reveal-image" data-gallery-filter="outdoor">
             <img
               src="images/hero.webp"
               alt="The pool and garden at TenTwo private residence near Kandy"
@@ -3711,7 +3712,7 @@
             />
             <p class="life-caption">The pool & garden</p>
           </div>
-          <div class="life-item reveal-image">
+          <div class="life-item reveal-image" data-gallery-filter="living">
             <img
               src="images/living-main.webp"
               alt="Shared living spaces at TenTwo with contemporary design"
@@ -3719,7 +3720,7 @@
             />
             <p class="life-caption">Shared living spaces</p>
           </div>
-          <div class="life-item reveal-image">
+          <div class="life-item reveal-image" data-gallery-filter="rooftop">
             <img
               src="images/roof_top.webp"
               alt="The rooftop terrace at TenTwo overlooking the landscape"
@@ -4442,6 +4443,31 @@
         suite.addEventListener("click", (e) => {
           e.preventDefault();
           const filter = suite.getAttribute("data-gallery-filter");
+
+          // Scroll to gallery
+          const gallerySection = document.querySelector("#gallery");
+          if (gallerySection) {
+            const headerHeight = 76;
+            const targetPosition = gallerySection.offsetTop - headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+
+            // Apply filter after a short delay to ensure scroll completes
+            setTimeout(() => {
+              filterGallery(filter);
+            }, 500);
+          }
+        });
+      });
+
+      // Life item clicks - navigate to gallery with filter
+      const lifeItems = document.querySelectorAll(".life-item");
+      lifeItems.forEach((lifeItem) => {
+        lifeItem.addEventListener("click", (e) => {
+          e.preventDefault();
+          const filter = lifeItem.getAttribute("data-gallery-filter");
 
           // Scroll to gallery
           const gallerySection = document.querySelector("#gallery");
