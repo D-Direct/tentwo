@@ -789,21 +789,24 @@
         transition: all 0.3s ease;
       }
 
-      .qb-row-1,
-      .qb-row-2 {
+      .qb-row-1 {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 12px;
       }
 
       .qb-row-2 {
-        display: none;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 12px;
       }
 
       .qb-field {
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        position: relative;
       }
 
       .qb-field label {
@@ -816,6 +819,15 @@
         letter-spacing: 0.05em;
         text-align: left;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .qb-field-error,
+      .mb-field-error {
+        display: none;
+        font-size: 11px;
+        color: #ff6b6b;
+        margin-top: 4px;
+        font-weight: 500;
       }
 
       .qb-price-display {
@@ -920,48 +932,52 @@
         padding: 14px 20px;
         backdrop-filter: blur(10px);
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 24px;
-      }
-
-      .stay-card-left,
-      .stay-card-right {
-        display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
       }
 
-      .stay-card-left {
-        text-align: left;
+      .stay-card-row-1,
+      .stay-card-row-2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
       }
 
-      .stay-card-right {
-        text-align: right;
-        align-items: flex-end;
+      .stay-card-row-1 {
+        align-items: center;
       }
 
-      .stay-card-package {
+      .stay-card-title {
         font-size: 16px;
         font-weight: 600;
         color: var(--white);
         line-height: 1.3;
+        flex: 1;
       }
 
-      .stay-card-bed {
+      .stay-card-price {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--white);
+        line-height: 1.3;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .price-suffix {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .stay-card-details {
         font-size: 14px;
         color: #e4ce9e;
         font-weight: 500;
         line-height: 1.3;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-      }
-
-      .stay-card-total {
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--white);
-        line-height: 1.3;
+        flex: 1;
       }
 
       .stay-card-breakdown {
@@ -970,6 +986,52 @@
         font-weight: 500;
         line-height: 1.3;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        text-align: right;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .more-guests-link,
+      .mb-more-guests-link {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--gold-bright);
+        color: #e4ce9e;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        text-decoration: underline;
+        transition: all 300ms var(--ease);
+        display: inline-block;
+      }
+
+      .more-guests-link:hover,
+      .mb-more-guests-link:hover {
+        opacity: 0.8;
+      }
+
+      .mb-more-guests-link {
+        font-size: 13px;
+      }
+
+      .qb-whatsapp-option,
+      .mb-whatsapp-option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .qb-whatsapp-option a,
+      .mb-whatsapp-option a {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        transition: all 300ms var(--ease);
+      }
+
+      .qb-whatsapp-option a:hover,
+      .mb-whatsapp-option a:hover {
+        color: #25D366;
       }
 
       .qb-check-btn {
@@ -2911,76 +2973,74 @@
           padding: 12px 14px;
           backdrop-filter: blur(10px);
           display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-start;
-          gap: 16px;
+          flex-direction: column;
+          gap: 6px;
           margin-bottom: 0;
         }
 
-        .mb-stay-card.placeholder {
-          justify-content: center;
-          align-items: center;
-        }
-
-        .mb-stay-card.placeholder .mb-stay-package {
-          font-size: 13px;
-          font-weight: 500;
-          color: rgba(255, 255, 255, 0.7);
-        }
-
-        .mb-stay-card-left {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          flex: 1;
-        }
-
-        .mb-stay-card-right {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          text-align: right;
-          align-items: flex-end;
-          flex-shrink: 0;
-        }
-
-        .mb-stay-card-row {
+        .mb-stay-card-row-1,
+        .mb-stay-card-row-2 {
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-start;
+          gap: 12px;
         }
 
-        .mb-stay-card-divider {
-          display: none;
+        .mb-stay-card-row-1 {
+          align-items: flex-start;
         }
 
-        .mb-stay-package {
+        .mb-stay-card-title {
+          font-size: 15px;
+          font-weight: 700;
+          color: var(--white);
+          line-height: 1.3;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .mb-title-line1,
+        .mb-title-line2 {
           font-size: 15px;
           font-weight: 700;
           color: var(--white);
           line-height: 1.3;
         }
 
-        .mb-stay-bed {
-          font-size: 13px;
-          color: var(--gold-bright);
-          font-weight: 500;
-          line-height: 1.3;
-        }
-
-        .mb-stay-total {
+        .mb-stay-card-price {
           font-size: 18px;
           font-weight: 700;
           color: var(--white);
           line-height: 1.3;
+          white-space: nowrap;
+          flex-shrink: 0;
+          align-self: flex-start;
         }
 
-        .mb-stay-breakdown {
+        .mb-price-suffix {
+          font-size: 13px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mb-stay-card-details {
           font-size: 13px;
           color: var(--gold-bright);
           font-weight: 500;
           line-height: 1.3;
+          flex: 1;
+        }
+
+        .mb-stay-card-breakdown {
+          font-size: 13px;
+          color: var(--gold-bright);
+          font-weight: 500;
+          line-height: 1.3;
+          text-align: right;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .mb-reassurance {
@@ -3286,128 +3346,88 @@
             Private pool · Up to 6 guests · From USD 200/night
           </p>
           <form class="quick-book" id="quickBook">
-            <!-- Row 1: Always visible -->
+            <!-- Row 1: Check-in, Check-out, Email/WhatsApp, SEND ENQUIRY -->
             <div class="qb-row-1">
               <div class="qb-field">
                 <label for="qbIn">CHECK-IN</label>
-                <input type="date" id="qbIn" aria-label="Check-in" />
+                <input type="date" id="qbIn" aria-label="Check-in" required />
               </div>
               <div class="qb-field">
                 <label for="qbOut">CHECK-OUT</label>
-                <input type="date" id="qbOut" aria-label="Check-out" />
+                <input type="date" id="qbOut" aria-label="Check-out" required />
               </div>
               <div class="qb-field">
-                <label for="qbGuests">GUESTS</label>
-                <select id="qbGuests" aria-label="Guests">
-                  <option value="">Select guests</option>
-                  <option value="2" data-price="200" data-config="Master Suite">
-                    2 Guests
-                  </option>
-                  <option value="4" data-price="225" data-config="Two-Suite Stay">
-                    4 Guests
-                  </option>
-                  <option value="6" data-price="250" data-config="Full Residence">
-                    6 Guests
-                  </option>
-                </select>
-              </div>
-              <button type="button" class="qb-check-btn" id="qbCheckBtn">
-                CHECK AVAILABILITY
-              </button>
-            </div>
-
-            <!-- Row 2: Hidden initially -->
-            <div
-              class="qb-row-2"
-              id="qbRow2"
-              style="display: none"
-            >
-              <div class="qb-field">
-                <label for="qbName">NAME</label>
-                <input
-                  type="text"
-                  id="qbName"
-                  placeholder="Your name"
-                  aria-label="Name"
-                />
-              </div>
-              <div class="qb-field">
-                <label for="qbEmail">EMAIL / WHATSAPP</label>
+                <label for="qbEmail">EMAIL OR WHATSAPP</label>
                 <input
                   type="text"
                   id="qbEmail"
-                  placeholder="your@email.com or WhatsApp"
+                  placeholder="you@email.com or +44 7700 900000"
                   autocomplete="email"
                   aria-label="Email or WhatsApp"
+                  required
                 />
+                <span class="qb-field-error" id="qbEmailError" style="display: none;"></span>
               </div>
-              <div class="qb-field">
-                <label for="qbCountry">COUNTRY</label>
-                <select id="qbCountry" aria-label="Country">
-                  <option value="">Select your country</option>
-                  <option value="Afghanistan">Afghanistan</option>
-                  <option value="Australia">Australia</option>
-                  <option value="Austria">Austria</option>
-                  <option value="Belgium">Belgium</option>
-                  <option value="Brazil">Brazil</option>
-                  <option value="Canada">Canada</option>
-                  <option value="China">China</option>
-                  <option value="Denmark">Denmark</option>
-                  <option value="Finland">Finland</option>
-                  <option value="France">France</option>
-                  <option value="Germany">Germany</option>
-                  <option value="India">India</option>
-                  <option value="Indonesia">Indonesia</option>
-                  <option value="Ireland">Ireland</option>
-                  <option value="Italy">Italy</option>
-                  <option value="Japan">Japan</option>
-                  <option value="Malaysia">Malaysia</option>
-                  <option value="Maldives">Maldives</option>
-                  <option value="Netherlands">Netherlands</option>
-                  <option value="New Zealand">New Zealand</option>
-                  <option value="Norway">Norway</option>
-                  <option value="Singapore">Singapore</option>
-                  <option value="South Korea">South Korea</option>
-                  <option value="Spain">Spain</option>
-                  <option value="Sri Lanka">Sri Lanka</option>
-                  <option value="Sweden">Sweden</option>
-                  <option value="Switzerland">Switzerland</option>
-                  <option value="Thailand">Thailand</option>
-                  <option value="United Arab Emirates">
-                    United Arab Emirates
-                  </option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="United States">United States</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <!-- Honeypot field for spam protection (hidden from users) -->
-              <input type="text" name="website" id="qbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
                 SEND ENQUIRY
               </button>
             </div>
 
-            <!-- Your Stay Card -->
-            <div
-              class="qb-stay-card"
-              id="qbStayCard"
-              style="display: none"
-            >
-              <div class="stay-card-left">
-                <div class="stay-card-package" id="stayCardPackage">Master Suite</div>
-                <div class="stay-card-bed" id="stayCardBed">King bed · up to 2 guests</div>
+            <!-- Row 2: Name (optional), Guests -->
+            <div class="qb-row-2" id="qbRow2">
+              <div class="qb-field">
+                <label for="qbName">NAME (OPTIONAL)</label>
+                <input
+                  type="text"
+                  id="qbName"
+                  placeholder="Your name"
+                  aria-label="Name (optional)"
+                />
               </div>
-              <div class="stay-card-right">
-                <div class="stay-card-total" id="stayCardTotal">USD 200</div>
-                <div class="stay-card-breakdown" id="stayCardBreakdown">/ night</div>
+              <div class="qb-field">
+                <label for="qbGuests">GUESTS</label>
+                <select id="qbGuests" aria-label="Guests">
+                  <option value="2" data-price="200" data-config="Master Suite" selected>
+                    2 Guests (Master Suite)
+                  </option>
+                  <option value="4" data-price="225" data-config="Two-Suite Stay">
+                    4 Guests (Two Suites)
+                  </option>
+                  <option value="6" data-price="250" data-config="Full Residence">
+                    6 Guests (Full Residence)
+                  </option>
+                </select>
               </div>
             </div>
 
+            <!-- Your Stay Card -->
+            <div class="qb-stay-card" id="qbStayCard">
+              <div class="stay-card-row-1">
+                <div class="stay-card-title" id="stayCardTitle">Entire Villa · 1 Bedroom (up to 2 guests)</div>
+                <div class="stay-card-price" id="stayCardPrice">USD 200<span class="price-suffix">/night</span></div>
+              </div>
+              <div class="stay-card-row-2">
+                <div class="stay-card-details" id="stayCardDetails">
+                  <a href="#" class="more-guests-link" id="moreGuestsLink">More guests? Up to 6 from USD 225/night</a>
+                </div>
+                <div class="stay-card-breakdown" id="stayCardBreakdown"></div>
+              </div>
+            </div>
+
+            <!-- WhatsApp option -->
+            <div class="qb-whatsapp-option" id="qbWhatsAppOption">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
+              </svg>
+              <a href="https://wa.me/94777889880" target="_blank" id="qbWhatsAppLink">Or ask on WhatsApp</a>
+            </div>
+
+            <!-- Honeypot field for spam protection (hidden from users) -->
+            <input type="text" name="website" id="qbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
           </form>
           <p class="qb-reassurance-line">
             <span class="qb-reassurance-desktop">We reply within 24 hours · No payment to enquire · <span style="white-space: nowrap;">Dec–Jan</span> & <span style="white-space: nowrap;">Jun–Aug</span> book early</span>
-            <span class="qb-reassurance-mobile">We reply within 24 hours · No payment to enquire<br>or <a href="https://wa.me/94777889880" target="_blank" onclick="window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'whatsapp_click', link_location: 'hero_mobile' });">message us on WhatsApp</a></span>
+            <span class="qb-reassurance-mobile">We reply within 24 hours · No payment to enquire</span>
           </p>
         </div>
       </section>
@@ -3440,85 +3460,53 @@
               <input type="date" id="mbCheckOut" required />
             </div>
           </div>
-          <div class="form-field">
-            <label for="mbGuests">GUESTS</label>
-            <select id="mbGuests" required>
-              <option value="">Select guests</option>
-              <option value="2" data-price="200" data-config="Master Suite">
-                2 Guests
-              </option>
-              <option value="4" data-price="225" data-config="Two-Suite Stay">
-                4 Guests
-              </option>
-              <option value="6" data-price="250" data-config="Full Residence">
-                6 Guests
-              </option>
-            </select>
-          </div>
 
           <div class="form-field">
-            <label for="mbName">NAME</label>
-            <input type="text" id="mbName" placeholder="Your name" required />
-          </div>
-          <div class="form-field">
-            <label for="mbEmail">EMAIL / WHATSAPP</label>
+            <label for="mbEmail">EMAIL OR WHATSAPP</label>
             <input
               type="text"
               id="mbEmail"
-              placeholder="your@email.com or WhatsApp"
+              placeholder="you@email.com or +44 7700 900000"
               autocomplete="email"
               required
             />
+            <span class="mb-field-error" id="mbEmailError" style="display: none;"></span>
           </div>
+
           <div class="form-field">
-            <label for="mbCountry">COUNTRY</label>
-            <select id="mbCountry" required>
-              <option value="">Select your country</option>
-              <option value="Afghanistan">Afghanistan</option>
-              <option value="Australia">Australia</option>
-              <option value="Austria">Austria</option>
-              <option value="Belgium">Belgium</option>
-              <option value="Brazil">Brazil</option>
-              <option value="Canada">Canada</option>
-              <option value="China">China</option>
-              <option value="Denmark">Denmark</option>
-              <option value="Finland">Finland</option>
-              <option value="France">France</option>
-              <option value="Germany">Germany</option>
-              <option value="India">India</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Ireland">Ireland</option>
-              <option value="Italy">Italy</option>
-              <option value="Japan">Japan</option>
-              <option value="Malaysia">Malaysia</option>
-              <option value="Maldives">Maldives</option>
-              <option value="Netherlands">Netherlands</option>
-              <option value="New Zealand">New Zealand</option>
-              <option value="Norway">Norway</option>
-              <option value="Singapore">Singapore</option>
-              <option value="South Korea">South Korea</option>
-              <option value="Spain">Spain</option>
-              <option value="Sri Lanka">Sri Lanka</option>
-              <option value="Sweden">Sweden</option>
-              <option value="Switzerland">Switzerland</option>
-              <option value="Thailand">Thailand</option>
-              <option value="United Arab Emirates">United Arab Emirates</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="United States">United States</option>
-              <option value="Other">Other</option>
+            <label for="mbName">NAME (OPTIONAL)</label>
+            <input type="text" id="mbName" placeholder="Your name" />
+          </div>
+
+          <div class="form-field">
+            <label for="mbGuests">GUESTS</label>
+            <select id="mbGuests">
+              <option value="2" data-price="200" data-config="Master Suite" selected>
+                2 Guests (Master Suite)
+              </option>
+              <option value="4" data-price="225" data-config="Two-Suite Stay">
+                4 Guests (Two Suites)
+              </option>
+              <option value="6" data-price="250" data-config="Full Residence">
+                6 Guests (Full Residence)
+              </option>
             </select>
           </div>
 
           <!-- Mobile Stay Card -->
-          <div class="mb-stay-card" id="mbStayCard" style="display: none;">
-            <div class="mb-stay-card-left">
-              <div class="mb-stay-package" id="mbStayPackage">Master Suite</div>
-              <div class="mb-stay-bed" id="mbStayBed">King bed · up to 2 guests</div>
+          <div class="mb-stay-card" id="mbStayCard">
+            <div class="mb-stay-card-row-1">
+              <div class="mb-stay-card-title" id="mbStayTitle">
+                <span class="mb-title-line1">Entire Villa · 1 Bedroom</span>
+                <span class="mb-title-line2">Up to 2 guests</span>
+              </div>
+              <div class="mb-stay-card-price" id="mbStayPrice">USD 200<span class="mb-price-suffix">/night</span></div>
             </div>
-            <div class="mb-stay-card-divider"></div>
-            <div class="mb-stay-card-right">
-              <div class="mb-stay-total" id="mbStayTotal">USD 200</div>
-              <div class="mb-stay-breakdown" id="mbStayBreakdown">/ night</div>
+            <div class="mb-stay-card-row-2">
+              <div class="mb-stay-card-details" id="mbStayDetails">
+                <a href="#" class="mb-more-guests-link" id="mbMoreGuestsLink">More guests? Up to 6 from USD 225/night</a>
+              </div>
+              <div class="mb-stay-card-breakdown" id="mbStayBreakdown"></div>
             </div>
           </div>
 
@@ -3526,6 +3514,15 @@
           <input type="text" name="website" id="mbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <button type="submit" class="submit-btn">SEND ENQUIRY</button>
+
+          <!-- WhatsApp option -->
+          <div class="mb-whatsapp-option" id="mbWhatsAppOption">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
+            </svg>
+            <a href="https://wa.me/94777889880" target="_blank" id="mbWhatsAppLink">Or ask on WhatsApp</a>
+          </div>
+
           <div class="mb-reassurance">
             We reply within 24 hours · No payment to enquire<br>
             Dec–Jan & Jun–Aug book early
@@ -4501,110 +4498,245 @@
 
       // Tier card selection and form reveal
       const tierCards = document.querySelectorAll(".tier-card");
-      // Quick Booking Form Functionality - New Two-Step Process
+
+      // Quick Booking Form Functionality - Single Step
       const quickBookForm = document.getElementById("quickBook");
-      const qbRow2 = document.getElementById("qbRow2");
-      const qbCheckBtn = document.getElementById("qbCheckBtn");
       const qbSubmitBtn = document.getElementById("qbSubmitBtn");
-      let fieldsShown = false;
 
-      // Helper function to check if mobile
+      // Helper function to check if mobile (640px for this feature)
       function isMobile() {
-        return window.innerWidth <= 768;
+        return window.innerWidth <= 640;
       }
 
-      // On mobile, remove required attributes from desktop form fields to avoid validation errors
-      if (isMobile()) {
-        document.getElementById("qbIn").removeAttribute("required");
-        document.getElementById("qbOut").removeAttribute("required");
+      // Manage required attributes based on viewport
+      function manageRequiredAttributes() {
+        const qbIn = document.getElementById("qbIn");
+        const qbOut = document.getElementById("qbOut");
+        const qbEmail = document.getElementById("qbEmail");
+
+        if (isMobile()) {
+          // Remove required from desktop form when mobile
+          if (qbIn) qbIn.removeAttribute("required");
+          if (qbOut) qbOut.removeAttribute("required");
+          if (qbEmail) qbEmail.removeAttribute("required");
+
+          // Change button text to CHECK AVAILABILITY and make it type button
+          if (qbSubmitBtn) {
+            qbSubmitBtn.textContent = "CHECK AVAILABILITY";
+            qbSubmitBtn.type = "button";
+          }
+        } else {
+          // Restore required for desktop
+          if (qbIn) qbIn.setAttribute("required", "");
+          if (qbOut) qbOut.setAttribute("required", "");
+          if (qbEmail) qbEmail.setAttribute("required", "");
+
+          // Change button back to SEND ENQUIRY and make it submit
+          if (qbSubmitBtn) {
+            qbSubmitBtn.textContent = "SEND ENQUIRY";
+            qbSubmitBtn.type = "submit";
+          }
+        }
       }
 
-      // CHECK AVAILABILITY button click handler
-      if (qbCheckBtn) {
-        qbCheckBtn.addEventListener("click", function (e) {
-          e.preventDefault();
+      // Run on load and resize
+      manageRequiredAttributes();
+      window.addEventListener("resize", manageRequiredAttributes);
 
-          // On mobile: scroll to mobile booking section
-          if (isMobile()) {
+      // Mobile hero button click handler - scroll to booking section
+      if (qbSubmitBtn) {
+        qbSubmitBtn.addEventListener("click", function(e) {
+          if (isMobile() && this.type === "button") {
+            // On mobile, scroll to the mobile booking section
+            e.preventDefault();
             const mobileBooking = document.getElementById("mobileBooking");
             if (mobileBooking) {
               mobileBooking.style.display = "block";
               setTimeout(() => {
-                // Calculate scroll position: section top minus scrolled header height (76px)
                 const sectionTop = mobileBooking.getBoundingClientRect().top + window.pageYOffset;
-                const scrollPosition = sectionTop - 76;
+                const scrollPosition = sectionTop - 76; // offset for header
                 window.scrollTo({
                   top: scrollPosition,
                   behavior: "smooth"
                 });
               }, 100);
             }
-            return;
           }
-
-          // Validate dates and guests
-          const checkInValue = document.getElementById("qbIn").value;
-          const checkOutValue = document.getElementById("qbOut").value;
-          const guestsValue = document.getElementById("qbGuests").value;
-
-          if (!checkInValue || !checkOutValue || !guestsValue) {
-            alert(
-              "Please fill in check-in, check-out, and select number of guests.",
-            );
-            return;
-          }
-
-          // Show row 2 (Name, Email, Country, SEND ENQUIRY button)
-          qbRow2.style.display = "grid";
-          qbCheckBtn.style.visibility = "hidden";
-          fieldsShown = true;
-
-          // Change form background to solid
-          quickBookForm.style.background = "rgba(10, 25, 45, 0.92)";
-
-          // Scroll to bring SEND ENQUIRY button into view if needed
-          setTimeout(() => {
-            const formRect = quickBookForm.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-
-            // If form bottom is below viewport, scroll to bring it into view
-            if (formRect.bottom > viewportHeight) {
-              quickBookForm.scrollIntoView({
-                behavior: "smooth",
-                block: "end",
-              });
-            }
-          }, 100);
+          // If not mobile or type is submit, the form submission handler will take over
         });
       }
+
+      // Helper function to validate email or WhatsApp
+      function validateEmailOrWhatsApp(value) {
+        if (!value || value.trim() === "") {
+          return { valid: false, message: "Please enter your email or WhatsApp number" };
+        }
+
+        value = value.trim();
+
+        // Check if it's an email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(value)) {
+          return { valid: true, type: 'email' };
+        }
+
+        // Check if it's a phone number (at least 7 digits, can have +, spaces, hyphens)
+        const phoneRegex = /^[\d\s\+\-\(\)]{7,}$/;
+        const digitCount = (value.match(/\d/g) || []).length;
+
+        if (phoneRegex.test(value) && digitCount >= 7) {
+          return { valid: true, type: 'phone' };
+        }
+
+        return { valid: false, message: "Please enter a valid email address or phone number" };
+      }
+
+      // Helper function to get browser timezone and language
+      function getBrowserInfo() {
+        let timezone = 'Unknown';
+        let language = 'Unknown';
+
+        try {
+          timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        } catch (e) {
+          console.error('Error getting timezone:', e);
+        }
+
+        try {
+          language = navigator.language || navigator.userLanguage || 'Unknown';
+        } catch (e) {
+          console.error('Error getting language:', e);
+        }
+
+        return { timezone, language };
+      }
+
+      // "More guests" link handler
+      const moreGuestsLink = document.getElementById("moreGuestsLink");
+      if (moreGuestsLink) {
+        moreGuestsLink.addEventListener("click", function (e) {
+          e.preventDefault();
+          const guestsSelect = document.getElementById("qbGuests");
+          if (guestsSelect) {
+            guestsSelect.focus();
+            // Try to open the dropdown
+            if (guestsSelect.showPicker) {
+              guestsSelect.showPicker();
+            }
+          }
+        });
+      }
+
+      // WhatsApp link tracking
+      const qbWhatsAppLink = document.getElementById("qbWhatsAppLink");
+      if (qbWhatsAppLink) {
+        qbWhatsAppLink.addEventListener("click", function (e) {
+          const checkInValue = document.getElementById("qbIn").value;
+          const checkOutValue = document.getElementById("qbOut").value;
+          const guestsSelect = document.getElementById("qbGuests");
+          const guests = guestsSelect.value;
+
+          // Get the new title format
+          let packageName = "";
+          if (guests === "2") {
+            packageName = "Entire Villa · 1 Bedroom";
+          } else if (guests === "4") {
+            packageName = "Entire Villa · 2 Bedrooms";
+          } else if (guests === "6") {
+            packageName = "Entire Villa · All 3 Bedrooms";
+          }
+
+          let message = "Hi TenTwo, I'm interested in staying";
+
+          if (checkInValue && checkOutValue) {
+            message += ` ${checkInValue} to ${checkOutValue}`;
+          }
+
+          if (guests && packageName) {
+            message += `, ${guests} guests (${packageName})`;
+          }
+
+          message += ". Is it available?";
+
+          const encodedMessage = encodeURIComponent(message);
+          this.href = `https://wa.me/94777889880?text=${encodedMessage}`;
+
+          // Track WhatsApp click
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'whatsapp_click',
+            link_location: 'booking_form'
+          });
+        });
+      }
+
+      // Track dates filled
+      const qbInInput = document.getElementById("qbIn");
+      const qbOutInput = document.getElementById("qbOut");
+      const qbEmailInput = document.getElementById("qbEmail");
+
+      let datesTracked = false;
+      let contactTracked = false;
+
+      function checkDatesTracking() {
+        if (!datesTracked && qbInInput.value && qbOutInput.value) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'booking_dates_selected'
+          });
+          datesTracked = true;
+        }
+      }
+
+      qbInInput.addEventListener("change", checkDatesTracking);
+      qbOutInput.addEventListener("change", checkDatesTracking);
+
+      // Track contact entered
+      qbEmailInput.addEventListener("blur", function() {
+        if (!contactTracked && this.value.trim()) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'booking_contact_entered'
+          });
+          contactTracked = true;
+        }
+      });
 
       quickBookForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        // On mobile: scroll to mobile booking section
+        // On mobile: scroll to mobile booking section instead
         if (isMobile()) {
           const mobileBooking = document.getElementById("mobileBooking");
           if (mobileBooking) {
             mobileBooking.style.display = "block";
             setTimeout(() => {
-              mobileBooking.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
+              const sectionTop = mobileBooking.getBoundingClientRect().top + window.pageYOffset;
+              const scrollPosition = sectionTop - 76;
+              window.scrollTo({
+                top: scrollPosition,
+                behavior: "smooth"
               });
             }, 100);
           }
           return;
         }
 
-        // Validate contact fields and submit
-        const nameValue = document.getElementById("qbName").value;
+        // Validate email/WhatsApp field
         const emailValue = document.getElementById("qbEmail").value;
-        const countryValue = document.getElementById("qbCountry").value;
+        const emailError = document.getElementById("qbEmailError");
+        const validation = validateEmailOrWhatsApp(emailValue);
 
-        if (!nameValue || !emailValue || !countryValue) {
-          alert("Please fill in your name, email/WhatsApp, and country.");
+        if (!validation.valid) {
+          emailError.textContent = validation.message;
+          emailError.style.display = "block";
           return;
+        } else {
+          emailError.style.display = "none";
         }
+
+        // Get browser info
+        const browserInfo = getBrowserInfo();
 
         // Submit to Google Sheets
         const submitButton = qbSubmitBtn;
@@ -4612,12 +4744,21 @@
         submitButton.textContent = "SENDING...";
         submitButton.disabled = true;
 
-        // Get configuration from guest selection data attribute
+        // Get configuration from guest selection
         const guestsSelect = document.getElementById("qbGuests");
         const guests = guestsSelect.value;
         const selectedOption = guestsSelect.options[guestsSelect.selectedIndex];
-        const configuration = selectedOption.getAttribute("data-config");
         const price = selectedOption.getAttribute("data-price");
+
+        // Use new title format for configuration
+        let configuration = "";
+        if (guests === "2") {
+          configuration = "Entire Villa · 1 Bedroom (up to 2 guests)";
+        } else if (guests === "4") {
+          configuration = "Entire Villa · 2 Bedrooms (up to 4 guests)";
+        } else if (guests === "6") {
+          configuration = "Entire Villa · All 3 Bedrooms (up to 6 guests)";
+        }
 
         // Calculate nights and total
         const checkInDate = new Date(document.getElementById("qbIn").value);
@@ -4625,10 +4766,13 @@
         const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
         const estimatedTotal = nights > 0 ? nights * parseInt(price) : 0;
 
+        const nameValue = document.getElementById("qbName").value || 'Not provided';
+
         const formData = {
-          name: document.getElementById("qbName").value,
-          email: document.getElementById("qbEmail").value,
-          country: document.getElementById("qbCountry").value,
+          name: nameValue,
+          email: emailValue,
+          timezone: browserInfo.timezone,
+          language: browserInfo.language,
           arrival: document.getElementById("qbIn").value,
           departure: document.getElementById("qbOut").value,
           configuration: configuration,
@@ -4637,16 +4781,6 @@
           pricePerNight: price,
           estimatedTotal: estimatedTotal,
         };
-
-        // Track form submission event
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "availability_form_submit",
-          form_type: "hero_booking",
-          configuration: formData.configuration,
-          guests: formData.guests,
-          country: formData.country,
-        });
 
         try {
           // Google Apps Script Web App URL - sends data to Google Sheets
@@ -4667,7 +4801,8 @@
           const emailData = {
             name: formData.name,
             contact: formData.email,
-            country: formData.country,
+            timezone: formData.timezone,
+            language: formData.language,
             checkIn: formData.arrival,
             checkOut: formData.departure,
             guests: formData.guests,
@@ -4693,8 +4828,24 @@
           // Wait for both requests to complete
           await Promise.all([sheetsPromise, emailPromise]);
 
-          // Redirect to thank you page for conversion tracking
-          window.location.href = "/thank-you.html";
+          // Track form submission event BEFORE redirect with a delay
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "availability_form_submit",
+            form_type: "hero_booking",
+            package: formData.configuration,
+            nights: formData.nights,
+            total_usd: formData.estimatedTotal,
+            eventCallback: function() {
+              window.location.href = "/thank-you.html";
+            },
+            eventTimeout: 300
+          });
+
+          // Fallback redirect after 500ms if eventCallback doesn't fire
+          setTimeout(() => {
+            window.location.href = "/thank-you.html";
+          }, 500);
         } catch (err) {
           console.error("Error submitting form:", err);
           // Even if there's an error, redirect to thank you page
@@ -4704,8 +4855,6 @@
 
       // Set minimum dates for quick booking
       var today = new Date().toISOString().split("T")[0];
-      const qbInInput = document.getElementById("qbIn");
-      const qbOutInput = document.getElementById("qbOut");
 
       qbInInput.setAttribute("min", today);
       qbOutInput.setAttribute("min", today);
@@ -4761,109 +4910,103 @@
       // Function to update stay card based on guest and date selection
       function updateStayCard() {
         var stayCardElement = document.getElementById("qbStayCard");
-        var quickBookFormElement = document.getElementById("quickBook");
-        var stayCardPackageElement = document.getElementById("stayCardPackage");
-        var stayCardBedElement = document.getElementById("stayCardBed");
-        var stayCardTotalElement = document.getElementById("stayCardTotal");
+        var stayCardTitleElement = document.getElementById("stayCardTitle");
+        var stayCardPriceElement = document.getElementById("stayCardPrice");
+        var stayCardDetailsElement = document.getElementById("stayCardDetails");
         var stayCardBreakdownElement = document.getElementById("stayCardBreakdown");
+        var moreGuestsLinkElement = document.getElementById("moreGuestsLink");
 
         if (guestsDropdown && stayCardElement) {
-          var selectedOption =
-            guestsDropdown.options[guestsDropdown.selectedIndex];
+          var selectedOption = guestsDropdown.options[guestsDropdown.selectedIndex];
           var guests = selectedOption.value;
           var price = selectedOption.getAttribute("data-price");
           var config = selectedOption.getAttribute("data-config");
 
-          // Show or hide card based on selection
           if (guests && price && config) {
-            // Update package title and bed text
-            var packageTitle = "";
+            // LINE 1: Title and Price
+            var title = "";
             var bedText = "";
 
             if (guests === "2") {
-              packageTitle = "Master Suite";
-              bedText = "King bed · up to 2 guests";
+              title = "Entire Villa · 1 Bedroom (up to 2 guests)";
+              bedText = "King bed";
             } else if (guests === "4") {
-              packageTitle = "Master Suite + Garden Suite";
-              bedText = "King + Queen beds · up to 4 guests";
+              title = "Entire Villa · 2 Bedrooms (up to 4 guests)";
+              bedText = "King + Queen beds";
             } else if (guests === "6") {
-              packageTitle = "Full Residence · All 3 Suites";
-              bedText = "King + 2 Queen beds · up to 6 guests";
+              title = "Entire Villa · All 3 Bedrooms (up to 6 guests)";
+              bedText = "King + 2 Queen beds";
             }
 
-            if (stayCardPackageElement) stayCardPackageElement.textContent = packageTitle;
-            if (stayCardBedElement) stayCardBedElement.textContent = bedText;
+            if (stayCardTitleElement) stayCardTitleElement.textContent = title;
 
             // Calculate nights and total if both dates are selected
             var checkInValue = document.getElementById("qbIn").value;
             var checkOutValue = document.getElementById("qbOut").value;
+            var hasDates = checkInValue && checkOutValue;
+            var nights = 0;
 
-            if (checkInValue && checkOutValue) {
+            if (hasDates) {
               var checkIn = new Date(checkInValue);
               var checkOut = new Date(checkOutValue);
-              var nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+              nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            }
 
-              if (nights > 0) {
-                var total = nights * parseInt(price);
-                var totalFormatted = total.toLocaleString('en-US');
-
-                // Show total and breakdown
-                if (stayCardTotalElement) {
-                  stayCardTotalElement.textContent = "USD " + totalFormatted;
-                }
-                if (stayCardBreakdownElement) {
-                  stayCardBreakdownElement.textContent = nights + " night" + (nights > 1 ? "s" : "") + " × USD " + price;
-                }
-              } else {
-                // Show nightly rate
-                if (stayCardTotalElement) {
-                  stayCardTotalElement.textContent = "USD " + price;
-                }
-                if (stayCardBreakdownElement) {
-                  stayCardBreakdownElement.textContent = "/ night";
-                }
+            // Update price (LINE 1 right)
+            if (hasDates && nights > 0) {
+              var total = nights * parseInt(price);
+              var totalFormatted = total.toLocaleString('en-US');
+              if (stayCardPriceElement) {
+                stayCardPriceElement.innerHTML = "USD " + totalFormatted;
               }
             } else {
-              // No dates selected - show nightly rate
-              if (stayCardTotalElement) {
-                stayCardTotalElement.textContent = "USD " + price;
+              if (stayCardPriceElement) {
+                stayCardPriceElement.innerHTML = "USD " + price + '<span class="price-suffix">/night</span>';
+              }
+            }
+
+            // LINE 2: Details (left) and Breakdown (right)
+            if (hasDates && nights > 0) {
+              // Dates chosen: show beds only on left, breakdown on right
+              if (stayCardDetailsElement) {
+                stayCardDetailsElement.textContent = bedText;
               }
               if (stayCardBreakdownElement) {
-                stayCardBreakdownElement.textContent = "/ night";
+                stayCardBreakdownElement.textContent = nights + " night" + (nights > 1 ? "s" : "") + " × USD " + price;
+              }
+            } else {
+              // No dates: show "More guests" link OR beds
+              if (guests === "2") {
+                // Show "More guests" link
+                if (stayCardDetailsElement) {
+                  stayCardDetailsElement.innerHTML = '';
+                  if (moreGuestsLinkElement) {
+                    stayCardDetailsElement.appendChild(moreGuestsLinkElement);
+                    moreGuestsLinkElement.style.display = "inline";
+                  }
+                }
+              } else {
+                // Show beds only
+                if (stayCardDetailsElement) {
+                  stayCardDetailsElement.textContent = bedText;
+                }
+                if (moreGuestsLinkElement) {
+                  moreGuestsLinkElement.style.display = "none";
+                }
+              }
+              if (stayCardBreakdownElement) {
+                stayCardBreakdownElement.textContent = "";
               }
             }
 
-            // Show the card
+            // Show the card - always visible now
             stayCardElement.style.display = "flex";
-
-            // Keep light transparent background - only changes to solid on step 2
-            if (quickBookFormElement && !fieldsShown) {
-              quickBookFormElement.style.background = "rgba(10, 25, 45, 0.25)";
-            }
-
-            // Don't automatically show step 2 fields - let user click CHECK AVAILABILITY first
-          } else {
-            // Hide the card if no valid selection
-            stayCardElement.style.display = "none";
-
-            // Hide row 2 and show CHECK AVAILABILITY button again
-            var qbRow2Element = document.getElementById("qbRow2");
-            var qbCheckBtnElement = document.getElementById("qbCheckBtn");
-            if (qbRow2Element) {
-              qbRow2Element.style.display = "none";
-              fieldsShown = false;
-            }
-            if (qbCheckBtnElement) {
-              qbCheckBtnElement.style.visibility = "visible";
-            }
-
-            // Restore light transparency if no selection
-            if (quickBookFormElement) {
-              quickBookFormElement.style.background = "rgba(10, 25, 45, 0.25)";
-            }
           }
         }
       }
+
+      // Initialize stay card on page load
+      updateStayCard();
 
       // Update stay card when guests or dates selection changes
       if (guestsDropdown) {
@@ -4890,13 +5033,11 @@
       function updateMobileStayCard() {
         const mbGuestsSelect = document.getElementById("mbGuests");
         const mbStayCard = document.getElementById("mbStayCard");
-        const mbStayPackage = document.getElementById("mbStayPackage");
-        const mbStayBed = document.getElementById("mbStayBed");
-        const mbStayTotal = document.getElementById("mbStayTotal");
+        const mbStayTitle = document.getElementById("mbStayTitle");
+        const mbStayPrice = document.getElementById("mbStayPrice");
+        const mbStayDetails = document.getElementById("mbStayDetails");
         const mbStayBreakdown = document.getElementById("mbStayBreakdown");
-        const mbStayCardDivider = mbStayCard.querySelector(".mb-stay-card-divider");
-        const mbStayCardLeft = mbStayCard.querySelector(".mb-stay-card-left");
-        const mbStayCardRight = mbStayCard.querySelector(".mb-stay-card-right");
+        const mbMoreGuestsLink = document.getElementById("mbMoreGuestsLink");
 
         if (!mbGuestsSelect || !mbStayCard) return;
 
@@ -4906,64 +5047,88 @@
         const checkInValue = document.getElementById("mbCheckIn").value;
         const checkOutValue = document.getElementById("mbCheckOut").value;
 
-        // Check if any field is filled
-        if (!guests && !checkInValue && !checkOutValue) {
-          // Show placeholder state
-          mbStayCard.classList.add("placeholder");
-          if (mbStayPackage) mbStayPackage.textContent = "Select dates and guests to see your price";
-          if (mbStayBed) mbStayBed.style.display = "none";
-          if (mbStayCardDivider) mbStayCardDivider.style.display = "none";
-          if (mbStayCardRight) mbStayCardRight.style.display = "none";
-          mbStayCard.style.display = "flex";
-          return;
-        }
-
-        // Remove placeholder state
-        mbStayCard.classList.remove("placeholder");
-        if (mbStayBed) mbStayBed.style.display = "block";
-        if (mbStayCardDivider) mbStayCardDivider.style.display = "block";
-        if (mbStayCardRight) mbStayCardRight.style.display = "flex";
-
         if (guests && price) {
-          let packageTitle = "Master Suite";
-          let bedText = "King bed · up to 2 guests";
+          // LINE 1: Title and Price
+          let titleLine1 = "";
+          let titleLine2 = "";
+          let bedText = "";
 
           if (guests === "2") {
-            packageTitle = "Master Suite";
-            bedText = "King bed · up to 2 guests";
+            titleLine1 = "Entire Villa · 1 Bedroom";
+            titleLine2 = "Up to 2 guests";
+            bedText = "King bed";
           } else if (guests === "4") {
-            packageTitle = "Master Suite + Garden Suite";
-            bedText = "King + Queen beds · up to 4 guests";
+            titleLine1 = "Entire Villa · 2 Bedrooms";
+            titleLine2 = "Up to 4 guests";
+            bedText = "King + Queen beds";
           } else if (guests === "6") {
-            packageTitle = "Full Residence · All 3 Suites";
-            bedText = "King + 2 Queen beds · up to 6 guests";
+            titleLine1 = "Entire Villa · All 3 Bedrooms";
+            titleLine2 = "Up to 6 guests";
+            bedText = "King + 2 Queen beds";
           }
 
-          if (mbStayPackage) mbStayPackage.textContent = packageTitle;
-          if (mbStayBed) mbStayBed.textContent = bedText;
+          // Update mobile title with two lines
+          if (mbStayTitle) {
+            mbStayTitle.innerHTML = '<span class="mb-title-line1">' + titleLine1 + '</span><span class="mb-title-line2">' + titleLine2 + '</span>';
+          }
 
-          // Calculate nights and total if both dates are selected
-          if (checkInValue && checkOutValue) {
+          // Calculate nights
+          const hasDates = checkInValue && checkOutValue;
+          let nights = 0;
+
+          if (hasDates) {
             const checkIn = new Date(checkInValue);
             const checkOut = new Date(checkOutValue);
-            const nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
-
-            if (nights > 0) {
-              const total = nights * parseInt(price);
-              const totalFormatted = total.toLocaleString('en-US');
-              if (mbStayTotal) mbStayTotal.textContent = "USD " + totalFormatted;
-              if (mbStayBreakdown) mbStayBreakdown.textContent = nights + " night" + (nights > 1 ? "s" : "") + " × USD " + price;
-            } else {
-              if (mbStayTotal) mbStayTotal.textContent = "USD " + price;
-              if (mbStayBreakdown) mbStayBreakdown.textContent = "per night";
-            }
-          } else {
-            if (mbStayTotal) mbStayTotal.textContent = "USD " + price;
-            if (mbStayBreakdown) mbStayBreakdown.textContent = "per night";
+            nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
           }
 
-          mbStayCard.style.display = "flex";
-        } else {
+          // Update price (LINE 1 right)
+          if (hasDates && nights > 0) {
+            const total = nights * parseInt(price);
+            const totalFormatted = total.toLocaleString('en-US');
+            if (mbStayPrice) {
+              mbStayPrice.innerHTML = "USD " + totalFormatted;
+            }
+          } else {
+            if (mbStayPrice) {
+              mbStayPrice.innerHTML = "USD " + price + '<span class="mb-price-suffix">/night</span>';
+            }
+          }
+
+          // LINE 2: Details (left) and Breakdown (right)
+          if (hasDates && nights > 0) {
+            // Dates chosen: show beds only on left, breakdown on right
+            if (mbStayDetails) {
+              mbStayDetails.textContent = bedText;
+            }
+            if (mbStayBreakdown) {
+              mbStayBreakdown.textContent = nights + " night" + (nights > 1 ? "s" : "") + " × USD " + price;
+            }
+          } else {
+            // No dates: show "More guests" link OR beds
+            if (guests === "2") {
+              // Show "More guests" link
+              if (mbStayDetails) {
+                mbStayDetails.innerHTML = '';
+                if (mbMoreGuestsLink) {
+                  mbStayDetails.appendChild(mbMoreGuestsLink);
+                  mbMoreGuestsLink.style.display = "inline";
+                }
+              }
+            } else {
+              // Show beds only
+              if (mbStayDetails) {
+                mbStayDetails.textContent = bedText;
+              }
+              if (mbMoreGuestsLink) {
+                mbMoreGuestsLink.style.display = "none";
+              }
+            }
+            if (mbStayBreakdown) {
+              mbStayBreakdown.textContent = "";
+            }
+          }
+
           mbStayCard.style.display = "flex";
         }
       }
@@ -4975,11 +5140,95 @@
         const mbCheckIn = document.getElementById("mbCheckIn");
         const mbCheckOut = document.getElementById("mbCheckOut");
         const mbGuests = document.getElementById("mbGuests");
+        const mbEmailInput = document.getElementById("mbEmail");
 
         mbCheckIn.setAttribute("min", today);
         mbCheckOut.setAttribute("min", today);
 
-        // Initialize mobile stay card with placeholder
+        // Mobile tracking
+        let mbDatesTracked = false;
+        let mbContactTracked = false;
+
+        function checkMbDatesTracking() {
+          if (!mbDatesTracked && mbCheckIn.value && mbCheckOut.value) {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'booking_dates_selected'
+            });
+            mbDatesTracked = true;
+          }
+        }
+
+        mbCheckIn.addEventListener("change", checkMbDatesTracking);
+        mbCheckOut.addEventListener("change", checkMbDatesTracking);
+
+        mbEmailInput.addEventListener("blur", function() {
+          if (!mbContactTracked && this.value.trim()) {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'booking_contact_entered'
+            });
+            mbContactTracked = true;
+          }
+        });
+
+        // "More guests" link handler for mobile
+        const mbMoreGuestsLink = document.getElementById("mbMoreGuestsLink");
+        if (mbMoreGuestsLink) {
+          mbMoreGuestsLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (mbGuests) {
+              mbGuests.focus();
+              if (mbGuests.showPicker) {
+                mbGuests.showPicker();
+              }
+            }
+          });
+        }
+
+        // WhatsApp link tracking for mobile
+        const mbWhatsAppLink = document.getElementById("mbWhatsAppLink");
+        if (mbWhatsAppLink) {
+          mbWhatsAppLink.addEventListener("click", function (e) {
+            const checkInValue = mbCheckIn.value;
+            const checkOutValue = mbCheckOut.value;
+            const guests = mbGuests.value;
+
+            // Get the new title format
+            let packageName = "";
+            if (guests === "2") {
+              packageName = "Entire Villa · 1 Bedroom";
+            } else if (guests === "4") {
+              packageName = "Entire Villa · 2 Bedrooms";
+            } else if (guests === "6") {
+              packageName = "Entire Villa · All 3 Bedrooms";
+            }
+
+            let message = "Hi TenTwo, I'm interested in staying";
+
+            if (checkInValue && checkOutValue) {
+              message += ` ${checkInValue} to ${checkOutValue}`;
+            }
+
+            if (guests && packageName) {
+              message += `, ${guests} guests (${packageName})`;
+            }
+
+            message += ". Is it available?";
+
+            const encodedMessage = encodeURIComponent(message);
+            this.href = `https://wa.me/94777889880?text=${encodedMessage}`;
+
+            // Track WhatsApp click
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'whatsapp_click',
+              link_location: 'booking_form'
+            });
+          });
+        }
+
+        // Initialize mobile stay card
         updateMobileStayCard();
 
         // Date validation for mobile form
@@ -5027,6 +5276,22 @@
         mobileBookingForm.addEventListener("submit", async function (e) {
           e.preventDefault();
 
+          // Validate email/WhatsApp field
+          const emailValue = document.getElementById("mbEmail").value;
+          const emailError = document.getElementById("mbEmailError");
+          const validation = validateEmailOrWhatsApp(emailValue);
+
+          if (!validation.valid) {
+            emailError.textContent = validation.message;
+            emailError.style.display = "block";
+            return;
+          } else {
+            emailError.style.display = "none";
+          }
+
+          // Get browser info
+          const browserInfo = getBrowserInfo();
+
           const submitButton = this.querySelector(".submit-btn");
           const originalText = submitButton.textContent;
           submitButton.textContent = "SENDING...";
@@ -5034,10 +5299,18 @@
 
           const mbGuestsSelect = document.getElementById("mbGuests");
           const guests = mbGuestsSelect.value;
-          const selectedOption =
-            mbGuestsSelect.options[mbGuestsSelect.selectedIndex];
-          const configuration = selectedOption.getAttribute("data-config");
+          const selectedOption = mbGuestsSelect.options[mbGuestsSelect.selectedIndex];
           const price = selectedOption.getAttribute("data-price");
+
+          // Use new title format for configuration
+          let configuration = "";
+          if (guests === "2") {
+            configuration = "Entire Villa · 1 Bedroom (up to 2 guests)";
+          } else if (guests === "4") {
+            configuration = "Entire Villa · 2 Bedrooms (up to 4 guests)";
+          } else if (guests === "6") {
+            configuration = "Entire Villa · All 3 Bedrooms (up to 6 guests)";
+          }
 
           // Calculate nights and total
           const checkInDate = new Date(document.getElementById("mbCheckIn").value);
@@ -5045,10 +5318,13 @@
           const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
           const estimatedTotal = nights > 0 ? nights * parseInt(price) : 0;
 
+          const nameValue = document.getElementById("mbName").value || 'Not provided';
+
           const formData = {
-            name: document.getElementById("mbName").value,
-            email: document.getElementById("mbEmail").value,
-            country: document.getElementById("mbCountry").value,
+            name: nameValue,
+            email: emailValue,
+            timezone: browserInfo.timezone,
+            language: browserInfo.language,
             arrival: document.getElementById("mbCheckIn").value,
             departure: document.getElementById("mbCheckOut").value,
             configuration: configuration,
@@ -5057,16 +5333,6 @@
             pricePerNight: price,
             estimatedTotal: estimatedTotal,
           };
-
-          // Track form submission event
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "availability_form_submit",
-            form_type: "mobile_booking",
-            configuration: formData.configuration,
-            guests: formData.guests,
-            country: formData.country,
-          });
 
           try {
             const GOOGLE_SCRIPT_URL =
@@ -5086,7 +5352,8 @@
             const emailData = {
               name: formData.name,
               contact: formData.email,
-              country: formData.country,
+              timezone: formData.timezone,
+              language: formData.language,
               checkIn: formData.arrival,
               checkOut: formData.departure,
               guests: formData.guests,
@@ -5112,7 +5379,24 @@
             // Wait for both requests to complete
             await Promise.all([sheetsPromise, emailPromise]);
 
-            window.location.href = "/thank-you.html";
+            // Track form submission event BEFORE redirect
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: "availability_form_submit",
+              form_type: "mobile_booking",
+              package: formData.configuration,
+              nights: formData.nights,
+              total_usd: formData.estimatedTotal,
+              eventCallback: function() {
+                window.location.href = "/thank-you.html";
+              },
+              eventTimeout: 300
+            });
+
+            // Fallback redirect after 500ms if eventCallback doesn't fire
+            setTimeout(() => {
+              window.location.href = "/thank-you.html";
+            }, 500);
           } catch (err) {
             console.error("Error submitting form:", err);
             window.location.href = "/thank-you.html";
@@ -5125,30 +5409,12 @@
         if (window.innerWidth <= 900) return;
 
         const heroBottom = document.querySelector('.hero-bottom');
-        const qbRow2 = document.getElementById('qbRow2');
-        const qbStayCard = document.getElementById('qbStayCard');
         const header = document.getElementById('header');
 
-        if (!heroBottom || !qbRow2 || !qbStayCard) return;
+        if (!heroBottom) return;
 
-        // Temporarily show hidden elements to measure full height
-        const originalRow2Display = qbRow2.style.display;
-        const originalCardDisplay = qbStayCard.style.display;
-        const originalRow2Visibility = qbRow2.style.visibility;
-
-        qbRow2.style.display = 'grid';
-        qbRow2.style.visibility = 'hidden';
-        qbStayCard.style.display = 'flex';
-        qbStayCard.style.visibility = 'hidden';
-
-        // Measure full expanded height
+        // Measure full height (all elements are now always visible)
         const heroHeight = heroBottom.offsetHeight;
-
-        // Restore original state
-        qbRow2.style.display = originalRow2Display;
-        qbRow2.style.visibility = originalRow2Visibility;
-        qbStayCard.style.display = originalCardDisplay;
-        qbStayCard.style.visibility = '';
 
         // Calculate position: 100vh - height - 40px bottom margin
         const headerHeight = header ? header.offsetHeight : 0;
