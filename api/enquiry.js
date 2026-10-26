@@ -124,6 +124,20 @@ function generateEmailHTML(data) {
       <div class="value"><strong>USD $${data.estimatedTotal}</strong></div>
     </div>
 
+    ${data.freeNights > 0 ? `
+    <div class="info-row">
+      <div class="label">Free Nights:</div>
+      <div class="value" style="color: #d4af37;">${data.freeNights} night${data.freeNights > 1 ? 's' : ''} free</div>
+    </div>
+    ` : ''}
+
+    ${data.offerName ? `
+    <div class="info-row">
+      <div class="label">Offer:</div>
+      <div class="value" style="color: #d4af37;">${data.offerName}</div>
+    </div>
+    ` : ''}
+
     <div class="footer">
       <div>Form used: ${data.formType}</div>
       <div>Submitted: ${data.submittedAt}</div>

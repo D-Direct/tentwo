@@ -1034,6 +1034,277 @@
         color: #25D366;
       }
 
+      /* New Booking UI Styles */
+      .qb-row-1 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .qb-price-line,
+      .mb-price-line {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--white);
+        text-align: center;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        margin-top: 4px;
+        line-height: 1.5;
+      }
+
+      .qb-price-line .price-crossed,
+      .mb-price-line .price-crossed {
+        text-decoration: line-through;
+        opacity: 0.6;
+        margin-right: 8px;
+      }
+
+      .qb-price-line .price-save,
+      .mb-price-line .price-save {
+        color: var(--gold);
+        font-weight: 600;
+        margin-left: 8px;
+      }
+
+      .qb-ota-row,
+      .mb-ota-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+
+      .qb-ota-label,
+      .mb-ota-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.85);
+        white-space: nowrap;
+      }
+
+      .mb-ota-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        flex: 1;
+      }
+
+      .qb-ota-btn,
+      .mb-ota-btn {
+        padding: 10px 18px;
+        background: rgba(255, 255, 255, 0.95);
+        color: rgba(10, 25, 45, 1);
+        border: none;
+        border-radius: 6px;
+        font-family: var(--sans);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 300ms ease;
+        white-space: nowrap;
+      }
+
+      .qb-ota-btn:hover,
+      .mb-ota-btn:hover {
+        background: var(--gold);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      }
+
+      .qb-direct-row,
+      .mb-direct-row {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.85);
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .qb-direct-row a,
+      .mb-direct-row a {
+        color: var(--gold);
+        text-decoration: none;
+        border-bottom: 1px solid var(--gold);
+        transition: all 300ms ease;
+      }
+
+      .qb-direct-row a:hover,
+      .mb-direct-row a:hover {
+        color: #e6c045;
+        border-bottom-color: #e6c045;
+      }
+
+      /* Enquiry Modal Styles */
+      .enquiry-modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .enquiry-modal-content {
+        background: linear-gradient(135deg, rgba(10, 25, 45, 0.98) 0%, rgba(15, 35, 60, 0.98) 100%);
+        margin: 5% auto;
+        padding: 32px;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        position: relative;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .enquiry-modal-close {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 32px;
+        font-weight: 300;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: all 300ms ease;
+        line-height: 1;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .enquiry-modal-close:hover {
+        color: var(--white);
+        transform: rotate(90deg);
+      }
+
+      .enquiry-modal-title {
+        font-family: var(--serif);
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--white);
+        margin: 0 0 24px 0;
+        text-align: center;
+      }
+
+      .enquiry-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .enquiry-dates-summary {
+        background: rgba(212, 175, 55, 0.15);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 6px;
+        padding: 14px 16px;
+        font-size: 14px;
+        color: var(--white);
+        text-align: center;
+        margin-bottom: 8px;
+        line-height: 1.6;
+      }
+
+      .enquiry-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .enquiry-field label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--white);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .enquiry-field input {
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        font-family: var(--sans);
+        font-size: 14px;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 300ms ease;
+      }
+
+      .enquiry-field input:focus {
+        outline: none;
+        border-color: var(--gold);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+      }
+
+      .enquiry-field input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .enquiry-field-error {
+        display: none;
+        font-size: 11px;
+        color: #ff6b6b;
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      .enquiry-submit-btn {
+        padding: 14px 20px;
+        background: var(--gold);
+        color: rgba(10, 25, 45, 1);
+        border: none;
+        border-radius: 6px;
+        font-family: var(--sans);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 300ms ease;
+        margin-top: 8px;
+      }
+
+      .enquiry-submit-btn:hover {
+        background: #e6c045;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      }
+
+      .enquiry-submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
       .qb-check-btn {
         padding: 14px 20px;
         background: var(--gold);
@@ -2966,6 +3237,69 @@
           gap: 10px;
         }
 
+        /* Mobile booking UI - new styles */
+        .mb-ota-row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+
+        .mb-ota-buttons {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+        }
+
+        .mb-ota-btn {
+          padding: 12px 10px;
+          font-size: 11px;
+          text-align: center;
+        }
+
+        .mb-price-line {
+          font-size: 14px;
+          padding: 10px 14px;
+        }
+
+        .mb-direct-row {
+          font-size: 12px;
+        }
+
+        .mb-reassurance {
+          font-size: 12px;
+          text-align: center;
+          color: rgba(255, 255, 255, 0.75);
+          line-height: 1.5;
+          margin-top: 12px;
+        }
+
+        /* Quick book mobile */
+        .qb-row-1 {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .qb-ota-row {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .qb-ota-btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        /* Modal mobile adjustments */
+        .enquiry-modal-content {
+          margin: 10% auto;
+          padding: 24px;
+          width: 95%;
+        }
+
+        .enquiry-modal-title {
+          font-size: 20px;
+        }
+
         .mb-stay-card {
           background: rgba(255, 255, 255, 0.12);
           border: 1px solid rgba(255, 255, 255, 0.2);
@@ -3343,88 +3677,84 @@
           </p>
           <p class="hero-location-mobile">Kandy, Sri Lanka</p>
           <p class="hero-facts">
-            Private pool · Up to 6 guests · From USD 200/night
+            Private pool · Up to 6 guests · From USD 150/night
           </p>
-          <form class="quick-book" id="quickBook">
-            <!-- Row 1: Check-in, Check-out, Email/WhatsApp, SEND ENQUIRY -->
+          <div class="quick-book" id="quickBook">
+            <!-- Row 1: Check-in, Check-out, Guests -->
             <div class="qb-row-1">
               <div class="qb-field">
                 <label for="qbIn">CHECK-IN</label>
-                <input type="date" id="qbIn" aria-label="Check-in" required />
+                <input type="date" id="qbIn" aria-label="Check-in" />
               </div>
               <div class="qb-field">
                 <label for="qbOut">CHECK-OUT</label>
-                <input type="date" id="qbOut" aria-label="Check-out" required />
-              </div>
-              <div class="qb-field">
-                <label for="qbEmail">EMAIL OR WHATSAPP</label>
-                <input
-                  type="text"
-                  id="qbEmail"
-                  placeholder="you@email.com or +44 7700 900000"
-                  autocomplete="email"
-                  aria-label="Email or WhatsApp"
-                  required
-                />
-                <span class="qb-field-error" id="qbEmailError" style="display: none;"></span>
-              </div>
-              <button type="submit" class="qb-check-btn" id="qbSubmitBtn">
-                SEND ENQUIRY
-              </button>
-            </div>
-
-            <!-- Row 2: Name (optional), Guests -->
-            <div class="qb-row-2" id="qbRow2">
-              <div class="qb-field">
-                <label for="qbName">NAME (OPTIONAL)</label>
-                <input
-                  type="text"
-                  id="qbName"
-                  placeholder="Your name"
-                  aria-label="Name (optional)"
-                />
+                <input type="date" id="qbOut" aria-label="Check-out" />
               </div>
               <div class="qb-field">
                 <label for="qbGuests">GUESTS</label>
                 <select id="qbGuests" aria-label="Guests">
-                  <option value="2" data-price="200" data-config="Master Suite" selected>
-                    2 Guests (Master Suite)
-                  </option>
-                  <option value="4" data-price="225" data-config="Two-Suite Stay">
-                    4 Guests (Two Suites)
-                  </option>
-                  <option value="6" data-price="250" data-config="Full Residence">
-                    6 Guests (Full Residence)
-                  </option>
+                  <option value="1">1 Guest</option>
+                  <option value="2" selected>2 Guests</option>
+                  <option value="3">3 Guests</option>
+                  <option value="4">4 Guests</option>
+                  <option value="5">5 Guests</option>
+                  <option value="6">6 Guests</option>
                 </select>
               </div>
             </div>
 
-            <!-- Your Stay Card -->
-            <div class="qb-stay-card" id="qbStayCard">
-              <div class="stay-card-row-1">
-                <div class="stay-card-title" id="stayCardTitle">Entire Villa · 1 Bedroom (up to 2 guests)</div>
-                <div class="stay-card-price" id="stayCardPrice">USD 200<span class="price-suffix">/night</span></div>
-              </div>
-              <div class="stay-card-row-2">
-                <div class="stay-card-details" id="stayCardDetails">
-                  <a href="#" class="more-guests-link" id="moreGuestsLink">More guests? Up to 6 from USD 225/night</a>
+            <!-- Row 2: Price line (dynamic) -->
+            <div class="qb-price-line" id="qbPriceLine">
+              From USD 150/night · 4th night free · Book by 31 Dec
+            </div>
+
+            <!-- Row 3: OTA buttons -->
+            <div class="qb-ota-row">
+              <div class="qb-ota-label">Book instantly on</div>
+              <button type="button" class="qb-ota-btn" id="qbAirbnbBtn" data-platform="airbnb">Airbnb</button>
+              <button type="button" class="qb-ota-btn" id="qbBookingBtn" data-platform="booking">Booking.com</button>
+              <button type="button" class="qb-ota-btn" id="qbAgodaBtn" data-platform="agoda">Agoda</button>
+            </div>
+
+            <!-- Row 4: Direct booking option -->
+            <div class="qb-direct-row">
+              Prefer to book direct?
+              <a href="#" id="qbEnquireLink">Enquire</a> ·
+              <a href="https://wa.me/94777889880" target="_blank" id="qbWhatsAppLink">WhatsApp</a>
+            </div>
+          </div>
+
+          <!-- Enquiry Modal (hidden by default) -->
+          <div class="enquiry-modal" id="enquiryModal" style="display: none;">
+            <div class="enquiry-modal-content">
+              <button class="enquiry-modal-close" id="enquiryModalClose">&times;</button>
+              <h3 class="enquiry-modal-title">Enquire About Your Stay</h3>
+              <form id="enquiryForm" class="enquiry-form">
+                <div class="enquiry-dates-summary" id="enquiryDatesSummary"></div>
+
+                <div class="enquiry-field">
+                  <label for="enquiryName">NAME</label>
+                  <input type="text" id="enquiryName" required />
                 </div>
-                <div class="stay-card-breakdown" id="stayCardBreakdown"></div>
-              </div>
-            </div>
 
-            <!-- WhatsApp option -->
-            <div class="qb-whatsapp-option" id="qbWhatsAppOption">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
-              </svg>
-              <a href="https://wa.me/94777889880" target="_blank" id="qbWhatsAppLink">Or ask on WhatsApp</a>
-            </div>
+                <div class="enquiry-field">
+                  <label for="enquiryContact">EMAIL OR WHATSAPP</label>
+                  <input type="text" id="enquiryContact" placeholder="you@email.com or +44 7700 900000" required />
+                  <span class="enquiry-field-error" id="enquiryContactError" style="display: none;"></span>
+                </div>
 
-            <!-- Honeypot field for spam protection (hidden from users) -->
-            <input type="text" name="website" id="qbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          </form>
+                <div class="enquiry-field">
+                  <label for="enquiryCountry">COUNTRY</label>
+                  <input type="text" id="enquiryCountry" placeholder="Your country" required />
+                </div>
+
+                <button type="submit" class="enquiry-submit-btn" id="enquirySubmitBtn">SEND ENQUIRY</button>
+
+                <!-- Honeypot -->
+                <input type="text" name="website" id="enquiryWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              </form>
+            </div>
+          </div>
           <p class="qb-reassurance-line">
             <span class="qb-reassurance-desktop">We reply within 24 hours · No payment to enquire · <span style="white-space: nowrap;">Dec–Jan</span> & <span style="white-space: nowrap;">Jun–Aug</span> book early</span>
             <span class="qb-reassurance-mobile">We reply within 24 hours · No payment to enquire</span>
@@ -3449,85 +3779,58 @@
         >
           Check Availability
         </h2>
-        <form class="mobile-booking-form" id="mobileBookingForm">
+        <div class="mobile-booking-form" id="mobileBookingForm">
+          <!-- Row 1: Check-in, Check-out, Guests -->
           <div class="date-row">
             <div class="form-field">
               <label for="mbCheckIn">CHECK-IN</label>
-              <input type="date" id="mbCheckIn" required />
+              <input type="date" id="mbCheckIn" />
             </div>
             <div class="form-field">
               <label for="mbCheckOut">CHECK-OUT</label>
-              <input type="date" id="mbCheckOut" required />
+              <input type="date" id="mbCheckOut" />
             </div>
-          </div>
-
-          <div class="form-field">
-            <label for="mbEmail">EMAIL OR WHATSAPP</label>
-            <input
-              type="text"
-              id="mbEmail"
-              placeholder="you@email.com or +44 7700 900000"
-              autocomplete="email"
-              required
-            />
-            <span class="mb-field-error" id="mbEmailError" style="display: none;"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="mbName">NAME (OPTIONAL)</label>
-            <input type="text" id="mbName" placeholder="Your name" />
           </div>
 
           <div class="form-field">
             <label for="mbGuests">GUESTS</label>
             <select id="mbGuests">
-              <option value="2" data-price="200" data-config="Master Suite" selected>
-                2 Guests (Master Suite)
-              </option>
-              <option value="4" data-price="225" data-config="Two-Suite Stay">
-                4 Guests (Two Suites)
-              </option>
-              <option value="6" data-price="250" data-config="Full Residence">
-                6 Guests (Full Residence)
-              </option>
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6 Guests</option>
             </select>
           </div>
 
-          <!-- Mobile Stay Card -->
-          <div class="mb-stay-card" id="mbStayCard">
-            <div class="mb-stay-card-row-1">
-              <div class="mb-stay-card-title" id="mbStayTitle">
-                <span class="mb-title-line1">Entire Villa · 1 Bedroom</span>
-                <span class="mb-title-line2">Up to 2 guests</span>
-              </div>
-              <div class="mb-stay-card-price" id="mbStayPrice">USD 200<span class="mb-price-suffix">/night</span></div>
-            </div>
-            <div class="mb-stay-card-row-2">
-              <div class="mb-stay-card-details" id="mbStayDetails">
-                <a href="#" class="mb-more-guests-link" id="mbMoreGuestsLink">More guests? Up to 6 from USD 225/night</a>
-              </div>
-              <div class="mb-stay-card-breakdown" id="mbStayBreakdown"></div>
+          <!-- Row 2: Price line (dynamic) -->
+          <div class="mb-price-line" id="mbPriceLine">
+            From USD 150/night · 4th night free · Book by 31 Dec
+          </div>
+
+          <!-- Row 3: OTA buttons -->
+          <div class="mb-ota-row">
+            <div class="mb-ota-label">Book instantly on</div>
+            <div class="mb-ota-buttons">
+              <button type="button" class="mb-ota-btn" id="mbAirbnbBtn" data-platform="airbnb">Airbnb</button>
+              <button type="button" class="mb-ota-btn" id="mbBookingBtn" data-platform="booking">Booking.com</button>
+              <button type="button" class="mb-ota-btn" id="mbAgodaBtn" data-platform="agoda">Agoda</button>
             </div>
           </div>
 
-          <!-- Honeypot field for spam protection (hidden from users) -->
-          <input type="text" name="website" id="mbWebsite" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-          <button type="submit" class="submit-btn">SEND ENQUIRY</button>
-
-          <!-- WhatsApp option -->
-          <div class="mb-whatsapp-option" id="mbWhatsAppOption">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/>
-            </svg>
-            <a href="https://wa.me/94777889880" target="_blank" id="mbWhatsAppLink">Or ask on WhatsApp</a>
+          <!-- Row 4: Direct booking option -->
+          <div class="mb-direct-row">
+            Prefer to book direct?
+            <a href="#" id="mbEnquireLink">Enquire</a> ·
+            <a href="https://wa.me/94777889880" target="_blank" id="mbWhatsAppLink">WhatsApp</a>
           </div>
 
           <div class="mb-reassurance">
             We reply within 24 hours · No payment to enquire<br>
             Dec–Jan & Jun–Aug book early
           </div>
-        </form>
+        </div>
       </section>
 
       <!-- PRIVATE RESIDENCE -->
@@ -3551,8 +3854,8 @@
               TenTwo is self-catering — meals are not included, but everything
               you need to cook and dine in is provided.
             </p>
-            <p class="residence-rates" id="rates" style="margin-top: 24px; font-size: 15px; line-height: 1.6; color: var(--text-2);">
-              <strong style="color: var(--gold);">Rates:</strong> Master Suite Stay USD 200 · Two-Suite Stay USD 225 · Full Residence USD 250 per night — the entire residence is always yours. <a href="#" id="ratesCheckDates" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); transition: all 300ms var(--ease);">CHECK DATES</a>
+            <p class="residence-rates" id="residenceRates" style="margin-top: 24px; font-size: 15px; line-height: 1.6; color: var(--text-2);">
+              <strong style="color: var(--gold);">Rates:</strong> <span id="residenceRatesText">1–2 guests USD 150 · 3–4 guests USD 165 · 5–6 guests USD 190 per night</span> — the entire residence is always yours. <a href="#" id="ratesCheckDates" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); transition: all 300ms var(--ease);">CHECK DATES</a>
             </p>
           </div>
           <div>
@@ -4117,7 +4420,7 @@
         <div class="footer-nav">
           <h4>ALSO ON</h4>
           <ul>
-            <li><a href="https://airbnb.com.sg/h/tentwo" target="_blank" rel="noopener">AIRBNB</a></li>
+            <li><a href="https://airbnb.com/h/tentwo" target="_blank" rel="noopener">AIRBNB</a></li>
             <li><a href="https://www.agoda.com/luxury-villa-in-kandy-with-a-private-pool/hotel/kandy-lk.html?ds=T8a9OBi6VA0RYSor" target="_blank" rel="noopener">AGODA</a></li>
             <li><a href="https://www.booking.com/hotel/lk/luxury-villa-in-kandy-with-a-private-pool.html" target="_blank" rel="noopener">BOOKING.COM</a></li>
           </ul>
@@ -4498,6 +4801,454 @@
 
       // Tier card selection and form reveal
       const tierCards = document.querySelectorAll(".tier-card");
+
+      // ===== BOOKING CONFIGURATION - CENTRALIZED SETTINGS =====
+      // All promo pricing, OTA URLs, and booking settings in one place
+      const BOOKING_CONFIG = {
+        // Promo settings
+        promo: {
+          enabled: true, // Set to false to disable promo
+          endDate: '2026-12-31T23:59:59', // Sri Lanka time - promo ends 31 Dec 2026
+          offerName: '4th night free · Book by 31 Dec',
+
+          // Normal prices (shown crossed out during promo)
+          normalPrices: {
+            '1-2': 200,  // 1-2 guests
+            '3-4': 225,  // 3-4 guests
+            '5-6': 250   // 5-6 guests
+          },
+
+          // Promo prices (active until endDate)
+          promoPrices: {
+            '1-2': 150,  // 1-2 guests
+            '3-4': 165,  // 3-4 guests
+            '5-6': 190   // 5-6 guests
+          },
+
+          // 4th night free rule: for every 4 nights, 1 is free
+          freeNightRule: {
+            everyNights: 4,
+            freeNights: 1
+          }
+        },
+
+        // OTA Platform URLs
+        ota: {
+          airbnb: {
+            listingId: '1774271605081797145',
+            baseUrl: 'https://www.airbnb.com',
+            shortUrl: 'https://airbnb.com/h/tentwo'
+          },
+          booking: {
+            url: 'https://www.booking.com/hotel/lk/luxury-villa-in-kandy-with-a-private-pool.html'
+          },
+          agoda: {
+            url: 'https://www.agoda.com/luxury-villa-in-kandy-with-a-private-pool/hotel/kandy-lk.html',
+            dsParam: 'T8a9OBi6VA0RYSor' // Keep existing ds parameter
+          }
+        }
+      };
+
+      // Helper: Check if promo is active
+      function isPromoActive() {
+        if (!BOOKING_CONFIG.promo.enabled) return false;
+        const now = new Date();
+        const endDate = new Date(BOOKING_CONFIG.promo.endDate);
+        // Convert both to Sri Lanka time for comparison
+        const nowSL = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Colombo' }));
+        return nowSL <= endDate;
+      }
+
+      // Helper: Get price for guest count
+      function getPriceForGuests(guests, usePromo = true) {
+        const guestNum = parseInt(guests);
+        let tier;
+        if (guestNum <= 2) tier = '1-2';
+        else if (guestNum <= 4) tier = '3-4';
+        else tier = '5-6';
+
+        const promoActive = isPromoActive();
+        if (promoActive && usePromo) {
+          return {
+            promo: BOOKING_CONFIG.promo.promoPrices[tier],
+            normal: BOOKING_CONFIG.promo.normalPrices[tier],
+            isPromo: true
+          };
+        } else {
+          return {
+            promo: BOOKING_CONFIG.promo.normalPrices[tier],
+            normal: BOOKING_CONFIG.promo.normalPrices[tier],
+            isPromo: false
+          };
+        }
+      }
+
+      // Helper: Calculate total with 4th night free
+      function calculateTotal(nights, pricePerNight) {
+        if (nights <= 0) return 0;
+        const rule = BOOKING_CONFIG.promo.freeNightRule;
+        const freeNights = Math.floor(nights / rule.everyNights) * rule.freeNights;
+        const paidNights = nights - freeNights;
+        return {
+          total: paidNights * pricePerNight,
+          freeNights: freeNights,
+          paidNights: paidNights
+        };
+      }
+
+      // Helper: Build OTA URLs with dates and guests
+      function buildOTAUrl(platform, checkIn, checkOut, guests) {
+        const config = BOOKING_CONFIG.ota[platform];
+        if (!checkIn || !checkOut) {
+          // No dates selected - return base URL
+          if (platform === 'airbnb') return config.shortUrl;
+          if (platform === 'booking') return config.url;
+          if (platform === 'agoda') return config.url + '?ds=' + config.dsParam;
+        }
+
+        const guestsNum = parseInt(guests) || 2;
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+        if (platform === 'airbnb') {
+          return `${config.baseUrl}/rooms/${config.listingId}?check_in=${checkIn}&check_out=${checkOut}&adults=${guestsNum}`;
+        } else if (platform === 'booking') {
+          return `${config.url}?checkin=${checkIn}&checkout=${checkOut}&group_adults=${guestsNum}&group_children=0&no_rooms=1`;
+        } else if (platform === 'agoda') {
+          return `${config.url}?checkIn=${checkIn}&los=${nights}&adults=${guestsNum}&rooms=1&ds=${config.dsParam}`;
+        }
+      }
+      // ===== END BOOKING CONFIGURATION =====
+
+      // ===== BOOKING UI FUNCTIONALITY =====
+      // Update price line based on dates and guests
+      function updatePriceLine(checkIn, checkOut, guests, elementId) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const pricing = getPriceForGuests(guests);
+
+        if (!checkIn || !checkOut) {
+          // No dates selected
+          if (pricing.isPromo) {
+            element.innerHTML = `From USD ${pricing.promo}/night · ${BOOKING_CONFIG.promo.offerName}`;
+          } else {
+            element.innerHTML = `From USD ${pricing.promo}/night`;
+          }
+          return;
+        }
+
+        // Dates selected - calculate total
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
+        const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+        if (nights <= 0) {
+          element.innerHTML = `From USD ${pricing.promo}/night`;
+          return;
+        }
+
+        const calc = calculateTotal(nights, pricing.promo);
+        const normalTotal = nights * pricing.normal;
+        const savings = normalTotal - calc.total;
+
+        let html = `${nights} night${nights > 1 ? 's' : ''} · USD ${calc.total}`;
+
+        if (pricing.isPromo) {
+          html += ` <span class="price-crossed">USD ${normalTotal}</span>`;
+          if (calc.freeNights > 0) {
+            html += ` · ${calc.freeNights} night${calc.freeNights > 1 ? 's' : ''} free`;
+          }
+          html += ` <span class="price-save">save USD ${savings}</span>`;
+        }
+
+        element.innerHTML = html;
+      }
+
+      // Update residence rates text based on promo
+      function updateResidenceRates() {
+        const element = document.getElementById('residenceRatesText');
+        if (!element) return;
+
+        if (isPromoActive()) {
+          element.textContent = '1–2 guests USD 150 · 3–4 guests USD 165 · 5–6 guests USD 190 per night';
+        } else {
+          element.textContent = '1–2 guests USD 200 · 3–4 guests USD 225 · 5–6 guests USD 250 per night';
+        }
+      }
+
+      // Initialize OTA buttons
+      function initOTAButtons(prefix) {
+        const checkInId = prefix === 'qb' ? 'qbIn' : 'mbCheckIn';
+        const checkOutId = prefix === 'qb' ? 'qbOut' : 'mbCheckOut';
+        const guestsId = prefix === 'qb' ? 'qbGuests' : 'mbGuests';
+
+        ['airbnb', 'booking', 'agoda'].forEach(platform => {
+          const btn = document.getElementById(`${prefix}${platform.charAt(0).toUpperCase() + platform.slice(1)}Btn`);
+          if (!btn) return;
+
+          btn.addEventListener('click', function() {
+            const checkIn = document.getElementById(checkInId).value;
+            const checkOut = document.getElementById(checkOutId).value;
+            const guests = document.getElementById(guestsId).value;
+
+            // Calculate nights for tracking
+            let nights = 0;
+            if (checkIn && checkOut) {
+              const checkInDate = new Date(checkIn);
+              const checkOutDate = new Date(checkOut);
+              nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+            }
+
+            // Track OTA click
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'ota_click',
+              platform: platform,
+              nights: nights,
+              guests: parseInt(guests) || 0
+            });
+
+            // Open OTA with dates
+            const url = buildOTAUrl(platform, checkIn, checkOut, guests);
+            window.open(url, '_blank');
+          });
+        });
+      }
+
+      // Initialize enquiry modal
+      function initEnquiryModal() {
+        const modal = document.getElementById('enquiryModal');
+        const closeBtn = document.getElementById('enquiryModalClose');
+        const enquiryForm = document.getElementById('enquiryForm');
+
+        // Desktop enquire link
+        const qbEnquireLink = document.getElementById('qbEnquireLink');
+        if (qbEnquireLink) {
+          qbEnquireLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openEnquiryModal('qb');
+          });
+        }
+
+        // Mobile enquire link
+        const mbEnquireLink = document.getElementById('mbEnquireLink');
+        if (mbEnquireLink) {
+          mbEnquireLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            openEnquiryModal('mb');
+          });
+        }
+
+        // Close modal
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+          });
+        }
+
+        // Close on outside click
+        window.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+
+        // Handle form submission
+        if (enquiryForm) {
+          enquiryForm.addEventListener('submit', handleEnquirySubmit);
+        }
+      }
+
+      function openEnquiryModal(prefix) {
+        const modal = document.getElementById('enquiryModal');
+        const summary = document.getElementById('enquiryDatesSummary');
+
+        const checkInId = prefix === 'qb' ? 'qbIn' : 'mbCheckIn';
+        const checkOutId = prefix === 'qb' ? 'qbOut' : 'mbCheckOut';
+        const guestsId = prefix === 'qb' ? 'qbGuests' : 'mbGuests';
+
+        const checkIn = document.getElementById(checkInId).value;
+        const checkOut = document.getElementById(checkOutId).value;
+        const guests = document.getElementById(guestsId).value;
+
+        // Set summary
+        if (checkIn && checkOut && guests) {
+          const checkInDate = new Date(checkIn);
+          const checkOutDate = new Date(checkOut);
+          const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+          const pricing = getPriceForGuests(guests);
+          const calc = calculateTotal(nights, pricing.promo);
+
+          let summaryHTML = `<strong>${guests} guest${guests > 1 ? 's' : ''}</strong> · ${nights} night${nights > 1 ? 's' : ''}<br>`;
+          summaryHTML += `Check-in: ${formatDate(checkIn)} · Check-out: ${formatDate(checkOut)}<br>`;
+          summaryHTML += `<strong>Total: USD ${calc.total}</strong>`;
+
+          if (pricing.isPromo && calc.freeNights > 0) {
+            summaryHTML += ` (${calc.freeNights} night${calc.freeNights > 1 ? 's' : ''} free)`;
+          }
+
+          summary.innerHTML = summaryHTML;
+        } else {
+          summary.innerHTML = '<strong>General Enquiry</strong>';
+        }
+
+        // Store data for submission
+        modal.dataset.checkIn = checkIn;
+        modal.dataset.checkOut = checkOut;
+        modal.dataset.guests = guests;
+
+        modal.style.display = 'block';
+      }
+
+      function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      async function handleEnquirySubmit(e) {
+        e.preventDefault();
+
+        const modal = document.getElementById('enquiryModal');
+        const submitBtn = document.getElementById('enquirySubmitBtn');
+        const contactError = document.getElementById('enquiryContactError');
+
+        const name = document.getElementById('enquiryName').value;
+        const contact = document.getElementById('enquiryContact').value;
+        const country = document.getElementById('enquiryCountry').value;
+        const website = document.getElementById('enquiryWebsite').value;
+
+        const checkIn = modal.dataset.checkIn;
+        const checkOut = modal.dataset.checkOut;
+        const guests = modal.dataset.guests || '2';
+
+        // Validate contact
+        const validation = validateEmailOrWhatsApp(contact);
+        if (!validation.valid) {
+          contactError.textContent = validation.message;
+          contactError.style.display = 'block';
+          return;
+        }
+        contactError.style.display = 'none';
+
+        // Calculate pricing details
+        let nights = 0;
+        let pricePerNight = 0;
+        let freeNights = 0;
+        let total = 0;
+
+        if (checkIn && checkOut) {
+          const checkInDate = new Date(checkIn);
+          const checkOutDate = new Date(checkOut);
+          nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+          const pricing = getPriceForGuests(guests);
+          pricePerNight = pricing.promo;
+          const calc = calculateTotal(nights, pricePerNight);
+          freeNights = calc.freeNights;
+          total = calc.total;
+        }
+
+        // Prepare email data
+        const emailData = {
+          name: name,
+          contact: contact,
+          country: country,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          guests: guests,
+          nights: nights,
+          pricePerNight: pricePerNight,
+          freeNights: freeNights,
+          estimatedTotal: total,
+          offerName: isPromoActive() ? BOOKING_CONFIG.promo.offerName : '',
+          formType: 'Direct Enquiry Modal',
+          website: website
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'SENDING...';
+
+        try {
+          await fetch('/api/enquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailData)
+          });
+
+          // Track submission
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'availability_form_submit',
+            form_type: 'enquiry_modal',
+            nights: nights,
+            total_usd: total,
+            eventCallback: function() {
+              window.location.href = '/thank-you.html';
+            },
+            eventTimeout: 300
+          });
+
+          setTimeout(() => {
+            window.location.href = '/thank-you.html';
+          }, 500);
+
+        } catch (err) {
+          console.error('Error submitting enquiry:', err);
+          window.location.href = '/thank-you.html';
+        }
+      }
+
+      // Initialize booking UI
+      function initBookingUI() {
+        // Desktop
+        const qbIn = document.getElementById('qbIn');
+        const qbOut = document.getElementById('qbOut');
+        const qbGuests = document.getElementById('qbGuests');
+
+        if (qbIn && qbOut && qbGuests) {
+          const updateDesktop = () => updatePriceLine(qbIn.value, qbOut.value, qbGuests.value, 'qbPriceLine');
+          qbIn.addEventListener('change', updateDesktop);
+          qbOut.addEventListener('change', updateDesktop);
+          qbGuests.addEventListener('change', updateDesktop);
+          updateDesktop(); // Initial update
+        }
+
+        // Mobile
+        const mbIn = document.getElementById('mbCheckIn');
+        const mbOut = document.getElementById('mbCheckOut');
+        const mbGuests = document.getElementById('mbGuests');
+
+        if (mbIn && mbOut && mbGuests) {
+          const updateMobile = () => updatePriceLine(mbIn.value, mbOut.value, mbGuests.value, 'mbPriceLine');
+          mbIn.addEventListener('change', updateMobile);
+          mbOut.addEventListener('change', updateMobile);
+          mbGuests.addEventListener('change', updateMobile);
+          updateMobile(); // Initial update
+        }
+
+        // Initialize OTA buttons
+        initOTAButtons('qb');
+        initOTAButtons('mb');
+
+        // Initialize modal
+        initEnquiryModal();
+
+        // Update residence rates
+        updateResidenceRates();
+
+        // Set minimum dates
+        const today = new Date().toISOString().split('T')[0];
+        if (qbIn) qbIn.setAttribute('min', today);
+        if (qbOut) qbOut.setAttribute('min', today);
+        if (mbIn) mbIn.setAttribute('min', today);
+        if (mbOut) mbOut.setAttribute('min', today);
+      }
+
+      // Run initialization
+      initBookingUI();
+      // ===== END BOOKING UI FUNCTIONALITY =====
 
       // Quick Booking Form Functionality - Single Step
       const quickBookForm = document.getElementById("quickBook");
