@@ -1,0 +1,13 @@
+╔════════════════════════════════════════════════════╗
+║     TenTwo Local Development Server               ║
+╚════════════════════════════════════════════════════╝
+
+✓ Server running at http://localhost:3000/
+
+  Pages available:
+  • Homepage:     http://localhost:3000/
+  • About:        http://localhost:3000/about.html
+  • Kandy Guide:  http://localhost:3000/kandy-guide.html
+
+  Press CTRL+C to stop the server
+

@@ -1,0 +1,324 @@
+/**
+ * TEN TWO - Shared JavaScript
+ * Common functionality used across all pages
+ *
+ * This file contains:
+ * - Header scroll behavior
+ * - Mobile menu functionality
+ * - Smooth scroll handlers
+ * - Intersection observer for reveal animations
+ * - Gallery filtering
+ * - Floating WhatsApp visibility control
+ * - Navigation link handlers
+ */
+
+(function() {
+  'use strict';
+
+  // =============================================================================
+  // HEADER SCROLL BEHAVIOR
+  // =============================================================================
+
+  /**
+   * Adds 'scrolled' class to header when page is scrolled down
+   */
+  function initHeaderScroll() {
+    const header = document.getElementById('header');
+    if (!header) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
+
+  // =============================================================================
+  // MOBILE MENU
+  // =============================================================================
+
+  /**
+   * Toggle mobile menu and close on link click
+   */
+  function initMobileMenu() {
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (!mobileToggle || !mobileMenu) return;
+
+    // Toggle menu
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu on link click
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+  }
+
+  // =============================================================================
+  // SMOOTH SCROLL
+  // =============================================================================
+
+  /**
+   * Smooth scroll to target element with header offset
+   * @param {string} targetId - ID of target element (without #)
+   * @param {number} offset - Offset from top (default: 76px for header)
+   */
+  function smoothScrollTo(targetId, offset = 76) {
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const scrollPosition = targetPosition - offset;
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  /**
+   * Initialize smooth scroll for navigation links
+   */
+  function initSmoothScroll() {
+    // Handle all section navigation links (desktop and mobile)
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === '#' || !href) return;
+
+      const targetId = href.substring(1);
+      // Only handle section links (residence, suites, gallery, location)
+      if (targetId === 'residence' || targetId === 'suites' ||
+          targetId === 'gallery' || targetId === 'location') {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          smoothScrollTo(targetId, 76);
+        });
+      }
+    });
+  }
+
+  // =============================================================================
+  // INTERSECTION OBSERVER (REVEAL ANIMATIONS)
+  // =============================================================================
+
+  /**
+   * Initialize reveal animations for elements with .reveal and .reveal-image classes
+   */
+  function initRevealAnimations() {
+    const revealElements = document.querySelectorAll('.reveal, .reveal-image');
+
+    if (revealElements.length === 0) return;
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -80px 0px',
+      }
+    );
+
+    revealElements.forEach((el) => {
+      revealObserver.observe(el);
+    });
+  }
+
+  // =============================================================================
+  // GALLERY FILTERING
+  // =============================================================================
+
+  /**
+   * Filter gallery items by category
+   * @param {string} filterValue - Category to filter by
+   */
+  function filterGallery(filterValue) {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    // Update active button
+    filterButtons.forEach((btn) => btn.classList.remove('active'));
+    const activeButton = document.querySelector(`[data-filter="${filterValue}"]`);
+    if (activeButton) {
+      activeButton.classList.add('active');
+    }
+
+    // Filter gallery items
+    galleryItems.forEach((item) => {
+      const category = item.getAttribute('data-category');
+      if (category === filterValue) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  }
+
+  /**
+   * Initialize gallery filtering functionality
+   */
+  function initGalleryFiltering() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    if (filterButtons.length === 0 || galleryItems.length === 0) return;
+
+    // Initialize gallery - show only outdoor on page load
+    galleryItems.forEach((item) => {
+      const category = item.getAttribute('data-category');
+      if (category !== 'outdoor') {
+        item.classList.add('hidden');
+      }
+    });
+
+    // Filter button clicks
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        filterGallery(filter);
+      });
+    });
+
+    // Suite item clicks - navigate to gallery with filter
+    const suiteItems = document.querySelectorAll('.suite-item');
+    suiteItems.forEach((suite) => {
+      suite.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = suite.getAttribute('data-gallery-filter');
+
+        // Scroll to gallery
+        const gallerySection = document.querySelector('#gallery');
+        if (gallerySection) {
+          const headerHeight = 76;
+          const targetPosition = gallerySection.offsetTop - headerHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+          });
+
+          // Apply filter after a short delay to ensure scroll completes
+          setTimeout(() => {
+            filterGallery(filter);
+          }, 500);
+        }
+      });
+    });
+
+    // Life item clicks - navigate to gallery with filter
+    const lifeItems = document.querySelectorAll('.life-item');
+    lifeItems.forEach((lifeItem) => {
+      lifeItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = lifeItem.getAttribute('data-gallery-filter');
+
+        // Scroll to gallery
+        const gallerySection = document.querySelector('#gallery');
+        if (gallerySection) {
+          const headerHeight = 76;
+          const targetPosition = gallerySection.offsetTop - headerHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth',
+          });
+
+          // Apply filter after a short delay to ensure scroll completes
+          setTimeout(() => {
+            filterGallery(filter);
+          }, 500);
+        }
+      });
+    });
+  }
+
+  // =============================================================================
+  // FLOATING WHATSAPP VISIBILITY (MOBILE)
+  // =============================================================================
+
+  /**
+   * Hide floating WhatsApp button when hero section is visible on mobile
+   */
+  function initFloatingWhatsAppVisibility() {
+    // Only run on mobile
+    if (window.innerWidth > 900) return;
+
+    const heroSection = document.querySelector('.hero');
+    const floatingWhatsApp = document.querySelector('.floating-whatsapp');
+
+    if (!heroSection || !floatingWhatsApp) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Hero is visible, hide WhatsApp button
+          floatingWhatsApp.classList.add('hidden-on-hero');
+        } else {
+          // Hero is not visible, show WhatsApp button
+          floatingWhatsApp.classList.remove('hidden-on-hero');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    observer.observe(heroSection);
+  }
+
+  // =============================================================================
+  // MOBILE WHATSAPP LINK TRACKING
+  // =============================================================================
+
+  /**
+   * Track clicks on mobile WhatsApp link in menu
+   */
+  function initMobileWhatsAppTracking() {
+    const mobileWhatsAppLink = document.getElementById('mobileWhatsAppLink');
+    if (!mobileWhatsAppLink) return;
+
+    mobileWhatsAppLink.addEventListener('click', function() {
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: 'whatsapp_click',
+        link_location: 'mobile_menu'
+      });
+    });
+  }
+
+  // =============================================================================
+  // INITIALIZATION
+  // =============================================================================
+
+  /**
+   * Initialize all shared functionality
+   */
+  function init() {
+    initHeaderScroll();
+    initMobileMenu();
+    initSmoothScroll();
+    initRevealAnimations();
+    initGalleryFiltering();
+    initFloatingWhatsAppVisibility();
+    initMobileWhatsAppTracking();
+  }
+
+  // Run initialization when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Expose smoothScrollTo for use by other scripts if needed
+  window.smoothScrollTo = smoothScrollTo;
+
+})();
