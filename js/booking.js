@@ -21,34 +21,14 @@
   // =============================================================================
 
   /**
-   * All promo pricing, OTA URLs, and booking settings in one place
+   * All pricing, OTA URLs, and booking settings in one place
    */
   const BOOKING_CONFIG = {
-    // Promo settings
-    promo: {
-      enabled: true, // Set to false to disable promo
-      endDate: '2026-12-31T23:59:59', // Sri Lanka time - promo ends 31 Dec 2026
-      offerName: '4th night free · Book by 31 Dec',
-
-      // Normal prices (shown crossed out during promo)
-      normalPrices: {
-        '1-2': 200,  // 1-2 guests
-        '3-4': 225,  // 3-4 guests
-        '5-6': 250   // 5-6 guests
-      },
-
-      // Promo prices (active until endDate)
-      promoPrices: {
-        '1-2': 150,  // 1-2 guests
-        '3-4': 165,  // 3-4 guests
-        '5-6': 190   // 5-6 guests
-      },
-
-      // 4th night free rule: for every 4 nights, 1 is free
-      freeNightRule: {
-        everyNights: 4,
-        freeNights: 1
-      }
+    // Fixed nightly rates (no promo)
+    pricing: {
+      '1-2': 150,  // 1-2 guests USD per night
+      '3-4': 165,  // 3-4 guests USD per night
+      '5-6': 190   // 5-6 guests USD per night
     },
 
     // OTA Platform URLs
@@ -73,62 +53,45 @@
   // =============================================================================
 
   /**
-   * Check if promo is currently active
-   * @returns {boolean} True if promo is active
-   */
-  function isPromoActive() {
-    if (!BOOKING_CONFIG.promo.enabled) return false;
-    const now = new Date();
-    const endDate = new Date(BOOKING_CONFIG.promo.endDate);
-    // Convert both to Sri Lanka time for comparison
-    const nowSL = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Colombo' }));
-    return nowSL <= endDate;
-  }
-
-  /**
-   * Get price for guest count with promo consideration
+   * Get price per night for guest count
    * @param {string|number} guests - Number of guests
-   * @param {boolean} usePromo - Whether to use promo pricing
-   * @returns {Object} Price object with promo, normal, and isPromo flag
+   * @returns {number} Price per night in USD
    */
-  function getPriceForGuests(guests, usePromo = true) {
+  function getPriceForGuests(guests) {
     const guestNum = parseInt(guests);
     let tier;
     if (guestNum <= 2) tier = '1-2';
     else if (guestNum <= 4) tier = '3-4';
     else tier = '5-6';
 
-    const promoActive = isPromoActive();
-    if (promoActive && usePromo) {
-      return {
-        promo: BOOKING_CONFIG.promo.promoPrices[tier],
-        normal: BOOKING_CONFIG.promo.normalPrices[tier],
-        isPromo: true
-      };
-    } else {
-      return {
-        promo: BOOKING_CONFIG.promo.normalPrices[tier],
-        normal: BOOKING_CONFIG.promo.normalPrices[tier],
-        isPromo: false
-      };
-    }
+    return BOOKING_CONFIG.pricing[tier];
   }
 
   /**
-   * Calculate total with 4th night free rule
-   * @param {number} nights - Total number of nights
-   * @param {number} pricePerNight - Price per night
-   * @returns {Object} Calculation result with total, freeNights, and paidNights
+   * Calculate nights between two dates
+   * @param {string} checkIn - Check-in date
+   * @param {string} checkOut - Check-out date
+   * @returns {number} Number of nights
    */
-  function calculateTotal(nights, pricePerNight) {
-    if (nights <= 0) return 0;
-    const rule = BOOKING_CONFIG.promo.freeNightRule;
-    const freeNights = Math.floor(nights / rule.everyNights) * rule.freeNights;
-    const paidNights = nights - freeNights;
+  function calculateNights(checkIn, checkOut) {
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+    return Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+  }
+
+  /**
+   * Calculate total pricing for a stay
+   * @param {number} nights - Number of nights
+   * @param {number} guests - Number of guests
+   * @returns {Object} Pricing details
+   */
+  function calculatePricing(nights, guests) {
+    const pricePerNight = getPriceForGuests(guests);
+    const total = nights * pricePerNight;
     return {
-      total: paidNights * pricePerNight,
-      freeNights: freeNights,
-      paidNights: paidNights
+      pricePerNight: pricePerNight,
+      nights: nights,
+      estimatedTotal: total
     };
   }
 
@@ -216,67 +179,44 @@
     const element = document.getElementById(elementId);
     if (!element) return;
 
-    const pricing = getPriceForGuests(guests);
+    const pricePerNight = getPriceForGuests(guests);
 
     if (!checkIn || !checkOut) {
-      // No dates selected
-      if (pricing.isPromo) {
-        element.innerHTML = `From USD ${pricing.promo}/night · ${BOOKING_CONFIG.promo.offerName}`;
-      } else {
-        element.innerHTML = `From USD ${pricing.promo}/night`;
-      }
+      // No dates selected - show default message
+      element.innerHTML = `From USD ${pricePerNight}/night`;
       return;
     }
 
     // Dates selected - calculate total
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
-    const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+    const nights = calculateNights(checkIn, checkOut);
 
     if (nights <= 0) {
-      element.innerHTML = `From USD ${pricing.promo}/night`;
+      element.innerHTML = `From USD ${pricePerNight}/night`;
       return;
     }
 
-    const calc = calculateTotal(nights, pricing.promo);
-    const normalTotal = nights * pricing.normal;
-    const savings = normalTotal - calc.total;
-
-    let html = `${nights} night${nights > 1 ? 's' : ''} · USD ${calc.total}`;
-
-    if (pricing.isPromo) {
-      html += ` <span class="price-crossed">USD ${normalTotal}</span>`;
-      if (calc.freeNights > 0) {
-        html += ` · ${calc.freeNights} night${calc.freeNights > 1 ? 's' : ''} free`;
-      }
-      html += ` <span class="price-save">save USD ${savings}</span>`;
-    }
-
-    element.innerHTML = html;
+    const total = nights * pricePerNight;
+    element.innerHTML = `${nights} night${nights > 1 ? 's' : ''} · USD ${total}`;
   }
 
   /**
-   * Update residence rates text based on promo
+   * Update residence rates text
    */
   function updateResidenceRates() {
     const element = document.getElementById('residenceRatesText');
     if (!element) return;
 
-    if (isPromoActive()) {
-      element.textContent = '1–2 guests USD 150 · 3–4 guests USD 165 · 5–6 guests USD 190 per night';
-    } else {
-      element.textContent = '1–2 guests USD 200 · 3–4 guests USD 225 · 5–6 guests USD 250 per night';
-    }
+    element.textContent = '1–2 guests USD 150 · 3–4 guests USD 165 · 5–6 guests USD 190 per night';
   }
 
   /**
    * Initialize OTA buttons for a specific prefix (qb or mb)
-   * @param {string} prefix - Button prefix ('qb' for desktop, 'mb' for mobile)
+   * @param {string} prefix - Button prefix ('qb' for desktop)
    */
   function initOTAButtons(prefix) {
-    const checkInId = prefix === 'qb' ? 'qbIn' : 'mbCheckIn';
-    const checkOutId = prefix === 'qb' ? 'qbOut' : 'mbCheckOut';
-    const guestsId = prefix === 'qb' ? 'qbGuests' : 'mbGuests';
+    const checkInId = 'qbIn';
+    const checkOutId = 'qbOut';
+    const guestsId = 'qbGuests';
 
     ['airbnb', 'booking', 'agoda'].forEach(platform => {
       const btn = document.getElementById(`${prefix}${platform.charAt(0).toUpperCase() + platform.slice(1)}Btn`);
@@ -317,47 +257,83 @@
 
   /**
    * Open enquiry modal with booking details
-   * @param {string} prefix - Form prefix ('qb' for desktop, 'mb' for mobile)
+   * @param {string} prefix - Form prefix ('qb' or 'mb')
    */
   function openEnquiryModal(prefix) {
     const modal = document.getElementById('enquiryModal');
     const summary = document.getElementById('enquiryDatesSummary');
+    const dateFields = document.getElementById('enquiryDateFields');
+    const enquiryCheckIn = document.getElementById('enquiryCheckIn');
+    const enquiryCheckOut = document.getElementById('enquiryCheckOut');
+    const enquiryGuests = document.getElementById('enquiryGuests');
 
-    const checkInId = prefix === 'qb' ? 'qbIn' : 'mbCheckIn';
-    const checkOutId = prefix === 'qb' ? 'qbOut' : 'mbCheckOut';
-    const guestsId = prefix === 'qb' ? 'qbGuests' : 'mbGuests';
+    // Try to get dates from either quick book or mobile forms
+    let checkIn, checkOut, guests;
 
-    const checkIn = document.getElementById(checkInId).value;
-    const checkOut = document.getElementById(checkOutId).value;
-    const guests = document.getElementById(guestsId).value;
+    if (prefix === 'mb') {
+      checkIn = document.getElementById('mbIn')?.value || '';
+      checkOut = document.getElementById('mbOut')?.value || '';
+      guests = document.getElementById('mbGuests')?.value || '2';
+    } else {
+      checkIn = document.getElementById('qbIn')?.value || '';
+      checkOut = document.getElementById('qbOut')?.value || '';
+      guests = document.getElementById('qbGuests')?.value || '2';
+    }
 
-    // Set summary
-    if (checkIn && checkOut && guests) {
-      const checkInDate = new Date(checkIn);
-      const checkOutDate = new Date(checkOut);
-      const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
-      const pricing = getPriceForGuests(guests);
-      const calc = calculateTotal(nights, pricing.promo);
+    // Show summary if dates selected, otherwise show date input fields
+    if (checkIn && checkOut) {
+      // Dates exist - show summary, hide fields
+      summary.style.display = 'block';
+      dateFields.style.display = 'none';
+
+      // Remove required from hidden fields to prevent validation errors
+      enquiryCheckIn.removeAttribute('required');
+      enquiryCheckOut.removeAttribute('required');
+      enquiryGuests.removeAttribute('required');
+
+      const nights = calculateNights(checkIn, checkOut);
+      const pricePerNight = getPriceForGuests(guests);
+      const total = nights * pricePerNight;
 
       let summaryHTML = `<strong>${guests} guest${guests > 1 ? 's' : ''}</strong> · ${nights} night${nights > 1 ? 's' : ''}<br>`;
       summaryHTML += `Check-in: ${formatDate(checkIn)} · Check-out: ${formatDate(checkOut)}<br>`;
-      summaryHTML += `<strong>Total: USD ${calc.total}</strong>`;
-
-      if (pricing.isPromo && calc.freeNights > 0) {
-        summaryHTML += ` (${calc.freeNights} night${calc.freeNights > 1 ? 's' : ''} free)`;
-      }
+      summaryHTML += `<strong>Total: USD $${total}</strong>`;
 
       summary.innerHTML = summaryHTML;
+
+      // Store data for submission
+      modal.dataset.checkIn = checkIn;
+      modal.dataset.checkOut = checkOut;
+      modal.dataset.guests = guests;
     } else {
-      summary.innerHTML = '<strong>General Enquiry</strong>';
+      // No dates - show fields, hide summary
+      summary.style.display = 'none';
+      dateFields.style.display = 'flex';
+
+      // Add required back when fields are visible
+      enquiryCheckIn.setAttribute('required', '');
+      enquiryCheckOut.setAttribute('required', '');
+      enquiryGuests.setAttribute('required', '');
+
+      // Set min dates
+      const today = new Date().toISOString().split('T')[0];
+      enquiryCheckIn.setAttribute('min', today);
+      enquiryCheckOut.setAttribute('min', today);
+
+      // Reset fields
+      enquiryCheckIn.value = '';
+      enquiryCheckOut.value = '';
+      enquiryGuests.value = '2';
+
+      // Clear stored data
+      delete modal.dataset.checkIn;
+      delete modal.dataset.checkOut;
+      delete modal.dataset.guests;
     }
 
-    // Store data for submission
-    modal.dataset.checkIn = checkIn;
-    modal.dataset.checkOut = checkOut;
-    modal.dataset.guests = guests;
-
-    modal.style.display = 'block';
+    // Show modal and lock scroll
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   /**
@@ -376,9 +352,27 @@
     const country = document.getElementById('enquiryCountry').value;
     const website = document.getElementById('enquiryWebsite').value;
 
-    const checkIn = modal.dataset.checkIn;
-    const checkOut = modal.dataset.checkOut;
-    const guests = modal.dataset.guests || '2';
+    // Get dates either from stored data or from modal form fields
+    let checkIn = modal.dataset.checkIn;
+    let checkOut = modal.dataset.checkOut;
+    let guests = modal.dataset.guests || '2';
+
+    // If no stored dates, get from modal input fields
+    if (!checkIn || !checkOut) {
+      const enquiryCheckIn = document.getElementById('enquiryCheckIn');
+      const enquiryCheckOut = document.getElementById('enquiryCheckOut');
+      const enquiryGuests = document.getElementById('enquiryGuests');
+
+      checkIn = enquiryCheckIn?.value || '';
+      checkOut = enquiryCheckOut?.value || '';
+      guests = enquiryGuests?.value || '2';
+    }
+
+    // Validate dates
+    if (!checkIn || !checkOut) {
+      alert('Please select check-in and check-out dates');
+      return;
+    }
 
     // Validate contact
     const validation = validateEmailOrWhatsApp(contact);
@@ -392,19 +386,18 @@
     // Calculate pricing details
     let nights = 0;
     let pricePerNight = 0;
-    let freeNights = 0;
     let total = 0;
 
     if (checkIn && checkOut) {
-      const checkInDate = new Date(checkIn);
-      const checkOutDate = new Date(checkOut);
-      nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+      nights = calculateNights(checkIn, checkOut);
 
-      const pricing = getPriceForGuests(guests);
-      pricePerNight = pricing.promo;
-      const calc = calculateTotal(nights, pricePerNight);
-      freeNights = calc.freeNights;
-      total = calc.total;
+      if (nights < 1) {
+        alert('Check-out date must be after check-in date');
+        return;
+      }
+
+      pricePerNight = getPriceForGuests(guests);
+      total = nights * pricePerNight;
     }
 
     // Prepare email data
@@ -417,9 +410,7 @@
       guests: guests,
       nights: nights,
       pricePerNight: pricePerNight,
-      freeNights: freeNights,
       estimatedTotal: total,
-      offerName: isPromoActive() ? BOOKING_CONFIG.promo.offerName : '',
       formType: 'Direct Enquiry Modal',
       website: website
     };
@@ -458,15 +449,54 @@
   }
 
   /**
+   * Close enquiry modal
+   */
+  function closeEnquiryModal() {
+    const modal = document.getElementById('enquiryModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /**
+   * Update price display in modal date fields
+   */
+  function updateEnquiryPriceDisplay() {
+    const checkIn = document.getElementById('enquiryCheckIn')?.value;
+    const checkOut = document.getElementById('enquiryCheckOut')?.value;
+    const guests = document.getElementById('enquiryGuests')?.value || '2';
+    const priceDisplay = document.getElementById('enquiryPriceDisplay');
+
+    if (!priceDisplay) return;
+
+    if (!checkIn || !checkOut) {
+      priceDisplay.innerHTML = ''; // Hide when no dates
+      return;
+    }
+
+    const nights = calculateNights(checkIn, checkOut);
+    if (nights < 1) {
+      priceDisplay.innerHTML = '<small style="color: #ff6b6b;">Check-out must be after check-in</small>';
+      return;
+    }
+
+    const pricing = calculatePricing(nights, parseInt(guests));
+    priceDisplay.innerHTML = `<small>USD $${pricing.pricePerNight}/night × ${nights} nights = <strong>$${pricing.estimatedTotal}</strong></small>`;
+  }
+
+  /**
    * Initialize enquiry modal
    */
   function initEnquiryModal() {
     const modal = document.getElementById('enquiryModal');
     const closeBtn = document.getElementById('enquiryModalClose');
+    const overlay = document.getElementById('enquiryModalOverlay');
     const enquiryForm = document.getElementById('enquiryForm');
 
-    // Desktop enquire link
+    // Enquire links (desktop and mobile)
     const qbEnquireLink = document.getElementById('qbEnquireLink');
+    const qbEnquireLink2 = document.getElementById('qbEnquireLink2');
+    const mbEnquireLink = document.getElementById('mbEnquireLink');
+
     if (qbEnquireLink) {
       qbEnquireLink.addEventListener('click', function(e) {
         e.preventDefault();
@@ -474,8 +504,13 @@
       });
     }
 
-    // Mobile enquire link
-    const mbEnquireLink = document.getElementById('mbEnquireLink');
+    if (qbEnquireLink2) {
+      qbEnquireLink2.addEventListener('click', function(e) {
+        e.preventDefault();
+        openEnquiryModal('qb');
+      });
+    }
+
     if (mbEnquireLink) {
       mbEnquireLink.addEventListener('click', function(e) {
         e.preventDefault();
@@ -483,24 +518,185 @@
       });
     }
 
-    // Close modal
+    // Close button
     if (closeBtn) {
-      closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-      });
+      closeBtn.addEventListener('click', closeEnquiryModal);
     }
 
-    // Close on outside click
-    window.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        modal.style.display = 'none';
+    // Close on overlay click
+    if (overlay) {
+      overlay.addEventListener('click', closeEnquiryModal);
+    }
+
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeEnquiryModal();
       }
     });
+
+    // Live price updates when dates change in modal
+    const enquiryCheckIn = document.getElementById('enquiryCheckIn');
+    const enquiryCheckOut = document.getElementById('enquiryCheckOut');
+    const enquiryGuests = document.getElementById('enquiryGuests');
+
+    if (enquiryCheckIn) {
+      enquiryCheckIn.addEventListener('change', updateEnquiryPriceDisplay);
+    }
+    if (enquiryCheckOut) {
+      enquiryCheckOut.addEventListener('change', updateEnquiryPriceDisplay);
+    }
+    if (enquiryGuests) {
+      enquiryGuests.addEventListener('change', updateEnquiryPriceDisplay);
+    }
 
     // Handle form submission
     if (enquiryForm) {
       enquiryForm.addEventListener('submit', handleEnquirySubmit);
     }
+  }
+
+  // =============================================================================
+  // MOBILE BOTTOM SHEET HANDLERS
+  // =============================================================================
+
+  /**
+   * Initialize mobile bottom sheet
+   */
+  function initMobileBottomSheet() {
+    const mobileBookingBtn = document.getElementById('mobileBookingBtn');
+    const bottomSheet = document.getElementById('mobileBottomSheet');
+    const sheetOverlay = document.getElementById('sheetOverlay');
+
+    // Mobile form elements
+    const mbIn = document.getElementById('mbIn');
+    const mbOut = document.getElementById('mbOut');
+    const mbGuests = document.getElementById('mbGuests');
+    const mbPriceMessage = document.getElementById('mbPriceMessage');
+
+    // Mobile OTA buttons
+    const mbAirbnbBtn = document.getElementById('mbAirbnbBtn');
+    const mbBookingBtn = document.getElementById('mbBookingBtn');
+    const mbAgodaBtn = document.getElementById('mbAgodaBtn');
+    const mbEnquireLink = document.getElementById('mbEnquireLink');
+
+    // Open sheet
+    if (mobileBookingBtn && bottomSheet) {
+      mobileBookingBtn.addEventListener('click', function() {
+        // Sync values from quick book form if they exist
+        const qbIn = document.getElementById('qbIn');
+        const qbOut = document.getElementById('qbOut');
+        const qbGuests = document.getElementById('qbGuests');
+
+        if (qbIn && qbIn.value) mbIn.value = qbIn.value;
+        if (qbOut && qbOut.value) mbOut.value = qbOut.value;
+        if (qbGuests && qbGuests.value) mbGuests.value = qbGuests.value;
+
+        // Update price message
+        updateMobilePriceMessage();
+
+        // Open sheet
+        bottomSheet.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Close sheet on overlay click
+    if (sheetOverlay && bottomSheet) {
+      sheetOverlay.addEventListener('click', function() {
+        bottomSheet.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Update price message when dates/guests change
+    if (mbIn) {
+      mbIn.addEventListener('change', updateMobilePriceMessage);
+    }
+    if (mbOut) {
+      mbOut.addEventListener('change', updateMobilePriceMessage);
+    }
+    if (mbGuests) {
+      mbGuests.addEventListener('change', updateMobilePriceMessage);
+    }
+
+    // Mobile OTA button handlers
+    if (mbAirbnbBtn) {
+      mbAirbnbBtn.addEventListener('click', function() {
+        const checkIn = mbIn?.value;
+        const checkOut = mbOut?.value;
+        const guests = mbGuests?.value || '2';
+
+        const url = buildOTAUrl('airbnb', checkIn, checkOut, guests);
+        window.open(url, '_blank');
+      });
+    }
+
+    if (mbBookingBtn) {
+      mbBookingBtn.addEventListener('click', function() {
+        const checkIn = mbIn?.value;
+        const checkOut = mbOut?.value;
+        const guests = mbGuests?.value || '2';
+
+        const url = buildOTAUrl('booking', checkIn, checkOut, guests);
+        window.open(url, '_blank');
+      });
+    }
+
+    if (mbAgodaBtn) {
+      mbAgodaBtn.addEventListener('click', function() {
+        const checkIn = mbIn?.value;
+        const checkOut = mbOut?.value;
+        const guests = mbGuests?.value || '2';
+
+        const url = buildOTAUrl('agoda', checkIn, checkOut, guests);
+        window.open(url, '_blank');
+      });
+    }
+
+    // Mobile enquire link
+    if (mbEnquireLink) {
+      mbEnquireLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Close sheet first
+        if (bottomSheet) {
+          bottomSheet.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        // Open enquiry modal
+        openEnquiryModal('mb');
+      });
+    }
+  }
+
+  /**
+   * Update mobile bottom sheet price message
+   */
+  function updateMobilePriceMessage() {
+    const mbIn = document.getElementById('mbIn');
+    const mbOut = document.getElementById('mbOut');
+    const mbGuests = document.getElementById('mbGuests');
+    const mbPriceMessage = document.getElementById('mbPriceMessage');
+
+    if (!mbPriceMessage) return;
+
+    const checkIn = mbIn?.value;
+    const checkOut = mbOut?.value;
+    const guests = parseInt(mbGuests?.value) || 2;
+
+    if (!checkIn || !checkOut) {
+      mbPriceMessage.innerHTML = '<small>Select dates to see pricing</small>';
+      return;
+    }
+
+    const nights = calculateNights(checkIn, checkOut);
+    if (nights < 1) {
+      mbPriceMessage.innerHTML = '<small style="color: #c9302c;">Check-out must be after check-in</small>';
+      return;
+    }
+
+    const pricing = calculatePricing(nights, guests);
+    mbPriceMessage.innerHTML = `<small>USD $${pricing.pricePerNight}/night × ${nights} nights = <strong>$${pricing.estimatedTotal}</strong></small>`;
   }
 
   // =============================================================================
@@ -511,43 +707,27 @@
    * Initialize check availability buttons
    */
   function initCheckAvailabilityButtons() {
-    // Desktop CHECK AVAILABILITY button - scroll to top and focus check-in field
+    // Desktop and Mobile CHECK AVAILABILITY buttons - scroll to top and focus check-in field
     const desktopCheckAvailability = document.getElementById('desktopCheckAvailability');
-    if (desktopCheckAvailability) {
-      desktopCheckAvailability.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-        setTimeout(() => {
-          const checkInField = document.getElementById('qbIn');
-          if (checkInField) {
-            checkInField.focus();
-          }
-        }, 500);
-      });
-    }
-
-    // Mobile CHECK AVAILABILITY button - scroll to mobile booking section
     const mobileCheckAvailability = document.getElementById('mobileCheckAvailability');
-    if (mobileCheckAvailability) {
-      mobileCheckAvailability.addEventListener('click', function(e) {
-        e.preventDefault();
-        const mobileBooking = document.getElementById('mobileBooking');
-        if (mobileBooking) {
-          mobileBooking.style.display = 'block';
+
+    [desktopCheckAvailability, mobileCheckAvailability].forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
           setTimeout(() => {
-            const sectionTop = mobileBooking.getBoundingClientRect().top + window.pageYOffset;
-            const scrollPosition = sectionTop - 76;
-            window.scrollTo({
-              top: scrollPosition,
-              behavior: 'smooth'
-            });
-          }, 100);
-        }
-      });
-    }
+            const checkInField = document.getElementById('qbIn');
+            if (checkInField) {
+              checkInField.focus();
+            }
+          }, 300);
+        });
+      }
+    });
   }
 
   // =============================================================================
@@ -582,77 +762,107 @@
   // =============================================================================
 
   /**
-   * Initialize WhatsApp link tracking
+   * Build WhatsApp URL with booking details
+   */
+  function buildWhatsAppUrl(checkIn, checkOut, guests) {
+    const phoneNumber = '94777889880';
+    let message = "Hi! I would like to book TENTWO Private Residence:";
+
+    if (checkIn && checkOut && guests) {
+      const nights = calculateNights(checkIn, checkOut);
+      const pricing = calculatePricing(nights, parseInt(guests));
+      const checkInFormatted = formatDate(checkIn);
+      const checkOutFormatted = formatDate(checkOut);
+
+      message = `Hi! I would like to book TenTwo residence:\n\n` +
+                `Check-in: ${checkInFormatted}\n` +
+                `Check-out: ${checkOutFormatted}\n` +
+                `Guests: ${guests}\n` +
+                `Nights: ${nights}\n` +
+                `Estimated Total: USD ${pricing.estimatedTotal}`;
+    }
+
+    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  }
+
+  /**
+   * Update WhatsApp link with booking details
+   */
+  function updateWhatsAppLink(linkId, checkIn, checkOut, guests) {
+    const link = document.getElementById(linkId);
+    if (link) {
+      link.href = buildWhatsAppUrl(checkIn, checkOut, guests);
+    }
+  }
+
+  /**
+   * Initialize WhatsApp link tracking and dynamic URLs
    */
   function initWhatsAppTracking() {
-    // Desktop WhatsApp link
     const qbWhatsAppLink = document.getElementById('qbWhatsAppLink');
+    const qbWhatsAppLink2 = document.getElementById('qbWhatsAppLink2');
+    const mbWhatsAppLink = document.getElementById('mbWhatsAppLink');
+    const mobileHeroWhatsAppLink = document.getElementById('mobileHeroWhatsAppLink');
+
+    // Update WhatsApp links when dates/guests change
+    const qbIn = document.getElementById('qbIn');
+    const qbOut = document.getElementById('qbOut');
+    const qbGuests = document.getElementById('qbGuests');
+
+    function updateDesktopWhatsAppLinks() {
+      const checkIn = qbIn?.value;
+      const checkOut = qbOut?.value;
+      const guests = qbGuests?.value || '2';
+
+      updateWhatsAppLink('qbWhatsAppLink', checkIn, checkOut, guests);
+      updateWhatsAppLink('qbWhatsAppLink2', checkIn, checkOut, guests);
+      updateWhatsAppLink('mobileHeroWhatsAppLink', checkIn, checkOut, guests);
+      updateWhatsAppLink('floatingWhatsAppLink', checkIn, checkOut, guests);
+    }
+
+    if (qbIn) qbIn.addEventListener('change', updateDesktopWhatsAppLinks);
+    if (qbOut) qbOut.addEventListener('change', updateDesktopWhatsAppLinks);
+    if (qbGuests) qbGuests.addEventListener('change', updateDesktopWhatsAppLinks);
+
+    // Mobile bottom sheet
+    const mbIn = document.getElementById('mbIn');
+    const mbOut = document.getElementById('mbOut');
+    const mbGuests = document.getElementById('mbGuests');
+
+    function updateMobileWhatsAppLink() {
+      const checkIn = mbIn?.value;
+      const checkOut = mbOut?.value;
+      const guests = mbGuests?.value || '2';
+
+      updateWhatsAppLink('mbWhatsAppLink', checkIn, checkOut, guests);
+      updateWhatsAppLink('mobileHeroWhatsAppLink', checkIn, checkOut, guests);
+      updateWhatsAppLink('floatingWhatsAppLink', checkIn, checkOut, guests);
+    }
+
+    if (mbIn) mbIn.addEventListener('change', updateMobileWhatsAppLink);
+    if (mbOut) mbOut.addEventListener('change', updateMobileWhatsAppLink);
+    if (mbGuests) mbGuests.addEventListener('change', updateMobileWhatsAppLink);
+
+    // Analytics tracking
     if (qbWhatsAppLink) {
       qbWhatsAppLink.addEventListener('click', function() {
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
           event: 'whatsapp_click',
-          link_location: 'desktop_booking'
+          link_location: 'hero_booking'
         });
       });
     }
 
-    // Mobile WhatsApp link
-    const mbWhatsAppLink = document.getElementById('mbWhatsAppLink');
-    if (mbWhatsAppLink) {
-      mbWhatsAppLink.addEventListener('click', function() {
+    // Mobile hero WhatsApp analytics
+    if (mobileHeroWhatsAppLink) {
+      mobileHeroWhatsAppLink.addEventListener('click', function() {
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
           event: 'whatsapp_click',
-          link_location: 'mobile_booking'
+          link_location: 'mobile_hero'
         });
       });
-    }
-  }
-
-  // =============================================================================
-  // DYNAMIC HERO POSITIONING
-  // =============================================================================
-
-  /**
-   * Position hero block dynamically on desktop
-   */
-  function positionHeroBlock() {
-    if (window.innerWidth <= 900) return;
-
-    const heroBottom = document.querySelector('.hero-bottom');
-    const header = document.getElementById('header');
-
-    if (!heroBottom) return;
-
-    // Measure full height (all elements are now always visible)
-    const heroHeight = heroBottom.offsetHeight;
-
-    // Calculate position: 100vh - height - 40px bottom margin
-    const headerHeight = header ? header.offsetHeight : 0;
-    const minTop = headerHeight + 40;
-    const idealTop = window.innerHeight - heroHeight - 40;
-    const finalTop = Math.max(minTop, idealTop);
-
-    heroBottom.style.top = finalTop + 'px';
-    heroBottom.style.transform = 'translateX(-50%)';
-  }
-
-  /**
-   * Initialize dynamic hero positioning
-   */
-  function initDynamicHeroPositioning() {
-    // Position on load and resize (desktop only)
-    if (window.innerWidth > 900) {
-      // Wait for fonts and images to load
-      if (document.readyState === 'loading') {
-        window.addEventListener('DOMContentLoaded', positionHeroBlock);
-      } else {
-        positionHeroBlock();
-      }
-
-      window.addEventListener('load', positionHeroBlock);
-      window.addEventListener('resize', positionHeroBlock);
     }
   }
 
@@ -661,41 +871,96 @@
   // =============================================================================
 
   /**
+   * Make date inputs open picker on any click
+   */
+  function initDateInputs() {
+    // Get all date inputs
+    const dateInputs = document.querySelectorAll('input[type="date"]');
+
+    dateInputs.forEach(input => {
+      // Open date picker when clicking anywhere on the input
+      input.addEventListener('click', function(e) {
+        try {
+          this.showPicker();
+        } catch (err) {
+          // Fallback for browsers that don't support showPicker()
+          this.focus();
+        }
+      });
+
+      // Also trigger on label click
+      const label = document.querySelector(`label[for="${input.id}"]`);
+      if (label) {
+        label.addEventListener('click', function(e) {
+          e.preventDefault();
+          try {
+            input.showPicker();
+          } catch (err) {
+            input.focus();
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Setup date validation for check-in and check-out pairs
+   * @param {string} checkInId - Check-in input ID
+   * @param {string} checkOutId - Check-out input ID
+   */
+  function setupDateValidation(checkInId, checkOutId) {
+    const checkInInput = document.getElementById(checkInId);
+    const checkOutInput = document.getElementById(checkOutId);
+
+    if (!checkInInput || !checkOutInput) return;
+
+    // When check-in changes, update check-out min date
+    checkInInput.addEventListener('change', function() {
+      const checkInValue = this.value;
+      if (checkInValue) {
+        // Set check-out min to check-in + 1 day
+        const checkInDate = new Date(checkInValue);
+        checkInDate.setDate(checkInDate.getDate() + 1);
+        const minCheckOut = checkInDate.toISOString().split('T')[0];
+        checkOutInput.setAttribute('min', minCheckOut);
+
+        // If current check-out is now invalid, clear it
+        const checkOutValue = checkOutInput.value;
+        if (checkOutValue && checkOutValue <= checkInValue) {
+          checkOutInput.value = '';
+        }
+      }
+    });
+  }
+
+  /**
    * Initialize all booking UI functionality
    */
   function initBookingUI() {
-    // Desktop booking UI
+    // Initialize date inputs to open picker on click
+    initDateInputs();
+
+    // Booking UI
     const qbIn = document.getElementById('qbIn');
     const qbOut = document.getElementById('qbOut');
     const qbGuests = document.getElementById('qbGuests');
 
     if (qbIn && qbOut && qbGuests) {
-      const updateDesktop = () => updatePriceLine(qbIn.value, qbOut.value, qbGuests.value, 'qbPriceLine');
-      qbIn.addEventListener('change', updateDesktop);
-      qbOut.addEventListener('change', updateDesktop);
-      qbGuests.addEventListener('change', updateDesktop);
-      updateDesktop(); // Initial update
-    }
-
-    // Mobile booking UI
-    const mbIn = document.getElementById('mbCheckIn');
-    const mbOut = document.getElementById('mbCheckOut');
-    const mbGuests = document.getElementById('mbGuests');
-
-    if (mbIn && mbOut && mbGuests) {
-      const updateMobile = () => updatePriceLine(mbIn.value, mbOut.value, mbGuests.value, 'mbPriceLine');
-      mbIn.addEventListener('change', updateMobile);
-      mbOut.addEventListener('change', updateMobile);
-      mbGuests.addEventListener('change', updateMobile);
-      updateMobile(); // Initial update
+      const updatePrice = () => updatePriceLine(qbIn.value, qbOut.value, qbGuests.value, 'priceMessage');
+      qbIn.addEventListener('change', updatePrice);
+      qbOut.addEventListener('change', updatePrice);
+      qbGuests.addEventListener('change', updatePrice);
+      updatePrice(); // Initial update
     }
 
     // Initialize OTA buttons
     initOTAButtons('qb');
-    initOTAButtons('mb');
 
     // Initialize modal
     initEnquiryModal();
+
+    // Initialize mobile bottom sheet
+    initMobileBottomSheet();
 
     // Update residence rates
     updateResidenceRates();
@@ -704,8 +969,11 @@
     const today = new Date().toISOString().split('T')[0];
     if (qbIn) qbIn.setAttribute('min', today);
     if (qbOut) qbOut.setAttribute('min', today);
-    if (mbIn) mbIn.setAttribute('min', today);
-    if (mbOut) mbOut.setAttribute('min', today);
+
+    // Setup date validation for all booking forms
+    setupDateValidation('qbIn', 'qbOut'); // Desktop quick book
+    setupDateValidation('mbIn', 'mbOut'); // Mobile bottom sheet
+    setupDateValidation('enquiryCheckIn', 'enquiryCheckOut'); // Enquiry modal
 
     // Initialize check availability buttons
     initCheckAvailabilityButtons();
@@ -715,9 +983,6 @@
 
     // Initialize WhatsApp tracking
     initWhatsAppTracking();
-
-    // Initialize dynamic hero positioning
-    initDynamicHeroPositioning();
   }
 
   // =============================================================================
@@ -733,9 +998,9 @@
 
   // Expose functions for external use if needed
   window.TENTWO_BOOKING = {
-    isPromoActive: isPromoActive,
     getPriceForGuests: getPriceForGuests,
-    calculateTotal: calculateTotal,
+    calculateNights: calculateNights,
+    calculatePricing: calculatePricing,
     buildOTAUrl: buildOTAUrl
   };
 

@@ -29,8 +29,25 @@ const mimeTypes = {
 
 const server = http.createServer((req, res) => {
   let filePath = '.' + req.url;
+
+  // Handle root
   if (filePath === './') {
     filePath = './index.html';
+  }
+
+  // Handle clean URLs (Vercel-style rewrites)
+  if (filePath === './about') {
+    filePath = './about.html';
+  } else if (filePath === './kandy-guide') {
+    filePath = './kandy-guide.html';
+  }
+
+  // If no extension, try adding .html
+  if (!path.extname(filePath) && filePath !== './index.html' && filePath !== './about.html' && filePath !== './kandy-guide.html') {
+    const htmlPath = filePath + '.html';
+    if (fs.existsSync(htmlPath)) {
+      filePath = htmlPath;
+    }
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();
@@ -61,8 +78,8 @@ server.listen(PORT, () => {
   console.log('');
   console.log('  Pages available:');
   console.log(`  • Homepage:     http://localhost:${PORT}/`);
-  console.log(`  • About:        http://localhost:${PORT}/about.html`);
-  console.log(`  • Kandy Guide:  http://localhost:${PORT}/kandy-guide.html`);
+  console.log(`  • About:        http://localhost:${PORT}/about`);
+  console.log(`  • Kandy Guide:  http://localhost:${PORT}/kandy-guide`);
   console.log('');
   console.log('  Press CTRL+C to stop the server');
   console.log('');

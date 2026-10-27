@@ -93,9 +93,8 @@
       if (href === '#' || !href) return;
 
       const targetId = href.substring(1);
-      // Only handle section links (residence, suites, gallery, location)
-      if (targetId === 'residence' || targetId === 'suites' ||
-          targetId === 'gallery' || targetId === 'location') {
+      // Only handle section links (residence, gallery, location)
+      if (targetId === 'residence' || targetId === 'gallery' || targetId === 'location') {
         link.addEventListener('click', function(e) {
           e.preventDefault();
           smoothScrollTo(targetId, 76);
@@ -174,10 +173,10 @@
 
     if (filterButtons.length === 0 || galleryItems.length === 0) return;
 
-    // Initialize gallery - show only outdoor on page load
+    // Initialize gallery - show only outdoor-rooftop on page load
     galleryItems.forEach((item) => {
       const category = item.getAttribute('data-category');
-      if (category !== 'outdoor') {
+      if (category !== 'outdoor-rooftop') {
         item.classList.add('hidden');
       }
     });
@@ -189,56 +188,6 @@
         filterGallery(filter);
       });
     });
-
-    // Suite item clicks - navigate to gallery with filter
-    const suiteItems = document.querySelectorAll('.suite-item');
-    suiteItems.forEach((suite) => {
-      suite.addEventListener('click', (e) => {
-        e.preventDefault();
-        const filter = suite.getAttribute('data-gallery-filter');
-
-        // Scroll to gallery
-        const gallerySection = document.querySelector('#gallery');
-        if (gallerySection) {
-          const headerHeight = 76;
-          const targetPosition = gallerySection.offsetTop - headerHeight;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth',
-          });
-
-          // Apply filter after a short delay to ensure scroll completes
-          setTimeout(() => {
-            filterGallery(filter);
-          }, 500);
-        }
-      });
-    });
-
-    // Life item clicks - navigate to gallery with filter
-    const lifeItems = document.querySelectorAll('.life-item');
-    lifeItems.forEach((lifeItem) => {
-      lifeItem.addEventListener('click', (e) => {
-        e.preventDefault();
-        const filter = lifeItem.getAttribute('data-gallery-filter');
-
-        // Scroll to gallery
-        const gallerySection = document.querySelector('#gallery');
-        if (gallerySection) {
-          const headerHeight = 76;
-          const targetPosition = gallerySection.offsetTop - headerHeight;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth',
-          });
-
-          // Apply filter after a short delay to ensure scroll completes
-          setTimeout(() => {
-            filterGallery(filter);
-          }, 500);
-        }
-      });
-    });
   }
 
   // =============================================================================
@@ -246,32 +195,168 @@
   // =============================================================================
 
   /**
-   * Hide floating WhatsApp button when hero section is visible on mobile
+   * Hide floating WhatsApp button when hero section is visible or bottom sheet is open
+   * For pages without hero (about, kandy-guide), show after 300px scrolling
    */
   function initFloatingWhatsAppVisibility() {
-    // Only run on mobile
-    if (window.innerWidth > 900) return;
-
     const heroSection = document.querySelector('.hero');
     const floatingWhatsApp = document.querySelector('.floating-whatsapp');
+    const bottomSheet = document.getElementById('mobileBooking');
 
-    if (!heroSection || !floatingWhatsApp) return;
+    if (!floatingWhatsApp) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Hero is visible, hide WhatsApp button
-          floatingWhatsApp.classList.add('hidden-on-hero');
-        } else {
-          // Hero is not visible, show WhatsApp button
+    // For pages with hero section (homepage)
+    if (heroSection) {
+      // Hide when hero is visible
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            floatingWhatsApp.classList.add('hidden-on-hero');
+          } else {
+            floatingWhatsApp.classList.remove('hidden-on-hero');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      heroObserver.observe(heroSection);
+
+      // Hide when bottom sheet is open
+      if (bottomSheet) {
+        const sheetObserver = new MutationObserver(() => {
+          if (bottomSheet.classList.contains('active')) {
+            floatingWhatsApp.classList.add('hidden-on-sheet');
+          } else {
+            floatingWhatsApp.classList.remove('hidden-on-sheet');
+          }
+        });
+
+        sheetObserver.observe(bottomSheet, {
+          attributes: true,
+          attributeFilter: ['class']
+        });
+      }
+    } else {
+      // For pages without hero (about, kandy-guide), show after 300px scrolling
+      let hasScrolledEnough = false;
+
+      function handleScroll() {
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        if (scrollY > 300 && !hasScrolledEnough) {
+          hasScrolledEnough = true;
           floatingWhatsApp.classList.remove('hidden-on-hero');
+        } else if (scrollY <= 300 && hasScrolledEnough) {
+          hasScrolledEnough = false;
+          floatingWhatsApp.classList.add('hidden-on-hero');
+        }
+      }
+
+      // Initially hidden
+      floatingWhatsApp.classList.add('hidden-on-hero');
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+  }
+
+  // =============================================================================
+  // GALLERY VIEWER
+  // =============================================================================
+
+  /**
+   * Initialize gallery viewer functionality
+   */
+  function initGalleryViewer() {
+    let currentImages = [];
+    let currentIndex = 0;
+
+    const viewer = document.getElementById('galleryViewer');
+    const viewerImage = document.getElementById('viewerImage');
+    const viewerClose = document.getElementById('viewerClose');
+    const viewerPrev = document.getElementById('viewerPrev');
+    const viewerNext = document.getElementById('viewerNext');
+    const viewerCounter = document.getElementById('viewerCounter');
+
+    if (!viewer || !viewerImage) return;
+
+    // Click on gallery item
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const activeFilter = document.querySelector('.filter-btn.active');
+        if (!activeFilter) return;
+
+        const filterValue = activeFilter.dataset.filter;
+        currentImages = Array.from(document.querySelectorAll(`.gallery-item[data-category="${filterValue}"] img`));
+        const clickedImg = this.querySelector('img');
+        currentIndex = currentImages.indexOf(clickedImg);
+
+        if (currentIndex !== -1) {
+          showImage(currentIndex);
+          viewer.style.display = 'flex';
         }
       });
-    }, {
-      threshold: 0.1
     });
 
-    observer.observe(heroSection);
+    // Close viewer
+    function closeViewer() {
+      viewer.style.display = 'none';
+    }
+
+    if (viewerClose) {
+      viewerClose.addEventListener('click', closeViewer);
+    }
+
+    viewer.addEventListener('click', function(e) {
+      if (e.target === viewer) closeViewer();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (viewer.style.display === 'flex') {
+        if (e.key === 'Escape') closeViewer();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      }
+    });
+
+    // Navigation
+    if (viewerPrev) {
+      viewerPrev.addEventListener('click', showPrev);
+    }
+    if (viewerNext) {
+      viewerNext.addEventListener('click', showNext);
+    }
+
+    // Touch swipe
+    let touchStartX = 0;
+    viewer.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+    viewer.addEventListener('touchend', function(e) {
+      const touchEndX = e.changedTouches[0].clientX;
+      if (touchStartX - touchEndX > 50) showNext();
+      if (touchEndX - touchStartX > 50) showPrev();
+    });
+
+    function showImage(index) {
+      currentIndex = index;
+      if (currentImages[index]) {
+        viewerImage.src = currentImages[index].src;
+        viewerImage.alt = currentImages[index].alt;
+        if (viewerCounter) {
+          viewerCounter.textContent = `${index + 1} / ${currentImages.length}`;
+        }
+      }
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      showImage(currentIndex);
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      showImage(currentIndex);
+    }
   }
 
   // =============================================================================
@@ -307,6 +392,7 @@
     initSmoothScroll();
     initRevealAnimations();
     initGalleryFiltering();
+    initGalleryViewer();
     initFloatingWhatsAppVisibility();
     initMobileWhatsAppTracking();
   }

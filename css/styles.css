@@ -551,7 +551,8 @@ footer {
   white-space: nowrap;
 }
 
-.floating-whatsapp.hidden-on-hero {
+.floating-whatsapp.hidden-on-hero,
+.floating-whatsapp.hidden-on-sheet {
   opacity: 0;
   pointer-events: none;
 }
