@@ -86,16 +86,19 @@
 
     <!-- Google Tag Manager -->
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PWTV3BHG");
+      // Don't load GTM on localhost
+      if (!window.location.hostname.match(/localhost|127\.0\.0\.1/)) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-PWTV3BHG");
+      }
     </script>
     <!-- End Google Tag Manager -->
 
@@ -206,21 +209,6 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/index.css" />
-
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-GJGY6QP2JS"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-GJGY6QP2JS");
-    </script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -252,7 +240,7 @@
         <a href="#gallery">GALLERY</a>
         <a href="/kandy-guide">DISCOVER KANDY</a>
         <a href="#location">LOCATION</a>
-        <a href="/" class="cta-header" id="desktopCheckAvailability"
+        <a href="/" class="cta-header" id="desktopCheckAvailability" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'home_header'});"
           >CHECK AVAILABILITY</a
         >
       </nav>
@@ -296,7 +284,7 @@
         <a href="#gallery" class="mobile-menu-link">GALLERY</a>
         <a href="/kandy-guide" class="mobile-menu-link">DISCOVER KANDY</a>
         <a href="#location" class="mobile-menu-link">LOCATION</a>
-        <a href="/" class="mobile-cta-btn" id="mobileCheckAvailability"
+        <a href="/" class="mobile-cta-btn" id="mobileCheckAvailability" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'home_mobile_menu'});"
           >CHECK AVAILABILITY</a
         >
         <a
@@ -1440,7 +1428,7 @@
             <li><a href="/#gallery">GALLERY</a></li>
             <li><a href="/kandy-guide">DISCOVER KANDY</a></li>
             <li><a href="/#location">LOCATION</a></li>
-            <li><a href="/">CHECK AVAILABILITY</a></li>
+            <li><a href="/" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'footer'});">CHECK AVAILABILITY</a></li>
           </ul>
         </div>
         <div class="footer-nav">

@@ -54,16 +54,19 @@
 
     <!-- Google Tag Manager -->
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PWTV3BHG");
+      // Don't load GTM on localhost
+      if (!window.location.hostname.match(/localhost|127\.0\.0\.1/)) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-PWTV3BHG");
+      }
     </script>
     <!-- End Google Tag Manager -->
 
@@ -518,7 +521,7 @@
         <a href="/#gallery">GALLERY</a>
         <a href="/kandy-guide" class="active">DISCOVER KANDY</a>
         <a href="/#location">LOCATION</a>
-        <a href="/#book" class="cta-header" id="desktopCheckAvailability"
+        <a href="/#book" class="cta-header" id="desktopCheckAvailability" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'kandy_guide_header'});"
           >CHECK AVAILABILITY</a
         >
       </nav>
@@ -537,7 +540,7 @@
         <a href="/#gallery">GALLERY</a>
         <a href="/kandy-guide" class="active">DISCOVER KANDY</a>
         <a href="/#location">LOCATION</a>
-        <a href="/#book" class="mobile-cta-btn" id="mobileCheckAvailability"
+        <a href="/#book" class="mobile-cta-btn" id="mobileCheckAvailability" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'kandy_guide_mobile_menu'});"
           >CHECK AVAILABILITY</a
         >
         <a

@@ -54,16 +54,19 @@
 
     <!-- Google Tag Manager -->
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PWTV3BHG");
+      // Don't load GTM on localhost
+      if (!window.location.hostname.match(/localhost|127\.0\.0\.1/)) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-PWTV3BHG");
+      }
     </script>
     <!-- End Google Tag Manager -->
 
@@ -635,7 +638,7 @@
         <a href="/#gallery">GALLERY</a>
         <a href="/kandy-guide">DISCOVER KANDY</a>
         <a href="/#location">LOCATION</a>
-        <a href="/#book" class="cta-header" id="desktopCheckAvailability"
+        <a href="/#book" class="cta-header" id="desktopCheckAvailability" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'about_header'});"
           >CHECK AVAILABILITY</a
         >
       </nav>
@@ -653,7 +656,7 @@
         <a href="/#gallery">GALLERY</a>
         <a href="/kandy-guide">DISCOVER KANDY</a>
         <a href="/#location">LOCATION</a>
-        <a href="/#book" class="mobile-cta-btn" id="mobileCheckAvailability"
+        <a href="/#book" class="mobile-cta-btn" id="mobileCheckAvailability" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'about_mobile_menu'});"
           >CHECK AVAILABILITY</a
         >
         <a
@@ -687,8 +690,8 @@
           A private, self-catering villa in the hills near Kandy, yours alone for the stay.
         </p>
         <div class="hero-buttons">
-          <a href="/#book" class="hero-btn hero-btn-primary">Check Availability</a>
-          <a href="https://wa.me/94777889880?text=Hi%21%20I%20would%20like%20to%20book%20TENTWO%20Private%20Residence%3A" target="_blank" rel="noopener" class="hero-btn hero-btn-outline">WhatsApp Us</a>
+          <a href="/#book" class="hero-btn hero-btn-primary" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'check_availability_click',link_location:'about_hero'});">Check Availability</a>
+          <a href="https://wa.me/94777889880?text=Hi%21%20I%20would%20like%20to%20book%20TENTWO%20Private%20Residence%3A" target="_blank" rel="noopener" class="hero-btn hero-btn-outline" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'whatsapp_click',link_location:'about_hero'});">WhatsApp Us</a>
         </div>
       </div>
 

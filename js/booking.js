@@ -428,10 +428,12 @@
       // Track submission
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'availability_form_submit',
-        form_type: 'enquiry_modal',
+        event: 'generate_lead',
+        form: 'enquiry',
         nights: nights,
-        total_usd: total,
+        guests: parseInt(guests),
+        value: total,
+        currency: 'USD',
         eventCallback: function() {
           window.location.href = '/thank-you.html';
         },
@@ -774,7 +776,7 @@
       const checkInFormatted = formatDate(checkIn);
       const checkOutFormatted = formatDate(checkOut);
 
-      message = `Hi! I would like to book TenTwo residence:\n\n` +
+      message = `Hi! I would like to book TENTWO Private Residence:\n\n` +
                 `Check-in: ${checkInFormatted}\n` +
                 `Check-out: ${checkOutFormatted}\n` +
                 `Guests: ${guests}\n` +
@@ -846,6 +848,16 @@
     // Analytics tracking
     if (qbWhatsAppLink) {
       qbWhatsAppLink.addEventListener('click', function() {
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+          event: 'whatsapp_click',
+          link_location: 'hero_booking'
+        });
+      });
+    }
+
+    if (qbWhatsAppLink2) {
+      qbWhatsAppLink2.addEventListener('click', function() {
         window.dataLayer = window.dataLayer || [];
         dataLayer.push({
           event: 'whatsapp_click',
