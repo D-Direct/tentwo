@@ -349,8 +349,13 @@
 
     const name = document.getElementById('enquiryName').value;
     const contact = document.getElementById('enquiryContact').value;
-    const country = document.getElementById('enquiryCountry').value;
     const website = document.getElementById('enquiryWebsite').value;
+
+    // Auto-populate country with timezone and language
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const language = navigator.language;
+    const country = `${timezone} | ${language}`;
+    document.getElementById('enquiryCountry').value = country;
 
     // Get dates either from stored data or from modal form fields
     let checkIn = modal.dataset.checkIn;
