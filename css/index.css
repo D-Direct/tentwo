@@ -108,6 +108,33 @@
   width: 100%;
   max-width: 960px;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Price message outside the box */
+.hero-bottom .price-message {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white);
+  text-align: left;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Wider layout for large desktops (1024px+) */
+@media (min-width: 1024px) {
+  .hero-content {
+    width: 78%;
+    max-width: 1400px;
+    align-items: flex-start;
+  }
+
+  .hero-bottom {
+    width: 78%;
+    max-width: 1400px;
+  }
 }
 
 .hero-title {
@@ -160,6 +187,9 @@
   display: inline-block;
   margin: 0;
   padding: 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8),
+               0 2px 8px rgba(0, 0, 0, 0.6),
+               0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .hero-title-mobile {
@@ -184,7 +214,9 @@
   white-space: nowrap;
   width: 100%;
   display: block;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7),
+               0 2px 6px rgba(0, 0, 0, 0.5),
+               0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .hero-facts * {
@@ -282,196 +314,16 @@
 .booking-bar {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 960px;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.12);
-  padding: 16px 20px;
+  padding: 14px 18px;
   border-radius: 8px;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 0 auto;
   transition: all 0.3s ease;
 }
 
-.booking-inputs {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 6px;
-}
-
-.input-group label {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0 12px;
-}
-
-.input-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.3);
-  align-self: flex-end;
-  margin-bottom: 8px;
-}
-
-.qb-field-error,
-.mb-field-error {
-  display: none;
-  font-size: 11px;
-  color: #ff6b6b;
-  margin-top: 4px;
-  font-weight: 500;
-}
-
-.qb-price-display {
-  padding: 14px 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  height: 50px;
-  box-sizing: border-box;
-}
-
-.qb-price-display span {
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.booking-bar input,
-.booking-bar select {
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  font-family: var(--sans);
-  font-size: 14px;
-  color: rgba(10, 25, 45, 1);
-  background: rgba(255, 255, 255, 0.95);
-  transition: all 300ms;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  height: 44px;
-  box-sizing: border-box;
-}
-
-.booking-bar input[type="date"] {
-  color-scheme: light;
-  cursor: pointer;
-}
-
-.booking-bar input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  opacity: 0.6;
-}
-
-.booking-bar select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230a192d' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 36px;
-  cursor: pointer;
-}
-
-.booking-bar select option {
-  background: #ffffff;
-  color: #0d0d0d;
-}
-
-.booking-bar input:focus,
-.booking-bar select:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
-}
-
-/* Disabled configuration field styling */
-.quick-book select:disabled {
-  opacity: 0.8;
-  cursor: not-allowed;
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.qb-additional-fields {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.more-guests-link,
-.mb-more-guests-link {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gold-bright);
-  color: #e4ce9e;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  text-decoration: underline;
-  transition: all 300ms var(--ease);
-  display: inline-block;
-}
-
-.more-guests-link:hover,
-.mb-more-guests-link:hover {
-  opacity: 0.8;
-}
-
-.mb-more-guests-link {
-  font-size: 13px;
-}
-
-.qb-whatsapp-option,
-.mb-whatsapp-option {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.qb-whatsapp-option a,
-.mb-whatsapp-option a {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
-  transition: all 300ms var(--ease);
-}
-
-.qb-whatsapp-option a:hover,
-.mb-whatsapp-option a:hover {
-  color: #25d366;
-}
-
-/* Booking Actions */
-.booking-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.price-message {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--white);
-  flex: 1;
-}
-
+/* Price message styling (inside hero-bottom, outside booking-bar) */
 .price-message .price-crossed {
   text-decoration: line-through;
   opacity: 0.6;
@@ -484,21 +336,169 @@
   margin-left: 8px;
 }
 
-.ota-buttons {
-  display: flex;
-  align-items: center;
+/* All fields in one row */
+.booking-all-fields {
+  display: grid;
+  grid-template-columns: 150px 150px 130px 1fr 170px;
   gap: 10px;
+  align-items: end;
 }
 
-.ota-label {
-  font-size: 12px;
+/* Wider field layout for large desktops (1024px+) */
+@media (min-width: 1024px) {
+  .booking-all-fields {
+    grid-template-columns: 160px 160px 130px 1fr 200px;
+  }
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.field-wrapper label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-left: 2px;
+}
+
+.field-wrapper input,
+.field-wrapper select {
+  height: 48px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: rgba(10, 25, 45, 1);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 300ms;
+  box-sizing: border-box;
+}
+
+.field-wrapper input[type="date"] {
+  color-scheme: light;
+  cursor: pointer;
+}
+
+.field-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.field-wrapper select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230a192d' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.field-wrapper select option {
+  background: #ffffff;
+  color: #0d0d0d;
+}
+
+.field-wrapper input:focus,
+.field-wrapper select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+.field-wrapper input::placeholder {
+  color: rgba(10, 25, 45, 0.5);
+}
+
+.field-wrapper input.error {
+  border: 2px solid var(--gold);
+}
+
+.field-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 11px;
+  color: var(--gold);
+  font-family: var(--sans);
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+.qb-field-error,
+.mb-field-error {
+  display: none;
+  font-size: 11px;
+  color: #ff6b6b;
+  margin-top: 4px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  white-space: nowrap;
+}
+
+/* Desktop booking options - two column layout */
+.booking-options-desktop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.booking-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-section-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.ota-buttons-row,
+.direct-buttons-row {
+  display: flex;
+  gap: 8px;
+}
+
+/* Single-row button layout for large desktops (1024px+) */
+@media (min-width: 1024px) {
+  .booking-options-desktop {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+    margin-top: 10px;
+  }
+
+  .booking-column {
+    flex: 0 0 auto;
+  }
+
+  .booking-column:first-child {
+    align-items: flex-start;
+  }
+
+  .booking-column:last-child {
+    align-items: flex-end;
+  }
+
+  .booking-section-label {
+    align-self: flex-start;
+  }
 }
 
 .ota-btn {
-  padding: 8px 16px;
+  flex: 1;
+  padding: 8px 14px;
   background: transparent;
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -509,6 +509,9 @@
   cursor: pointer;
   transition: all 300ms ease;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ota-btn:hover {
@@ -516,6 +519,86 @@
   border-color: var(--gold);
   color: rgba(10, 25, 45, 1);
   transform: translateY(-1px);
+}
+
+/* Direct booking buttons - match OTA button style */
+.direct-btn {
+  flex: 1;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 300ms ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Button sizes for large desktops (1024px+) */
+@media (min-width: 1024px) {
+  .ota-btn,
+  .direct-btn {
+    height: 40px;
+    padding: 0 16px;
+    flex: 0 0 auto;
+  }
+
+  .ota-btn {
+    width: 120px;
+  }
+
+  .direct-btn {
+    width: 180px;
+  }
+}
+
+.direct-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.direct-btn.whatsapp-btn:hover {
+  background: #25d366;
+  border-color: #25d366;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.direct-btn.enquiry-btn {
+  border-color: var(--gold);
+}
+
+.direct-btn.enquiry-btn svg {
+  fill: var(--gold);
+}
+
+.direct-btn.enquiry-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: rgba(10, 25, 45, 1);
+  transform: translateY(-1px);
+}
+
+.direct-btn.enquiry-btn:hover svg {
+  fill: rgba(10, 25, 45, 1);
+}
+
+/* Booking reassurance text (outside booking-bar, inside hero-bottom) */
+.hero-bottom .booking-reassurance {
+  margin: 0;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Booking notes mobile (inside glass panel) */
@@ -1795,6 +1878,16 @@
     display: none;
   }
 
+  /* Hide desktop price message on mobile */
+  .hero-bottom .price-message {
+    display: none;
+  }
+
+  /* Hide desktop reassurance message on mobile */
+  .hero-bottom .booking-reassurance {
+    display: none;
+  }
+
   /* Show mobile CTA button */
   .mobile-booking-cta {
     display: flex;
@@ -1829,6 +1922,9 @@
     font-size: 13px;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 320px;
+    text-align: left;
   }
 
   .mobile-hero-whatsapp {
@@ -2001,31 +2097,113 @@
     background: rgba(10, 25, 45, 0.05);
   }
 
-  .sheet-notes {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(10, 25, 45, 0.1);
+  /* Mobile sheet sections */
+  .sheet-section {
+    margin-bottom: 16px;
   }
 
-  .sheet-price-note,
-  .sheet-direct {
-    margin: 0;
+  .sheet-section-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgba(10, 25, 45, 0.6);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  /* Direct booking buttons in sheet */
+  .sheet-direct-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .sheet-direct-btn {
+    padding: 14px 12px;
+    background: var(--white);
+    color: rgba(10, 25, 45, 1);
+    border: 1px solid rgba(10, 25, 45, 0.3);
+    border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 300ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .sheet-direct-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sheet-direct-btn.whatsapp-btn:active {
+    background: #25d366;
+    color: white;
+  }
+
+  .sheet-direct-btn.enquiry-btn:active {
+    background: var(--gold);
+    color: rgba(10, 25, 45, 1);
+  }
+
+  /* Mobile enquiry fields */
+  .sheet-enquiry-field-wrapper {
+    margin-bottom: 12px;
+  }
+
+  .sheet-enquiry-field-wrapper input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid rgba(10, 25, 45, 0.2);
+    border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 14px;
+    background: white;
+    transition: border-color 300ms ease;
+    box-sizing: border-box;
+  }
+
+  .sheet-enquiry-field-wrapper input::placeholder {
+    color: rgba(10, 25, 45, 0.5);
+  }
+
+  .sheet-enquiry-field-wrapper input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .sheet-enquiry-field-wrapper input.error {
+    border-color: var(--gold);
+    border-width: 2px;
+  }
+
+  .sheet-enquiry-field-wrapper .field-error {
+    font-size: 11px;
+    color: var(--gold);
+    font-family: var(--sans);
+    margin-top: 4px;
+    min-height: 16px;
+  }
+
+  /* Reassurance text */
+  .sheet-reassurance {
+    margin-top: 12px;
+    text-align: center;
     font-size: 11px;
     color: rgba(10, 25, 45, 0.6);
-    text-align: center;
+    line-height: 1.5;
   }
 
-  .sheet-direct {
-    font-size: 12px;
-    color: rgba(10, 25, 45, 0.8);
-  }
-
-  .sheet-direct a {
-    color: var(--gold);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold);
+  /* Stack buttons on very small screens */
+  @media (max-width: 360px) {
+    .sheet-direct-row {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Enquiry Modal - Mobile */

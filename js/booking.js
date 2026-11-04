@@ -803,6 +803,23 @@
   }
 
   /**
+   * Build WhatsApp message for direct booking
+   * @param {string} checkIn - Check-in date
+   * @param {string} checkOut - Check-out date
+   * @param {string} guests - Number of guests
+   * @returns {string} Pre-filled WhatsApp message
+   */
+  function buildWhatsAppDirectBookingMessage(checkIn, checkOut, guests) {
+    if (!checkIn || !checkOut) {
+      return "Hi TenTwo, I'd like to book direct. Is it available?";
+    }
+
+    const checkInFormatted = formatDate(checkIn);
+    const checkOutFormatted = formatDate(checkOut);
+    return `Hi TenTwo, I'd like to book direct: ${checkInFormatted} to ${checkOutFormatted}, ${guests} guests. Is it available?`;
+  }
+
+  /**
    * Initialize WhatsApp link tracking and dynamic URLs
    */
   function initWhatsAppTracking() {
@@ -951,6 +968,318 @@
   }
 
   /**
+   * Initialize new direct booking buttons (desktop)
+   */
+  function initDirectBookingButtons() {
+    const qbWhatsAppBtn = document.getElementById('qbWhatsAppBtn');
+    const qbEnquiryBtn = document.getElementById('qbEnquiryBtn');
+
+    // Desktop WhatsApp button
+    if (qbWhatsAppBtn) {
+      qbWhatsAppBtn.addEventListener('click', function() {
+        const checkIn = document.getElementById('qbIn')?.value;
+        const checkOut = document.getElementById('qbOut')?.value;
+        const guests = document.getElementById('qbGuests')?.value || '2';
+
+        const message = buildWhatsAppDirectBookingMessage(checkIn, checkOut, guests);
+        const url = `https://wa.me/94777889880?text=${encodeURIComponent(message)}`;
+
+        // Track event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          link_location: 'booking_panel'
+        });
+
+        window.open(url, '_blank');
+      });
+    }
+
+    // Desktop Send Enquiry button - inline validation
+    if (qbEnquiryBtn) {
+      qbEnquiryBtn.addEventListener('click', async function() {
+        const contactInput = document.getElementById('qbEnquiryContact');
+        const contact = contactInput?.value;
+        const name = document.getElementById('qbEnquiryName')?.value || 'Guest';
+        const checkInInput = document.getElementById('qbIn');
+        const checkOutInput = document.getElementById('qbOut');
+        const checkIn = checkInInput?.value;
+        const checkOut = checkOutInput?.value;
+        const guests = document.getElementById('qbGuests')?.value || '2';
+        const errorEl = document.getElementById('qbContactError');
+
+        // Clear previous errors
+        if (contactInput) contactInput.classList.remove('error');
+        if (checkInInput) checkInInput.classList.remove('error');
+        if (checkOutInput) checkOutInput.classList.remove('error');
+        if (errorEl) errorEl.textContent = '';
+
+        let hasError = false;
+        let firstErrorField = null;
+
+        // Validate contact
+        if (!contact) {
+          if (contactInput) {
+            contactInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = contactInput;
+          }
+          if (errorEl) errorEl.textContent = 'Please add your email or WhatsApp number';
+          hasError = true;
+        } else {
+          const validation = validateEmailOrWhatsApp(contact);
+          if (!validation.valid) {
+            if (contactInput) {
+              contactInput.classList.add('error');
+              if (!firstErrorField) firstErrorField = contactInput;
+            }
+            if (errorEl) errorEl.textContent = validation.message;
+            hasError = true;
+          }
+        }
+
+        // Validate dates
+        if (!checkIn || !checkOut) {
+          if (!checkIn && checkInInput) {
+            checkInInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = checkInInput;
+          }
+          if (!checkOut && checkOutInput) {
+            checkOutInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = checkOutInput;
+          }
+          if (errorEl && !errorEl.textContent) {
+            errorEl.textContent = 'Please choose your dates';
+          }
+          hasError = true;
+        }
+
+        if (hasError) {
+          if (firstErrorField) firstErrorField.focus();
+          return;
+        }
+
+        // Calculate pricing
+        const nights = calculateNights(checkIn, checkOut);
+        const pricePerNight = getPriceForGuests(guests);
+        const total = nights * pricePerNight;
+
+        // Auto-populate country with timezone and language
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const language = navigator.language;
+        const country = `${timezone} | ${language}`;
+
+        // Prepare data
+        const emailData = {
+          name: name,
+          contact: contact,
+          country: country,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          guests: guests,
+          nights: nights,
+          pricePerNight: pricePerNight,
+          estimatedTotal: total,
+          formType: 'Desktop Direct Booking',
+          website: ''
+        };
+
+        qbEnquiryBtn.disabled = true;
+        const originalText = qbEnquiryBtn.innerHTML;
+        qbEnquiryBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg> Sending...';
+
+        try {
+          await fetch('/api/enquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailData)
+          });
+
+          // Track submission
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            form: 'desktop_direct_booking',
+            nights: nights,
+            guests: parseInt(guests),
+            value: total,
+            currency: 'USD',
+            eventCallback: function() {
+              window.location.href = '/thank-you.html';
+            },
+            eventTimeout: 300
+          });
+
+          setTimeout(() => {
+            window.location.href = '/thank-you.html';
+          }, 500);
+
+        } catch (err) {
+          console.error('Error submitting enquiry:', err);
+          window.location.href = '/thank-you.html';
+        }
+      });
+    }
+  }
+
+  /**
+   * Initialize mobile sheet direct booking buttons
+   */
+  function initMobileDirectBookingButtons() {
+    const mbWhatsAppBtn = document.getElementById('mbWhatsAppBtn');
+    const mbEnquiryBtn = document.getElementById('mbEnquiryBtn');
+
+    // Mobile WhatsApp button
+    if (mbWhatsAppBtn) {
+      mbWhatsAppBtn.addEventListener('click', function() {
+        const checkIn = document.getElementById('mbIn')?.value;
+        const checkOut = document.getElementById('mbOut')?.value;
+        const guests = document.getElementById('mbGuests')?.value || '2';
+
+        const message = buildWhatsAppDirectBookingMessage(checkIn, checkOut, guests);
+        const url = `https://wa.me/94777889880?text=${encodeURIComponent(message)}`;
+
+        // Track event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          link_location: 'booking_panel'
+        });
+
+        window.open(url, '_blank');
+      });
+    }
+
+    // Mobile Send Enquiry button - inline validation
+    if (mbEnquiryBtn) {
+      mbEnquiryBtn.addEventListener('click', async function() {
+        const contactInput = document.getElementById('mbEnquiryContact');
+        const contact = contactInput?.value;
+        const name = document.getElementById('mbEnquiryName')?.value || 'Guest';
+        const checkInInput = document.getElementById('mbIn');
+        const checkOutInput = document.getElementById('mbOut');
+        const checkIn = checkInInput?.value;
+        const checkOut = checkOutInput?.value;
+        const guests = document.getElementById('mbGuests')?.value || '2';
+        const errorEl = document.getElementById('mbContactError');
+
+        // Clear previous errors
+        if (contactInput) contactInput.classList.remove('error');
+        if (checkInInput) checkInInput.classList.remove('error');
+        if (checkOutInput) checkOutInput.classList.remove('error');
+        if (errorEl) errorEl.textContent = '';
+
+        let hasError = false;
+        let firstErrorField = null;
+
+        // Validate contact
+        if (!contact) {
+          if (contactInput) {
+            contactInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = contactInput;
+          }
+          if (errorEl) errorEl.textContent = 'Please add your email or WhatsApp number';
+          hasError = true;
+        } else {
+          const validation = validateEmailOrWhatsApp(contact);
+          if (!validation.valid) {
+            if (contactInput) {
+              contactInput.classList.add('error');
+              if (!firstErrorField) firstErrorField = contactInput;
+            }
+            if (errorEl) errorEl.textContent = validation.message;
+            hasError = true;
+          }
+        }
+
+        // Validate dates
+        if (!checkIn || !checkOut) {
+          if (!checkIn && checkInInput) {
+            checkInInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = checkInInput;
+          }
+          if (!checkOut && checkOutInput) {
+            checkOutInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = checkOutInput;
+          }
+          if (errorEl && !errorEl.textContent) {
+            errorEl.textContent = 'Please choose your dates';
+          }
+          hasError = true;
+        }
+
+        if (hasError) {
+          if (firstErrorField) {
+            firstErrorField.focus();
+            // Scroll to first error field
+            firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
+
+        // Calculate pricing
+        const nights = calculateNights(checkIn, checkOut);
+        const pricePerNight = getPriceForGuests(guests);
+        const total = nights * pricePerNight;
+
+        // Auto-populate country with timezone and language
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const language = navigator.language;
+        const country = `${timezone} | ${language}`;
+
+        // Prepare data
+        const emailData = {
+          name: name,
+          contact: contact,
+          country: country,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          guests: guests,
+          nights: nights,
+          pricePerNight: pricePerNight,
+          estimatedTotal: total,
+          formType: 'Mobile Direct Booking',
+          website: ''
+        };
+
+        mbEnquiryBtn.disabled = true;
+        const originalHTML = mbEnquiryBtn.innerHTML;
+        mbEnquiryBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg> Sending...';
+
+        try {
+          await fetch('/api/enquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailData)
+          });
+
+          // Track submission
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            form: 'mobile_direct_booking',
+            nights: nights,
+            guests: parseInt(guests),
+            value: total,
+            currency: 'USD',
+            eventCallback: function() {
+              window.location.href = '/thank-you.html';
+            },
+            eventTimeout: 300
+          });
+
+          setTimeout(() => {
+            window.location.href = '/thank-you.html';
+          }, 500);
+
+        } catch (err) {
+          console.error('Error submitting enquiry:', err);
+          window.location.href = '/thank-you.html';
+        }
+      });
+    }
+  }
+
+  /**
    * Initialize all booking UI functionality
    */
   function initBookingUI() {
@@ -1000,6 +1329,71 @@
 
     // Initialize WhatsApp tracking
     initWhatsAppTracking();
+
+    // Initialize new direct booking buttons
+    initDirectBookingButtons();
+    initMobileDirectBookingButtons();
+
+    // Initialize booking box positioning (desktop only)
+    if (window.innerWidth > 640) {
+      positionBookingBox();
+      window.addEventListener('resize', positionBookingBox);
+    }
+  }
+
+  /**
+   * Position booking box to prevent overlap with hero title
+   * Desktop only (above 640px)
+   */
+  function positionBookingBox() {
+    // Only run on desktop
+    if (window.innerWidth <= 640) return;
+
+    const heroContent = document.querySelector('.hero-content');
+    const heroBottom = document.querySelector('.hero-bottom');
+    const bookingBar = document.getElementById('bookingBar');
+
+    if (!heroContent || !heroBottom || !bookingBar) return;
+
+    // Get hero section
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    const heroHeight = hero.offsetHeight;
+    const heroContentBottom = heroContent.offsetTop + heroContent.offsetHeight;
+    const bookingBarHeight = bookingBar.offsetHeight;
+
+    // Desired position: 40px from bottom
+    const desiredBottom = 40;
+    const desiredTop = heroHeight - bookingBarHeight - desiredBottom;
+
+    // Minimum gap between hero content and booking bar
+    const minGap = 24;
+
+    // Check if there would be overlap
+    const actualGap = desiredTop - heroContentBottom;
+
+    if (actualGap < minGap) {
+      // Not enough space - position box minGap below hero content
+      const newTop = heroContentBottom + minGap;
+      heroBottom.style.position = 'absolute';
+      heroBottom.style.bottom = 'auto';
+      heroBottom.style.top = newTop + 'px';
+
+      // Grow hero if needed
+      const requiredHeight = newTop + bookingBarHeight + desiredBottom;
+      if (requiredHeight > heroHeight) {
+        hero.style.minHeight = requiredHeight + 'px';
+      }
+    } else {
+      // Enough space - anchor to bottom
+      heroBottom.style.position = 'absolute';
+      heroBottom.style.bottom = desiredBottom + 'px';
+      heroBottom.style.top = 'auto';
+
+      // Reset hero height
+      hero.style.minHeight = '100vh';
+    }
   }
 
   // =============================================================================
