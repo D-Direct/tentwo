@@ -191,6 +191,324 @@
   }
 
   // =============================================================================
+  // MOBILE GALLERY THUMBNAIL GRID
+  // =============================================================================
+
+  /**
+   * Initialize mobile gallery thumbnail grid functionality
+   */
+  function initMobileGallery() {
+    // Only run on mobile
+    if (window.innerWidth > 768) return;
+
+    const gallerySection = document.querySelector('.gallery-section');
+    const galleryIntro = document.querySelector('.gallery-intro');
+    if (!gallerySection || !galleryIntro) return;
+
+    // Create highlights label
+    const highlightsLabel = document.createElement('div');
+    highlightsLabel.className = 'gallery-highlights-label';
+    highlightsLabel.id = 'highlightsLabel';
+    highlightsLabel.textContent = 'HIGHLIGHTS';
+
+    // Create mobile filter buttons
+    const mobileFilters = document.createElement('div');
+    mobileFilters.className = 'gallery-filters-mobile';
+    mobileFilters.innerHTML = `
+      <button class="filter-btn-mobile" data-filter-mobile="all">All</button>
+      <button class="filter-btn-mobile" data-filter-mobile="outdoor">Outdoor</button>
+      <button class="filter-btn-mobile" data-filter-mobile="living">Living</button>
+      <button class="filter-btn-mobile" data-filter-mobile="suites">Suites</button>
+    `;
+
+    // Insert after gallery intro
+    galleryIntro.after(highlightsLabel);
+    highlightsLabel.after(mobileFilters);
+
+    // Create mobile thumbnail grid
+    const mobileGrid = document.createElement('div');
+    mobileGrid.className = 'gallery-grid-mobile';
+    mobileGrid.id = 'galleryGridMobile';
+
+    // Insert after mobile filters
+    mobileFilters.after(mobileGrid);
+
+    // Create "Show all photos" button
+    const showAllBtn = document.createElement('button');
+    showAllBtn.className = 'show-all-btn';
+    showAllBtn.id = 'showAllPhotosBtn';
+    showAllBtn.textContent = 'Show all photos (31)';
+
+    // Insert after mobile grid
+    mobileGrid.after(showAllBtn);
+
+    // Get all gallery items from desktop grid
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    // Map categories: outdoor-rooftop -> outdoor, living-kitchen -> living, master/garden/upper -> suites
+    function getCategoryGroup(category) {
+      if (category === 'outdoor-rooftop') return 'outdoor';
+      if (category === 'living-kitchen') return 'living';
+      if (category === 'master' || category === 'garden' || category === 'upper') return 'suites';
+      return category;
+    }
+
+    // Build thumbnail grid
+    let allThumbs = [];
+    galleryItems.forEach((item, index) => {
+      const img = item.querySelector('img');
+      if (!img) return;
+
+      const category = item.getAttribute('data-category');
+      const categoryGroup = getCategoryGroup(category);
+
+      const thumb = document.createElement('div');
+      thumb.className = 'gallery-thumb';
+      thumb.setAttribute('data-category-mobile', categoryGroup);
+      thumb.setAttribute('data-category-original', category);
+      thumb.setAttribute('data-index', index);
+      thumb.innerHTML = `<img src="${img.src}" alt="${img.alt}" loading="lazy" />`;
+
+      // Click handler to open viewer
+      thumb.addEventListener('click', function() {
+        openMobileViewer(index, getCurrentFilteredItems());
+      });
+
+      allThumbs.push(thumb);
+      mobileGrid.appendChild(thumb);
+    });
+
+    // Filter and show/hide logic
+    let currentMode = 'highlights'; // 'highlights', 'all', 'outdoor', 'living', 'suites'
+
+    // Define highlight photos: outdoor-1, rooftop-1, living-kitchen-1, master-1, outdoor-2, living-kitchen-2, garden-1, master-2, upper-1
+    const highlightIndices = [];
+    const categoryFirstIndices = {
+      'outdoor-rooftop': [],
+      'living-kitchen': [],
+      'master': [],
+      'garden': [],
+      'upper': []
+    };
+
+    // Find first photos of each category
+    galleryItems.forEach((item, index) => {
+      const cat = item.getAttribute('data-category');
+      if (!categoryFirstIndices[cat]) categoryFirstIndices[cat] = [];
+      categoryFirstIndices[cat].push(index);
+    });
+
+    // Build highlight list (9 photos): outdoor-1, rooftop-1, living-1, master-1, outdoor-2, living-2, garden-1, master-2, upper-1
+    // Note: outdoor-rooftop category includes both outdoor and rooftop photos
+    if (categoryFirstIndices['outdoor-rooftop'][0] !== undefined) highlightIndices.push(categoryFirstIndices['outdoor-rooftop'][0]); // outdoor-1 or rooftop-1
+    if (categoryFirstIndices['outdoor-rooftop'][1] !== undefined) highlightIndices.push(categoryFirstIndices['outdoor-rooftop'][1]); // next outdoor/rooftop
+    if (categoryFirstIndices['living-kitchen'][0] !== undefined) highlightIndices.push(categoryFirstIndices['living-kitchen'][0]); // living-1
+    if (categoryFirstIndices['master'][0] !== undefined) highlightIndices.push(categoryFirstIndices['master'][0]); // master-1
+    if (categoryFirstIndices['outdoor-rooftop'][2] !== undefined) highlightIndices.push(categoryFirstIndices['outdoor-rooftop'][2]); // outdoor-2
+    if (categoryFirstIndices['living-kitchen'][1] !== undefined) highlightIndices.push(categoryFirstIndices['living-kitchen'][1]); // living-2
+    if (categoryFirstIndices['garden'][0] !== undefined) highlightIndices.push(categoryFirstIndices['garden'][0]); // garden-1
+    if (categoryFirstIndices['master'][1] !== undefined) highlightIndices.push(categoryFirstIndices['master'][1]); // master-2
+    if (categoryFirstIndices['upper'][0] !== undefined) highlightIndices.push(categoryFirstIndices['upper'][0]); // upper-1
+
+    function getCurrentFilteredItems() {
+      if (currentMode === 'highlights') {
+        return highlightIndices.map(idx => galleryItems[idx]);
+      }
+
+      if (currentMode === 'all') {
+        // Interleave by category: outdoor, living, suites, outdoor, living, suites...
+        const outdoor = Array.from(galleryItems).filter(item => getCategoryGroup(item.getAttribute('data-category')) === 'outdoor');
+        const living = Array.from(galleryItems).filter(item => getCategoryGroup(item.getAttribute('data-category')) === 'living');
+        const suites = Array.from(galleryItems).filter(item => getCategoryGroup(item.getAttribute('data-category')) === 'suites');
+
+        const interleaved = [];
+        const maxLen = Math.max(outdoor.length, living.length, suites.length);
+        for (let i = 0; i < maxLen; i++) {
+          if (outdoor[i]) interleaved.push(outdoor[i]);
+          if (living[i]) interleaved.push(living[i]);
+          if (suites[i]) interleaved.push(suites[i]);
+        }
+        return interleaved;
+      }
+
+      return Array.from(galleryItems).filter(item => {
+        const cat = getCategoryGroup(item.getAttribute('data-category'));
+        return cat === currentMode;
+      });
+    }
+
+    function filterThumbnails(mode) {
+      currentMode = mode;
+      const thumbs = mobileGrid.querySelectorAll('.gallery-thumb');
+
+      if (mode === 'highlights') {
+        // Show only highlight photos (9)
+        thumbs.forEach((thumb, index) => {
+          const thumbIndex = parseInt(thumb.getAttribute('data-index'));
+          if (highlightIndices.includes(thumbIndex)) {
+            thumb.classList.remove('hidden');
+          } else {
+            thumb.classList.add('hidden');
+          }
+        });
+        showAllBtn.classList.remove('hidden');
+        highlightsLabel.classList.remove('hidden');
+      } else if (mode === 'all') {
+        // Show all in interleaved order
+        const interleavedItems = getCurrentFilteredItems();
+        const interleavedIndices = interleavedItems.map(item => Array.from(galleryItems).indexOf(item));
+
+        thumbs.forEach(thumb => {
+          const thumbIndex = parseInt(thumb.getAttribute('data-index'));
+          if (interleavedIndices.includes(thumbIndex)) {
+            thumb.classList.remove('hidden');
+            // Reorder in DOM
+            const orderIndex = interleavedIndices.indexOf(thumbIndex);
+            thumb.style.order = orderIndex;
+          } else {
+            thumb.classList.add('hidden');
+          }
+        });
+        showAllBtn.classList.add('hidden');
+        highlightsLabel.classList.add('hidden');
+      } else {
+        // Show all for specific category
+        thumbs.forEach(thumb => {
+          const category = thumb.getAttribute('data-category-mobile');
+          if (category === mode) {
+            thumb.classList.remove('hidden');
+            thumb.style.order = '';
+          } else {
+            thumb.classList.add('hidden');
+          }
+        });
+        showAllBtn.classList.add('hidden');
+        highlightsLabel.classList.add('hidden');
+      }
+    }
+
+    // Mobile filter button handlers
+    const filterBtnsMobile = mobileFilters.querySelectorAll('.filter-btn-mobile');
+    filterBtnsMobile.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Update active state
+        filterBtnsMobile.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        // Apply filter
+        const filterValue = this.getAttribute('data-filter-mobile');
+        filterThumbnails(filterValue);
+      });
+    });
+
+    // Show all button handler
+    showAllBtn.addEventListener('click', function() {
+      filterThumbnails('all');
+      // Highlight the All button
+      filterBtnsMobile.forEach(b => b.classList.remove('active'));
+      const allBtn = document.querySelector('[data-filter-mobile="all"]');
+      if (allBtn) allBtn.classList.add('active');
+    });
+
+    // Initial state: highlights (no button highlighted)
+    filterThumbnails('highlights');
+
+    // Mobile viewer with suite captions
+    function openMobileViewer(startIndex, filteredItems) {
+      const viewer = document.getElementById('galleryViewer');
+      const viewerImage = document.getElementById('viewerImage');
+      const viewerCounter = document.getElementById('viewerCounter');
+
+      if (!viewer || !viewerImage) return;
+
+      let currentIndex = 0;
+
+      // Find the index in filtered items
+      const startItem = galleryItems[startIndex];
+      currentIndex = Array.from(filteredItems).indexOf(startItem);
+
+      if (currentIndex === -1) currentIndex = 0;
+
+      // Create caption element if it doesn't exist
+      let viewerCaption = document.getElementById('viewerCaptionMobile');
+      if (!viewerCaption) {
+        viewerCaption = document.createElement('div');
+        viewerCaption.id = 'viewerCaptionMobile';
+        viewerCaption.className = 'viewer-caption-mobile';
+        viewer.appendChild(viewerCaption);
+      }
+
+      function updateViewer(index) {
+        const item = filteredItems[index];
+        if (!item) return;
+
+        const img = item.querySelector('img');
+        if (img) {
+          viewerImage.src = img.src;
+          viewerImage.alt = img.alt;
+        }
+
+        // Update counter
+        if (viewerCounter) {
+          viewerCounter.textContent = `${index + 1} / ${filteredItems.length}`;
+        }
+
+        // Update caption for suites
+        const category = item.getAttribute('data-category');
+        if (category === 'master') {
+          viewerCaption.textContent = 'Master suite';
+          viewerCaption.style.display = 'block';
+        } else if (category === 'garden') {
+          viewerCaption.textContent = 'Garden suite';
+          viewerCaption.style.display = 'block';
+        } else if (category === 'upper') {
+          viewerCaption.textContent = 'Upper suite';
+          viewerCaption.style.display = 'block';
+        } else {
+          viewerCaption.style.display = 'none';
+        }
+      }
+
+      // Show viewer
+      updateViewer(currentIndex);
+      viewer.style.display = 'flex';
+
+      // Navigation handlers
+      const viewerPrev = document.getElementById('viewerPrev');
+      const viewerNext = document.getElementById('viewerNext');
+
+      if (viewerPrev) {
+        viewerPrev.onclick = function() {
+          currentIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
+          updateViewer(currentIndex);
+        };
+      }
+
+      if (viewerNext) {
+        viewerNext.onclick = function() {
+          currentIndex = (currentIndex + 1) % filteredItems.length;
+          updateViewer(currentIndex);
+        };
+      }
+
+      // Keyboard navigation
+      function handleKeydown(e) {
+        if (viewer.style.display !== 'flex') return;
+        if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
+          updateViewer(currentIndex);
+        } else if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % filteredItems.length;
+          updateViewer(currentIndex);
+        }
+      }
+
+      document.removeEventListener('keydown', handleKeydown);
+      document.addEventListener('keydown', handleKeydown);
+    }
+  }
+
+  // =============================================================================
   // FLOATING WHATSAPP VISIBILITY (MOBILE)
   // =============================================================================
 
@@ -392,6 +710,7 @@
     initSmoothScroll();
     initRevealAnimations();
     initGalleryFiltering();
+    initMobileGallery();
     initGalleryViewer();
     initFloatingWhatsAppVisibility();
     initMobileWhatsAppTracking();
