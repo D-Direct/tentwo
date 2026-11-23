@@ -1402,6 +1402,7 @@
   max-width: 90%;
   max-height: 90vh;
   object-fit: contain;
+  transition: opacity 150ms ease, transform 150ms ease;
 }
 
 .viewer-close {
@@ -2290,11 +2291,10 @@
     white-space: nowrap;
   }
 
-  /* Gallery viewer mobile */
+  /* Gallery viewer mobile - hide arrow buttons on photo */
   .viewer-prev,
   .viewer-next {
-    font-size: 40px;
-    padding: 10px;
+    display: none;
   }
 
   .hero-facts {
@@ -2714,23 +2714,23 @@
   }
 
   .mobile-hero-btn-whatsapp {
+    background: #25D366;
+    color: white;
+    border: none;
+  }
+
+  .mobile-hero-btn-whatsapp:active {
+    background: #1fa952;
+  }
+
+  .mobile-hero-btn-check {
     background: transparent;
     color: white;
     border: 1px solid white;
   }
 
-  .mobile-hero-btn-whatsapp:active {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .mobile-hero-btn-check {
-    background: var(--gold);
-    color: rgba(10, 25, 45, 1);
-    border: none;
-  }
-
   .mobile-hero-btn-check:active {
-    background: #d4af37;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .mobile-hero-ota-links {
@@ -2959,6 +2959,50 @@
     font-size: 14px;
     font-weight: 500;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    display: none;
+  }
+
+  /* Mobile viewer controls row */
+  .viewer-controls-mobile {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .viewer-nav-btn-mobile {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: white;
+    opacity: 0.7;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .viewer-nav-btn-mobile:active {
+    opacity: 1;
+  }
+
+  .viewer-counter-mobile {
+    color: white;
+    font-size: 16px;
+    font-family: var(--sans);
+    opacity: 0.7;
+  }
+
+  /* Hide desktop counter on mobile, show mobile controls */
+  .viewer-counter {
     display: none;
   }
 }
