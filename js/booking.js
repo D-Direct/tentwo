@@ -703,7 +703,7 @@
     }
 
     const pricing = calculatePricing(nights, guests);
-    mbPriceMessage.innerHTML = `<small>USD $${pricing.pricePerNight}/night × ${nights} nights = <strong>$${pricing.estimatedTotal}</strong></small>`;
+    mbPriceMessage.innerHTML = `<small>USD ${pricing.pricePerNight}/night × ${nights} night${nights > 1 ? 's' : ''} = <strong>USD ${pricing.estimatedTotal}</strong></small>`;
   }
 
   // =============================================================================
@@ -1397,14 +1397,270 @@
   }
 
   // =============================================================================
+  // NEW MOBILE FUNCTIONALITY (Change A & B)
+  // =============================================================================
+
+  /**
+   * Initialize new mobile hero "Check dates" button
+   */
+  function initMobileHeroCheckDates() {
+    const btn = document.getElementById('mobileHeroCheckDatesBtn');
+    const bottomSheet = document.getElementById('mobileBottomSheet');
+
+    if (btn && bottomSheet) {
+      btn.addEventListener('click', function() {
+        bottomSheet.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Track event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'check_availability_click',
+          link_location: 'mobile_hero'
+        });
+      });
+    }
+  }
+
+  /**
+   * Hide floating WhatsApp button while hero is visible on mobile
+   */
+  function initFloatingWhatsAppHideOnHero() {
+    // Only run on mobile
+    if (window.innerWidth > 768) return;
+
+    const floatingWhatsApp = document.querySelector('.floating-whatsapp');
+    const hero = document.querySelector('.hero');
+
+    if (!floatingWhatsApp || !hero) return;
+
+    function checkHeroVisibility() {
+      const heroRect = hero.getBoundingClientRect();
+      const heroBottom = heroRect.bottom;
+
+      // Hide floating WhatsApp when hero is visible, show when scrolled past
+      if (heroBottom > 0) {
+        floatingWhatsApp.style.display = 'none';
+      } else {
+        floatingWhatsApp.style.display = '';
+      }
+    }
+
+    // Check on scroll
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          checkHeroVisibility();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial check
+    checkHeroVisibility();
+  }
+
+  /**
+   * Initialize new mobile sheet WhatsApp primary button
+   */
+  function initMobileSheetWhatsAppPrimary() {
+    const btn = document.getElementById('mbWhatsAppPrimaryBtn');
+    const toggleLink = document.getElementById('mbEmailToggleLink');
+    const emailFields = document.getElementById('mbEmailFieldsNew');
+
+    if (btn) {
+      btn.addEventListener('click', function() {
+        const checkIn = document.getElementById('mbIn')?.value;
+        const checkOut = document.getElementById('mbOut')?.value;
+        const guests = document.getElementById('mbGuests')?.value || '2';
+
+        let message = "Hi, I'd like to book TenTwo Private Residence.";
+
+        if (checkIn && checkOut) {
+          const checkInFormatted = formatDate(checkIn);
+          const checkOutFormatted = formatDate(checkOut);
+          const nights = calculateNights(checkIn, checkOut);
+          const pricing = calculatePricing(nights, parseInt(guests));
+
+          message = `Hi, I'd like to book TenTwo from ${checkInFormatted} to ${checkOutFormatted} for ${guests} guests (USD ${pricing.estimatedTotal}).`;
+        }
+
+        const url = `https://wa.me/94777889880?text=${encodeURIComponent(message)}`;
+
+        // Track event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'whatsapp_click',
+          link_location: 'mobile_sheet'
+        });
+
+        window.open(url, '_blank');
+      });
+    }
+
+    // Email toggle functionality
+    if (toggleLink && emailFields) {
+      toggleLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (emailFields.style.display === 'none' || !emailFields.style.display) {
+          emailFields.style.display = 'flex';
+          toggleLink.textContent = 'Hide email form';
+        } else {
+          emailFields.style.display = 'none';
+          toggleLink.textContent = 'Or send by email';
+        }
+      });
+    }
+
+    // Email enquiry button (new)
+    const enquiryBtnNew = document.getElementById('mbEnquiryBtnNew');
+    if (enquiryBtnNew) {
+      enquiryBtnNew.addEventListener('click', async function() {
+        const contactInput = document.getElementById('mbEnquiryContactNew');
+        const contact = contactInput?.value;
+        const name = document.getElementById('mbEnquiryNameNew')?.value || 'Guest';
+        const checkInInput = document.getElementById('mbIn');
+        const checkOutInput = document.getElementById('mbOut');
+        const checkIn = checkInInput?.value;
+        const checkOut = checkOutInput?.value;
+        const guests = document.getElementById('mbGuests')?.value || '2';
+        const errorEl = document.getElementById('mbContactErrorNew');
+
+        // Clear previous errors
+        if (contactInput) contactInput.classList.remove('error');
+        if (checkInInput) checkInInput.classList.remove('error');
+        if (checkOutInput) checkOutInput.classList.remove('error');
+        if (errorEl) errorEl.textContent = '';
+
+        let hasError = false;
+        let firstErrorField = null;
+
+        // Validate contact
+        if (!contact) {
+          if (contactInput) {
+            contactInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = contactInput;
+          }
+          if (errorEl) errorEl.textContent = 'Please add your email or WhatsApp number';
+          hasError = true;
+        } else {
+          const validation = validateEmailOrWhatsApp(contact);
+          if (!validation.valid) {
+            if (contactInput) {
+              contactInput.classList.add('error');
+              if (!firstErrorField) firstErrorField = contactInput;
+            }
+            if (errorEl) errorEl.textContent = validation.message;
+            hasError = true;
+          }
+        }
+
+        // Validate dates
+        if (!checkIn || !checkOut) {
+          if (!checkIn && checkInInput) {
+            checkInInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = checkInInput;
+          }
+          if (!checkOut && checkOutInput) {
+            checkOutInput.classList.add('error');
+            if (!firstErrorField) firstErrorField = checkOutInput;
+          }
+          if (errorEl && !errorEl.textContent) {
+            errorEl.textContent = 'Please choose your dates';
+          }
+          hasError = true;
+        }
+
+        if (hasError) {
+          if (firstErrorField) {
+            firstErrorField.focus();
+            firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
+
+        // Calculate pricing
+        const nights = calculateNights(checkIn, checkOut);
+        const pricePerNight = getPriceForGuests(guests);
+        const total = nights * pricePerNight;
+
+        // Auto-populate country
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const language = navigator.language;
+        const country = `${timezone} | ${language}`;
+
+        // Prepare data
+        const emailData = {
+          name: name,
+          contact: contact,
+          country: country,
+          checkIn: checkIn,
+          checkOut: checkOut,
+          guests: guests,
+          nights: nights,
+          pricePerNight: pricePerNight,
+          estimatedTotal: total,
+          formType: 'Mobile Direct Booking (New)',
+          website: ''
+        };
+
+        enquiryBtnNew.disabled = true;
+        const originalHTML = enquiryBtnNew.innerHTML;
+        enquiryBtnNew.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg> Sending...';
+
+        try {
+          await fetch('/api/enquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(emailData)
+          });
+
+          // Track submission
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            form: 'mobile_direct_booking_new',
+            nights: nights,
+            guests: parseInt(guests),
+            value: total,
+            currency: 'USD',
+            eventCallback: function() {
+              window.location.href = '/thank-you.html';
+            },
+            eventTimeout: 300
+          });
+
+          setTimeout(() => {
+            window.location.href = '/thank-you.html';
+          }, 500);
+
+        } catch (err) {
+          console.error('Error submitting enquiry:', err);
+          window.location.href = '/thank-you.html';
+        }
+      });
+    }
+  }
+
+  // =============================================================================
   // AUTO-INITIALIZATION
   // =============================================================================
 
   // Run initialization when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBookingUI);
+    document.addEventListener('DOMContentLoaded', function() {
+      initBookingUI();
+      initMobileHeroCheckDates();
+      initMobileSheetWhatsAppPrimary();
+      initFloatingWhatsAppHideOnHero();
+    });
   } else {
     initBookingUI();
+    initMobileHeroCheckDates();
+    initMobileSheetWhatsAppPrimary();
+    initFloatingWhatsAppHideOnHero();
   }
 
   // Expose functions for external use if needed

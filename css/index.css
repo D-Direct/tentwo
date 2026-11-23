@@ -102,7 +102,7 @@
 .hero-bottom {
   position: absolute;
   left: 50%;
-  bottom: 40px;
+  bottom: 60px;
   transform: translateX(-50%);
   z-index: 2;
   width: 100%;
@@ -110,7 +110,7 @@
   padding: 0 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 /* Price message outside the box */
@@ -314,9 +314,9 @@
 .booking-bar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   background: rgba(255, 255, 255, 0.12);
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-radius: 8px;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -369,7 +369,7 @@
 
 .field-wrapper input,
 .field-wrapper select {
-  height: 48px;
+  height: 42px;
   padding: 0 14px;
   border: none;
   border-radius: 4px;
@@ -2610,5 +2610,204 @@
     font-size: 14px;
     line-height: 1.55;
     margin-bottom: 24px;
+  }
+}
+
+/* ============================================================================
+   MOBILE-ONLY CHANGES (Change A & B) - Max width 768px
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  /* Hide old hero titles on mobile */
+  .hero-title-mobile,
+  .hero-location-mobile,
+  .hero-title-new {
+    display: none !important;
+  }
+
+  /* Extend dark gradient starting at 45% on mobile for text readability */
+  .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 25, 45, 0) 0%,
+      rgba(10, 25, 45, 0) 45%,
+      rgba(10, 25, 45, 0.5) 65%,
+      rgba(10, 25, 45, 0.75) 100%
+    ) !important;
+  }
+
+  /* Change A: New Mobile Hero Section */
+  .mobile-booking-cta {
+    display: none !important;
+  }
+
+  .mobile-hero-new {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px 28px 24px;
+    min-height: 100vh;
+    justify-content: flex-end;
+  }
+
+  .mobile-hero-title {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-hero-location {
+    margin: 4px 0 0 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-hero-price {
+    margin: 28px 0 0 0;
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    text-align: left;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 8px;
+  }
+
+  .mobile-hero-buttons-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .mobile-hero-btn {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .mobile-hero-btn-whatsapp {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+  }
+
+  .mobile-hero-btn-whatsapp:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-hero-btn-check {
+    background: var(--gold);
+    color: rgba(10, 25, 45, 1);
+    border: none;
+  }
+
+  .mobile-hero-btn-check:active {
+    background: #d4af37;
+  }
+
+  .mobile-hero-ota-links {
+    margin: 12px 0 0 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-hero-ota-links a {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .mobile-hero-ota-links a:active {
+    color: var(--gold);
+  }
+
+  .mobile-reassurance-text {
+    margin: 8px 0 0 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Change B: New Mobile Sheet WhatsApp Primary */
+  .sheet-section:has(#mbWhatsAppBtn) {
+    display: none !important;
+  }
+
+  .sheet-section-new {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .sheet-whatsapp-primary {
+    width: 100%;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25d366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms ease;
+    box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3);
+  }
+
+  .sheet-whatsapp-primary:active {
+    background: #20ba5a;
+    transform: scale(0.98);
+  }
+
+  .sheet-email-toggle {
+    display: block;
+    text-align: center;
+    color: rgba(10, 25, 45, 0.7);
+    font-family: var(--sans);
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    padding: 8px;
+  }
+
+  .sheet-email-toggle:active {
+    color: rgba(10, 25, 45, 1);
+  }
+
+  .sheet-email-fields-new {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
   }
 }

@@ -425,6 +425,36 @@
             </p>
           </div>
 
+          <!-- NEW Mobile Hero Section (Change A) - Hidden by default, shown only on mobile -->
+          <div class="mobile-hero-new" style="display: none;">
+            <p class="mobile-hero-title">Your Luxury Escape</p>
+            <p class="mobile-hero-location">Kandy, Sri Lanka</p>
+            <p class="mobile-hero-price">From USD 150/night</p>
+            <div class="mobile-hero-buttons-row">
+              <a
+                href="https://wa.me/94777889880"
+                target="_blank"
+                class="mobile-hero-btn mobile-hero-btn-whatsapp"
+                id="mobileHeroWhatsAppBtn"
+                onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'whatsapp_click',link_location:'mobile_hero'});"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                </svg>
+                WhatsApp us
+              </a>
+              <button class="mobile-hero-btn mobile-hero-btn-check" id="mobileHeroCheckDatesBtn">
+                Check availability
+              </button>
+            </div>
+            <p class="mobile-hero-ota-links">
+              Book on <a href="https://airbnb.com/h/tentwo" target="_blank" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'ota_click',platform:'airbnb',link_location:'mobile_hero'});">Airbnb</a> · <a href="https://www.booking.com/hotel/lk/luxury-villa-in-kandy-with-a-private-pool.html" target="_blank" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'ota_click',platform:'booking',link_location:'mobile_hero'});">Booking.com</a> · <a href="https://www.agoda.com/luxury-villa-in-kandy-with-a-private-pool/hotel/kandy-lk.html?ds=T8a9OBi6VA0RYSor" target="_blank" onclick="window.dataLayer=window.dataLayer||[];dataLayer.push({event:'ota_click',platform:'agoda',link_location:'mobile_hero'});">Agoda</a>
+            </p>
+            <p class="mobile-reassurance-text">
+              We reply within 24 hours · No payment to enquire
+            </p>
+          </div>
+
           <!-- Mobile Bottom Sheet -->
           <div class="mobile-bottom-sheet" id="mobileBottomSheet">
             <div class="bottom-sheet-overlay" id="sheetOverlay"></div>
@@ -451,15 +481,6 @@
                 </select>
               </div>
 
-              <!-- Direct enquiry fields (always visible) -->
-              <div class="sheet-enquiry-field-wrapper">
-                <input type="text" id="mbEnquiryContact" placeholder="Email or WhatsApp (for direct enquiry)" />
-                <div class="field-error" id="mbContactError"></div>
-              </div>
-              <div class="sheet-enquiry-field-wrapper">
-                <input type="text" id="mbEnquiryName" placeholder="Name (optional)" />
-              </div>
-
               <div class="sheet-price-row" id="mbPriceMessage">
                 From USD 150/night
               </div>
@@ -474,7 +495,7 @@
                 </div>
               </div>
 
-              <!-- OR BOOK DIRECT section -->
+              <!-- OR BOOK DIRECT section - Change B -->
               <div class="sheet-section">
                 <label class="sheet-section-label">OR BOOK DIRECT</label>
                 <div class="sheet-direct-row">
@@ -485,6 +506,32 @@
                     WhatsApp us
                   </button>
                   <button class="sheet-direct-btn enquiry-btn" id="mbEnquiryBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                    </svg>
+                    Send enquiry
+                  </button>
+                </div>
+              </div>
+
+              <!-- NEW Mobile Sheet WhatsApp Primary (Change B) - Hidden by default -->
+              <div class="sheet-section-new" style="display: none;">
+                <button class="sheet-whatsapp-primary" id="mbWhatsAppPrimaryBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                  </svg>
+                  Send on WhatsApp
+                </button>
+                <a href="#" class="sheet-email-toggle" id="mbEmailToggleLink">Or send by email</a>
+                <div class="sheet-email-fields-new" id="mbEmailFieldsNew" style="display: none;">
+                  <div class="sheet-enquiry-field-wrapper">
+                    <input type="text" id="mbEnquiryContactNew" placeholder="Email or WhatsApp (for direct enquiry)" />
+                    <div class="field-error" id="mbContactErrorNew"></div>
+                  </div>
+                  <div class="sheet-enquiry-field-wrapper">
+                    <input type="text" id="mbEnquiryNameNew" placeholder="Name (optional)" />
+                  </div>
+                  <button class="sheet-direct-btn enquiry-btn" id="mbEnquiryBtnNew">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                       <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
                     </svg>
